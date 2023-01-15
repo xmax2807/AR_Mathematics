@@ -2,7 +2,7 @@ using System.Globalization;
 using System;
 using System.ComponentModel;
 
-namespace Project.ExtensionMethods {
+namespace Project.Utils.ExtensionMethods {
     public static class StringExtensionMethods{
 
         /// <summary>

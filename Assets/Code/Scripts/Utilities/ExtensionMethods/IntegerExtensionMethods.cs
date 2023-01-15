@@ -1,6 +1,6 @@
 using System;
 
-namespace Project.ExtensionMethods{
+namespace Project.Utils.ExtensionMethods{
     public static class IntegerExtensionMethods{
 
         /// <summary>

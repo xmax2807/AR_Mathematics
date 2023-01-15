@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Project.UI
+namespace Project.UI.Panel
 {
     public abstract class BasePanelView : MonoBehaviour
     {
