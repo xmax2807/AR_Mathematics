@@ -1,3 +1,5 @@
-public interface ICollectable{
-    void AddToCollector();
+namespace Project.RewardSystem{
+    public interface ICollectable{
+        void AddToCollector();
+    }
 }

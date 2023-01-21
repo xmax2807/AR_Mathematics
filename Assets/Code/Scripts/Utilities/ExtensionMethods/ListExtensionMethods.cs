@@ -33,6 +33,13 @@ namespace Project.Utils.ExtensionMethods
             return valueToCompare;
         }
 
+        /// <summary>
+        /// Traverse the list and check condition. If condition tells to stop, return method with result if traversed whole list or not
+        /// </summary>
+        /// <param name="List"></param>
+        /// <param name="stopCondition"></param>
+        /// <param name="result"> is the list traversed fully or not</param>
+        /// <typeparam name="T"></typeparam>
         public static void TraverseWithCondition<T>(this T[] List, Func<int,bool> stopCondition, out bool result){
             for(int i = 0; i < List.Length; i++){
                 if(stopCondition != null && stopCondition.Invoke(i) == true){
@@ -52,12 +59,14 @@ namespace Project.Utils.ExtensionMethods
         /// <typeparam name="T"></typeparam>
         /// <returns>true - Array is Sort. false - Array is not sorted</returns>
         public static bool IsSorted<T>(this IEnumerable<T> List, IComparer<T> comparer, bool isDescending = false){
+            comparer.EnsureComparer();
+
             T[] array = List.ToArray();
             
             //Local function
             bool stopCondition(int index)
             {
-                if (index - 1 < 0) return false;
+                if (index - 1 < 0) return false;// 
 
                 int compareResult = isDescending ? 1 : -1;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.AssetI
+namespace Project.AssetIO
 {
     public class AssetDatabaseExtension
     {
