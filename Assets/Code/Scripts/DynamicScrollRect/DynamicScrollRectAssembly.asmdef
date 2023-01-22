@@ -1,3 +1,17 @@
 {
-	"name": "DynamicScrollRectAssembly"
+    "name": "DynamicScrollRectAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:42118b34889c4b641971d8ff17f9fe07",
+        "GUID:0bfa978952c65c24eb41989751a0cf44"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

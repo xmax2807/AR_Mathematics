@@ -6,5 +6,6 @@ namespace Project.Utils.ObjectPooling
         bool IsUsing { get; set; }
         void OnReturn();
         void OnRelease();
+        event System.Action<IPooling> AddBackToQueue;
     }
 }

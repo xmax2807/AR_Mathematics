@@ -18,6 +18,10 @@ namespace Project.Utils.ObjectPooling
             obj.OnReturn();
             poolQueue.Enqueue(obj);
         }
+        public void AddToQueue(IPooling obj){
+            AddToQueue((T)obj);
+        }
+        
         public T GetObj(){
             if(poolQueue.Count <= 0){
                 PopulateObj();
@@ -29,6 +33,7 @@ namespace Project.Utils.ObjectPooling
         private void PopulateObj(){
             for(int i = 0; i <  CloneNumber; i++){
                 T newObj = Instantiate(prefabSample, this.transform);
+                newObj.AddBackToQueue += AddToQueue;
                 AddToQueue(newObj);
             }
         }
