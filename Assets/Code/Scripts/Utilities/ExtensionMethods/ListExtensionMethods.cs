@@ -6,7 +6,7 @@ namespace Project.Utils.ExtensionMethods
 {
     public static class ListExtensionMethods{
         /// <summary>
-        /// Find the largest element in 
+        /// Find the largest item in list
         /// </summary>
         /// <param name="List"></param>
         /// <param name="comparer"></param>
@@ -14,17 +14,36 @@ namespace Project.Utils.ExtensionMethods
         /// <returns></returns>
         public static T FindLargest<T>(this IEnumerable<T> List, IComparer<T> comparer){
             IEnumerator<T> iterator = List.GetEnumerator();
+
+            if(!iterator.MoveNext()) return default;
+            
             T valueToCompare = iterator.Current;
+
             while(iterator.MoveNext()){
+                if(valueToCompare == null){
+                    valueToCompare = iterator.Current;
+                    continue;
+                }
                 if(comparer.Compare(valueToCompare, iterator.Current) < 0){
                     valueToCompare = iterator.Current;
                 }
             }
             return valueToCompare;
         }
+        /// <summary>
+        /// Find the smallest item in list
+        /// </summary>
+        /// <param name="List">given list</param>
+        /// <param name="comparer"> Comparer<T> </param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T FindSmallest<T>(this IEnumerable<T> List, IComparer<T> comparer){
             IEnumerator<T> iterator = List.GetEnumerator();
+            
+            if(!iterator.MoveNext()) return default;
+
             T valueToCompare = iterator.Current;
+
             while(iterator.MoveNext()){
                 if(comparer.Compare(valueToCompare, iterator.Current) > 0){
                     valueToCompare = iterator.Current;
@@ -75,6 +94,28 @@ namespace Project.Utils.ExtensionMethods
 
             TraverseWithCondition(array, stopCondition, out bool result);
             return result;
+        }
+
+        /// <summary>
+        /// Find Closet Match base on condition
+        /// </summary>
+        /// <param name="List">given List</param>
+        /// <param name="condition"> Delegate invokes the function </param>
+        /// <param name="closestMatch"> reference parameter as result </param>
+        /// <typeparam name="T"></typeparam>
+        public static void FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition, ref T closestMatch){
+            if(condition == null) return;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+
+            if(!iterator.MoveNext()) return;
+
+            closestMatch = iterator.Current;
+            while(iterator.MoveNext()){
+                if(condition.Invoke(iterator.Current)){
+                    closestMatch = iterator.Current;
+                }
+            }
         }
     }
 }

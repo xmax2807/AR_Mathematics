@@ -1,12 +1,13 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
-//using pooling;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Project.Utils.ObjectPooling;
+using Project.Utils.ExtensionMethods;
 
 namespace Project.UI.DynamicScrollRect
 {
@@ -19,6 +20,28 @@ namespace Project.UI.DynamicScrollRect
         UP = 0x8,
         DOWN = 0x10
     }
+    public class ScrollRectItemComparer<T> : IComparer<ScrollRectItem<T>>
+    {
+        private bool _isVertical;
+        public ScrollRectItemComparer(bool IsVertical = true){
+            _isVertical = IsVertical;
+        }
+        public int Compare(ScrollRectItem<T> x, ScrollRectItem<T> y)
+        {
+            var xAnchoredPosition = x.Rect.anchoredPosition;
+            var yAnchoredPosition = y.Rect.anchoredPosition;
+            if (_isVertical)
+            {
+                if(xAnchoredPosition.y < yAnchoredPosition.y) return -1;
+                if(xAnchoredPosition.y > yAnchoredPosition.y) return 1;
+            }
+            else{
+                if(xAnchoredPosition.x < yAnchoredPosition.x) return -1;
+                if(xAnchoredPosition.x > yAnchoredPosition.x) return 1;
+            }
+            return 0;
+        }
+    }
 
     public class DynamicScroll<T, T1>
         where T1 : ScrollRectItem<T>
@@ -26,6 +49,7 @@ namespace Project.UI.DynamicScrollRect
         public const float CONTENT_OFFSET_FIXER_LIMIT = 1000f;
         public float spacing = 15f;
         public ListPooling<T1> listPool;
+        private IComparer<T1> scrollRectItemComparer; 
 
         public T1 CentralizedObject { get; private set; }
         public DynamicScrollRect ScrollRect { get; private set; }
@@ -77,26 +101,22 @@ namespace Project.UI.DynamicScrollRect
             ScrollRect.MovementType = ScrollRect.movementType;
             ScrollRect.movementType = UnityEngine.UI.ScrollRect.MovementType.Unrestricted;
 
-            if (ScrollRect.content.GetComponent<VerticalLayoutGroup>() != null)
+            if (ScrollRect.content.TryGetComponent(out mVerticalLayoutGroup))
             {
-                mVerticalLayoutGroup = ScrollRect.content.GetComponent<VerticalLayoutGroup>();
                 mVerticalLayoutGroup.spacing = spacing;
             }
 
-            if (ScrollRect.content.GetComponent<HorizontalLayoutGroup>() != null)
+            if (ScrollRect.content.TryGetComponent(out mHorizontalLayoutGroup))
             {
-                mHorizontalLayoutGroup = ScrollRect.content.GetComponent<HorizontalLayoutGroup>();
                 mHorizontalLayoutGroup.spacing = spacing;
             }
 
-            if (ScrollRect.content.GetComponent<GridLayoutGroup>() != null)
+            if (ScrollRect.content.TryGetComponent(out mGridLayoutGroup))
             {
-                mGridLayoutGroup = ScrollRect.content.GetComponent<GridLayoutGroup>();
                 mGridLayoutGroup.spacing = new Vector2(spacing, spacing);
             }
 
-            if (ScrollRect.content.GetComponent<ContentSizeFitter>() != null)
-                mContentSizeFitter = ScrollRect.content.GetComponent<ContentSizeFitter>();
+            ScrollRect.content.TryGetComponent(out mContentSizeFitter);
 
             mIsHorizontal = ScrollRect.horizontal;
             mIsVertical = ScrollRect.vertical;
@@ -105,6 +125,7 @@ namespace Project.UI.DynamicScrollRect
             {
                 createMoreIfNeeded = createMoreIfNeeded
             };
+            scrollRectItemComparer = new ScrollRectItemComparer<T>(mIsVertical);
 
             CreateList(startIndex);
 
@@ -171,11 +192,11 @@ namespace Project.UI.DynamicScrollRect
                     obj.Rect.anchoredPosition = new Vector2(posX, posY);
                     lastObjectPosition = new Vector2(posX + (mIsHorizontal ? obj.CurrentWidth : 0), posY - (mIsVertical ? obj.CurrentHeight : 0));
 
-                    totalSize += ((mIsVertical) ? obj.CurrentHeight : obj.CurrentWidth) + spacing;
+                    totalSize += (mIsVertical ? obj.CurrentHeight : obj.CurrentWidth) + spacing;
                     currentIndex++;
                 } while (currentIndex < infoList.Count &&
-                         (mIsVertical && totalSize < (ScrollRect.viewport.rect.height * 2f)) ||
-                         (mIsHorizontal && totalSize < (ScrollRect.viewport.rect.width * 2f)));
+                         ((mIsVertical && totalSize < (ScrollRect.viewport.rect.height * 2f)) ||
+                         (mIsHorizontal && totalSize < (ScrollRect.viewport.rect.width * 2f))));
 
                 canDrag = (mIsHorizontal && totalSize > ScrollRect.viewport.rect.width) || (mIsVertical && totalSize > ScrollRect.viewport.rect.height);
             }
@@ -536,7 +557,7 @@ namespace Project.UI.DynamicScrollRect
             var objs = listPool.GetAllWithState(true);
             foreach (var obj in objs)
             {
-                var x = (Mathf.Abs(obj.Rect.anchoredPosition.x) - Mathf.Abs(ScrollRect.content.anchoredPosition.x)) + (obj.CurrentWidth / 2f);
+                var x = Mathf.Abs(obj.Rect.anchoredPosition.x) - Mathf.Abs(ScrollRect.content.anchoredPosition.x) + (obj.CurrentWidth / 2f);
                 var y = (Mathf.Abs(obj.Rect.anchoredPosition.y) - Mathf.Abs(ScrollRect.content.anchoredPosition.y)) + (obj.CurrentHeight / 2f);
                 obj.SetPositionInViewport(new Vector2(x, y), new Vector2(Mathf.Abs(x - ScrollRect.viewport.rect.width / 2f), Mathf.Abs(y - ScrollRect.viewport.rect.height / 2f)));
             }
@@ -567,60 +588,75 @@ namespace Project.UI.DynamicScrollRect
         {
             UpdateObjectsCentralizedPosition();
 
-            var objs = listPool.GetAllWithState(true);
-            var distFromCenter = float.MaxValue;
+            List<T1> objs = listPool.GetAllWithState(true);
+            
             T1 centerObject = null;
-            foreach (var obj in objs)
-            {
-                var pos = Mathf.Abs((mIsVertical ? (obj.PositionInViewport.y - ScrollRect.viewport.rect.height / 2f) :
-                    (obj.PositionInViewport.x - ScrollRect.viewport.rect.width / 2f)));
-                if (pos > distFromCenter)
-                    continue;
-
-                centerObject = obj;
-                distFromCenter = pos;
+            
+            float GetDistanceFromCenter(T1 item){
+                if(mIsVertical){
+                    return Mathf.Abs(item.PositionInViewport.y - ScrollRect.viewport.rect.height / 2f);
+                }
+                return Mathf.Abs(item.PositionInViewport.x - ScrollRect.viewport.rect.width / 2f);
             }
+
+            objs.FindMatch<T1>(
+                (obj) => GetDistanceFromCenter(obj) <= GetDistanceFromCenter(centerObject), 
+                ref centerObject
+            );
+
+            // foreach (T1 obj in objs)
+            // {
+            //     float pos = Mathf.Abs(mIsVertical ? (obj.PositionInViewport.y - ScrollRect.viewport.rect.height / 2f) :
+            //         (obj.PositionInViewport.x - ScrollRect.viewport.rect.width / 2f));
+                
+            //     if (pos <= distFromCenter){
+            //         centerObject = obj;
+            //         distFromCenter = pos;
+            //     }
+
+            // }
 
             return centerObject;
         }
 
         public T1 GetLowest()
         {
-            var min = float.MaxValue;
-            T1 lowestObj = null;
+            // var min = float.MaxValue;
+            // T1 lowestObj = null;
             var objs = listPool.GetAllWithState(true);
+            return objs.FindSmallest<T1>(scrollRectItemComparer);
+            // foreach (var t in objs)
+            // {
+            //     var anchoredPosition = t.Rect.anchoredPosition;
 
-            foreach (var t in objs)
-            {
-                var anchoredPosition = t.Rect.anchoredPosition;
+            //     if (mIsVertical && anchoredPosition.y < min || mIsHorizontal && anchoredPosition.x < min)
+            //     {
+            //         min = mIsVertical ? anchoredPosition.y : anchoredPosition.x;
+            //         lowestObj = t;
+            //     }
+            // }
 
-                if (mIsVertical && anchoredPosition.y < min || mIsHorizontal && anchoredPosition.x < min)
-                {
-                    min = mIsVertical ? anchoredPosition.y : anchoredPosition.x;
-                    lowestObj = t;
-                }
-            }
-
-            return lowestObj;
+            // return lowestObj;
         }
 
         public T1 GetHighest()
         {
-            var max = float.MinValue;
-            T1 highestObj = null;
+            // var max = float.MinValue;
+            // T1 highestObj = null;
             var objs = listPool.GetAllWithState(true);
-            foreach (var t in objs)
-            {
-                var anchoredPosition = t.Rect.anchoredPosition;
+            return objs.FindLargest<T1>(scrollRectItemComparer);
+            // foreach (var t in objs)
+            // {
+            //     var anchoredPosition = t.Rect.anchoredPosition;
 
-                if (mIsVertical && anchoredPosition.y > max || mIsHorizontal && anchoredPosition.x > max)
-                {
-                    max = mIsVertical ? anchoredPosition.y : anchoredPosition.x;
-                    highestObj = t;
-                }
-            }
+            //     if (mIsVertical && anchoredPosition.y > max || mIsHorizontal && anchoredPosition.x > max)
+            //     {
+            //         max = mIsVertical ? anchoredPosition.y : anchoredPosition.x;
+            //         highestObj = t;
+            //     }
+            // }
 
-            return highestObj;
+            // return highestObj;
         }
     }
 }

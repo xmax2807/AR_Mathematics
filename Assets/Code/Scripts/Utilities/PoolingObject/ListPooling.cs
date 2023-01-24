@@ -56,15 +56,14 @@ namespace Project.Utils.ObjectPooling{
                 obj.transform.localPosition = position ?? mStartPos;
             else
                 obj.transform.position = position ?? mStartPos;
-            obj.OnReturn();
+            obj.OnRelease();
 
             return obj;
         }
 
         public void Release(T obj)
         {
-			if(obj != null)
-                obj.OnRelease();
+			obj?.OnReturn();
         }
 
         public List<T> GetAllWithState(bool active)

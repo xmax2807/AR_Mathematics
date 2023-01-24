@@ -20,14 +20,14 @@ namespace Project.UI.DynamicScrollRect
 			WWW www = new(@"https://jsonplaceholder.typicode.com/comments");
 			yield return www;
 			mData = JsonHelper.getJsonArray<ExampleData>(www.text);
-            mHorizontalDynamicScroll.spacing = 5f;
-            mHorizontalDynamicScroll.Initiate(horizontalScroll, mData, 0, referenceObject);
+            // mHorizontalDynamicScroll.spacing = 5f;
+            // mHorizontalDynamicScroll.Initiate(horizontalScroll, mData, 0, referenceObject);
 
             mVerticalDynamicScroll.spacing = 5f;
             mVerticalDynamicScroll.centralizeOnStop = true;
             mVerticalDynamicScroll.Initiate(verticalScroll, mData, 0, referenceObject);
             
-            Debug.Log("Example Horizontal Data : " +  mHorizontalDynamicScroll.RawDataList.Count);
+            //Debug.Log("Example Horizontal Data : " +  mHorizontalDynamicScroll.RawDataList.Count);
             Debug.Log("Example Vertical Data : " +  mVerticalDynamicScroll.RawDataList.Count);
 		}
 
