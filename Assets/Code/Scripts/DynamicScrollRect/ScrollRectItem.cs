@@ -45,7 +45,8 @@ namespace Project.UI.DynamicScrollRect{
             IsCentralized = false;
         }
         #endregion
-
+        
+        public virtual void InitScrollRectItem(){}
         public virtual void UpdateScrollItem(T item, int index){
             CurrentIndex = index;
             OnObjectIsNotCentralized();
@@ -57,8 +58,8 @@ namespace Project.UI.DynamicScrollRect{
 
             return CurrentIndex.CompareTo(other.CurrentIndex);
         }
-        private void OnValidate(){
-            this.EnsureComponent<RectTransform>(ref rectTransform);
+        protected virtual void Awake(){
+            rectTransform = this.EnsureComponent<RectTransform>();
         }
     }
 }

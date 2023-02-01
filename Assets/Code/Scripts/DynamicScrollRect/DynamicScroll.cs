@@ -43,15 +43,15 @@ namespace Project.UI.DynamicScrollRect
         }
     }
 
-    public class DynamicScroll<T, T1>
-        where T1 : ScrollRectItem<T>
+    public class DynamicScroll<T, TScrollItem>
+        where TScrollItem : ScrollRectItem<T>
     {
         public const float CONTENT_OFFSET_FIXER_LIMIT = 1000f;
         public float spacing = 15f;
-        public ListPooling<T1> listPool;
-        private IComparer<T1> scrollRectItemComparer; 
+        public ListPooling<TScrollItem> listPool;
+        private IComparer<TScrollItem> scrollRectItemComparer; 
 
-        public T1 CentralizedObject { get; private set; }
+        public TScrollItem CentralizedObject { get; private set; }
         public DynamicScrollRect ScrollRect { get; private set; }
 
         public bool centralizeOnStop;
@@ -78,7 +78,7 @@ namespace Project.UI.DynamicScrollRect
         private IList<T> infoList;
         private Tween forceMoveTween;
         public IList<T> RawDataList => infoList;
-        public void Initiate(DynamicScrollRect scrollRect, IList<T> infoList, int startIndex, GameObject objReference, bool createMoreIfNeeded = true, int? forceAmount = null)
+        public void Initiate(DynamicScrollRect scrollRect, IList<T> infoList, int startIndex, TScrollItem objReference, bool createMoreIfNeeded = true, int? forceAmount = null)
         {
             ScrollRect = scrollRect;
             if (ScrollRect == null)
@@ -121,10 +121,10 @@ namespace Project.UI.DynamicScrollRect
             mIsHorizontal = ScrollRect.horizontal;
             mIsVertical = ScrollRect.vertical;
 
-            listPool = new(forceAmount ?? 0, objReference, ScrollRect.content)
-            {
-                createMoreIfNeeded = createMoreIfNeeded
-            };
+            // listPool = new(forceAmount ?? 0, objReference, ScrollRect.content)
+            // {
+            //     createMoreIfNeeded = createMoreIfNeeded
+            // };
             scrollRectItemComparer = new ScrollRectItemComparer<T>(mIsVertical);
 
             CreateList(startIndex);
@@ -180,15 +180,16 @@ namespace Project.UI.DynamicScrollRect
             startIndex = Mathf.Max(0, startIndex);
             var currentIndex = startIndex;
             var canDrag = false;
-
             if (infoList != null && infoList.Count > 0)
             {
                 do
                 {
                     var obj = listPool.Collect();
+                    obj.InitScrollRectItem();
                     obj.UpdateScrollItem(this.infoList[currentIndex], currentIndex);
                     var posX = currentIndex > 0 ? lastObjectPosition.x + (mIsHorizontal ? spacing : 0) : 0;
                     var posY = currentIndex > 0 ? lastObjectPosition.y - (mIsVertical ? spacing : 0) : 0;
+
                     obj.Rect.anchoredPosition = new Vector2(posX, posY);
                     lastObjectPosition = new Vector2(posX + (mIsHorizontal ? obj.CurrentWidth : 0), posY - (mIsVertical ? obj.CurrentHeight : 0));
 
@@ -439,12 +440,15 @@ namespace Project.UI.DynamicScrollRect
         private ScrollDirection LimitScroll()
         {
             var invalidDirections = ScrollDirection.NONE;
+            
             var lowestObj = GetLowest();
-            if(lowestObj == null) return ScrollDirection.NONE;
+            if(lowestObj == null || lowestObj.Rect == null) return ScrollDirection.NONE;
             var lowestPos = lowestObj.Rect.anchoredPosition;
+            
             var highestObj = GetHighest();
-            if(highestObj == null) return ScrollDirection.NONE;
+            if(highestObj == null || highestObj.Rect == null) return ScrollDirection.NONE;
             var highestPos = highestObj.Rect.anchoredPosition;
+            
             var contentPos = ScrollRect.content.anchoredPosition;
 
             if (mIsVertical)
@@ -584,22 +588,22 @@ namespace Project.UI.DynamicScrollRect
             forceMoveTween = (mIsHorizontal ? ScrollRect.content.DOAnchorPosX(pos, time) : ScrollRect.content.DOAnchorPosY(pos, time)).SetEase(Ease.OutQuint);
         }
 
-        public T1 GetCentralizedObject()
+        public TScrollItem GetCentralizedObject()
         {
             UpdateObjectsCentralizedPosition();
 
-            List<T1> objs = listPool.GetAllWithState(true);
+            List<TScrollItem> objs = listPool.GetAllWithState(true);
             
-            T1 centerObject = null;
+            TScrollItem centerObject = null;
             
-            float GetDistanceFromCenter(T1 item){
+            float GetDistanceFromCenter(TScrollItem item){
                 if(mIsVertical){
                     return Mathf.Abs(item.PositionInViewport.y - ScrollRect.viewport.rect.height / 2f);
                 }
                 return Mathf.Abs(item.PositionInViewport.x - ScrollRect.viewport.rect.width / 2f);
             }
 
-            objs.FindMatch<T1>(
+            objs.FindMatch<TScrollItem>(
                 (obj) => GetDistanceFromCenter(obj) <= GetDistanceFromCenter(centerObject), 
                 ref centerObject
             );
@@ -619,12 +623,12 @@ namespace Project.UI.DynamicScrollRect
             return centerObject;
         }
 
-        public T1 GetLowest()
+        public TScrollItem GetLowest()
         {
             // var min = float.MaxValue;
             // T1 lowestObj = null;
             var objs = listPool.GetAllWithState(true);
-            return objs.FindSmallest<T1>(scrollRectItemComparer);
+            return objs.FindSmallest<TScrollItem>(scrollRectItemComparer);
             // foreach (var t in objs)
             // {
             //     var anchoredPosition = t.Rect.anchoredPosition;
@@ -639,12 +643,12 @@ namespace Project.UI.DynamicScrollRect
             // return lowestObj;
         }
 
-        public T1 GetHighest()
+        public TScrollItem GetHighest()
         {
             // var max = float.MinValue;
             // T1 highestObj = null;
             var objs = listPool.GetAllWithState(true);
-            return objs.FindLargest<T1>(scrollRectItemComparer);
+            return objs.FindLargest<TScrollItem>(scrollRectItemComparer);
             // foreach (var t in objs)
             // {
             //     var anchoredPosition = t.Rect.anchoredPosition;

@@ -15,5 +15,8 @@ namespace Project.UI.DynamicScrollRect
         {
             this.fake = fake;
         }
+        public ExampleData(int id, bool fake) : this(fake){
+            this.id = id;
+        }
     }
 }

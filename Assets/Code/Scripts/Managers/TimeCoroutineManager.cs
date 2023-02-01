@@ -2,12 +2,17 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class TimeCoroutineManager : MonoBehaviour{
+namespace Project.Managers{
+    public class TimeCoroutineManager : MonoBehaviour{
     public static TimeCoroutineManager Instance {get;private set;}
     private void Awake(){
         if(Instance == null){
             Instance = this;
         }
+    }
+
+    public Coroutine WaitFor(YieldInstruction instruction, Action result){
+        return StartCoroutine(ExecuteWaitCoroutine(instruction, result));
     }
     public Coroutine WaitForSeconds(float seconds, Action result){
         float timeout = Time.time + seconds;
@@ -16,6 +21,11 @@ public class TimeCoroutineManager : MonoBehaviour{
     public Coroutine WaitUntil(Func<bool> condition, Action result) => StartCoroutine(ExecuteWaitCoroutine(condition, result));
     private IEnumerator ExecuteWaitCoroutine(Func<bool> condition, Action result){
         yield return new WaitUntil(condition);
+        result?.Invoke();
+    }
+
+    private IEnumerator ExecuteWaitCoroutine(YieldInstruction condition, Action result){
+        yield return condition;
         result?.Invoke();
     }
 
@@ -36,4 +46,5 @@ public class TimeCoroutineManager : MonoBehaviour{
         }
         end?.Invoke();
     }
+}
 }

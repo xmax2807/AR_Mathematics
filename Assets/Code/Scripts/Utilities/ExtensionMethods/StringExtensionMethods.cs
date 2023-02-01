@@ -1,9 +1,12 @@
 using System.Globalization;
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 
-namespace Project.Utils.ExtensionMethods {
-    public static class StringExtensionMethods{
+namespace Project.Utils.ExtensionMethods
+{
+    public static class StringExtensionMethods
+    {
 
         /// <summary>
         /// Uppercase
@@ -11,9 +14,10 @@ namespace Project.Utils.ExtensionMethods {
         /// <param name="Str"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static string UppercaseAtIndex(this string Str, int index = 0){
+        public static string UppercaseAtIndex(this string Str, int index = 0)
+        {
             index.EnsureInRange(Str.Length);
-            
+
             char[] chars = Str.ToCharArray();
             chars[index] = char.ToUpper(chars[index]);
             return chars.ToString();
@@ -24,10 +28,12 @@ namespace Project.Utils.ExtensionMethods {
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNumeric(this string value){
+        public static bool IsNumeric(this string value)
+        {
             return long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out var result);
         }
-        public static T ToEnum<T>(this string value) where T : Enum{
+        public static T ToEnum<T>(this string value) where T : Enum
+        {
             return (T)Enum.Parse(typeof(T), value, true);
         }
 
@@ -38,17 +44,44 @@ namespace Project.Utils.ExtensionMethods {
         /// <param name="result"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static bool TryParse<T>(this string value, out T result){
-            if(string.IsNullOrEmpty(value)) {
+        public static bool TryParse<T>(this string value, out T result)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
                 result = default;
                 return false;
             }
 
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
+            result = Parse<T>(value);
             
-            result = (T) converter.ConvertFrom(value);
+            return !EqualityComparer<T>.Default.Equals(result, default);
+        }
 
-            return true;
+        /// <summary>
+        /// Convert a string to any type (includes nullable)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T Parse<T>(this string value)
+        {
+            if (value is T variable) return variable;
+
+            try
+            {
+                //Handling Nullable types i.e, int?, double?, bool? .. etc
+                if (Nullable.GetUnderlyingType(typeof(T)) != null)
+                {
+                    return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFrom(value);
+                }
+
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            catch (Exception)
+            {
+                return default;
+            }
         }
     }
 }

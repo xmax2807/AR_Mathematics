@@ -103,7 +103,13 @@ namespace Project.UI.DynamicScrollRect{
             return (1 - (1 / ((Mathf.Abs(overStretching) * 0.55f / viewSize) + 1))) * viewSize * Mathf.Sign(overStretching);
         }
         #endregion
-        
+
+        protected override void Awake()
+        {
+            if(viewport == null) viewport = _viewPort;
+            if(content == null) content = _content;
+            base.Awake();
+        }
         protected override void LateUpdate()
         {
             // check if user stop dragging.
@@ -227,12 +233,12 @@ namespace Project.UI.DynamicScrollRect{
             return offset;
         }
 
-        protected override void OnValidate()
-        {
-            base.OnValidate();
+        // public new void OnValidate()
+        // {
+        //     base.OnValidate();
 
-            if(viewport == null) viewport = _viewPort;
-            if(content == null) content = _content;
-        }
+        //     if(viewport == null) viewport = _viewPort;
+        //     if(content == null) content = _content;
+        // }
     }
 }
