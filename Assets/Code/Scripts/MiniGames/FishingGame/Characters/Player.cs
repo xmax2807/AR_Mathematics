@@ -9,5 +9,9 @@ namespace Project.MiniGames.FishingGame
         #region States
         
         #endregion
+
+        protected override void InitFiniteStateMachine(){
+            
+        }
     }
 }
