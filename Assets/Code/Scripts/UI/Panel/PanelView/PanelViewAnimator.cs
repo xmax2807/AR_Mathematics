@@ -6,7 +6,7 @@ namespace Project.UI.Panel{
     public class PanelViewAnimator : BasePanelView{
         [SerializeField, HideInInspector] protected Animator _animator;
         
-        public void OnValidate(){
+        public void Awake(){
             this.EnsureComponent(ref _animator);
         }
     }

@@ -25,14 +25,13 @@ namespace Project.QuizSystem.Expression
         public string FullEquatation() => ToQuest() + "";
         public static Expression<T> ConvertToExpression(string expression)
         {
-            char op = '\0';
             int opIndex = FindOperator(expression);
             if(opIndex == -1){
                 return new Expression<T>();
             }
 
-            op = expression[opIndex];
-            
+            char op = expression[opIndex];
+
             bool parseRes = expression.Substring(0,opIndex).TryParse<T>(out T arg1);
             parseRes = expression.Substring(opIndex + 1, expression.Length - opIndex - 1).TryParse<T>(out T arg2) && parseRes;
 

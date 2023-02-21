@@ -7,5 +7,9 @@ namespace Project.MiniGames.FishingGame
 {
     public class Fish : BaseCharacter
     {
+        protected override void InitFiniteStateMachine()
+        {
+            StateMachine = new FiniteStateMachine<Fish>(this);
+        }
     }
 }

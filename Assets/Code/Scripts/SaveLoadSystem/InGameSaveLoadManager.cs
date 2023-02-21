@@ -24,8 +24,10 @@ namespace Project.SaveLoad
             foreach(ISavable obj in cache){
                 obj.Save(gameData);
             }
+            FileIO.Write(gameData, _savePath);
         }
         public void LoadGame(){
+            gameData = FileIO.Read<GameData>(_savePath);
             cache = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToArray();
             foreach(ISavable obj in cache){
                 obj.Load(gameData);

@@ -1,14 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Project.MiniGames.FishingGame
 {
-    public class FiniteStateMachine<T> where T : BaseCharacter{
-        public State<T> CurrentState;
-        public T Host;
+    public interface IFiniteStateMachine{
+        void LogicUpdate();
+        void PhysicsUpdate();
+        void ChangeState(IState newState);
+    }
+    public class FiniteStateMachine<T> : IFiniteStateMachine where T : BaseCharacter{
+        public IState CurrentState {get;private set;}
+        public readonly T Host;
         public FiniteStateMachine(T host){
             Host = host;
+        }
+        public void LogicUpdate() => CurrentState.LogicUpdate();
+        public void PhysicsUpdate() => CurrentState.PhysicsUpdate();
+        public void ChangeState(IState newState){
+            CurrentState?.Exit();
+            newState?.Enter();
+            CurrentState = newState;
         }
     }
 }

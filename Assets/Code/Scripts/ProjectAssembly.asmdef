@@ -1,0 +1,16 @@
+{
+    "name": "Projec",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0bfa978952c65c24eb41989751a0cf44"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

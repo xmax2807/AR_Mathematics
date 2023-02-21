@@ -28,7 +28,7 @@ namespace Project.Utils
         {
             output = logString;
             stack = stackTrace;
-            myLog = output + $" - {Time.time} - {stackTrace}" + "\n" + myLog;
+            myLog = output + $" - {Time.time} - {stack}" + "\n" + myLog;
             if (myLog.Length > 5000)
             {
                 myLog = myLog.Substring(0, 4800);

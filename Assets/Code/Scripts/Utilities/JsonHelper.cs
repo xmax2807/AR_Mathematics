@@ -6,12 +6,12 @@ public class JsonHelper
     {
         string newJson = "{ \"array\": " + json + "}";
         Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>> (newJson);
-        return wrapper.array;
+        return wrapper.Array;
     }
  
     [Serializable]
     private class Wrapper<T>
     {
-        public T[] array;
+        public T[] Array;
     }
 }
