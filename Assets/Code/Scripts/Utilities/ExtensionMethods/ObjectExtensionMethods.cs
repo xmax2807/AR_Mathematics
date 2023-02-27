@@ -101,12 +101,12 @@ namespace Project.Utils.ExtensionMethods
             return child.AddComponent<T>();
         }
 
-        public static void EnsureChildComponent<T>(this GameObject obj, string childName = "Game Object") where T : Component{
+        public static T EnsureChildComponent<T>(this GameObject obj, string childName = "Game Object") where T : Component{
             bool hasChild = obj.transform.ContainChildWithComponent<T>();
 
-            if(hasChild) return;
+            if(hasChild) return obj.GetComponentInChildren<T>();
 
-            obj.AddChildWithComponent<T>(childName);
+            return obj.AddChildWithComponent<T>(childName);
         }
         public static bool ContainChildWithComponent<T>(this Transform transform){
             foreach(Transform child in transform){

@@ -1,0 +1,16 @@
+{
+    "name": "MiniGamesAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c2e01c4dda57f664dba0bd2a8c88ef55"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

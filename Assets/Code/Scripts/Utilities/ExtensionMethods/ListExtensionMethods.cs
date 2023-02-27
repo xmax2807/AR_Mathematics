@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Project.Utils.ExtensionMethods
 {
@@ -26,6 +27,27 @@ namespace Project.Utils.ExtensionMethods
                 }
                 if(comparer.Compare(valueToCompare, iterator.Current) < 0){
                     valueToCompare = iterator.Current;
+                }
+            }
+            return valueToCompare;
+        }
+
+        public static TProperty FindLargestPropertyInObjects<T,TProperty>(this IEnumerable<T> List, Func<T, TProperty> getProperty) where TProperty :IComparable<TProperty>{
+            IEnumerator<T> iterator = List.GetEnumerator();
+
+            if(!iterator.MoveNext() || getProperty == null) return default;
+            
+            TProperty valueToCompare = getProperty(iterator.Current);
+
+            while(iterator.MoveNext()){
+                TProperty newValue = getProperty(iterator.Current);
+                
+                if(valueToCompare == null){
+                    valueToCompare = newValue;
+                    continue;
+                }
+                if(newValue.CompareTo(valueToCompare) < 0){
+                    valueToCompare = newValue;
                 }
             }
             return valueToCompare;
@@ -114,6 +136,16 @@ namespace Project.Utils.ExtensionMethods
             while(iterator.MoveNext()){
                 if(condition.Invoke(iterator.Current)){
                     closestMatch = iterator.Current;
+                }
+            }
+        }
+
+        public static void SplitLoop(int count, int loopCount, Action eachLoopAction){
+            for(int i = 0; i < count;){
+                int limit = Math.Min(loopCount, count - i) + i;
+                while(i < limit){
+                    eachLoopAction?.Invoke();
+                    i++;
                 }
             }
         }

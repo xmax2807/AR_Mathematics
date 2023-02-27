@@ -9,7 +9,8 @@ namespace Project.MiniGames.FishingGame
     {
         private Animator _animator;
         public Animator Animator => _animator;
-        protected IFiniteStateMachine StateMachine;
+        public IFiniteStateMachine StateMachine {get;protected set;}
+        public IStateFactory factory {get; protected set;}
         protected abstract void InitFiniteStateMachine();  
         protected virtual void Awake(){
             this.EnsureComponent<Animator>(ref _animator);

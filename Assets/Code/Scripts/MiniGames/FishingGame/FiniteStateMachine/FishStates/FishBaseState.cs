@@ -1,7 +1,8 @@
 namespace Project.MiniGames.FishingGame{
-    internal class FishBaseState : State<Fish>
+    public class FishBaseState : State<Fish>
     {
-        public FishBaseState(FiniteStateMachine<Fish> finiteStateMachine, string animName) : base(finiteStateMachine, animName)
+        protected FishStateFactory Factory => (FishStateFactory)host.factory;
+        public FishBaseState(Fish host, string animName) : base(host, animName)
         {
         }
     }

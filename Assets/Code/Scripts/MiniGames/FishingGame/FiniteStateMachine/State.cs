@@ -13,12 +13,14 @@ namespace Project.MiniGames.FishingGame
     }
     public abstract class State<T> : IState where T : BaseCharacter
     {
+        protected T host;
         protected Animator animator => stateMachine.Host.Animator;
         protected string animName;
         protected FiniteStateMachine<T> stateMachine;
         protected bool isAnimationFinish;
-        public State(FiniteStateMachine<T> finiteStateMachine, string animName){
-            stateMachine = finiteStateMachine;
+        public State(T host, string animName){
+            this.host = host;
+            stateMachine = (FiniteStateMachine<T>)host.StateMachine;
             this.animName = animName;
         }
 

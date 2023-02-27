@@ -13,20 +13,21 @@ namespace Project.Managers
         /// </summary>
         private void Init(){
             Instance = this;
+            gameObject.EnsureChildComponent<SpawnerManager>(childName: "Spawn Manager");
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
         }
-        private void Awake()
+        protected void Awake()
         {
             if (Instance == null)
             {
                 Init();
                 DontDestroyOnLoad(this.gameObject);
             }
-            if (Instance != this)
+            else if (Instance != null && Instance != this)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }

@@ -5,10 +5,14 @@ using System;
 namespace Project.Managers{
     public class TimeCoroutineManager : MonoBehaviour{
     public static TimeCoroutineManager Instance {get;private set;}
-    private void Awake(){
+    protected void Awake(){
         if(Instance == null){
             Instance = this;
         }
+    }
+    
+    protected void OnDestroy(){
+        StopAllCoroutines();
     }
 
     public Coroutine WaitFor(YieldInstruction instruction, Action result){

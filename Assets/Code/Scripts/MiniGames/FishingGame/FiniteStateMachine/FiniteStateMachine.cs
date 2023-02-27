@@ -11,6 +11,12 @@ namespace Project.MiniGames.FishingGame
         public FiniteStateMachine(T host){
             Host = host;
         }
+        public FiniteStateMachine(T host, IState initState) : this(host){
+            if(initState == null){
+                UnityEngine.Debug.LogWarning("initState is null");
+            }
+            CurrentState = initState;
+        }
         public void LogicUpdate() => CurrentState.LogicUpdate();
         public void PhysicsUpdate() => CurrentState.PhysicsUpdate();
         public void ChangeState(IState newState){

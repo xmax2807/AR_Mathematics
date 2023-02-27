@@ -48,17 +48,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamOffset: 9.31
+    - _FoamOffset: 0.05
     - _Metalic: 0
-    - _NormalStrength: 0.7
+    - _NormalStrength: 0.3
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RipplesDissolve: 3.65
-    - _RipplesScale: 7
-    - _RipplesSpeed: 0.8
-    - _Smoothness: 0.95
+    - _RipplesDissolve: 10.7
+    - _RipplesScale: 18.25
+    - _RipplesSpeed: 2
+    - _Smoothness: 0.82
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.1984936, b: 0.5283019, a: 0}
-    - _FoamColor: {r: 4.2870936, g: 4.2870936, b: 4.2870936, a: 0}
-    - _RipplesColor: {r: 0.5886792, g: 0.94625956, b: 1, a: 0}
+    - _BaseColor: {r: 0, g: 0.72861475, b: 1.5105022, a: 0}
+    - _FoamColor: {r: 2.4622889, g: 2.4622889, b: 2.4622889, a: 0}
+    - _RipplesColor: {r: 0.7184755, g: 0.81173915, b: 0.8324644, a: 0}
+    - _Tiling: {r: 1.29, g: 3.28, b: 0, a: 0}
   m_BuildTextureStacks: []
