@@ -1,5 +1,4 @@
 using MongoDB.Bson;
-using Realms;
 
 public class UserModel : RealmObject
 {
