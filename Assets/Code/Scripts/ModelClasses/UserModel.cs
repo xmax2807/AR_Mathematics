@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 
-public class UserModel : RealmObject
+public class UserModel
 {
     public string UserID { get; set; }
     public string Username{get;set;}

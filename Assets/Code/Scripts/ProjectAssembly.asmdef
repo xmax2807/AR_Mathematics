@@ -11,15 +11,11 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "MongoDB.Libmongocrypt.dll",
         "DOTween.dll",
         "Newtonsoft.Json.dll",
         "MongoDB.Driver.Core.dll",
         "MongoDB.Driver.dll",
-        "MongoDB.Bson.dll",
-        "Snappier.dll",
-        "Realm.dll",
-        "Realm.UnityUtils.dll"
+        "MongoDB.Bson.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
