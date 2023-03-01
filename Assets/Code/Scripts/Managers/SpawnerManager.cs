@@ -17,7 +17,6 @@ namespace Project.Managers
             else if(Instance != null && Instance != this){
                 Destroy(this);
             }
-            Debug.Log(Instance);
         }
         public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null) where T : MonoBehaviour
         {

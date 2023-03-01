@@ -1,23 +1,26 @@
 using System;
 
 namespace Project.RewardSystem{
-    public abstract class Reward<T> : ICollectable, IUnlockable where T : IEquatable<T>
+    public class Reward<T> : ICollectable, IUnlockable<T> where T : IComparable<T>
     {
-        public T CurrentProgress{get; protected set;}
         public T Goal {get;protected set;}
+
+        private bool isAcquired;
+        public bool IsAcquired => isAcquired;
 
         public Reward(T goal){
             Goal = goal;
-            CurrentProgress = default;
-        }
-        public Reward(T goal, T progress) : this(goal){
-            CurrentProgress = progress;
         }
         public void AddToCollector()
         {
             throw new System.NotImplementedException();
         }
 
-        public bool IsRewarded() => CurrentProgress.Equals(Goal);
+        public bool CanBeRewarded(T currentValue) {
+            if(isAcquired) return true;
+
+            isAcquired = currentValue.CompareTo(Goal) >= 0;
+            return isAcquired;
+        }
     }
 }

@@ -1,5 +1,6 @@
 namespace Project.RewardSystem{
-    public interface IUnlockable{
-        bool IsRewarded();
+    public interface IUnlockable<T>{
+        bool CanBeRewarded(T currentValue);
+        bool IsAcquired {get;}
     }
 }

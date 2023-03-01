@@ -6,11 +6,14 @@ namespace Project.UI.ProgressBar{
     [RequireComponent(typeof(Slider))]
     public class SlideBarController : MonoBehaviour
     {
-        private Slider _slider;
-        protected BaseProgressAnim _animation;
+        protected Slider _slider;
+        protected IProgressAnim _animation;
         protected void Awake(){
             SetupSlider();
-            _animation = new(_slider, 200);
+            SetupAnimation();
+        }
+        protected virtual void SetupAnimation(){
+            _animation = new BaseProgressAnim(_slider,200);
         }
         private void SetupSlider(){
             _slider = GetComponent<Slider>();
