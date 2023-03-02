@@ -1,6 +1,9 @@
 using UnityEngine;
 using MongoDB.Driver;
 using System;
+using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class UserController : MonoBehaviour
 {
@@ -12,23 +15,31 @@ public class UserController : MonoBehaviour
 
     private void Start()
     {
-        System.Globalization.CultureInfo.CurrentCulture.ClearCachedData();
         database = client.GetDatabase("Math");
         userCollection = database.GetCollection<UserModel>("User");
+        database.RunCommand<BsonDocument>(new BsonDocument(){
+            new Dictionary<string, object>(){
+                {"drop","User"}
+            }
+        });    
         Send("xmax", "pass");
     }
-    public void Send(string username, string password)
+    public UserModel Send(string username, string password)
     {
         UserModel user = new UserModel();
         user.Username = username;
         user.Password = password;
-        user.CreatedAt = DateTime.Now;
-        user.UpdatedAt = DateTime.Now;
 
-        AddUser(user);
+        string created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+        user.CreatedAt = created;
+        user.UpdatedAt = created;
+        return AddUser(user).Result;
+        
     }
-    private async void AddUser(UserModel user)
+    private async Task<UserModel> AddUser(UserModel user)
     {
         await userCollection.InsertOneAsync(user);
+        
+        return user;
     }
 }
