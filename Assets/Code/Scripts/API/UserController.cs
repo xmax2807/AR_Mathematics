@@ -21,7 +21,7 @@ public class UserController : MonoBehaviour
         });    
         Send("xmax", "pass");
     }
-    public UserModel Send(string username, string password)
+    public  UserModel Send(string username, string password)
     {
         UserModel user = new UserModel();
         user.Username = username;
@@ -30,12 +30,12 @@ public class UserController : MonoBehaviour
         string created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
         user.CreatedAt = created;
         user.UpdatedAt = created;
-        return AddUser(user).Result;
+        return AddUser(user);
         
     }
-    private async Task<UserModel> AddUser(UserModel user)
+    private  UserModel AddUser(UserModel user)
     {
-        await userCollection.InsertOneAsync(user);
+         userCollection.InsertOneAsync(user);
         
         return user;
     }
