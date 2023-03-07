@@ -8,15 +8,11 @@ using System.Configuration;
 
 public class UserController : MonoBehaviour
 {
-    MongoClient client = new MongoClient(
-       "mongodb+srv://khoa:khoa@cluster0.gwp7sx0.mongodb.net/?retryWrites=true&w=majority"
-   );
-    IMongoDatabase database;
+    IMongoDatabase database => DatabaseManager.Instance.Database;
     IMongoCollection<UserModel> userCollection;
     
     private void Start()
     {
-        database = client.GetDatabase("Math");
         userCollection = database.GetCollection<UserModel>("User");
         database.RunCommand<BsonDocument>(new BsonDocument(){
             new Dictionary<string, object>(){
