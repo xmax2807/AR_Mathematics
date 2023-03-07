@@ -10,17 +10,16 @@ public class DatabaseManager : MonoBehaviour
         if(Instance != null) return;
 
         Instance = this;
+        PlayerPrefs.SetString("DBConnection", "mongodb+srv://khoa:khoa@cluster0.gwp7sx0.mongodb.net/?retryWrites=true&w=majority");
+        
         Instance.Client = new MongoClient(
             PlayerPrefs.GetString("DBConnection")
         ); 
-        PlayerPrefs.SetString("DBConnection", "mongodb+srv://khoa:khoa@cluster0.gwp7sx0.mongodb.net/?retryWrites=true&w=majority");
+
+        
+        Database = Client.GetDatabase("Math");
+        collection = Database.GetCollection<UserModel>("User");
     }
     public IMongoDatabase Database {get;private set;}
     IMongoCollection<UserModel> collection;
-
-    void Start() {
-        Database = Client.GetDatabase("Math");
-        collection = Database.GetCollection<UserModel>("User");
-        UserModel model;
-     }
 }

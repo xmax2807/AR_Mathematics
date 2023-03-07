@@ -20,7 +20,6 @@ public class UserController : MonoBehaviour
             }
         });    
         Send("xmax", "pass");
-        Debug.Log(ConfigurationManager.AppSettings["MongoDB_Server"]);
     }
     public UserModel Send(string username, string password)
     {
