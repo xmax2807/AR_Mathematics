@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17757854, g: 0.22232202, b: 0.30451757, a: 1}
+  m_IndirectSpecularColor: {r: 0.4405009, g: 0.48899466, b: 0.5693816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,8 +393,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 60
-  field of view: 45
+  far clip plane: 1000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c738bdcef2433eb48a85c8f0c61788a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomRange: 40
+  randomRange: 80
   AvailableFish:
   - origin: {fileID: 666812213295118764, guid: 3c1c3ffccee75fc4f9544764667fabfd, type: 3}
     count: 25
@@ -930,8 +930,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 60
-  field of view: 40
+  far clip plane: 1000
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1007,15 +1007,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953426548}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 23, z: 20}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 60, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 195439455}
   m_Father: {fileID: 602659069}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &953426555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,10 +1228,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028879708}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!114 &1028879713
@@ -1302,8 +1302,8 @@ Transform:
   m_GameObject: {fileID: 1286790608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1702949208}
   - {fileID: 1420556954}
