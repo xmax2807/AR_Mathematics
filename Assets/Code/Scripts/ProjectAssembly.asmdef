@@ -15,7 +15,8 @@
         "Newtonsoft.Json.dll",
         "MongoDB.Driver.Core.dll",
         "MongoDB.Driver.dll",
-        "MongoDB.Bson.dll"
+        "MongoDB.Bson.dll",
+        "System.Configuration.ConfigurationManager.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

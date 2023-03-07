@@ -4,6 +4,7 @@ using System;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Configuration;
 
 public class UserController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class UserController : MonoBehaviour
    );
     IMongoDatabase database;
     IMongoCollection<UserModel> userCollection;
-
+    
     private void Start()
     {
         database = client.GetDatabase("Math");
@@ -23,6 +24,7 @@ public class UserController : MonoBehaviour
             }
         });    
         Send("xmax", "pass");
+        Debug.Log(ConfigurationManager.AppSettings["MongoDB_Server"]);
     }
     public UserModel Send(string username, string password)
     {
