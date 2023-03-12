@@ -18,20 +18,21 @@ public class UserController : MonoBehaviour
             new Dictionary<string, object>(){
                 {"drop","User"}
             }
-        });    
-        Send("xmax", "pass");
+        });
+        var model = SendAsync("xmax", "pass").Result;
     }
-    public  UserModel Send(string username, string password)
+    public async Task<UserModel> SendAsync(string username, string password)
     {
-        UserModel user = new UserModel();
-        user.Username = username;
-        user.Password = password;
+        UserModel user = new()
+        {
+            Username = username,
+            Password = password
+        };
 
         string created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
         user.CreatedAt = created;
         user.UpdatedAt = created;
-        return AddUser(user);
-        
+        return await AddUser(user);
     }
     private  UserModel AddUser(UserModel user)
     {

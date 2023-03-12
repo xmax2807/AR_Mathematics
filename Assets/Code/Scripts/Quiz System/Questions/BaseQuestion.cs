@@ -14,15 +14,18 @@ namespace Project.QuizSystem{
     }
     public abstract class BaseQuestion<T> : IQuestion where T : IEquatable<T>{
         private string _question;
-        private T _answer;
+        protected T _answer;
         private T _playerAnswered;
         public BaseQuestion(string question, T answer){
             _question = question;
             _answer = answer;
         }
+        protected BaseQuestion(string question){
+            _question = question;
+        }
 
         public virtual bool HasAnswered() => !_playerAnswered.Equals(null);
-
+        public virtual string GetQuestion()=>_question;
         // public virtual bool IsCorrect(T playerAns){
         //     return playerAns.Equals(_answer);
         // }

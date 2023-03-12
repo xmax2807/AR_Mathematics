@@ -34,5 +34,13 @@ namespace Project.Utils.ExtensionMethods
             return selectedElements.ToArray();
 
         }
+
+        public static T Randomize<T>(Random rand) where T : Enum{
+            if(rand == null){
+                rand = new Random();
+            }
+            var values = Enum.GetValues(typeof(T));
+            return (T) values.GetValue (rand.Next(values.Length));
+        }
     }
 }
