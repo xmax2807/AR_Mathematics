@@ -4,11 +4,13 @@
     "references": [
         "GUID:0bfa978952c65c24eb41989751a0cf44",
         "GUID:fe685ec1767f73d42b749ea8045bfe43",
-        "GUID:9e6bdf94fcb245c585c26819fa23a202"
+        "GUID:9e6bdf94fcb245c585c26819fa23a202",
+        "GUID:a9420e37d7990b54abdef6688edbe313",
+        "GUID:92703082f92b41ba80f0d6912de66115"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": true,
     "precompiledReferences": [
         "DOTween.dll",
