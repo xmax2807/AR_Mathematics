@@ -5,7 +5,7 @@ using Project.QuizSystem;
 
 namespace Project.UI.Panel
 {
-    public class QuizPanelView : PanelViewAnimator
+    public class QuizPanelView : AnimatorPanelView
     {
         [SerializeField] private LayoutGroup Layout;
         private Quiz quiz;
