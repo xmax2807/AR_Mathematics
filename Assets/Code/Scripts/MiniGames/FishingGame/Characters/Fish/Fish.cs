@@ -12,7 +12,7 @@ namespace Project.MiniGames.FishingGame
         protected override void Awake()
         {
             base.Awake();
-            board.transform.position += _renderer.bounds.size.y / 2 * Vector3.up;
+            board.transform.position += _renderer.bounds.size.y / 3 * Vector3.up;
         }
         public void OnBecameInvisible() => ToggleVisible(false);
         
