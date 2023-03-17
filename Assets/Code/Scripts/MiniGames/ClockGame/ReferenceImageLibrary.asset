@@ -27,13 +27,3 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: Clock
     m_Texture: {fileID: 2800000, guid: 4ffc75eed5c7c854299eaaa6134988ac, type: 3}
-  - m_SerializedGuid:
-      m_GuidLow: 5563640547530698310
-      m_GuidHigh: 5861118499353847487
-    m_SerializedTextureGuid:
-      m_GuidLow: 13885756858727412461
-      m_GuidHigh: 6319243151979516555
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: 194312403_4390320777667057_5590569597722820637_n
-    m_Texture: {fileID: 0}

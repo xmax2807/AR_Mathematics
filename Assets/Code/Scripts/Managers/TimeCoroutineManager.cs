@@ -43,9 +43,10 @@ namespace Project.Managers{
     }
     private IEnumerator ExecuteLoopAction(Func<bool> stopCondition, Action action, float delayInterval = 0, Action end = null){
         if(stopCondition != null){
+            var delayTicker = new WaitForSeconds(delayInterval);
             while(!stopCondition.Invoke()){
                 action?.Invoke();
-                yield return new WaitForSeconds(delayInterval);
+                yield return delayTicker;
             }
         }
         end?.Invoke();

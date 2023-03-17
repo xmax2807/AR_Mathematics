@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 6280764539114199041}
   - component: {fileID: 5810623662932053017}
   m_Layer: 0
-  m_Name: Clock_fbx
+  m_Name: Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,9 +358,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6656903810175582907}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1738454419442110787}
   - {fileID: 8305967188242445525}
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10673df41dbdc5348a08ad663ee62df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoursHand: {fileID: 7682854212341898396}
-  minutesHand: {fileID: 2523954442209006431}
-  secondsHand: {fileID: 7676450583476967625}
+  hoursHand: {fileID: 2343451620274920405}
+  minutesHand: {fileID: 6162485759468009249}
+  secondsHand: {fileID: 4059326793074120158}
 --- !u!1 &7676450583476967625
 GameObject:
   m_ObjectHideFlags: 0

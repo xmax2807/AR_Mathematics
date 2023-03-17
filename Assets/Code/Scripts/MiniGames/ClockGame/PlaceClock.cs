@@ -18,6 +18,7 @@ public class PlaceClock : MonoBehaviour
     {
         //Get the AR tracked image manager component
         _trackedImageManager = GetComponent<ARTrackedImageManager>();
+        _trackedImageManager.enabled = true;
     }
 
     void OnEnable()
@@ -53,31 +54,34 @@ public class PlaceClock : MonoBehaviour
 
         foreach (var trackedImage in eventArgs.updated)
         {
-            _instantiatedPrefabs[trackedImage.referenceImage.name].SetActive(trackedImage.trackingState == TrackingState.Tracking);
-            //loop through all tracked images that have been updated
+            //get the name of the ref image
+            var imageName = trackedImage.referenceImage.name;
+            //now loop over the array of prefabs
+            foreach (var curPrefab in ARPrefabs)
+            {
+                if(string.Compare(curPrefab.name, imageName, System.StringComparison.OrdinalIgnoreCase) != 0) continue;
+                if (!_instantiatedPrefabs.ContainsKey(imageName))
+                {
+                    var newPrefab = Instantiate(curPrefab, trackedImage.transform);
+                    //add the created prefab to our array
+                    _instantiatedPrefabs[imageName] = newPrefab;
+                }
+                
+                _instantiatedPrefabs[imageName].SetActive(trackedImage.trackingState == TrackingState.Tracking);
+            }
         }
 
         //If the AR subsystem has given up looking for a tracked image
         foreach (var trackedImage in eventArgs.removed)
         {
+            var name = trackedImage.referenceImage.name;
+            Debug.Log($"Destroyed {name}");
             //Destroy its prefab
-            Destroy(_instantiatedPrefabs[trackedImage.referenceImage.name]);
-            //Also remove the instance from our array
-            _instantiatedPrefabs.Remove(trackedImage.referenceImage.name);
+            // Destroy(_instantiatedPrefabs[name]);
+            // //Also remove the instance from our array
+            // _instantiatedPrefabs.Remove(name);
             //or simply set the prefab to inactive
-            //_instantiatedPrefabs[trackedImage.referenceImage.name].SetActive(false);
+            _instantiatedPrefabs[trackedImage.referenceImage.name].SetActive(false);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
