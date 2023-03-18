@@ -2,7 +2,9 @@
     "name": "MiniGamesAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:c2e01c4dda57f664dba0bd2a8c88ef55"
+        "GUID:c2e01c4dda57f664dba0bd2a8c88ef55",
+        "GUID:a9420e37d7990b54abdef6688edbe313",
+        "GUID:92703082f92b41ba80f0d6912de66115"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
