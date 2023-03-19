@@ -6,14 +6,43 @@ using UnityEngine;
 public class UserController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
+    Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
     const string Collection = "users";
     public UserController()
     {
     }
+    public void RegisterAuth(string email, string password)
+    {
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            // Firebase user has been created.
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+        });
+    }
+    public async Task<bool> SignInAuth(string email, string password)
+    {
+        Firebase.Auth.Credential credential =
+    Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
+        var user = await auth.SignInWithCredentialAsync(credential);
+        return user != null;
+    }
     public void Register(string Username, string Password)
     {
 
-        if (CheckifUsernameExist(Username)) return;
+        if (CheckifUsernameExist(Username).Result) return;
 
         Debug.Log("Username available");
 
@@ -28,20 +57,27 @@ public class UserController
         });
 
     }
-    public bool CheckifUsernameExist(string document)
+    public async Task<bool> CheckifUsernameExist(string document)
     {
-        return CheckIfDocumentExist(Collection, document);
+        return await CheckIfDocumentExist(Collection, document);
     }
-    public bool CheckIfDocumentExist(string collection, string doc)
+    public async Task<bool> CheckIfDocumentExist(string collection, string doc)
     {
-        var documentSnapshot = db.Collection(collection).Document(doc).GetSnapshotAsync().Result;
-
-        if (documentSnapshot.Exists)
+        try
         {
-            Debug.Log(doc + " exists in " + collection);
+            DocumentSnapshot documentSnapshot = await db.Collection(collection).Document(doc).GetSnapshotAsync();
+            if (documentSnapshot.Exists)
+            {
+                Debug.Log(doc + " exists in " + collection);
+            }
+
+            return documentSnapshot.Exists;
+        }
+        catch
+        {
+            return true;
         }
 
-        return documentSnapshot.Exists;
     }
     public async Task<T> GetValueAsync<T>(string collection, string document)
     {

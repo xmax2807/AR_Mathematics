@@ -19,12 +19,13 @@ public class DatabaseManager : MonoBehaviour
     // [SerializeField] private string Password;
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
+    public static Firebase.Auth.FirebaseAuth Auth;
     private FirebaseApp app;
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         FirebaseFireStore = FirebaseFirestore.DefaultInstance;
+        Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)

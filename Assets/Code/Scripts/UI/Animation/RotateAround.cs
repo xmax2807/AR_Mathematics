@@ -12,6 +12,6 @@ public class RotateAround : MonoBehaviour
     }
     void Update()
     {
-        thisTrans.Rotate(rotateDirection * angularSpeed * Time.deltaTime);
+        thisTrans.Rotate(Time.deltaTime * angularSpeed * rotateDirection);
     }
 }
