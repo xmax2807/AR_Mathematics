@@ -140,6 +140,21 @@ namespace Project.Utils.ExtensionMethods
             }
         }
 
+        public static T FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition){
+            if(condition == null) return default;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+
+            if(!iterator.MoveNext()) return default;
+
+            do{
+                if(condition.Invoke(iterator.Current)){
+                    return iterator.Current;
+                }
+            }while(iterator.MoveNext());
+            return default;
+        }
+
         public static void SplitLoop(int count, int loopCount, Action eachLoopAction){
             for(int i = 0; i < count;){
                 int limit = Math.Min(loopCount, count - i) + i;
