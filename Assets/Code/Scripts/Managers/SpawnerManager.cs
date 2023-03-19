@@ -18,17 +18,31 @@ namespace Project.Managers
                 Destroy(this);
             }
         }
-        public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null) where T : MonoBehaviour
+        public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null, Action<T> onBuildObj = null) where T : MonoBehaviour
         {
-            var newGameObj = Instantiate(gameObj, newPosition, Quaternion.identity);
-            newGameObj.transform.parent = theParent;
+            T newGameObj;
+            if (theParent != null){
+                newGameObj = Instantiate(gameObj, theParent);
+            }
+            else newGameObj = Instantiate(gameObj, newPosition, Quaternion.identity);
+
+            onBuildObj?.Invoke(newGameObj);
         }
-        public void SpawnObjects<T>(T origin, int count, Transform theParent = null) where T : MonoBehaviour
+        public void SpawnObjects<T>(T origin, int count, Action<T> onBuildObj = null, Transform theParent = null) where T : MonoBehaviour
         {
             ListExtensionMethods.SplitLoop(count, 10,
                 () => StartCoroutine(
-                    SpawnObjectsAsync(origin, origin.transform.position, theParent)
+                    SpawnObjectsAsync(origin, origin.transform.position, theParent,10,onBuildObj)
                 ));
+        }
+        public void SpawnObjectsList<T>(T origin, int count,Transform theParent, Action<T,int> onBuildItem = null) where T : MonoBehaviour{
+            for(int i = 0; i < count; i++){
+                SpawnObject(origin, origin.transform.position, theParent,
+                    (obj)=>{
+                        onBuildItem?.Invoke(obj, i);
+                    }
+                );
+            }
         }
         public void SpawnObjectsRandomly<T>(T origin, int count, Func<Vector3> randomMethod, Func<Vector3, bool> canSpawnCondition, Transform theParent = null) where T : MonoBehaviour
         {
@@ -54,11 +68,11 @@ namespace Project.Managers
                 yield return new WaitForEndOfFrame();
             }
         }
-        public IEnumerator SpawnObjectsAsync<T>(T gameObj, Vector3 newPosition, Transform newParent = null, int count = 10) where T : MonoBehaviour
+        public IEnumerator SpawnObjectsAsync<T>(T gameObj, Vector3 newPosition, Transform newParent = null, int count = 10, Action<T> onBuildObj = null) where T : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                SpawnObject(gameObj, newPosition, newParent);
+                SpawnObject(gameObj, newPosition, newParent,onBuildObj);
                 yield return new WaitForEndOfFrame();
             }
         }
