@@ -785,6 +785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828f6487ca54afb48b308f725e202084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  View: {fileID: -8488945422180087357}
+  BackButton: {fileID: 2610776254698115080}
   ButtonGroupTransform: {fileID: 3854347895372410735}
   Item: {fileID: 1837748474714565587}
   Title: {fileID: 5209598673986183820}

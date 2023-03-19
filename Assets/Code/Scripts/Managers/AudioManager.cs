@@ -23,6 +23,7 @@ namespace Project.Managers{
             if(SoundFX == null){
                 SoundFX = this.gameObject.AddChildWithComponent<AudioSource>("SoundFX");
             }
+            DontDestroyOnLoad(gameObject);
         }
         public void Start(){
             //Speak("Và giờ anh biết cuộc tình mình chẳng còn gì. Khi nắng xuân sang để lòng mình chẳng thầm thì");

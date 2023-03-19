@@ -326,7 +326,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3148114082089532460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1268471737238829906}
+        m_TargetAssemblyTypeName: UserControllerBehaviour, Projec
+        m_MethodName: SignIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8994167512401850141}
+        m_TargetAssemblyTypeName: Gameframe.GUI.TransitionSystem.SingleSceneLoadBehaviour,
+          com.gameframe.gui
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3148114082109471888
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +946,9 @@ GameObject:
   - component: {fileID: 2997427390651465326}
   - component: {fileID: 3669229859341035454}
   - component: {fileID: 4340704655682597637}
+  - component: {fileID: 1268471737238829906}
+  - component: {fileID: 8994167512401850141}
+  - component: {fileID: 13597588993547787}
   m_Layer: 5
   m_Name: LoginPanel
   m_TagString: Untagged
@@ -1008,6 +1036,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2997427390651465326}
   animationType: 1
+--- !u!114 &1268471737238829906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148114082862327218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f2c652ef1912a41a8b59c3f4fa90e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userNameField: {fileID: 3148114083230410557}
+  passwordField: {fileID: 3148114083784572664}
+--- !u!114 &8994167512401850141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148114082862327218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb4ab66f639465d907c76a1441e14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneTransitionSystem: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77,
+    type: 2}
+  sceneName: MainMenuScene
+--- !u!114 &13597588993547787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148114082862327218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274c718b656aa4b949200a902a772807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelType: {fileID: 11400000, guid: ad59a8ced19cb6f4d8a44741f11b70d2, type: 2}
+  panelView: {fileID: 0}
+  eventManager: {fileID: 0}
+  sceneTransitionSystem: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77,
+    type: 2}
 --- !u!1 &3148114083230410555
 GameObject:
   m_ObjectHideFlags: 0

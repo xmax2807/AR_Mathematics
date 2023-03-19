@@ -483,19 +483,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5690807099983909254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5447608247197241348}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5031283572776073810
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5578f1ebc862a0c4abe43d26bfa6ecd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  View: {fileID: -6714539846832026239}
   BackButton: {fileID: 5963570811886482703}
   ButtonGroupTransform: {fileID: 3938565342209640521}
   ButtonPrefab: {fileID: 2079449857927685525, guid: 311a07389adedbf4fa8aacb9faae8f55,

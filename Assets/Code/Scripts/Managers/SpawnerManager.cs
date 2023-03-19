@@ -17,6 +17,7 @@ namespace Project.Managers
             else if(Instance != null && Instance != this){
                 Destroy(this);
             }
+            DontDestroyOnLoad(gameObject);
         }
         public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null, Action<T> onBuildObj = null) where T : MonoBehaviour
         {

@@ -18,9 +18,9 @@
         "DOTween.dll",
         "Newtonsoft.Json.dll",
         "MongoDB.Driver.Core.dll",
-        "MongoDB.Driver.dll",
-        "MongoDB.Bson.dll",
-        "System.Configuration.ConfigurationManager.dll"
+        "Firebase.App.dll",
+        "Firebase.Auth.dll",
+        "Firebase.Firestore.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
