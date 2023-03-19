@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8297792435224733328, guid: 2f7442e9955ee82459ba17078603fe57,
+        type: 3}
+      propertyPath: ARCamera
+      value: 
+      objectReference: {fileID: 1462001255}
     - target: {fileID: 9045534289745474938, guid: 2f7442e9955ee82459ba17078603fe57,
         type: 3}
       propertyPath: m_Name
@@ -318,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlacedPrefab: {fileID: 6656903810175582907, guid: eb7db8af144a96a4ca708ca08843f570,
     type: 3}
+  ARCamera: {fileID: 1462001255}
   visualObject: {fileID: 9045534289745474938, guid: 2f7442e9955ee82459ba17078603fe57,
     type: 3}
 --- !u!114 &626532300
@@ -644,7 +650,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -653,7 +659,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 20
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -683,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -733,7 +739,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
-  m_LightEstimation: 0
+  m_LightEstimation: -1
   m_FacingDirection: 1
 --- !u!114 &1462001260
 MonoBehaviour:
