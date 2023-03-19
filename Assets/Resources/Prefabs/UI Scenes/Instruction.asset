@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
-  m_Name: SemesterData
+  m_Name: Instruction
   m_EditorClassIdentifier: 
   Children:
-  - {fileID: 11400000, guid: 1ce76c50423a3c54bbe358f607aa369a, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000}
+  - {fileID: 11400000}
   ButtonNames:
-  - Name: "H\u1ECDc k\u1EF3 1"
+  - Name: "Ca\u0301ch ho\u0323c"
     Description: 
-  Title: "Ch\u01B0\u01A1ng Tr\xECnh H\u1ECDc"
+  - Name: "Ca\u0301ch ch\u01A1i"
+    Description: 
+  - Name: "Ca\u0301ch la\u0300m \xF4n t\xE2\u0323p"
+    Description: 
+  Title: "H\u01B0\u01A1\u0301ng d\xE2\u0303n"
   Description: 
