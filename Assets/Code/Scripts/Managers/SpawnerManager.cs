@@ -19,13 +19,17 @@ namespace Project.Managers
             }
             DontDestroyOnLoad(gameObject);
         }
+        public void SpawnObjectInParent<T>(T gameObj, Transform theParent, Action<T> onBuildObj = null) where T : MonoBehaviour
+        {
+            T newGameObj;
+            newGameObj = Instantiate(gameObj, theParent);
+            onBuildObj?.Invoke(newGameObj);
+        }
         public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null, Action<T> onBuildObj = null) where T : MonoBehaviour
         {
             T newGameObj;
-            if (theParent != null){
-                newGameObj = Instantiate(gameObj, theParent);
-            }
-            else newGameObj = Instantiate(gameObj, newPosition, Quaternion.identity);
+            newGameObj = Instantiate(gameObj, newPosition, Quaternion.identity);
+            newGameObj.transform.SetParent(theParent);
 
             onBuildObj?.Invoke(newGameObj);
         }
@@ -38,7 +42,7 @@ namespace Project.Managers
         }
         public void SpawnObjectsList<T>(T origin, int count,Transform theParent, Action<T,int> onBuildItem = null) where T : MonoBehaviour{
             for(int i = 0; i < count; i++){
-                SpawnObject(origin, origin.transform.position, theParent,
+                SpawnObjectInParent(origin, theParent,
                     (obj)=>{
                         onBuildItem?.Invoke(obj, i);
                     }

@@ -164,13 +164,13 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: asdasdasdasdasdasdasdasdasdasd
+  m_Text: quanghuy2807
   m_CaretBlinkRate: 0.31
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 0
   m_GlobalFontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
-  m_OnFocusSelectAll: 0
+  m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 3148114082089532461}
   - component: {fileID: 3148114082089532460}
   - component: {fileID: 3148114082089532459}
+  - component: {fileID: 6106464471838128746}
   m_Layer: 5
   m_Name: SignUp
   m_TagString: Untagged
@@ -298,6 +299,50 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6106464471838128746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148114082089532457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa80081f61ad4d8f8f4109f268ab26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelType: {fileID: 11400000, guid: eb5fe7a589871374f9dc630fa79f108d, type: 2}
+  panelStackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
+  onConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
+        m_TargetAssemblyTypeName: Gameframe.GUI.PanelSystem.PanelStackSystem, com.gameframe.gui
+        m_MethodName: Pop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
+        m_TargetAssemblyTypeName: Gameframe.GUI.PanelSystem.PanelStackSystem, com.gameframe.gui
+        m_MethodName: Pop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3148114082232258016
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +803,7 @@ GameObject:
   - component: {fileID: 2997427390651465326}
   - component: {fileID: 3669229859341035454}
   - component: {fileID: 4340704655682597637}
+  - component: {fileID: 9211015863969008668}
   m_Layer: 5
   m_Name: SignUp
   m_TagString: Untagged
@@ -845,6 +891,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2997427390651465326}
   animationType: 1
+--- !u!114 &9211015863969008668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148114082862327218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f45844644f84f4b8068d5ddb7a6c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userNameField: {fileID: 3148114083230410557}
+  passwordField: {fileID: 4119343118865427568}
+  rePasswordField: {fileID: 3148114083784572664}
+  BackToSignInButton: {fileID: 5817361551261871326}
+  SignUpButton: {fileID: 3148114082089532459}
+  pusher: {fileID: 6106464471838128746}
 --- !u!1 &3148114083230410555
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +1045,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 16
+  m_CharacterLimit: 32
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1009,13 +1073,13 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: asdasdjlaskjdkjlkajslkdl
+  m_Text: xmax28072001@gmail.com
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 0
   m_GlobalFontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
-  m_OnFocusSelectAll: 1
+  m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
@@ -1299,7 +1363,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "******************************\u200B"
+  m_text: "************\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
   m_sharedMaterial: {fileID: 1198199753470425219, guid: 033cb527de5e62d4d818444da18d90fd,
@@ -1598,13 +1662,13 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: asdasdasdasdasdasdasdasdasdasd
+  m_Text: quanghuy2807
   m_CaretBlinkRate: 0.31
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 0
   m_GlobalFontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
-  m_OnFocusSelectAll: 0
+  m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
@@ -1812,7 +1876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "asdasdjlaskjdkjlkajslkdl\u200B"
+  m_text: "xmax28072001@gmail.com\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
   m_sharedMaterial: {fileID: 1198199753470425219, guid: 033cb527de5e62d4d818444da18d90fd,
@@ -1948,7 +2012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "******************************\u200B"
+  m_text: "************\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 033cb527de5e62d4d818444da18d90fd, type: 2}
   m_sharedMaterial: {fileID: 1198199753470425219, guid: 033cb527de5e62d4d818444da18d90fd,

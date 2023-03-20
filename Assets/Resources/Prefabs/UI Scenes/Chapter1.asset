@@ -14,14 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children:
   - {fileID: 11400000}
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: dbf30c16d6116d447b7bd74d34e329db, type: 2}
   - {fileID: 11400000}
   ButtonNames:
   - Name: "Ba\u0300i ho\u0323c"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   - Name: "Tro\u0300 ch\u01A1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   - Name: "\xD4n t\xE2\u0323p"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   Title: "Ch\u01B0\u01A1ng 1"
   Description: "La\u0300m quen v\u01A1\u0301i m\xF4\u0323t s\xF4\u0301 hi\u0300nh"

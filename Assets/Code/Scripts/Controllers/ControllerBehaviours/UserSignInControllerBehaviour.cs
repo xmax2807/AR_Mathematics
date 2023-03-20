@@ -1,9 +1,10 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Project.Utils.ExtensionMethods;
 using Gameframe.GUI.TransitionSystem;
 
-public class UserControllerBehaviour : MonoBehaviour{
+public class UserSignInControllerBehaviour : MonoBehaviour{
     
     [SerializeField] SingleSceneLoadBehaviour SceneLoadBehaviour;
     [SerializeField] TMP_InputField userNameField;
@@ -11,7 +12,7 @@ public class UserControllerBehaviour : MonoBehaviour{
     [SerializeField] Button SignInButton;
     private string username;
     private string password;
-    private UserController controller;
+    private UserController Controller => DatabaseManager.Instance.UserController;
 
     private void OnEnable(){
         userNameField.onEndEdit.AddListener(EndedEditUsername);
@@ -25,24 +26,19 @@ public class UserControllerBehaviour : MonoBehaviour{
         SignInButton.onClick.RemoveListener(SignIn);
     }
 
-    private async void EndedEditUsername(string text){
-        bool result = await controller.CheckifUsernameExist(text);
-        if(result){
-            Debug.Log("Existed");
-        }
-        SignInButton.interactable = !result;
+    private void EndedEditUsername(string text){
+        SignInButton.interactable = text.IsEmail();
         username = text;
     }
     private void EndedEditPassword(string password){
         this.password = password;
     }
     private void Start(){
-        controller = new();
         SignInButton.interactable = false;
     }
   
     public async void SignIn(){
-        bool result = await controller.SignInAuth(username, password);
+        bool result = await Controller.SignInAuth(username, password);
 
         if(result){
             Debug.Log("Signed");

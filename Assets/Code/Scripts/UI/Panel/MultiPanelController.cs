@@ -30,19 +30,17 @@ namespace Project.UI.Panel
         }
         private void CreateUI(PanelViewData data)
         {
-            for (int i = 0; i < data.ButtonNames.Length; i++)
+            int min = Mathf.Min(data.Children.Length, data.ButtonNames.Length);
+            for (int i = 0; i < min; i++)
             {
                 int currIndex = i;
-                data.ButtonNames[currIndex].OnClick += () =>
-                {
-                    PushUI(data.Children[currIndex]);
-                };
+                data.ButtonNames[currIndex].OnClick.AddListener(()=>PushUI(data.Children[currIndex])); 
             }
 
             var controller = Samples.FindMatch((item) => item.Type == data.Type);
 
             if (controller == null) return;
-            SpawnerManager.Instance.SpawnObject(controller, this.transform.position, this.transform, (obj) =>
+            SpawnerManager.Instance.SpawnObjectInParent(controller, this.transform, (obj) =>
             {
                 obj.SetUI(data);
 

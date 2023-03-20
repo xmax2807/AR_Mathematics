@@ -249,7 +249,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1366847861}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -482,8 +482,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1674364508}
   - {fileID: 298516107}
+  - {fileID: 1674364508}
   - {fileID: 135365653}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -572,8 +572,9 @@ GameObject:
   - component: {fileID: 1674364508}
   - component: {fileID: 1674364510}
   - component: {fileID: 1674364509}
+  - component: {fileID: 1674364511}
   m_Layer: 5
-  m_Name: StackPanelController
+  m_Name: PanelController - LoadingPanelType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,7 +593,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1366847861}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -623,7 +624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674364507}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4e70909638574717a3e9e1382ce0913, type: 3}
   m_Name: 
@@ -631,6 +632,23 @@ MonoBehaviour:
   eventManager: {fileID: 0}
   panelStackSystem: {fileID: 11400000, guid: a47d394c465a24d1194fce337a94c971, type: 2}
   clearSystemStackOnDestroy: 1
+--- !u!114 &1674364511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674364507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274c718b656aa4b949200a902a772807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelType: {fileID: 11400000, guid: ad59a8ced19cb6f4d8a44741f11b70d2, type: 2}
+  panelView: {fileID: 0}
+  eventManager: {fileID: 0}
+  sceneTransitionSystem: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77,
+    type: 2}
 --- !u!1 &1768657857
 GameObject:
   m_ObjectHideFlags: 0

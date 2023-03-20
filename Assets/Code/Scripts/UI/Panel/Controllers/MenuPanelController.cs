@@ -21,7 +21,7 @@ namespace Project.UI.Panel{
             (obj,i)=>{
                 obj.name = Data.ButtonNames[i].Name;
                 obj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Data.ButtonNames[i].Name;
-                obj.onClick.AddListener(Data.ButtonNames[i].OnClick);
+                obj.onClick = Data.ButtonNames[i].OnClick;
             });
 
             Title.text = Data.Title;

@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Project.UI.Panel{
 
     [System.Serializable]
     public class ButtonData{
         public string Name;
-        public UnityAction OnClick;
+        public Button.ButtonClickedEvent OnClick;
         public string Description;
     }
     public enum PanelEnumType{

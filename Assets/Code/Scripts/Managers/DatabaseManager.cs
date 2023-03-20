@@ -20,13 +20,28 @@ public class DatabaseManager : MonoBehaviour
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
+    public static DatabaseManager Instance {get;private set;}
     private FirebaseApp app;
+    public UserController UserController {get;private set;}
 
     void Awake()
     {
+        if(Instance == null){
+            Instance = this;
+            InitFirebase();
+        }
+        else if(Instance != this){
+            Destroy(this.gameObject);
+        }
+    }
+
+    private async void InitFirebase()
+    {
         FirebaseFireStore = FirebaseFirestore.DefaultInstance;
         Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        UserController = new UserController();
+        
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -47,10 +62,5 @@ public class DatabaseManager : MonoBehaviour
 
             return Task.CompletedTask;
         });
-
     }
-
-
-    // Update is called once per frame
-   
 }
