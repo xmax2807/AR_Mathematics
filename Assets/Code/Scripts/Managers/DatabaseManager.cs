@@ -13,16 +13,19 @@ using Firebase;
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    [SerializeField] LessonData LessonData;
     // private string userID;
     // [SerializeField] private string Username;
     // [SerializeField] private string Password;
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
+    public static Firebase.Storage.FirebaseStorage Storage;
     public static DatabaseManager Instance {get;private set;}
     private FirebaseApp app;
     public UserController UserController {get;private set;}
+    public AchievementController AchievementController {get;private set;}
+    public LessonController LessonController {get;private set;}
 
     void Awake()
     {
@@ -39,7 +42,11 @@ public class DatabaseManager : MonoBehaviour
     {
         FirebaseFireStore = FirebaseFirestore.DefaultInstance;
         Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        Storage = Firebase.Storage.FirebaseStorage.DefaultInstance;
+
         UserController = new UserController();
+        AchievementController = new AchievementController();
+        LessonController = new();
         
         await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
@@ -49,6 +56,8 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
+                // LessonController.UploadLesson(LessonData);
+                LessonController.GetVideo(1,2);
                 // CreateUser(Username, Password);
 
                 // Set a flag here to indicate whether Firebase is ready to use by your app.

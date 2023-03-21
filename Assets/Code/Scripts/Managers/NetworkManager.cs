@@ -14,6 +14,7 @@ namespace Project.Managers
             DontDestroyOnLoad(gameObject);
             CheckInternetConnection();
         }
+        
         public void CheckInternetConnection()
         {
             StartCoroutine(

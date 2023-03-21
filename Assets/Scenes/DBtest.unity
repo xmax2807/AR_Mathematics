@@ -675,7 +675,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2060876672}
   - component: {fileID: 2060876673}
-  - component: {fileID: 2060876674}
   m_Layer: 0
   m_Name: GameManger
   m_TagString: Untagged
@@ -710,17 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6abf2ad4d64364c949af988c8d95b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Username: 
-  Password: 
---- !u!114 &2060876674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060876671}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a31764569d70b40a1823cb15903fa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  LessonData:
+    LessonTitle: "L\xE0m quen v\u1EDBi c\xE1c s\u1ED1 1, 2, 3, 4, 5"
+    LessonVideoFolder: gs://math-64c88.appspot.com/Lesson_Video/Chapter2/Unit1
+    VideoNumbers: 12
+    LessonChapter: 2
+    LessonSemester: 1
+    LessonUnit: 1
+    LessonStatus: 1

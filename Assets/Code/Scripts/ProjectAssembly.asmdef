@@ -20,7 +20,8 @@
         "Firebase.Auth.dll",
         "Firebase.App.dll",
         "Firebase.Firestore.dll",
-        ""
+        "Firebase.TaskExtension.dll",
+        "Firebase.Storage.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
