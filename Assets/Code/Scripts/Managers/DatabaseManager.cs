@@ -19,14 +19,16 @@ public class DatabaseManager : MonoBehaviour
     Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     UserController userController;
-    
+    AchievementController achievementController;
     Firebase.Auth.FirebaseAuth auth;
-    
+
     async void Start()
     {
         userController = new();
+        achievementController = new();
         FirebaseFireStore = FirebaseFirestore.DefaultInstance;
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -39,7 +41,8 @@ public class DatabaseManager : MonoBehaviour
                 try
                 {
 
-                    userController.SignIn(Username, Password);
+                    // userController.SignIn(Username, Password);
+                    achievementController.ListAchievements();
                 }
                 catch (Exception e)
                 {
@@ -62,5 +65,5 @@ public class DatabaseManager : MonoBehaviour
 
 
     // Update is called once per frame
-   
+
 }
