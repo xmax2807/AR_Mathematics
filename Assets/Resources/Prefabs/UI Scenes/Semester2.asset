@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: Semester2
+  m_EditorClassIdentifier: 
+  Children:
+  - {fileID: 11400000, guid: c4eed344e816b414e8cbcc9b70de2458, type: 2}
+  - {fileID: 11400000, guid: 348df246be74c214b884b3fca7f458bd, type: 2}
+  ButtonNames:
+  - Name: "Ch\u01B0\u01A1ng 4"
+    Description: 
+  - Name: "Ch\u01B0\u01A1ng 5"
+    Description: 
+  Title: "Ch\u01B0\u01A1ng Tr\xECnh H\u1ECDc"
+  Description: 

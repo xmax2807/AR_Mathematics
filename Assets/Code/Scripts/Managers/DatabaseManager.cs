@@ -8,27 +8,40 @@ using System.Linq;
 using Firebase.Firestore;
 using Project.Utils.ExtensionMethods;
 using System.Threading.Tasks;
+using Firebase;
 
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private string userID;
-    [SerializeField] private string Username;
-    [SerializeField] private string Password;
-    Firebase.FirebaseApp app;
+    // private string userID;
+    // [SerializeField] private string Username;
+    // [SerializeField] private string Password;
+    // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
-    UserController userController;
-    AchievementController achievementController;
-    Firebase.Auth.FirebaseAuth auth;
+    public static Firebase.Auth.FirebaseAuth Auth;
+    public static DatabaseManager Instance {get;private set;}
+    private FirebaseApp app;
+    public UserController UserController {get;private set;}
 
-    async void Start()
+    void Awake()
     {
-        userController = new();
-        achievementController = new();
+        if(Instance == null){
+            Instance = this;
+            InitFirebase();
+        }
+        else if(Instance != this){
+            Destroy(this.gameObject);
+        }
+    }
+
+    private async void InitFirebase()
+    {
         FirebaseFireStore = FirebaseFirestore.DefaultInstance;
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
+        Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        UserController = new UserController();
+        
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -37,17 +50,6 @@ public class DatabaseManager : MonoBehaviour
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
                 // CreateUser(Username, Password);
-                // SignIn(Username, Password);
-                try
-                {
-
-                    // userController.SignIn(Username, Password);
-                    achievementController.ListAchievements();
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e.Message);
-                }
 
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
@@ -60,10 +62,5 @@ public class DatabaseManager : MonoBehaviour
 
             return Task.CompletedTask;
         });
-
     }
-
-
-    // Update is called once per frame
-
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24973135441",
+    "project_id": "bubbly-domain-300603",
+    "storage_bucket": "bubbly-domain-300603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24973135441:android:528fb0a8734cec6dbcf270",
+        "android_client_info": {
+          "package_name": "hcmus.DATN.AR_Math"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24973135441-bbs4a0kf9uimeqqq6fcncjum6si6c05l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAozOqTHKbIQEf3HdnHU1RC1_1P6HprPko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24973135441-bbs4a0kf9uimeqqq6fcncjum6si6c05l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

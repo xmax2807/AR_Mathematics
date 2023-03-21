@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: MenuPanelViewData
+  m_EditorClassIdentifier: 
+  Children:
+  - {fileID: 11400000, guid: 599d9d66b4e2142499172bec2c938a17, type: 2}
+  - {fileID: 11400000, guid: 6566a0fd27328ba43890a103a319611f, type: 2}
+  - {fileID: 11400000, guid: c29eda5456f94e440a586111e0620d6c, type: 2}
+  - {fileID: 11400000, guid: d3d1889dd4a55d04884bd96efa043518, type: 2}
+  ButtonNames:
+  - Name: "B\u1EAFt \u0111\u1EA7u h\u1ECDc"
+    Description: 
+  - Name: "H\u01B0\u01A1\u0301ng d\xE2\u0303n"
+    Description: 
+  - Name: "B\xF4\u0323 s\u01B0u t\xE2\u0323p"
+    Description: 
+  - Name: "Ca\u0300i \u0111\u0103\u0323t"
+    Description: 
+  Title: "To\xE1n L\u1EDBp 1"
+  Description: 

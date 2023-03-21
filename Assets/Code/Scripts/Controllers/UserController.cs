@@ -2,23 +2,34 @@ using System;
 using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Utils.ExtensionMethods;
-// using Unity.Services.Authentication;
-// using Unity.Services.Core;
-// using Unity.Services.Core.Environments;
 using UnityEngine;
 public class UserController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
-    private void Register(string Username, string Password)
+    Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
+    const string Collection = "users";
+
+    public async Task<Firebase.Auth.FirebaseUser> RegisterAuth(string email, string password)
+    {
+        return await auth.CreateUserWithEmailAndPasswordAsync(email, password);
+    }
+    public async Task<bool> SignInAuth(string email, string password)
+    {
+        Firebase.Auth.Credential credential =
+    Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
+        var user = await auth.SignInWithCredentialAsync(credential);
+        return user != null;
+    }
+    public void Register(string Username, string Password)
     {
 
-        if (CheckIfDocumentExist("users", Username)) return;
+        if (CheckifUsernameExist(Username).Result) return;
 
         Debug.Log("Username available");
 
         string encryptPassword = StringExtensionMethods.EncryptString(Username + Password, Password);
 
-        db.Collection("users").Document(Username).SetAsync(new UserModel()
+        db.Collection(Collection).Document(Username).SetAsync(new UserModel()
         {
             Password = encryptPassword
         }).ContinueWith(task =>
@@ -27,21 +38,32 @@ public class UserController
         });
 
     }
-    public bool CheckIfDocumentExist(string collection, string document)
+    public async Task<bool> CheckifUsernameExist(string document)
     {
-        var documentSnapshot = db.Collection(collection).Document(document).GetSnapshotAsync().Result;
-
-        if (documentSnapshot.Exists)
+        return await CheckIfDocumentExist(Collection, document);
+    }
+    public async Task<bool> CheckIfDocumentExist(string collection, string doc)
+    {
+        try
         {
-            Debug.Log(document + " exists in " + collection);
+            DocumentSnapshot documentSnapshot = await db.Collection(collection).Document(doc).GetSnapshotAsync();
+            if (documentSnapshot.Exists)
+            {
+                Debug.Log(doc + " exists in " + collection);
+            }
+
+            return documentSnapshot.Exists;
+        }
+        catch
+        {
+            return true;
         }
 
-        return documentSnapshot.Exists;
     }
     public async Task<T> GetValueAsync<T>(string collection, string document)
     {
 
-        DocumentSnapshot doc = await db.Collection(collection).Document(document).GetSnapshotAsync();        
+        DocumentSnapshot doc = await db.Collection(collection).Document(document).GetSnapshotAsync();
 
         if (doc == null || !doc.Exists)
         {
@@ -51,14 +73,14 @@ public class UserController
 
         return doc.ConvertTo<T>();
     }
-    public async void SignIn(string username, string password)
+    public async Task<bool> SignIn(string username, string password)
     {
 
         var model = await GetValueAsync<UserModel>("users", username);
         if (model == null)
         {
             Debug.Log("Username is not exist!");
-            return;
+            return false;
         }
 
         string decryptPassword = StringExtensionMethods.DecryptString(username + password, model.Password);
@@ -66,15 +88,16 @@ public class UserController
         if (decryptPassword == password)
         {
             Debug.Log("Login success");
+            return true;
         }
         else
         {
             Debug.Log("Incorrect password");
-            return;
+            return false;
         }
 
     }
-    
+
     // Setup authentication event handlers if desired
     // void SetupEvents()
     // {

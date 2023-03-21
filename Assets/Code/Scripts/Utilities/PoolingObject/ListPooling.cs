@@ -76,7 +76,6 @@ namespace Project.Utils.ObjectPooling{
             var go = GameObject.Instantiate(referenceObject, position ?? mStartPos, Quaternion.identity, parent ?? mParent);
             var obj = go.GetComponent<T>();
             obj.transform.localPosition = position ?? mStartPos;
-            obj.name = obj.Name + Count;
 
             Add(obj);
 			OnObjectCreationCallBack?.Invoke(obj, Count - 1);

@@ -7,11 +7,17 @@ using System.Text;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 namespace Project.Utils.ExtensionMethods
 {
     public static class StringExtensionMethods
     {
+        private const string MatchEmailPattern =
+		@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+		+ @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+		+ @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+		+ @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
         /// <summary>
         /// Uppercase
         /// </summary>
@@ -86,6 +92,13 @@ namespace Project.Utils.ExtensionMethods
             {
                 return default;
             }
+        }
+
+        public static bool IsEmail(this string email){
+            if(email != null){
+                return Regex.IsMatch(email, MatchEmailPattern);
+            }
+            return false;
         }
 
         public static string RandomString(int length)

@@ -96,8 +96,8 @@ namespace Project.Utils.ExtensionMethods
             return child;
         }
         public static T AddChildWithComponent<T>(this GameObject obj, string name) where T : Component{
-            GameObject child = UnityEngine.Object.Instantiate(new GameObject(), obj.transform);
-            child.name = name;
+            GameObject child = new(name); 
+            child.transform.parent = obj.transform;
             return child.AddComponent<T>();
         }
 

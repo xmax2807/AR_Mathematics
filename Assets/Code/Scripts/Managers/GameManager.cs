@@ -16,6 +16,7 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<SpawnerManager>(childName: "Spawn Manager");
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
+            gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
         }
         protected void Awake()
@@ -23,12 +24,12 @@ namespace Project.Managers
             if (Instance == null)
             {
                 Init();
-                DontDestroyOnLoad(this.gameObject);
             }
             else if (Instance != null && Instance != this)
             {
                 Destroy(this.gameObject);
             }
+            DontDestroyOnLoad(this);
         }
     }
 }

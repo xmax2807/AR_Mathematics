@@ -3,7 +3,7 @@ using Project.Utils.ExtensionMethods;
 
 namespace Project.UI.Panel{
     [RequireComponent(typeof(Animator))]
-    public class PanelViewAnimator : BasePanelView{
+    public class AnimatorPanelView : BasePanelView{
         [SerializeField, HideInInspector] protected Animator _animator;
         
         public void Awake(){
