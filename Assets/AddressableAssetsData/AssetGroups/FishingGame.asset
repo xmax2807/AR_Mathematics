@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FishingGame
+  m_EditorClassIdentifier: 
+  m_GroupName: FishingGame
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 606098f2d2398764a925a5686adccced
+  m_SerializeEntries:
+  - m_GUID: 3c1c3ffccee75fc4f9544764667fabfd
+    m_Address: Models/Fish/Cartoon Fish Export
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c7643fe63fc06f242968b6c6396e1219
+    m_Address: Models/Shark/shark 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e037b4d928079cc41a11a117e5664e70, type: 2}
+    - {fileID: 11400000, guid: a60a074882f580943882eb6256c7cd1c, type: 2}

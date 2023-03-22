@@ -18,6 +18,7 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
+            gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
         }
         protected void Awake()
         {

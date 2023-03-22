@@ -586,6 +586,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301336142}
   m_CullTransparentMesh: 1
+--- !u!1 &365665393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 365665395}
+  - component: {fileID: 365665394}
+  m_Layer: 0
+  m_Name: AddressablePack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &365665394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365665393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f6abb4162d4b04c9d7502d7cc448da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabRefs:
+    references:
+    - m_AssetGUID: 3c1c3ffccee75fc4f9544764667fabfd
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: c7643fe63fc06f242968b6c6396e1219
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 600743982}
+          m_TargetAssemblyTypeName: Project.MiniGames.FishingGame.FishSpawner, MiniGamesAssembly
+          m_MethodName: SpawnFish
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  textureRefs: []
+--- !u!4 &365665395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365665393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402319179
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,12 +909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c738bdcef2433eb48a85c8f0c61788a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomRange: 60
-  AvailableFish:
-  - origin: {fileID: 666812213295118764, guid: 3c1c3ffccee75fc4f9544764667fabfd, type: 3}
-    count: 15
-  - origin: {fileID: 340578017612422078, guid: c7643fe63fc06f242968b6c6396e1219, type: 3}
-    count: 6
+  randomRange: 100
+  spawnCounts: 0a00000005000000
   OriginalSpawn: {x: 0, y: -3.5, z: 8}
   LockDir: {x: 1, y: 0, z: 1}
   collideLayerMask:
