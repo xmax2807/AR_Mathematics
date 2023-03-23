@@ -6,9 +6,11 @@ using System.Linq;
 
 
 using Firebase.Firestore;
-using Project.Utils.ExtensionMethods;
+using Project.Managers;
 using System.Threading.Tasks;
 using Firebase;
+using RobinBird.FirebaseTools.Storage.Addressables;
+using Firebase.Extensions;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -21,34 +23,31 @@ public class DatabaseManager : MonoBehaviour
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
     public static Firebase.Storage.FirebaseStorage Storage;
-    public static DatabaseManager Instance {get;private set;}
+    public static DatabaseManager Instance { get; private set; }
     private FirebaseApp app;
-    public UserController UserController {get;private set;}
-    public AchievementController AchievementController {get;private set;}
-    public LessonController LessonController {get;private set;}
+    public UserController UserController { get; private set; }
+    public AchievementController AchievementController { get; private set; }
+    public LessonController LessonController { get; private set; }
 
     void Awake()
     {
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             InitFirebase();
         }
-        else if(Instance != this){
+        else if (Instance != this)
+        {
             Destroy(this.gameObject);
         }
     }
 
     private async void InitFirebase()
     {
-        FirebaseFireStore = FirebaseFirestore.DefaultInstance;
-        Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        Storage = Firebase.Storage.FirebaseStorage.DefaultInstance;
+        AddressableManager.AddDependencies();
 
-        UserController = new UserController();
-        AchievementController = new AchievementController();
-        LessonController = new();
-        
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -56,8 +55,17 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
+                FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
+                
+                FirebaseFireStore = FirebaseFirestore.GetInstance(app);
+                Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
+                Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+
+                UserController = new UserController();
+                AchievementController = new AchievementController();
+                LessonController = new();
                 // LessonController.UploadLesson(LessonData);
-                LessonController.GetVideo(1,2);
+                //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);
 
                 // Set a flag here to indicate whether Firebase is ready to use by your app.

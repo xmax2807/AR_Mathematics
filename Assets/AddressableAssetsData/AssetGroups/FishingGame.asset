@@ -25,6 +25,86 @@ MonoBehaviour:
     m_Address: Models/Shark/shark 1
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: f19792a7522c85f4c9ff123482ee4170
+    m_Address: Materials/fish/Cartoon_Eye_Brown_BaseColor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: efeddc6ec9470be49bf26824ded83883
+    m_Address: Materials/fish/eyes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eec6d10040199544c9faa622ac6f3c23
+    m_Address: Materials/fish/Fish Color
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a3f33c1439c5ae449e338bcd74d7571
+    m_Address: Materials/fish/Fish Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1e2f82538e4be4742bd3b2fda9cd2c6d
+    m_Address: Materials/fish/fish
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2e631fe7f87f49f47bca8d5a32e71da6
+    m_Address: Models/Shark/shark_material
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 309030731bf41c042bf895865ce0d299
+    m_Address: Models/Shark/Sport_Shark_Diffuse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e78263816175fde4082c559a63ffad5b
+    m_Address: Models/Shark/Sport_Shark_Emissive
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e681512d866bb52498d7694d11fbfc34
+    m_Address: Models/Shark/Sport_Shark_Gloss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fadf3d25c9a1f9542bb8964cb89ff2d7
+    m_Address: Models/Shark/Sport_Shark_Normals
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 548c5e3b92f3fb143891a1fef1e74e85
+    m_Address: Models/Shark/Sport_Shark_PBR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b4c7880a4ff390549bac39f845487a22
+    m_Address: Models/Shark/Sport_Shark_Specular
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5720aa338e7a21f4a932d9c75a5bc654
+    m_Address: Assets/Code/Shader/WaterShader2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 621a6429119a1554e8384aa7b111e775
+    m_Address: Materials/Sand textures pack/Sand 02/Sand pattern 02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 427cf221b0e5f4b4da9d0821562ddc18
+    m_Address: Materials/Sand textures pack/Sand 02/normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 249658be85c3a614fb5a8d8eb3cf0f52
+    m_Address: Materials/Sand textures pack/Sand 02/diffuse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f5af6cd9a772d3949a57a2d6233f1528
+    m_Address: Models/Fish/Cartoon Fish Export
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ce5a75434690f44fa646c5090585a4e
+    m_Address: Models/Fish/Fish Animator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a0329ee7a260a2b4e8b5f4f0f4dcba2a
+    m_Address: Models/Shark/shark 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c3bc086e250b0594c9fc0b78f15dd578
+    m_Address: Models/Shark/Shark
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
   m_SchemaSet:

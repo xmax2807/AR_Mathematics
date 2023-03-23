@@ -11,7 +11,7 @@ namespace Project.MiniGames.FishingGame
         private Vector3 CurrentPosition { get => host.transform.position; set => host.transform.position = value; }
         public FishMovementState(Fish host, string animName) : base(host, animName)
         {
-            Points = VectorExtensionMethods.SpawnPoints(CurrentPosition, new Vector3(1, 0, 1), 10f);
+            Points = VectorExtensionMethods.SpawnPoints(CurrentPosition, new Vector3(1, 0, 1), 50f);
         }
         public override void LogicUpdate()
         {
