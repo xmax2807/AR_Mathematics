@@ -17,7 +17,6 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     private string username;
     private string password;
     private UserController Controller => DatabaseManager.Instance.UserController;
-
     private void OnEnable()
     {
         SignUpButton.interactable = false;
@@ -73,6 +72,9 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
         3,
         () =>
         {
+            //Up model len6 db
+                Controller.UploadModel(user);
+            //
             BackToSignInButton.onClick?.Invoke();
             pusher.OnConfirm?.Invoke();
         });

@@ -26,6 +26,7 @@ public class DatabaseManager : MonoBehaviour
     public UserController UserController {get;private set;}
     public AchievementController AchievementController {get;private set;}
     public LessonController LessonController {get;private set;}
+    public GameController GameController {get;private set;}
 
     void Awake()
     {
@@ -47,8 +48,9 @@ public class DatabaseManager : MonoBehaviour
         UserController = new UserController();
         AchievementController = new AchievementController();
         LessonController = new();
+        GameController = new();
         
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(async task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -57,9 +59,14 @@ public class DatabaseManager : MonoBehaviour
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
                 // LessonController.UploadLesson(LessonData);
-                LessonController.GetVideo(1,2);
-                // CreateUser(Username, Password);
-
+                // LessonController.GetVideo(1,2);
+                // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
+                // UserController.UploadModel(user);
+                try{GameController.SavingGameToUser("wqMomNaMtNeNvHbENiMxzzmcxh72","oHmusqZVcR9BKG5EMekh",1);
+                }
+                catch(Exception e){
+                    Debug.Log(e.Message);
+                }
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else
