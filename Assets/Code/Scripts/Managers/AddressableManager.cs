@@ -38,9 +38,10 @@ namespace Project.Managers
                 Destroy(this.gameObject);
             }
         }
-        void Start(){
+        void Start()
+        {
             InitializeTask = Addressables.InitializeAsync();
-                InitializeTask.Completed += Instance.OnComplete;
+            InitializeTask.Completed += Instance.OnComplete;
         }
 
         public static void AddDependencies()
@@ -94,16 +95,18 @@ namespace Project.Managers
 
             Debug.Log("Success");
         }
-        public async Task<T> PreLoadAsset<T>(AssetReferenceT<T> required) where T : UnityEngine.Object{
-            return await required.LoadAssetAsync<T>().Task;
+        public async Task<T> PreLoadAsset<T>(AssetReferenceT<T> required) where T : UnityEngine.Object
+        {
+            var task = required.LoadAssetAsync<T>();
+            return await task.Task;
         }
         public async Task<GameObject[]> PreLoadAssets(AssetReference[] required)
         {
             List<Task<GameObject>> tasks = new();
             foreach (AssetReference asset in required)
             {
-                var task = asset.LoadAssetAsync<GameObject>().Task;
-                tasks.Add(task);
+                var task = asset.LoadAssetAsync<GameObject>();
+                tasks.Add(task.Task);
             }
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();
@@ -113,8 +116,8 @@ namespace Project.Managers
             List<Task<T>> tasks = new();
             foreach (AssetReferenceT<T> asset in required)
             {
-                var task = asset.LoadAssetAsync<T>().Task;
-                tasks.Add(task);
+                var task = asset.LoadAssetAsync<T>();
+                tasks.Add(task.Task);
             }
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();
