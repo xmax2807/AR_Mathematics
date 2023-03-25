@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8778573859592029012}
   - component: {fileID: 8297792435224733328}
   m_Layer: 0
-  m_Name: Visual
+  m_Name: ClockVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
