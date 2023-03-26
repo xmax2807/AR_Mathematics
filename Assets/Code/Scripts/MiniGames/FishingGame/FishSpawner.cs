@@ -7,14 +7,9 @@ namespace Project.MiniGames.FishingGame
 {
     public class FishSpawner : MonoBehaviour
     {
-        [System.Serializable]
-        private struct FishPack{
-            public Fish origin;
-            public int count;
-        }
         [SerializeField] private float randomRange = 20f;
-        // [SerializeField] private FishPack[] AvailableFish;
-        [SerializeField] private int[] spawnCounts;
+        [SerializeField] private int maxCount = 20;
+        [SerializeField] private int minCount = 5;
         [SerializeField] private Vector3 OriginalSpawn;
         [SerializeField] private Vector3 LockDir;
         [SerializeField] private LayerMask collideLayerMask;
@@ -30,10 +25,10 @@ namespace Project.MiniGames.FishingGame
         // }
 
         public void SpawnFish(GameObject[] objs){
-            for(int i = 0; i < spawnCounts.Length; i++){
+            for(int i = 0; i < objs.Length; i++){
                 
                 if(!objs[i].TryGetComponent<Fish>(out Fish fish)) continue;
-                SpawnerManager.Instance.SpawnObjectsRandomly<Fish>(fish, spawnCounts[i], RandomMethod, CanBeSpawn, transform);
+                SpawnerManager.Instance.SpawnObjectsRandomly<Fish>(fish, Random.Range(minCount, maxCount), RandomMethod, CanBeSpawn, transform);
             }
         }
 

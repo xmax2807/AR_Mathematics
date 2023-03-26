@@ -105,6 +105,42 @@ MonoBehaviour:
     m_Address: Models/Shark/Shark
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1e73a6d7192a2e64b92e2c00c60b1340
+    m_Address: Assets/Resources_moved/Models/Island
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 811c655237a4c1d47adb6d416ab28cd5
+    m_Address: Material UI/FishingGameMaterialUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5a1852b2589f7d4d90172c6b4130deb
+    m_Address: Assets/Resources_moved/Prefabs/MiniGames/FishingGame/Sea.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 020ffe3a97bbb2945b47f7c3191c6c4e
+    m_Address: Assets/Resources_moved/Prefabs/MiniGames/FishingGame/ShapeAsset.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8be2947e6d64ed74ea3d30ea787e0c77
+    m_Address: Assets/Resources_moved/Prefabs/MiniGames/FishingGame/ShapeBoard.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6b4e6554abc4bbf41a0e613aeefb83cb
+    m_Address: Assets/Resources_moved/Models/SeaHorse
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 76c15cd7be8de63438a8b6ce264961ff
+    m_Address: Assets/Resources_moved/Models/SeaHorse/SeaHorse.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 87058c51cea70d04f9f09e87043cfcd5
+    m_Address: Assets/Resources_moved/Models/fish20
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a4ff0398748f784cb9a998daf743624
+    m_Address: Assets/Resources_moved/Models/Wuppy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
   m_SchemaSet:

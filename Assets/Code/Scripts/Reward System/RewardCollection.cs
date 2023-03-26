@@ -32,7 +32,7 @@ namespace Project.RewardSystem
             
             
                 acquiredRewardIndex++;
-                AudioManager.Instance.PlayEffect(Datas[i].rewardSound);
+                AudioManager.Instance.PlayEffect(Datas[0].rewardSound);
         }
     }
 }

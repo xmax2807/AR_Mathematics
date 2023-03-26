@@ -89,7 +89,7 @@ namespace Project.UI.ProgressBar{
 
         public override void StartAnimation()
         {
-            AudioManager.Instance.PlaySoundFX(_clip);
+            AudioManager.Instance.PlayEffect(Project.Audio.SoundFXController.SoundFXType.OnRewarded);
             base.StartAnimation();
         }
     }

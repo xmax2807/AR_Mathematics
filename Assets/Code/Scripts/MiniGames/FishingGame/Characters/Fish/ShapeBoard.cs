@@ -3,43 +3,55 @@ using Project.QuizSystem;
 using Project.Utils;
 using UnityEngine;
 using UnityEngine.UI;
+using Project.Addressable;
+using Project.Utils.ExtensionMethods;
 
-namespace Project.MiniGames.FishingGame{
+namespace Project.MiniGames.FishingGame
+{
     [RequireComponent(typeof(Canvas))]
-    public class ShapeBoard : MonoBehaviour{
-        [System.Serializable]
-        public struct ShapePack{
-            public Shape.ShapeType type;
-            public Sprite icon;
-        }
-
+    public class ShapeBoard : MonoBehaviour
+    {
         private Canvas canvas;
         [SerializeField] private Image Icon;
-        [SerializeField] private ShapePack[] packs;
-        private static Randomizer<ShapePack> Randomizer;
+        [SerializeField] private StoAddressableRequest request;
+        private static Randomizer<ShapePackAsset.ShapePack> Randomizer;
 
-        private void Awake(){
-            Randomizer ??= new Randomizer<ShapePack>(packs);
-
+        private async void Awake()
+        {
             InitCanvas();
+            if (Randomizer == null)
+            {
+                ScriptableObject[] result = await request.GetResultT();
+                if (result.Length == 0 || !result[0].TryCastTo<ShapePackAsset>(out var asset))
+                {
+                    throw new System.InvalidCastException("Cannot cast ScriptableObject to ShapePackAsset");
+                }
+
+                Randomizer = new Randomizer<ShapePackAsset.ShapePack>(asset.Packs);
+            }
             UpdateUI();
         }
-        private void InitCanvas(){
+        private void InitCanvas()
+        {
             canvas = this.GetComponent<Canvas>();
             canvas.worldCamera = Camera.main;
         }
-        public void OnEnable(){
+        public void OnEnable()
+        {
             canvas.enabled = true;
         }
-        public void OnDisable(){
+        public void OnDisable()
+        {
             canvas.enabled = false;
         }
-        public void UpdateUI(){
-            ShapePack pack = Randomizer.Next();
-            Icon.sprite = pack.icon;
+        public void UpdateUI()
+        {
+            ShapePackAsset.ShapePack pack = Randomizer.Next();
+            Icon.sprite = pack.Icon;
         }
-        public void ButtonClick(){
-            
+        public void ButtonClick()
+        {
+
         }
     }
 }

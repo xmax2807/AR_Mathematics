@@ -1,46 +1,34 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Project.Managers;
-using System.Threading.Tasks;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using System.Collections.Generic;
-using UnityEngine.ResourceManagement.ResourceLocations;
 using RobinBird.FirebaseTools.Storage.Addressables;
-using System.Linq;
-using UnityEngine.ResourceManagement.ResourceProviders;
-using System;
+using Gameframe.GUI.PanelSystem;
 
 namespace Project.Addressable
 {
     public class AddressableRequestHandler : MonoBehaviour
     {
-
+        [SerializeField] private PanelStackSystem stackSystem;
+        [SerializeField] private PanelType type;
         [Header("Prefab"), SerializeField] private GameObjectReferencePack prefabRefs;
-        [Header("Textures"), SerializeField] private AssetReferencePack<Texture2D> textureRefs;
-        [Header("Materials"), SerializeField] private AssetReferenceSingle<Material>[] EnviromentMaterial;
+        [Header ("Initialized Prefabs"), SerializeField] private AssetReferenceT<GameObject>[] preInitPrefabs;
+        [Header("SFXPack"), SerializeField] private AssetReferenceSingle<Audio.AudioPackSTO> audioRefs;
+
         public void Start()
         {
-            // if(AddressableManager.Instance.InitializeTask.IsDone){
-            //     PreLoad();
-            //     return;
-            // }
-            // AddressableManager.Instance.OnComplete += (AsyncOperationHandle<IResourceLocator> locator)=>{
-            //     PreLoad();
-            // };
-            //TimeCoroutineManager.Instance.WaitUntil(() => FirebaseAddressablesManager.IsFirebaseSetupFinished, LoadDependencies);
+            stackSystem.PushAsync(new PanelViewController(type));
             TimeCoroutineManager.Instance.WaitUntil(() => FirebaseAddressablesManager.IsFirebaseSetupFinished, PreLoad);
         }
         private async void PreLoad()
         {
-            var prefabTask = await AddressableManager.Instance.PreLoadAssets(prefabRefs.References);
+            AddressableManager.Instance.InstantiatePrefabs(preInitPrefabs);
 
-            prefabRefs.OnComplete?.Invoke(prefabTask);
-            foreach (var pack in EnviromentMaterial)
-            {
-                var materialTask = await AddressableManager.Instance.PreLoadAsset(pack.Reference);
-                pack.OnComplete?.Invoke(materialTask);
-            }
+            var prefabs = await AddressableManager.Instance.PreLoadAssets(prefabRefs.References);
+            prefabRefs.OnComplete?.Invoke(prefabs);
+
+            var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
+            AudioManager.Instance.SwapSoundPack(audioPack);
+            await stackSystem.PopAsync();
         }
     }
 }

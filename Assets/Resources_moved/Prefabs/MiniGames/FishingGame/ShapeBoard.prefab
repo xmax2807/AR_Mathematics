@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5624239432743730655}
   - component: {fileID: 7326318090632254070}
   - component: {fileID: 4532388234902804467}
+  - component: {fileID: -671370244558517738}
   m_Layer: 5
   m_Name: ShapeBoard
   m_TagString: Untagged
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5624239432743730655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,15 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 5256314892819571270}
-  packs:
-  - type: 0
-    icon: {fileID: -120078202, guid: f0fda8b0390f6734a9d13c96a5866c30, type: 3}
-  - type: 1
-    icon: {fileID: 1299057499, guid: f0fda8b0390f6734a9d13c96a5866c30, type: 3}
-  - type: 2
-    icon: {fileID: 1828180842, guid: f0fda8b0390f6734a9d13c96a5866c30, type: 3}
-  - type: 3
-    icon: {fileID: 1443807262, guid: f0fda8b0390f6734a9d13c96a5866c30, type: 3}
+  request: {fileID: -671370244558517738}
 --- !u!114 &4532388234902804467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +131,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 5
+--- !u!114 &-671370244558517738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526785774315052164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae93b18d9e6de1f48be14774fec1364b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requests:
+  - m_AssetGUID: 020ffe3a97bbb2945b47f7c3191c6c4e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &3260349164476609623
 GameObject:
   m_ObjectHideFlags: 0

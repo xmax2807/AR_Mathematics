@@ -21,7 +21,6 @@ namespace Project.Managers
         "GroupOperation failed because one of its dependencies failed",
     };
 
-        private const string FirebaseStoragePath = "gs://math-64c88.appspot.com/GameAssets/Android";
         public static AddressableManager Instance;
         public AsyncOperationHandle<IResourceLocator> InitializeTask { get; private set; }
         public Action<AsyncOperationHandle<IResourceLocator>> OnComplete;
@@ -121,6 +120,13 @@ namespace Project.Managers
             }
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();
+        }
+
+        public async void InstantiatePrefabs<T>(AssetReferenceT<T>[] required) where T : UnityEngine.Object{
+            foreach (AssetReferenceT<T> asset in required)
+            {
+                await asset.InstantiateAsync().Task;
+            }
         }
     }
 }
