@@ -1311,7 +1311,7 @@ GameObject:
   - component: {fileID: 4901315638767108592}
   - component: {fileID: 7235186080186386406}
   - component: {fileID: 2794490463370544983}
-  - component: {fileID: 2436269706818540209}
+  - component: {fileID: -1185218826825096172}
   m_Layer: 0
   m_Name: Calendar
   m_TagString: Untagged
@@ -1390,19 +1390,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2436269706818540209
-BoxCollider:
+--- !u!114 &-1185218826825096172
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5548481540091180396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f214f1fcb9c571b4bb9a373dc2e8dea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dateText: {fileID: 0}
+  daysOfWeek: {fileID: 0}
+  button: {fileID: 0}
 --- !u!1 &5576676943801231777
 GameObject:
   m_ObjectHideFlags: 0
