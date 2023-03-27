@@ -35,6 +35,7 @@ public class GameController
                 {
                     user.SavedGame[index].Task = GameTask;
                 }
+                ///////////////////////////////////////////
                 var gameSnapshot = await gameRef.GetSnapshotAsync();
 
                 GameModel game = gameSnapshot.ConvertTo<GameModel>();

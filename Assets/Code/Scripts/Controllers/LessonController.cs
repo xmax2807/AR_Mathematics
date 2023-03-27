@@ -14,6 +14,7 @@ public class LessonData
     public int LessonUnit;
 
     public bool LessonStatus;
+    
 }
 public class LessonController
 {
@@ -21,20 +22,11 @@ public class LessonController
 
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
     Firebase.Storage.FirebaseStorage storage => DatabaseManager.Storage;
-    public void UploadLesson(LessonData data)
+    public void UploadData<T>(string collection,System.Func<T> builder)
     {
-        lessonModel = new LessonModel()
-        {
-            LessonTitle = data.LessonTitle,
-            LessonUnit = data.LessonUnit,
-            LessonVideoFolder = data.LessonVideoFolder,
-            VideoNumbers = data.VideoNumbers,
-            LessonChapter = data.LessonChapter,
-            LessonSemester = data.LessonSemester,
-            LessonStatus = data.LessonStatus
-        };
+        T model = builder.Invoke();
 
-        db.Collection("lessons").Document().SetAsync(lessonModel);
+        db.Collection(collection).Document().SetAsync(model);
     }
     public void GetVideo(int unit, int chapter)
     {

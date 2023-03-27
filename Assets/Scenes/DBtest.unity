@@ -709,11 +709,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6abf2ad4d64364c949af988c8d95b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LessonData:
-    LessonTitle: "L\xE0m quen v\u1EDBi c\xE1c s\u1ED1 1, 2, 3, 4, 5"
-    LessonVideoFolder: gs://math-64c88.appspot.com/Lesson_Video/Chapter2/Unit1
-    VideoNumbers: 12
-    LessonChapter: 2
-    LessonSemester: 1
-    LessonUnit: 1
-    LessonStatus: 1
+  quizData:
+    ID_Lesson: 
+    QuizTitle: 
+    QuizIMG: 
+    QuizAnswer: []
+    QuizCorrectAnswer: 0
+    QuizSemester: 0
+    QuizChapter: 0
+  collection: quizzes
