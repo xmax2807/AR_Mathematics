@@ -16,9 +16,18 @@ public class UserController
     public async Task<bool> SignInAuth(string email, string password)
     {
         Firebase.Auth.Credential credential =
-    Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
+        Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
         var user = await auth.SignInWithCredentialAsync(credential);
         return user != null;
+    }
+    public void SignOutAuth()
+    {
+        try{
+            auth.SignOut();
+        }
+        catch(Firebase.FirebaseException e){
+            Debug.Log(e.Message);
+        }
     }
     UserModel user;
     public void UploadModel(Firebase.Auth.FirebaseUser newUser)

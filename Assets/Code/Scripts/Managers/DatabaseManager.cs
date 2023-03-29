@@ -64,8 +64,10 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
+                // Debug.Log(LessonController.GetLessonID(1,1).Result);
+               
                 UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                    ID_Lesson = quizData.ID_Lesson,
+                    QuizUnit = quizData.QuizUnit,
                     QuizTitle = quizData.QuizTitle,
                     QuizIMG = quizData.QuizIMG,
                     QuizAnswer = quizData.QuizAnswer,
@@ -81,7 +83,7 @@ public class DatabaseManager : MonoBehaviour
                 // catch(Exception e){
                 //     Debug.Log(e.Message);
                 // }
-                // try{QuizController.GetQuizzesBySemester(1);
+                // try{QuizController.GetQuizzesByLesson(1,2);
                 // }
                 // catch(Exception e){
                 //     Debug.Log(e.Message);

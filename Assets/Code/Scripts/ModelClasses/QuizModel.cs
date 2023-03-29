@@ -2,7 +2,7 @@ using Firebase.Firestore;
 [FirestoreData]
 public class QuizModel
 {
-    [FirestoreProperty] public string ID_Lesson { get; set; }
+    [FirestoreProperty] public int QuizUnit { get; set; }
     [FirestoreProperty] public string QuizTitle { get; set; }
     [FirestoreProperty] public string QuizIMG { get; set; }
     [FirestoreProperty] public string[] QuizAnswer { get; set; }
@@ -18,7 +18,7 @@ public class QuizModel
 [System.Serializable]
 public class QuizData
 {
-    public string ID_Lesson;
+    public int QuizUnit;
     public string QuizTitle;
     public string QuizIMG;
     public string[] QuizAnswer;
