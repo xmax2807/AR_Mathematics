@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e70909638574717a3e9e1382ce0913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 1561473625}
   panelStackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
   clearSystemStackOnDestroy: 1
 --- !u!1 &298516106
@@ -272,6 +272,7 @@ MonoBehaviour:
   Samples:
   - {fileID: 8268570796667732546, guid: ce442e9ca8195c64995a5ed3df0b9340, type: 3}
   - {fileID: 2993841710374924669, guid: f3b3f335c35c3c74b9c852df9773f7aa, type: 3}
+  eventManager: {fileID: 1561473625}
 --- !u!1 &1022673511
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +505,7 @@ GameObject:
   - component: {fileID: 1561473623}
   - component: {fileID: 1561473622}
   - component: {fileID: 1561473624}
+  - component: {fileID: 1561473625}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -582,6 +584,25 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &1561473625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561473620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16069015fd38a554c91582a3a9b2f447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputLock:
+    onUnlocked:
+      m_PersistentCalls:
+        m_Calls: []
+    onLocked:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1674364507
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,9 +671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e70909638574717a3e9e1382ce0913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 1561473625}
   panelStackSystem: {fileID: 11400000, guid: a47d394c465a24d1194fce337a94c971, type: 2}
-  clearSystemStackOnDestroy: 1
+  clearSystemStackOnDestroy: 0
 --- !u!114 &1674364511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelType: {fileID: 11400000, guid: ad59a8ced19cb6f4d8a44741f11b70d2, type: 2}
   panelView: {fileID: 0}
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 1561473625}
   sceneTransitionSystem: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77,
     type: 2}
 --- !u!1 &1768657857

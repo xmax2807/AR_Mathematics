@@ -9,7 +9,7 @@ namespace Project.RewardSystem
         private Reward<float>[] Rewards;
         [SerializeField] private RewardScriptableObject[] Datas;
         private int acquiredRewardIndex;
-
+        public Reward<float> CurrentReward => Rewards[acquiredRewardIndex];
         private void Awake()
         {
             Datas = Datas.OrderBy((x) => x.Goal).ToArray();
@@ -21,11 +21,15 @@ namespace Project.RewardSystem
             }
         }
 
+        public RewardScriptableObject CurrentRewardData => Datas[acquiredRewardIndex];
+        public bool CanBeRewarded()=> Rewards[acquiredRewardIndex].CanBeRewarded();
+        public void IncreaseProgress(float value){
+            float currentValue = Rewards[acquiredRewardIndex].CurrentValue; 
+            Rewards[acquiredRewardIndex].UpdateProgress(currentValue + value);
+        }
         public void OnProgressValueChanged(float newValue)
         {
-            int i = acquiredRewardIndex;
-            if(i >= Datas.Length){
-
+            if(acquiredRewardIndex >= Datas.Length){
                 return;
             }
             if (!Rewards[acquiredRewardIndex].CanBeRewarded(newValue)) return;

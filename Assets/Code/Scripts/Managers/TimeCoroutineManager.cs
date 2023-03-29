@@ -9,7 +9,6 @@ namespace Project.Managers{
         if(Instance == null){
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
     
     protected void OnDestroy(){

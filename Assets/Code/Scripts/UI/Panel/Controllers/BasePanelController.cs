@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Gameframe.GUI.PanelSystem;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel{
     public abstract class BasePanelController : MonoBehaviour{
@@ -17,11 +18,11 @@ namespace Project.UI.Panel{
             if(BackButton == null || onBackButtonClicked == null) return;
             BackButton?.onClick?.RemoveListener(onBackButtonClicked);
         }
-        public void Hide(){
-            View.HideAsync();
+        public async Task Hide(){
+            await View.HideAsync();
         }
-        public void Show(){
-            View.ShowAsync();
+        public async Task Show(){
+            await View.ShowAsync();
         }
     }
     public abstract class BasePanelController<T> : BasePanelController where T : PanelViewData {

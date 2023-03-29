@@ -5,5 +5,7 @@ namespace Project.RewardSystem{
     public class RewardScriptableObject : ScriptableObject{
         public AudioClip rewardSound;
         public float Goal;
+        public RewardBadgeSTO Badge;
+        public Sprite UnacquiredBadge;
     }
 }

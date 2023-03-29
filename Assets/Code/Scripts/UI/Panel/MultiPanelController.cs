@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
-using Gameframe.GUI.PanelSystem;
+using Gameframe.GUI.Camera.UI;
 
 namespace Project.UI.Panel
 {
@@ -10,17 +10,20 @@ namespace Project.UI.Panel
     {
         [SerializeField] PanelViewData ListData;
         [SerializeField] BasePanelController[] Samples;
-        class PanelPack{
+        [SerializeField] UIEventManager eventManager;
+        class PanelPack
+        {
             public PanelViewData Data;
             public BasePanelController Controller;
-            public PanelPack(PanelViewData data, BasePanelController controller){
+            public PanelPack(PanelViewData data, BasePanelController controller)
+            {
                 Data = data;
                 Controller = controller;
             }
         }
         private Dictionary<string, PanelPack> cached;
         private Stack<PanelPack> stack;
-        private PanelPack CurrentData => stack.Count == 0? null : stack.Peek();
+        private PanelPack CurrentData => stack.Count == 0 ? null : stack.Peek();
         private void Awake()
         {
             stack = new();
@@ -34,7 +37,7 @@ namespace Project.UI.Panel
             for (int i = 0; i < min; i++)
             {
                 int currIndex = i;
-                data.ButtonNames[currIndex].OnClick.AddListener(()=>PushUI(data.Children[currIndex])); 
+                data.ButtonNames[currIndex].OnClick.AddListener(() => PushUI(data.Children[currIndex]));
             }
 
             var controller = Samples.FindMatch((item) => item.Type == data.Type);
@@ -53,23 +56,41 @@ namespace Project.UI.Panel
                 cached.Add(data.name, newPanel);
             });
         }
-        private void PopUI()
+        private async void PopUI()
         {
-            if(!stack.TryPop(out var result)) return;
-            result.Controller.Hide();
+            eventManager?.Lock();
 
-            CurrentData?.Controller.Show();
-        }
-        private void PushUI(PanelViewData data)
-        {
-            if(!cached.ContainsKey(data.name)){
-                CreateUI(data);
+            {
+                if (!stack.TryPop(out var result)) return;
+
+                await result.Controller.Hide();
+                if(CurrentData != null){
+                    await CurrentData.Controller.Show();
+                }
             }
 
-            var pack = cached[data.name];
-            pack.Controller.Show();
-            CurrentData?.Controller.Hide();
-            stack.Push(pack);
+            eventManager?.Unlock();
+        }
+        private async void PushUI(PanelViewData data)
+        {
+            if (!cached.ContainsKey(data.name))
+            {
+                CreateUI(data);
+            }
+            eventManager?.Lock();
+
+            {
+                var pack = cached[data.name];
+
+                if(CurrentData != null){
+                    await CurrentData.Controller.Hide();
+                }
+                await pack.Controller.Show();
+
+                stack.Push(pack);
+            }
+
+            eventManager?.Unlock();
         }
     }
 }

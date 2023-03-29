@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Project.Addressable;
 using Project.Utils.ExtensionMethods;
+using System.Threading.Tasks;
 
 namespace Project.MiniGames.FishingGame
 {
@@ -14,8 +15,10 @@ namespace Project.MiniGames.FishingGame
         private Canvas canvas;
         [SerializeField] private Image Icon;
         [SerializeField] private StoAddressableRequest request;
+        private Button button;
         private static Randomizer<ShapePackAsset.ShapePack> Randomizer;
-
+        public ShapePackAsset.ShapePack Current {get; private set;}
+        public System.Func<Shape.ShapeType, Task> OnCatchFish;
         private async void Awake()
         {
             InitCanvas();
@@ -35,6 +38,9 @@ namespace Project.MiniGames.FishingGame
         {
             canvas = this.GetComponent<Canvas>();
             canvas.worldCamera = Camera.main;
+
+            button = GetComponentInChildren<Button>();
+            button.onClick.AddListener(ButtonClick);
         }
         public void OnEnable()
         {
@@ -46,12 +52,16 @@ namespace Project.MiniGames.FishingGame
         }
         public void UpdateUI()
         {
-            ShapePackAsset.ShapePack pack = Randomizer.Next();
-            Icon.sprite = pack.Icon;
+            Current = Randomizer.Next();
+            Icon.sprite = Current.Icon;
         }
-        public void ButtonClick()
+        public async void ButtonClick()
         {
+            if(button.interactable == false) return;
 
+            button.interactable = false;
+            await OnCatchFish?.Invoke(Current.Type);
+            button.interactable = true;
         }
     }
 }

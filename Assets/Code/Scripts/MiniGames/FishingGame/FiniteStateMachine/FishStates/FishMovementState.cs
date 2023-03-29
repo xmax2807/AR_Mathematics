@@ -11,12 +11,12 @@ namespace Project.MiniGames.FishingGame
         private Vector3 CurrentPosition { get => host.transform.position; set => host.transform.position = value; }
         public FishMovementState(Fish host, string animName) : base(host, animName)
         {
-            Points = VectorExtensionMethods.SpawnPoints(CurrentPosition, new Vector3(1, 0, 1), 50f);
+            Points = VectorExtensionMethods.SpawnPoints(CurrentPosition, new Vector3(1, 0, 1), 40f);
         }
         public override void LogicUpdate()
         {
             host.transform.LookAtUpdate(Points[currentPointIndex], 6f);
-            CurrentPosition = Vector3.SmoothDamp(CurrentPosition, Points[currentPointIndex],ref velocity, smoothTime: 400f * Time.deltaTime);
+            CurrentPosition = Vector3.SmoothDamp(CurrentPosition, Points[currentPointIndex],ref velocity, smoothTime: 100f * Time.deltaTime);
 
             base.LogicUpdate();
         }

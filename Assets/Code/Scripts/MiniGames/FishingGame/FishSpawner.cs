@@ -2,6 +2,7 @@ using Project.Utils.ExtensionMethods;
 using Project.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using System.Collections.Generic;
 
 namespace Project.MiniGames.FishingGame
 {
@@ -14,6 +15,8 @@ namespace Project.MiniGames.FishingGame
         [SerializeField] private Vector3 LockDir;
         [SerializeField] private LayerMask collideLayerMask;
         private float enemyRadius;
+
+        private List<Fish> cache;
         private Vector3 RandomMethod() => VectorExtensionMethods.Randomize(OriginalSpawn, randomRange, LockDir);
         // protected void Awake()
         // {
@@ -32,6 +35,22 @@ namespace Project.MiniGames.FishingGame
             }
         }
 
+        public void Shuffle(){
+            if(cache == null){
+                cache = new();
+                foreach(Transform child in transform){
+                    if(!child.TryGetComponent<Fish>(out Fish fish)) continue;
+                    cache.Add(fish);
+                    fish.ShuffleBoard();
+                }
+                return;
+            }
+
+            foreach(Fish child in cache){
+                child.ShuffleBoard();
+            }
+        }
+
         // protected void Start(){
         //     for (int i = 0; i < AvailableFish.Length; i++)
         //     {
@@ -39,12 +58,12 @@ namespace Project.MiniGames.FishingGame
         //     }
         // }
 
-        private bool CanBeSpawn(Vector3 spawnPoint)
-        {
-            Collider[] collisionResult = Physics.OverlapSphere(spawnPoint, enemyRadius, collideLayerMask);
+        private bool CanBeSpawn(Vector3 spawnPoint){
+            return true;
+        //     Collider[] collisionResult = Physics.OverlapSphere(spawnPoint, enemyRadius, collideLayerMask);
 
-            //If the Collision is empty then, we can instantiate
-            return collisionResult == null || collisionResult.Length == 0;
+        //     //If the Collision is empty then, we can instantiate
+        //     return collisionResult == null || collisionResult.Length == 0;
         }
     }
 }

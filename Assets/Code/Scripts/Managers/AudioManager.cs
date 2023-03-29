@@ -24,7 +24,6 @@ namespace Project.Managers{
             if(SoundFXController == null){
                 SoundFXController = this.gameObject.AddChildWithComponent<Audio.SoundFXController>("SoundFX");
             }
-            DontDestroyOnLoad(gameObject);
         }
         public void Start(){
             //Speak("Và giờ anh biết cuộc tình mình chẳng còn gì. Khi nắng xuân sang để lòng mình chẳng thầm thì");

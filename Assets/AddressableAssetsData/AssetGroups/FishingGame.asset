@@ -73,10 +73,6 @@ MonoBehaviour:
     m_Address: Models/Shark/Sport_Shark_Specular
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5720aa338e7a21f4a932d9c75a5bc654
-    m_Address: Assets/Code/Shader/WaterShader2.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 621a6429119a1554e8384aa7b111e775
     m_Address: Materials/Sand textures pack/Sand 02/Sand pattern 02
     m_ReadOnly: 0
@@ -139,6 +135,26 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 6a4ff0398748f784cb9a998daf743624
     m_Address: Assets/Resources_moved/Models/Wuppy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3d522716e358d154ab5df7322501c0bb
+    m_Address: Assets/Resources_moved/Models/Merlin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 81b257bdc18fd4c4b96cd9f63aa09bf2
+    m_Address: Assets/Resources_moved/Materials/Sea/MobileWaterShader_EKV_sphere.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f4152f9ba61c06d44b3d34b7d571b570
+    m_Address: Assets/Resources_moved/Materials/Sea/Textures/Water_HeightMap.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 85a1f565a7ea64942bdf113d910aa6e6
+    m_Address: Assets/Resources_moved/Materials/Sea/Textures/Water_Texture_A.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a47b93438f902e44fb5c7fe36a20ee9b
+    m_Address: Assets/Resources_moved/Materials/Sea/Textures/Water_Texture_B.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

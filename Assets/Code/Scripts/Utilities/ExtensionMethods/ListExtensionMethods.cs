@@ -164,5 +164,18 @@ namespace Project.Utils.ExtensionMethods
                 }
             }
         }
+
+        public static bool CheckAnyDuplicateWithinRange<T>(this IEnumerable<T> list, T itemNeedChecked,int itemIndex, int range) where T : IEquatable<T>{
+            var arrayList = list.ToArray();
+            range = Math.Min(range, arrayList.Length);
+            int startIndex = Math.Max(itemIndex - range, 0);
+
+            for(int i = startIndex; i < itemIndex; i++){
+                if(itemNeedChecked.Equals(arrayList[i])){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

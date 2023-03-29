@@ -4,7 +4,7 @@ namespace Project.RewardSystem{
     public class Reward<T> : ICollectable, IUnlockable<T> where T : IComparable<T>
     {
         public T Goal {get;protected set;}
-
+        public T CurrentValue {get;protected set;}
         private bool isAcquired;
         public bool IsAcquired => isAcquired;
 
@@ -15,12 +15,20 @@ namespace Project.RewardSystem{
         {
             throw new System.NotImplementedException();
         }
+        public bool CanBeRewarded(){
+            if(isAcquired) return true;
 
+            isAcquired = CurrentValue.CompareTo(Goal) >= 0;
+            return isAcquired;
+        }
         public bool CanBeRewarded(T currentValue) {
             if(isAcquired) return true;
 
-            isAcquired = currentValue.CompareTo(Goal) >= 0;
-            return isAcquired;
+            CurrentValue = currentValue;
+            return CanBeRewarded();
+        }
+        public void UpdateProgress(T value){
+            CurrentValue = value;
         }
     }
 }

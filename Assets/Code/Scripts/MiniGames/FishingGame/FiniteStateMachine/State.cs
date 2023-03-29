@@ -22,13 +22,19 @@ namespace Project.MiniGames.FishingGame
             this.host = host;
             stateMachine = (FiniteStateMachine<T>)host.StateMachine;
             this.animName = animName;
+            animator.logWarnings = false;
         }
 
         public virtual void Enter(){
             isAnimationFinish = false;
+
+            if(animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
+            
             animator.SetBool(animName, true);    
         }
         public virtual void Exit(){
+            if(animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
+
             animator.SetBool(animName, false);
         }
         public virtual void LogicUpdate(){}

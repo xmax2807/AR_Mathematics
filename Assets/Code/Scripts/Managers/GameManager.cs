@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ namespace Project.Managers
                 Destroy(this.gameObject);
             }
             DontDestroyOnLoad(this);
+            Application.targetFrameRate = 60;
         }
+
+        public System.Func<Task> OnGameFinishLoading;
     }
 }

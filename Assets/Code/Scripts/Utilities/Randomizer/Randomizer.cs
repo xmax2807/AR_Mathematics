@@ -13,9 +13,7 @@ namespace Project.Utils{
             rand = new();
         }
         public T Next(){
-            int index = rand.Next(list.Count);
-            if(index == list.Count) return default;
-
+            int index = rand.Next(list.Count);            
             return list[index];
         }
         public void Add(T newChild){

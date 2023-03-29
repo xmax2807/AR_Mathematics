@@ -33,6 +33,10 @@ namespace Project.QuizSystem{
         {
             return _answer.Equals(_playerAnswered);
         }
+        public bool IsCorrect(T answer){
+            SetAnswer(answer);
+            return IsCorrect();
+        }
 
         public void SetAnswer(object value)
         {
