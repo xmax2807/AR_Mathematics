@@ -14,15 +14,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Plugins/Gameframe.GUI.Demo/Basic/Demo - GUI Basic.unity
     guid: a75bbcacfa24c4283b3530aa84e49de8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/LoginScene.unity
     guid: 1471d764e823ee345b17040e9de02d59
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/MainMenuScene.unity
     guid: f23ed8b621c5e9e43835f07836fa9096
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FishingScene.unity
     guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
+  - enabled: 1
+    path: Assets/Scenes/Calendar.unity
+    guid: 1bebd17e6477f8d4cafcc59f16139e88
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

@@ -7,7 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 public class PlacementIndicator : MonoBehaviour
 {
 	public GameObject ARCamera;
-
+    readonly List<ARRaycastHit> hits = new();
 	private ARRaycastManager rayManager;
 	[SerializeField]
 	private GameObject visual;
@@ -17,7 +17,7 @@ public class PlacementIndicator : MonoBehaviour
 
 		// get the components
 		rayManager = FindObjectOfType<ARRaycastManager>();
-		visual = transform.GetChild(0).gameObject;
+		//visual = gameObject;
 
 		// hide the placement indicator visual
 		visual.SetActive(false);
@@ -26,10 +26,10 @@ public class PlacementIndicator : MonoBehaviour
 	void Update()
 	{
 		//get the current rotation of the camera
-		curRotation = ARCamera.transform.rotation.eulerAngles.y;
+		
 
 		// shoot a raycast from the center of the screen
-		List<ARRaycastHit> hits = new List<ARRaycastHit>();
+		
 		rayManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.Planes);
 
 		// if we hit an AR plane surface, update the position and rotation
@@ -38,6 +38,7 @@ public class PlacementIndicator : MonoBehaviour
 			transform.position = hits[0].pose.position;
 			transform.rotation = hits[0].pose.rotation;
 			//make the plane rotate add 90 degree X
+			curRotation = ARCamera.transform.rotation.eulerAngles.y;
 			transform.rotation = Quaternion.Euler(transform.rotation.x + 90, curRotation, transform.rotation.z);
 
 			// enable the visual if it's disabled

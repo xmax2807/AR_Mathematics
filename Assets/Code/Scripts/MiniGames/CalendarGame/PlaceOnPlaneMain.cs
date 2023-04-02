@@ -25,7 +25,6 @@ public class PlaceOnPlaneMain : MonoBehaviour
 
 	[SerializeField]
 	GameObject visualObject;
-
 	/// <summary>
 	/// The prefab to instantiate on touch.
 	/// </summary>
@@ -39,6 +38,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	/// The object instantiated as a result of a successful raycast intersection with a plane.
 	/// </summary>
 	public GameObject spawnedObject { get; private set; }
+
 
 	void Awake()
 	{
@@ -65,7 +65,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	void Update()
 	{
 		//get ARCAmera current roation y
-		var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+		//var curRotation = ARCamera.transform.rotation.eulerAngles.y;
 
 		if (!TryGetTouchPosition(out Vector2 touchPosition))
 			return;
@@ -80,20 +80,15 @@ public class PlaceOnPlaneMain : MonoBehaviour
 			{
 				spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
 				// make spawnedobject rotate -90 degree Y and Z
-				spawnedObject.transform.LookAt(ARCamera.transform);
+				//spawnedObject.transform.LookAt(ARCamera.transform);
 				//var rotation = spawnedObject.transform.rotation;
 				//spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
 
 
 			}
-			else
-			{
-				spawnedObject.transform.position = hitPose.position;
-				spawnedObject.transform.LookAt(ARCamera.transform);
-				//var rotation = spawnedObject.transform.rotation;
-				//spawnedObject.transform.Rotate(rotation.x, rotation.y + 90, rotation.z);
-			}
-
+			spawnedObject.transform.position = hitPose.position;
+			spawnedObject.transform.rotation = hitPose.rotation;
+			
 			placementUpdate.Invoke();
 		}
 	}

@@ -11,10 +11,6 @@
         mavenLocal()
         mavenCentral()
     }
-    ext {
-        it.setProperty("android.useAndroidX", true)
-        it.setProperty("android.enableJetifier", true)
-    }
 }
 // Android Resolver Repos End
 apply plugin: 'com.android.library'

@@ -7,8 +7,8 @@ public class TouchToChangeDate : MonoBehaviour
 {
     //create a public variable to store the date text
     [SerializeField]
-    public TextMesh dateText;
-    public TextMesh daysOfWeek;
+    public TMPro.TextMeshProUGUI dateText;
+    public TMPro.TextMeshProUGUI daysOfWeek;
     public Button button;
 	List<int> dateList = new List<int>();
 	List<string> daysList = new List<string>();
