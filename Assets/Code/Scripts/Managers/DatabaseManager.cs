@@ -15,7 +15,8 @@ using Firebase.Extensions;
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] LessonData LessonData;
+    [SerializeField] QuizData quizData;
+    [SerializeField] string collection = "quizzes";
     // private string userID;
     // [SerializeField] private string Username;
     // [SerializeField] private string Password;
@@ -25,10 +26,11 @@ public class DatabaseManager : MonoBehaviour
     public static Firebase.Storage.FirebaseStorage Storage;
     public static DatabaseManager Instance { get; private set; }
     private FirebaseApp app;
-    public UserController UserController { get; private set; }
-    public AchievementController AchievementController { get; private set; }
-    public LessonController LessonController { get; private set; }
-
+    public UserController UserController {get;private set;}
+    public AchievementController AchievementController {get;private set;}
+    public LessonController LessonController {get;private set;}
+    public GameController GameController {get;private set;}
+    public QuizController QuizController {get; private set;}
     void Awake()
     {
         if (Instance == null)
@@ -41,7 +43,12 @@ public class DatabaseManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    public void UploadData<T>(string collection,System.Func<T> builder)
+    {
+        T model = builder.Invoke();
 
+        FirebaseFireStore.Collection(collection).Document().SetAsync(model);
+    }
     private async void InitFirebase()
     {
         AddressableManager.AddDependencies();
@@ -64,10 +71,36 @@ public class DatabaseManager : MonoBehaviour
                 UserController = new UserController();
                 AchievementController = new AchievementController();
                 LessonController = new();
+                GameController = new();
+                QuizController = new();
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);
 
+                // Debug.Log(LessonController.GetLessonID(1,1).Result);
+               
+                UploadData<QuizModel>(collection, ()=>new QuizModel(){
+                    QuizUnit = quizData.QuizUnit,
+                    QuizTitle = quizData.QuizTitle,
+                    QuizIMG = quizData.QuizIMG,
+                    QuizAnswer = quizData.QuizAnswer,
+                    QuizCorrectAnswer = quizData.QuizCorrectAnswer,
+                    QuizSemester = quizData.QuizSemester,
+                    QuizChapter = quizData.QuizChapter,
+                });
+                // LessonController.GetVideo(1,2);
+                // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
+                // UserController.UploadModel(user);
+                // try{GameController.SavingGameToUser("wqMomNaMtNeNvHbENiMxzzmcxh72","oHmusqZVcR9BKG5EMekh",1);
+                // }
+                // catch(Exception e){
+                //     Debug.Log(e.Message);
+                // }
+                // try{QuizController.GetQuizzesByLesson(1,2);
+                // }
+                // catch(Exception e){
+                //     Debug.Log(e.Message);
+                // }
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else

@@ -2,6 +2,7 @@
 using UnityEngine;
 using Firebase.Firestore;
 using Project.Managers;
+using System.Threading.Tasks;
 
 [System.Serializable]
 public class LessonData
@@ -14,6 +15,7 @@ public class LessonData
     public int LessonUnit;
 
     public bool LessonStatus;
+
 }
 public class LessonController
 {
@@ -21,30 +23,34 @@ public class LessonController
 
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
     Firebase.Storage.FirebaseStorage storage => DatabaseManager.Storage;
-    public void UploadLesson(LessonData data)
+    public void UploadData<T>(string collection, System.Func<T> builder)
     {
-        lessonModel = new LessonModel()
-        {
-            LessonTitle = data.LessonTitle,
-            LessonUnit = data.LessonUnit,
-            LessonVideoFolder = data.LessonVideoFolder,
-            VideoNumbers = data.VideoNumbers,
-            LessonChapter = data.LessonChapter,
-            LessonSemester = data.LessonSemester,
-            LessonStatus = data.LessonStatus
-        };
+        T model = builder.Invoke();
 
-        db.Collection("lessons").Document().SetAsync(lessonModel);
+        db.Collection(collection).Document().SetAsync(model);
     }
     public void GetVideo(int unit, int chapter)
     {
         Query documentQuery = db.Collection("lessons").WhereEqualTo("LessonUnit", unit).WhereEqualTo("LessonChapter", chapter);
-        documentQuery.GetSnapshotAsync().ContinueWith(task=>{
-           QuerySnapshot querySnapshot = task.Result;
+        documentQuery.GetSnapshotAsync().ContinueWith(task =>
+        {
+            QuerySnapshot querySnapshot = task.Result;
             var model = querySnapshot[0].ConvertTo<LessonModel>();
             Debug.Log(model.GetFileFormat(7));
             Debug.Log(storage.GetReferenceFromUrl(model.GetFileFormat(7)).Path);
         });
 
+    }
+
+    public async Task<string> GetLessonID(int chapter, int unit)
+    {
+        string lessonID = null;
+        Query queryLesson = db.Collection("lessons").WhereEqualTo("LessonUnit", unit).WhereEqualTo("LessonChapter", chapter);
+        var result = await queryLesson.GetSnapshotAsync();
+        foreach (DocumentSnapshot querySnapshot in result.Documents)
+        {
+                lessonID = querySnapshot.Id;
+        }
+        return lessonID;
     }
 }
