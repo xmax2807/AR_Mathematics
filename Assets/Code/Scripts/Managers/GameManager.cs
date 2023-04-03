@@ -18,6 +18,7 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
+            gameObject.EnsureChildComponent<UserManager>(childName: "User Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
         }

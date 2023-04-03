@@ -78,16 +78,7 @@ public class DatabaseManager : MonoBehaviour
                 // CreateUser(Username, Password);
 
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
-               
-                UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                    QuizUnit = quizData.QuizUnit,
-                    QuizTitle = quizData.QuizTitle,
-                    QuizIMG = quizData.QuizIMG,
-                    QuizAnswer = quizData.QuizAnswer,
-                    QuizCorrectAnswer = quizData.QuizCorrectAnswer,
-                    QuizSemester = quizData.QuizSemester,
-                    QuizChapter = quizData.QuizChapter,
-                });
+            
                 // LessonController.GetVideo(1,2);
                 // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
                 // UserController.UploadModel(user);

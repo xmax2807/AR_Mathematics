@@ -14,13 +14,8 @@ public class ChangePlayPause : MonoBehaviour
     void Start()
     {
         player = GetComponent<VideoPlayer>();
-        image.enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //image.enabled = false;
+        //button.onClick.AddListener(ChangeStartStop); 
     }
 
     public void ChangeStartStop()
@@ -28,12 +23,12 @@ public class ChangePlayPause : MonoBehaviour
         if (player.isPlaying == false)
         {
             player.Play();
-            image.enabled = false;
+            //image.enabled = false;
         }
         else
         {
             player.Pause();
-            image.enabled = true;
+            //image.enabled = true;
         }
     }
 }

@@ -63,17 +63,17 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
         await user.SendEmailVerificationAsync();
 
         TimeCoroutineManager.Instance.DoLoopAction(
-        () =>
+        () => // loop action
         {
             user.ReloadAsync();
             Debug.Log(user.IsEmailVerified);
         },
-        () => user.IsEmailVerified,
-        3,
-        () =>
+        () => user.IsEmailVerified, // stop condition
+        1,// interval
+        () => // post process
         {
             //Up model len6 db
-                Controller.UploadModel(user);
+            Controller.UploadModel(user);
             //
             BackToSignInButton.onClick?.Invoke();
             pusher.OnConfirm?.Invoke();

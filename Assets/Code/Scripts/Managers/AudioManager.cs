@@ -8,8 +8,8 @@ namespace Project.Managers{
         public static AudioManager Instance;
 
         private const string googleSTT_URL = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=vi&q=";
-        private AudioSource VoiceVolume;
-        private AudioSource BackgroundFX;
+        public AudioSource VoiceVolume {get; private set;}
+        public AudioSource BackgroundFX {get;private set;}
         private Project.Audio.SoundFXController SoundFXController;
         public void Awake(){
             if(Instance == null){
