@@ -13,33 +13,35 @@ using Firebase;
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] QuizData quizData;
-    [SerializeField] string collection = "quizzes";
+    // [SerializeField] QuizData quizData;
+    // [SerializeField] string collection = "quizzes";
     // private string userID;
-    // [SerializeField] private string Username;
-    // [SerializeField] private string Password;
+    [SerializeField] private string Email;
+    [SerializeField] private string Password;
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
     public static Firebase.Storage.FirebaseStorage Storage;
-    public static DatabaseManager Instance {get;private set;}
+    public static DatabaseManager Instance { get; private set; }
     private FirebaseApp app;
-    public UserController UserController {get;private set;}
-    public AchievementController AchievementController {get;private set;}
-    public LessonController LessonController {get;private set;}
-    public GameController GameController {get;private set;}
-    public QuizController QuizController {get; private set;}
+    public UserController UserController { get; private set; }
+    public AchievementController AchievementController { get; private set; }
+    public LessonController LessonController { get; private set; }
+    public GameController GameController { get; private set; }
+    public QuizController QuizController { get; private set; }
     void Awake()
     {
-        if(Instance == null){
+        if (Instance == null)
+        {
             Instance = this;
             InitFirebase();
         }
-        else if(Instance != this){
+        else if (Instance != this)
+        {
             Destroy(this.gameObject);
         }
     }
-    public void UploadData<T>(string collection,System.Func<T> builder)
+    public void UploadData<T>(string collection, System.Func<T> builder)
     {
         T model = builder.Invoke();
 
@@ -56,7 +58,8 @@ public class DatabaseManager : MonoBehaviour
         LessonController = new();
         GameController = new();
         QuizController = new();
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(async task => {
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(async task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -64,17 +67,19 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
+                bool result = await UserController.SignInAuth(Email,Password);
+                // UserController.RegisterAuth(Email,Password);
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
-               
-                UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                    QuizUnit = quizData.QuizUnit,
-                    QuizTitle = quizData.QuizTitle,
-                    QuizIMG = quizData.QuizIMG,
-                    QuizAnswer = quizData.QuizAnswer,
-                    QuizCorrectAnswer = quizData.QuizCorrectAnswer,
-                    QuizSemester = quizData.QuizSemester,
-                    QuizChapter = quizData.QuizChapter,
-                });
+
+                // UploadData<QuizModel>(collection, ()=>new QuizModel(){
+                //     QuizUnit = quizData.QuizUnit,
+                //     QuizTitle = quizData.QuizTitle,
+                //     QuizIMG = quizData.QuizIMG,
+                //     QuizAnswer = quizData.QuizAnswer,
+                //     QuizCorrectAnswer = quizData.QuizCorrectAnswer,
+                //     QuizSemester = quizData.QuizSemester,
+                //     QuizChapter = quizData.QuizChapter,
+                // });
                 // LessonController.GetVideo(1,2);
                 // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
                 // UserController.UploadModel(user);

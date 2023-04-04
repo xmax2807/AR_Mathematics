@@ -998,16 +998,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6abf2ad4d64364c949af988c8d95b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quizData:
-    QuizUnit: 3
-    QuizTitle: 0
-    QuizIMG: 0
-    QuizAnswer:
-    - 
-    - 
-    - 
-    - 
-    QuizCorrectAnswer: 0
-    QuizSemester: 1
-    QuizChapter: 1
-  collection: quizzes
+  Email: khoapro123@gmail.com
+  Password: 123456
