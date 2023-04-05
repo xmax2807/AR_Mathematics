@@ -624,6 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlacedPrefab: {fileID: 5548481540091180396, guid: 454a2d64fa6d8da4181e87656ad47736,
     type: 3}
+  rotateObject: {x: 0, y: 180, z: 0}
   ARCamera: {fileID: 114901492}
   visualObject: {fileID: 7004860215671566897}
 --- !u!1 &1607184953

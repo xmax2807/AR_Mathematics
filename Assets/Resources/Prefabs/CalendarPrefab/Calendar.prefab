@@ -724,8 +724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f214f1fcb9c571b4bb9a373dc2e8dea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dateText: {fileID: 0}
-  daysOfWeek: {fileID: 0}
+  dateText: {fileID: 2280866000089205123}
+  daysOfWeek: {fileID: 3955779172922156715}
+  month: {fileID: 4465626422792822671}
   button: {fileID: 0}
 --- !u!1 &5899066383335479607
 GameObject:

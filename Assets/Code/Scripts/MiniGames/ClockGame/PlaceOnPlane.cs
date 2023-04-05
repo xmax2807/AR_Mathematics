@@ -79,7 +79,6 @@ public class PlaceOnPlane : MonoBehaviour
 			if (spawnedObject == null)
 			{
 				spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-				// make spawnedobject rotate -90 degree Y and Z
 				spawnedObject.transform.LookAt(ARCamera.transform);
 				var rotation = spawnedObject.transform.rotation;
 				spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);

@@ -18,7 +18,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	[SerializeField]
 	[Tooltip("Instantiates this prefab on a plane at the touch location.")]
 	GameObject m_PlacedPrefab;
-
+	public Vector3 rotateObject;
 	public GameObject ARCamera;
 
 	UnityEvent placementUpdate;
@@ -79,10 +79,9 @@ public class PlaceOnPlaneMain : MonoBehaviour
 			if (spawnedObject == null)
 			{
 				spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-				//make spawnedobject rotate -90 degree Y and Z
 				spawnedObject.transform.LookAt(ARCamera.transform);
 				var rotation = spawnedObject.transform.rotation;
-				spawnedObject.transform.Rotate(rotation.x, rotation.y + 180, rotation.z);
+				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 
 
 			}
@@ -91,7 +90,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 				spawnedObject.transform.position = hitPose.position;
 				spawnedObject.transform.LookAt(ARCamera.transform);
 				var rotation = spawnedObject.transform.rotation;
-				spawnedObject.transform.Rotate(rotation.x, rotation.y + 180, rotation.z);
+				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 			}
 
 			placementUpdate.Invoke();
