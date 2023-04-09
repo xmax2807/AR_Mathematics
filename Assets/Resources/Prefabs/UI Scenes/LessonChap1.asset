@@ -18,7 +18,7 @@ MonoBehaviour:
     OnClick:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11400000, guid: 43823646381f83942bdf2dfdc631947c, type: 2}
+        - m_Target: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
           m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
           m_MethodName: Request
           m_Mode: 5
@@ -27,20 +27,41 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Tr\xEAn - d\u01B0\u1EDBi, tr\xE1i - ph\u1EA3i, tr\u01B0\u1EDBc
-              - sau"
+            m_StringArgument: 1,1
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 11400000, guid: 8d247f9139b1e5049a870cf37c124f25, type: 2}
-          m_TargetAssemblyTypeName: Project.UI.Panel.SingleSceneLoadData, Projec
-          m_MethodName: LoadScene
+    Description: 
+  - Name: "H\xECnh kh\u1ED1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: LessonVideoScene
+            m_StringArgument: 2,1
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "H\xECnh h\u1ECDc"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 3,1
             m_BoolArgument: 0
           m_CallState: 2
     Description: 

@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a68d3113042f394f8385874016941b3, type: 3}
-  m_Name: LessonModelRequest
+  m_Script: {fileID: 11500000, guid: a69bd29f1c1044749a9ba4476bdd7e32, type: 3}
+  m_Name: LessonRequest
   m_EditorClassIdentifier: 
+  requestType: 1
+  sceneLoadData: {fileID: 11400000, guid: 6155da6821f221f44ae18c5c6360298a, type: 2}

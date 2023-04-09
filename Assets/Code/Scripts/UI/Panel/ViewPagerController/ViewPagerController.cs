@@ -37,7 +37,7 @@ namespace Project.UI.Panel{
             for(int i = 0; i < minIndex + currentIndex; i++){
                 StartCoroutine(preloadList[i].UnloadAsync());
             }
-            for(int i = maxIndex + currentIndex + 1; i < preloadList.Count; i++){
+            for(int i = maxIndex + 1 + currentIndex; i < preloadList.Count; i++){
                 StartCoroutine(preloadList[i].UnloadAsync());
             }
             cacheIndex = currentIndex;

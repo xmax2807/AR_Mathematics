@@ -12,11 +12,10 @@ namespace Project.UI.Panel{
         
         public override IEnumerator PrepareAsync()
         {
-            Debug.Log("Is prepared " + isPrepared);
             if(isPrepared) yield break;
+         
             yield return videoPlayerBehaviour.Setup();
             isPrepared = true;
-            Debug.Log(isPrepared);
         }
 
         public override IEnumerator UnloadAsync()

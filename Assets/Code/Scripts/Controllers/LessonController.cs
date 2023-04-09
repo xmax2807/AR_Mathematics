@@ -39,6 +39,13 @@ public class LessonController
     public LessonModel LessonModel { get; private set; }
     public async Task<LessonModel> GetLessonModel(int unit, int chapter)
     {
+        bool isNetworkAvailable = await NetworkManager.Instance.CheckInternetConnectionAsync();
+
+        if(!isNetworkAvailable){
+            Debug.Log("isNetworkAvailable: " + isNetworkAvailable);
+            return null;
+        }
+
         Query doc = db.Collection("lessons").WhereEqualTo("LessonUnit", unit).WhereEqualTo("LessonChapter", chapter);
         QuerySnapshot snapshot = await doc.GetSnapshotAsync();
 
@@ -50,6 +57,12 @@ public class LessonController
 
     public async Task<LessonModel> GetLessonModel(string lessonName)
     {
+        bool isNetworkAvailable = await NetworkManager.Instance.CheckInternetConnectionAsync();
+
+        if(!isNetworkAvailable){
+            Debug.Log("isNetworkAvailable: " + isNetworkAvailable);
+            return null;
+        }
         Query doc = db.Collection("lessons").WhereEqualTo("LessonTitle", lessonName);
         QuerySnapshot snapshot = await doc.GetSnapshotAsync();
 
@@ -69,7 +82,7 @@ public class LessonController
             var uri = await gsReference.GetDownloadUrlAsync();
             return uri;
         }
-        catch (Firebase.FirebaseException e)
+        catch (System.Exception e)
         {
             Debug.Log(e.Message);
             return null;
