@@ -67,7 +67,10 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
-                bool result = await UserController.SignInAuth(Email,Password);
+                // bool result = await UserController.SignInAuth(Email,Password);
+                var result = await GameController.GetListGames(8,5);
+                
+                Debug.Log(result.Count);
                 // UserController.RegisterAuth(Email,Password);
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
 
