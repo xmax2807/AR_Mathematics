@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Plugins/Gameframe.GUI.Demo/Basic/Demo - GUI Basic.unity
     guid: a75bbcacfa24c4283b3530aa84e49de8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/LoginScene.unity
     guid: 1471d764e823ee345b17040e9de02d59
+  - enabled: 1
+    path: Assets/Scenes/MainGameFlow/GameBuilding.unity
+    guid: 24038f933a5d5d74aa5a5015324be760
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

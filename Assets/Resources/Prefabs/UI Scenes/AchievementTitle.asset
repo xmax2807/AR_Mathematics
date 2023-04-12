@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AchievementTitle
   m_EditorClassIdentifier: 
   Children:
-  - {fileID: 11400000, guid: 94f155e10d047084f8c65f861ca0b18d, type: 2}
+  - {fileID: 11400000, guid: 7767be7de60528b409cc5f28355611ba, type: 2}
   - {fileID: 11400000, guid: 5234ca71ed263ea4ca47e7f50a1c9d77, type: 2}
   ButtonNames:
   - Name: "Danh hi\xEA\u0323u"

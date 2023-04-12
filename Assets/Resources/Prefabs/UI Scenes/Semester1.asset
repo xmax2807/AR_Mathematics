@@ -16,12 +16,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3d8ab07013a93647bed3a27a1235358, type: 2}
   - {fileID: 11400000, guid: 0b5cb6b102d22da408d0c94e840314fd, type: 2}
   - {fileID: 11400000, guid: 717c9fec38b405948ad3cd5dbb219b90, type: 2}
+  - {fileID: 11400000}
   ButtonNames:
   - Name: "Ch\u01B0\u01A1ng 1"
     Description: 
   - Name: "Ch\u01B0\u01A1ng 2"
     Description: 
   - Name: "Ch\u01B0\u01A1ng 3"
+    Description: 
+  - Name: "\xD4n t\xE2\u0323p"
     Description: 
   Title: "Ch\u01B0\u01A1ng Tr\xECnh H\u1ECDc"
   Description: 
