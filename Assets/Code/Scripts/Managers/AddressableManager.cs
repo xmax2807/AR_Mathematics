@@ -121,12 +121,35 @@ namespace Project.Managers
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();
         }
-
-        public async void InstantiatePrefabs<T>(AssetReferenceT<T>[] required) where T : UnityEngine.Object{
-            foreach (AssetReferenceT<T> asset in required)
+        public void UnloadAssets<T>(AssetReferenceT<T>[] assets) where T : UnityEngine.Object{
+            foreach (AssetReferenceT<T> asset in assets)
             {
-                await asset.InstantiateAsync().Task;
+                asset.ReleaseAsset();
             }
         }
+        public void UnloadAsset<T>(AssetReferenceT<T> asset) where T : UnityEngine.Object{
+            asset.ReleaseAsset();
+        }
+
+        public AsyncOperationHandle<T>[] InstantiatePrefabs<T>(AssetReferenceT<T>[] required) where T : UnityEngine.Object{
+            AsyncOperationHandle<T>[] results = new AsyncOperationHandle<T>[required.Length];
+            for(int i = 0; i < required.Length;i++)
+            { 
+                results[i] = required[i].LoadAssetAsync();
+            }
+            return results;
+        }
+
+        public void UnloadInstancePrefabs(params GameObject[] gameObjects){
+            foreach(GameObject obj in gameObjects){
+                Addressables.ReleaseInstance(obj);
+            }
+        }
+        public void UnloadInstancePrefabs(IEnumerable<AsyncOperationHandle<GameObject>> operations){
+            foreach(var operation in operations){
+                Addressables.ReleaseInstance(operation);
+            }
+        }
+        
     }
 }

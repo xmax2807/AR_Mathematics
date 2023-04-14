@@ -33,7 +33,8 @@ namespace Project.Managers
                 Destroy(this.gameObject);
             }
             DontDestroyOnLoad(this);
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 30;
+            Screen.SetResolution(1280, 720, true);
         }
 
         public System.Func<Task> OnGameFinishLoading;

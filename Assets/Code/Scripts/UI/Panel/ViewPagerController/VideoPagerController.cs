@@ -1,20 +1,56 @@
 using Project.Managers;
-namespace Project.UI.Panel{
-    public class VideoPagerController : ViewPagerControllerT<PreloadableVideoPanelView>{
+using Project.AssetIO.Firebase;
+using UnityEngine;
+using System.Threading.Tasks;
+
+namespace Project.UI.Panel
+{
+    public class VideoPagerController : ViewPagerControllerT<PreloadableVideoPanelView>
+    {
+        [SerializeField] private DownloadingPanelView downloadingPanel;
         LessonController lessonController => DatabaseManager.Instance.LessonController;
         LessonModel lessonModel => UserManager.Instance.CurrentLesson;
-        private void Start(){
-            Setup(lessonModel.VideoNumbers, OnBuildVideoView);
+
+        private async void Start()
+        {
+            downloadingPanel.SetupUI("Đang tải bài học, bé chờ chút nhé...");
+            
+            if(lessonModel == null){
+                await downloadingPanel.HideAsync();
+                return;
+            }
+            await FetchPanelView(lessonModel.VideoNumbers, OnBuildVideoView);
+            await downloadingPanel.StartDownload();
+            
+            InvokeOnPageChanged(0);
             LoadMore();
-            preloadList[0].ShowAsync();
+            await preloadList[0].ShowAsync();
         }
 
-        private async void OnBuildVideoView(PreloadableVideoPanelView view, int index){
-            System.Uri uri = await lessonController.GetVideoUrl(lessonModel, index);
-            
-            if(uri == null) return;
-            
-            view.VideoPlayerBehaviour.VideoUrl = uri.ToString();
+        private async Task OnBuildVideoView(PreloadableVideoPanelView view, int index)
+        {
+            var reference = lessonController.GetVideoReference(lessonModel, index);
+            if (reference == null) return;
+
+            System.Uri uri = await reference.GetDownloadUrlAsync();
+            string relativePath = uri.Segments[uri.Segments.Length - 1].Replace("%2F", "/");
+
+            bool isFileAvailableOffline = FirebaseStorageDownloadHandler.TryGetLocalFilePath(relativePath, out string fullFilePath);
+            if (!isFileAvailableOffline)
+            {
+                downloadingPanel.AddDownloadTask(reference, fullFilePath, OnDownloadComplete);
+            }
+            else
+            {
+                view.VideoPlayerBehaviour.VideoUrl = $"file://{fullFilePath}";
+            }
+
+        }
+
+        private void OnDownloadComplete(int index, DownloadingPanelView.DownloadTask task)
+        {
+            if (preloadList[index] is not PreloadableVideoPanelView view) return;
+            view.VideoPlayerBehaviour.VideoUrl = $"file://{task.destinationFile}";
         }
     }
 }

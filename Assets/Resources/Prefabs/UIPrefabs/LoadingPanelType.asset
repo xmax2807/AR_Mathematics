@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc69d8282683b4927bea889cf04fdbad, type: 3}
   m_Name: LoadingPanelType
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2662207952473054713, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7, type: 3}
+  prefab: {fileID: 5466664222258960278, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7, type: 3}
   visibility: 0

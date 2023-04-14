@@ -2,17 +2,20 @@ using System.Collections;
 using UnityEngine;
 using Project.Utils.ExtensionMethods;
 using System;
+using System.Threading.Tasks;
 
 namespace Project.Managers
 {
     public class SpawnerManager : MonoBehaviour
     {
+        public static System.Random RandomInstance {get;private set;}
         public static SpawnerManager Instance {get; private set;}
 
         protected void Awake()
         {
             if(Instance == null){
                 Instance = this;
+                RandomInstance = new();
             }
             else if(Instance != null && Instance != this){
                 Destroy(this);
@@ -22,7 +25,13 @@ namespace Project.Managers
         {
             T newGameObj;
             newGameObj = Instantiate(gameObj, theParent);
+            newGameObj.transform.SetParent(theParent, false);
             onBuildObj?.Invoke(newGameObj);
+        }
+        public Task SpawnObjectInParentAsync<T>(T gameObj, Transform theParent, Func<T, Task> onBuildObj = null) where T : MonoBehaviour{
+            T newGameObj;
+            newGameObj = Instantiate(gameObj, theParent);
+            return onBuildObj?.Invoke(newGameObj);
         }
         public void SpawnObject<T>(T gameObj, Vector3 newPosition, Transform theParent = null, Action<T> onBuildObj = null) where T : MonoBehaviour
         {

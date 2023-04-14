@@ -2,11 +2,10 @@ using Project.Utils.MathProvider;
 using Project.Utils.ExtensionMethods;
 namespace Project.QuizSystem.Expression
 {
-    public struct Expression<T>
+    public struct Expression<T> where T : System.IComparable<T>
     {
         public T arg1, arg2;
         public char Operator;
-
         public Expression(T arg1, T arg2, char Operator)
         {
             this.arg1 = arg1;
@@ -43,6 +42,11 @@ namespace Project.QuizSystem.Expression
         {
             result = ConvertToExpression(expression);
             return !result.IsEmpty();
+        }
+        public static Expression<T> CreateExpression(T result, MathProvider<T> provider){
+            (T,T,char) tuple = provider.SplitNumber(result);
+
+            return new Expression<T>(tuple.Item1, tuple.Item2, tuple.Item3);
         }
         public bool IsEmpty() => Operator == '\0';
         private static int FindOperator(string expression){

@@ -2,18 +2,15 @@ using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Video;
 
 namespace Project.UI.Panel{
     public class PreloadableVideoPanelView : PreloadablePanelView
     {
         [SerializeField] private VideoPlayerBehaviour videoPlayerBehaviour;
         public VideoPlayerBehaviour VideoPlayerBehaviour {get => videoPlayerBehaviour;}
-        
         public override IEnumerator PrepareAsync()
         {
             if(isPrepared) yield break;
-         
             yield return videoPlayerBehaviour.Setup();
             isPrepared = true;
         }

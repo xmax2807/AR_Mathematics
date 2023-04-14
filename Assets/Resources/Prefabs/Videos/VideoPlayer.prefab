@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8890573994393898036}
   - component: {fileID: 8890573994393898042}
-  - component: {fileID: 8890573994393898041}
   - component: {fileID: 8890573994393898040}
   m_Layer: 0
   m_Name: VideoPlayer
@@ -46,24 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d98daa03e1e4a44a91414599d047fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 0}
-  unit: 1
-  chapter: 1
-  videoIndex: 0
---- !u!114 &8890573994393898041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8890573994393898039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b3831ad5b455344a666915cc62bda0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 0}
-  image: {fileID: 0}
 --- !u!114 &8890573994393898040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,4 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fec6d80f4851f142b414bb13d7ba42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pagerUI: {fileID: 3670448639257708758, guid: e618e1bcae8f53e4599d377cf7a96042, type: 3}
   videoPlayerBehaviour: {fileID: 8890573994393898042}

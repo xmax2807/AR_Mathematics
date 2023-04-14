@@ -35,7 +35,6 @@ namespace Project.Managers
         public async Task<bool> CheckInternetConnectionAsync(string url = "http://google.com"){
             UnityWebRequestAsyncOperation operation = SendRequest(url);
             while(!operation.isDone){
-                Debug.Log(operation.isDone);
                await Task.Delay(1);
             }
             return operation.webRequest.result != UnityWebRequest.Result.ConnectionError;

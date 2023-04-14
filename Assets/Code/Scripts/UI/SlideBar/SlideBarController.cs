@@ -13,9 +13,13 @@ namespace Project.UI.ProgressBar{
             SetupAnimation(200);
         }
         public virtual void SetupAnimation(float maxValue){
+            if(_slider == null){
+                SetupSlider();
+            }
+            _slider.value = 0;
             _animation = new BaseProgressAnim(_slider,maxValue);
         }
-        public virtual void UpdateEndValue(float endValue, float duration){
+        public virtual void UpdateEndValue(float endValue, float duration = 1){
             _animation.SettingUp(endValue, duration);
         }
         private void SetupSlider(){

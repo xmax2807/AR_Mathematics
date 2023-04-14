@@ -1,6 +1,7 @@
 using UnityEngine;
 using Project.Managers;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Project.UI.Panel
 {
@@ -19,26 +20,36 @@ namespace Project.UI.Panel
         void OnDisable(){
             RemovePostRequestCallback();
         }
+        
         public void Request(string data){
             TimeCoroutineManager.Instance.WaitUntil(
                 ()=> requestType != RequestType.None,
-                ()=> Request(requestType, data),
+                async ()=> await Request(requestType, data),
                 timeout: 2f
             );
         }
-        private async void Request(RequestType type,string data){
+        public Task<bool> TryRequest(string data){
+            return Request(requestType, data, postRequest: false);
+        }
+        private async Task<bool> Request(RequestType type,string data, bool postRequest = true){
             Task<bool> requestResult = null;
             switch(type){
                 case RequestType.Lesson: requestResult = RequestLesson(data);
                 break;
+                case RequestType.Quiz: requestResult = RequestQuizzes(data);
+                break;
             }
 
-            if(requestResult == null){
-                return;
+            if(requestResult == null){ 
+                return false;
             }
 
             bool result = await requestResult;
-            onPostRequest?.Invoke(result);
+            
+            if(postRequest){
+                onPostRequest?.Invoke(result);
+            }
+            return true;
         }
         protected async Task<bool> RequestLesson(string lessonName)
         {
@@ -53,8 +64,30 @@ namespace Project.UI.Panel
             var Result = await DatabaseManager.Instance.LessonController.GetLessonModel(unit, chapter);
             if(Result == null) return false;
 
-            Debug.Log("Request Result: " + Result.LessonChapter);
             UserManager.Instance.CurrentLesson = Result;
+            return true;
+        }
+
+        protected async Task<bool> RequestQuizzes(string data){
+            string[] datas = data.Split(separator);
+            if(datas.Length > 3 || datas.Length <= 0) return false;
+
+            bool parseResult = int.TryParse(datas[0], out int unit);
+            if(!parseResult) unit = -1;
+            parseResult = int.TryParse(datas[1], out int chapter);            
+            if(!parseResult) chapter = -1;
+            parseResult = int.TryParse(datas[2], out int semester);
+            if(!parseResult) semester = -1;
+
+            var Result = await DatabaseManager.Instance.QuizController.GetQuizModelsAsync(
+                unit == -1 ? null : unit,
+                chapter == -1 ? null : chapter,
+                semester == -1 ? null : semester
+            );
+            
+            if(Result == null) return false;
+
+            UserManager.Instance.CurrentQuizzes = Result;
             return true;
         }
         protected virtual void AddPostRequestCallback(){}

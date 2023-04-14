@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0887d75cceb9aa148885cfe6c8ce8b0c, type: 3}
+  m_Name: GroupSpritePack
+  m_EditorClassIdentifier: 
+  listOfPacks:
+  - {fileID: 11400000, guid: b52a568541213f7409e96d47d0c13d3f, type: 2}

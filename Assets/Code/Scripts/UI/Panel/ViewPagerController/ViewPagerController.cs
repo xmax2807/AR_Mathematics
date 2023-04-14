@@ -7,16 +7,25 @@ namespace Project.UI.Panel{
     public class ViewPagerController : MonoBehaviour{
         [SerializeField] private int cacheCount = 1;
         [SerializeField] PreloadablePanelView[] Samples;
+        [SerializeField] protected PreloadablePanelView LastPageView;
         
         protected int currentIndex = 0;
         protected int cacheIndex;
-        protected List<PreloadablePanelView> preloadList;  
-        public event System.Action<int> OnPageChanged;
+
+        protected List<PreloadablePanelView> preloadList;
+        public event System.Action<PreloadablePanelView> OnPageChanged;
+        protected void InvokeOnPageChanged(int index) => OnPageChanged?.Invoke(preloadList[index]);
         protected virtual void Awake(){
             preloadList = new List<PreloadablePanelView>(Math.Max(5, Samples.Length));
             for(int i = 0; i < Samples.Length; i++){
-               preloadList.Add(Samples[i]); 
+               preloadList.Add(Samples[i]);
             }
+        }
+
+        protected virtual void AddLastView(){
+            if(LastPageView == null) return;
+            var newObj = Instantiate(LastPageView, this.transform);
+            preloadList.Add(newObj);
         }
 
         public void ShouldLoadMore(){
@@ -29,15 +38,15 @@ namespace Project.UI.Panel{
 
         public void LoadMore(){
             int minIndex = Math.Max(currentIndex - cacheCount,0);
-            int maxIndex = Math.Min(cacheCount, preloadList.Count - 1 - currentIndex);
+            int maxIndex = Math.Min(currentIndex + cacheCount, preloadList.Count - 1);
 
             for(int i = minIndex; i <= maxIndex; i++){
-                StartCoroutine(preloadList[i + currentIndex].PrepareAsync());
+                StartCoroutine(preloadList[i].PrepareAsync());
             }
-            for(int i = 0; i < minIndex + currentIndex; i++){
+            for(int i = 0; i < minIndex; i++){
                 StartCoroutine(preloadList[i].UnloadAsync());
             }
-            for(int i = maxIndex + 1 + currentIndex; i < preloadList.Count; i++){
+            for(int i = maxIndex + 1; i < preloadList.Count; i++){
                 StartCoroutine(preloadList[i].UnloadAsync());
             }
             cacheIndex = currentIndex;
@@ -49,7 +58,7 @@ namespace Project.UI.Panel{
             await preloadList[currentIndex].HideAsync();
             ++currentIndex;
             ShouldLoadMore();
-            OnPageChanged?.Invoke(currentIndex + 1);
+            InvokeOnPageChanged(currentIndex);
             await preloadList[currentIndex].ShowAsync();
         }
 
@@ -59,7 +68,7 @@ namespace Project.UI.Panel{
             await preloadList[currentIndex].HideAsync();
             --currentIndex;
             ShouldLoadMore();
-            OnPageChanged?.Invoke(currentIndex - 1);
+            InvokeOnPageChanged(currentIndex);
             await preloadList[currentIndex].ShowAsync();
         }
 

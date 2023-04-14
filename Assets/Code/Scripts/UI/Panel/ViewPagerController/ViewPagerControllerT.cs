@@ -1,22 +1,26 @@
 using UnityEngine;
 using Project.Managers;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Project.UI.Panel
 {
     public abstract class ViewPagerControllerT<T> : ViewPagerController where T : PreloadablePanelView
     {
         [SerializeField] private T prefab;
-
-        public void Setup(int count, System.Action<T, int> onBuildObj)
+        protected System.Action OnBuildComplete;
+        public async Task FetchPanelView(int count, System.Func<T, int, Task> onBuildObj)
         {
             for (int i = 0; i < count; i++)
             {
-                SpawnerManager.Instance.SpawnObjectInParent(prefab, this.transform, (obj) =>
-                {
-                    onBuildObj?.Invoke(obj, i);
-                    obj.HideAsync();
+                await SpawnerManager.Instance.SpawnObjectInParentAsync(prefab, this.transform, async (obj) =>
+                { 
+                    await obj.HideAsync();
                     preloadList.Add(obj);
+                    await onBuildObj?.Invoke(obj, i);
                 });
             }
+            AddLastView();
         }
     }
 }

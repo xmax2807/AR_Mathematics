@@ -17,7 +17,7 @@ namespace Project.UI.Panel
         }
 
         private void ChangeQuest(IQuestion newQuestion){
-            newQuestion.UpdateUI(Layout);
+            //newQuestion.CreateUIElement(Layout);
         }
     }
 }

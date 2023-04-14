@@ -3,7 +3,8 @@ using UnityEngine.AddressableAssets;
 using Project.Managers;
 using RobinBird.FirebaseTools.Storage.Addressables;
 using Gameframe.GUI.PanelSystem;
-using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Collections.Generic;
 
 namespace Project.Addressable
 {
@@ -14,6 +15,9 @@ namespace Project.Addressable
         [Header("Prefab"), SerializeField] private GameObjectReferencePack prefabRefs;
         [Header ("Initialized Prefabs"), SerializeField] private AssetReferenceT<GameObject>[] preInitPrefabs;
         [Header("SFXPack"), SerializeField] private AssetReferenceSingle<Audio.AudioPackSTO> audioRefs;
+        
+        private List<AsyncOperationHandle<GameObject>> cacheOperations;
+
         public void Start()
         {
             stackSystem.PushAsync(new PanelViewController(type));
@@ -21,7 +25,9 @@ namespace Project.Addressable
         }
         private async void PreLoad()
         {
-            AddressableManager.Instance.InstantiatePrefabs(preInitPrefabs);
+            cacheOperations = new();
+            var operations = AddressableManager.Instance.InstantiatePrefabs(preInitPrefabs);
+            cacheOperations.AddRange(operations);
 
             var prefabs = await AddressableManager.Instance.PreLoadAssets(prefabRefs.References);
             prefabRefs.OnComplete?.Invoke(prefabs);
@@ -31,6 +37,12 @@ namespace Project.Addressable
             await stackSystem.PopAsync();
 
             GameManager.Instance.OnGameFinishLoading?.Invoke();
+        }
+
+        private void OnDestroy(){
+            AddressableManager.Instance.UnloadAssets(prefabRefs.References);
+            AddressableManager.Instance.UnloadAsset(audioRefs.Reference);
+            AddressableManager.Instance.UnloadInstancePrefabs(cacheOperations);
         }
     }
 }

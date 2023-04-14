@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 using Project.Managers;
 using UnityEngine;
 using UnityEngine.Video;
+using Project.AssetIO.Firebase;
 
 public class VideoPlayerBehaviour : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;
+    public enum VideoState{
+        Playing, Pausing, Stopped, Preparing
+    }
+    private VideoPlayer videoPlayer;
     private AudioSource audioSource;
     private static Camera targetCam;
-
+    public event System.Action<VideoState> OnVideoStateChanged;
     public string VideoUrl { get; set; }
-
-    public int unit = 1;
-    public int chapter = 1;
-    public int videoIndex = 0;
 
     private void Awake()
     {
@@ -26,15 +26,43 @@ public class VideoPlayerBehaviour : MonoBehaviour
     {
         if(videoPlayer == null) return;
         videoPlayer.targetCamera = targetCam;
-        videoPlayer.Play();
+        videoPlayer.loopPointReached += OnEndPointReached;
+        PlayVideo();
     }
     void OnDisable()
     {
         if(videoPlayer == null) return;
         videoPlayer.targetCamera = null;
-        videoPlayer.Pause();
+        PauseVideo();
     }
-
+    
+    public void PauseVideo(){
+        videoPlayer.Pause();
+        OnVideoStateChanged?.Invoke(VideoState.Pausing);
+    }
+    public void PlayVideo(){
+        if(!videoPlayer.isPrepared){
+            videoPlayer.Prepare();
+            return;
+        }
+        videoPlayer.Play();
+        OnVideoStateChanged?.Invoke(VideoState.Playing);
+    }
+    public void ReplayVideo(){
+        videoPlayer.frame = 0;
+        PlayVideo();
+    }
+    private void PrepareVideo(){
+        OnVideoStateChanged?.Invoke(VideoState.Preparing);
+        videoPlayer.Prepare();
+    }
+    private void StopVideo(){
+        videoPlayer.Stop();
+        OnVideoStateChanged?.Invoke(VideoState.Stopped);
+    }
+    private void OnEndPointReached(VideoPlayer player){
+        OnVideoStateChanged?.Invoke(VideoState.Stopped);
+    }
     public IEnumerator PrepareVideoUrl(string url)
     {
         if (videoPlayer == null)
@@ -44,8 +72,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
         try
         {
             videoPlayer.url = url;
-            Debug.Log("got " + url);
-            videoPlayer.Prepare();
+            PrepareVideo();
         }
         catch (UnityException e)
         {
@@ -56,7 +83,6 @@ public class VideoPlayerBehaviour : MonoBehaviour
 
     public IEnumerator Setup()
     {
-        Debug.Log("setup");
         if (videoPlayer != null)
         {
             Destroy(videoPlayer);
@@ -69,6 +95,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
         }
 
         videoPlayer.playOnAwake = false;
+        videoPlayer.waitForFirstFrame = true;
         videoPlayer.source = VideoSource.Url;
         videoPlayer.renderMode = VideoRenderMode.CameraFarPlane;
         videoPlayer.targetCamera = targetCam;
@@ -85,7 +112,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.Stop();
+            StopVideo();
             videoPlayer.prepareCompleted -= PlayVideo;
             Destroy(videoPlayer);
         }
@@ -95,6 +122,6 @@ public class VideoPlayerBehaviour : MonoBehaviour
     private void PlayVideo(VideoPlayer video){
         if(!enabled) return;
 
-        video.Play();
+        PlayVideo();
     }
 }

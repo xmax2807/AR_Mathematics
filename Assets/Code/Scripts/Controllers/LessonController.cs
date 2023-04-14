@@ -48,7 +48,7 @@ public class LessonController
 
         Query doc = db.Collection("lessons").WhereEqualTo("LessonUnit", unit).WhereEqualTo("LessonChapter", chapter);
         QuerySnapshot snapshot = await doc.GetSnapshotAsync();
-
+        Debug.Log(snapshot.Count);
         if (snapshot.Count == 0) return null;
 
         LessonModel = snapshot[0].ConvertTo<LessonModel>();
@@ -88,6 +88,19 @@ public class LessonController
             return null;
         }
 
+    }
+    public Firebase.Storage.StorageReference GetVideoReference(LessonModel model, int videoIndex){
+        try
+        {
+            string gsPath = model.GetFileFormat(videoIndex);
+            var gsReference = storage.GetReferenceFromUrl(gsPath);
+            return gsReference;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message);
+            return null;
+        }
     }
 
     public async Task<string> GetLessonID(int chapter, int unit)

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Project.Managers;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel
 {
@@ -18,8 +18,11 @@ namespace Project.UI.Panel
             Debug.Log("removed");
             onPostRequest -= ShouldLoadScene;
         }
+        public Task<bool> TryRequst(string data){
+            return TryRequest(data);
+        }
         private void ShouldLoadScene(bool isRequestSuccess){
-            Debug.Log(isRequestSuccess);
+            
             if(isRequestSuccess){
                 sceneLoadData.LoadScene();
             }
