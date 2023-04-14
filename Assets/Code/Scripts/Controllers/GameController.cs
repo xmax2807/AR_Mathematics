@@ -1,5 +1,7 @@
 
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Firebase.Firestore;
 using UnityEngine;
 public class GameController
@@ -9,10 +11,6 @@ public class GameController
     public void SavingGameToUser(string UserID, string GameID, int GameTask)
     {
         DocumentReference userRef = db.Collection("users").Document(UserID);
-        // GameData savingGame = new();
-        // savingGame.GameID = GameID;
-        // savingGame.Task = GameTask;
-
         DocumentReference gameRef = db.Collection("games").Document(GameID);
 
         userRef.GetSnapshotAsync().ContinueWith(async task =>
@@ -48,41 +46,24 @@ public class GameController
 
             }
         });
+    }
 
-        // Query queryUser = db.Collection("users").WhereEqualTo("UserID", UserID);
-        // DocumentReference docGame = db.Collection("games").Document(GameID);
+    public async Task<List<GameModel>> GetListGames(int unit, int chapter)
+    {
+        List<GameModel> listGames = new();
+        string req = $"{unit},{chapter}";
+        CollectionReference gamesRef = db.Collection("games");
+        // Query query = gamesRef.WhereEqualTo("Unit", unit).WhereEqualTo("Chapter", chapter);
 
-        // GameModel game = new();
-        // docGame.GetSnapshotAsync().ContinueWith(task =>
-        // {
-        //     DocumentSnapshot gameSnapshot = task.Result;
-        //     game = gameSnapshot.ConvertTo<GameModel>();
-        //     Debug.Log(game.GameTitle);
-        //     queryUser.GetSnapshotAsync().ContinueWith(task =>
-        // {
-        //     QuerySnapshot userSnapshot = task.Result;
-        //     var user = userSnapshot[0].ConvertTo<UserModel>();
-        //     GameData savingGame = new()
-        //     {
-        //         GameID = GameID,
-        //         Task = GameTask
-        //     };
-        //     Debug.Log(savingGame.GameID);
-        //     DocumentReference userDoc = db.Collection("users").Document(UserID);
-        //     Dictionary<string, object> update = new()
-        //     {
-        //         {"GameID",GameID},
-        //         {"Task",GameTask}
-        //     };
-        //     user.SavedGame.Add(savingGame);
-        //     for (int i = 0; i < GameTask; i++)
-        //     {
-        //         user.User_ListAchievement.Add(game.AchievementID[GameTask - 1 - i]);
 
-        //     }
+        Query query = gamesRef.WhereArrayContains("UnitChapter", req);
+        var snapshots = await query.GetSnapshotAsync();
+        foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
+        {
+            Debug.Log(String.Format("Document {0} returned", documentSnapshot.Id));
+            listGames.Add(documentSnapshot.ConvertTo<GameModel>());
+        }
 
-        // });
-        // });
-
+        return listGames;
     }
 }
