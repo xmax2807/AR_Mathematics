@@ -42,7 +42,7 @@ namespace Project.UI.Panel
             }
             else
             {
-                view.VideoPlayerBehaviour.VideoUrl = $"file://{fullFilePath}";
+                view.VideoPlayerBehaviour.VideoUrl = $"{fullFilePath}";
             }
 
         }

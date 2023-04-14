@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Gameframe.GUI.PanelSystem;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel{
     [RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]

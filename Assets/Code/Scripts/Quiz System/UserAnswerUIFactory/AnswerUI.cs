@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using Project.Managers;
+using Project.UI.TrueFalseUI;
 
 namespace Project.QuizSystem.UIFactory
 {
@@ -26,9 +27,11 @@ namespace Project.QuizSystem.UIFactory
     public class SingleChoiceAnswerUI : AnswerUI
     {
         private string[] options;
-        private Button button;
+        private TrueFalseButton button;
+        private TrueFalseButton[] optionButtons;
+        private int answerIndex;
         public SingleChoiceAnswerUI(GameObject prefabSample) : base(prefabSample){
-            if (!prefabSample.TryGetComponent<Button>(out button)){
+            if (!prefabSample.TryGetComponent<TrueFalseButton>(out button)){
                 throw new MissingComponentException("Button is missing in prefab");
             }
         }
@@ -40,8 +43,10 @@ namespace Project.QuizSystem.UIFactory
             }
             else
             {
+                answerIndex = singleChoiceQuestion.AnswerIndex;
                 this.question = question;
                 this.options = singleChoiceQuestion.GetOptions();
+                optionButtons = new TrueFalseButton[options.Length];
             }
         }
         protected override void BuildUI(LayoutGroup layoutGroup)
@@ -50,15 +55,28 @@ namespace Project.QuizSystem.UIFactory
                 SpawnerManager.Instance.SpawnObjectInParent(button,layoutGroup.transform,(btn)=>OnBuildUIElement(btn, i));
             }
         }
-        private void OnBuildUIElement(Button obj, int index){
-            obj.onClick.AddListener(()=>CheckAnswer(index));
+        private void OnBuildUIElement(TrueFalseButton obj, int index){
+            optionButtons[index] = obj;
+            obj.Button.onClick.AddListener(()=>CheckAnswer(index));
             obj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = options[index];
         }
         private void CheckAnswer(int index){
             question.SetAnswer(index);
             bool result = question.IsCorrect();
-            Debug.Log(result);
+            
             InvokeAnswerEvent(result);
+            ChangeButtonsUI(index);
+        }
+
+        protected virtual void ChangeButtonsUI(int index){
+            foreach(TrueFalseButton button in optionButtons){
+                button.Reset();
+            }
+            bool isCorrect = question.IsCorrect();
+            if(!isCorrect){
+                optionButtons[answerIndex].ChangeUI(true);
+            }
+            optionButtons[index].ChangeUI(isCorrect);
         }
     }
 }

@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameFlow/QuizScene.unity
     guid: f02ff65be7351d94cad0b56b377111a9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/FishingScene.unity
     guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
   - enabled: 0

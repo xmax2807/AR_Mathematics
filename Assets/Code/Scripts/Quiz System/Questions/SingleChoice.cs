@@ -5,6 +5,7 @@ namespace Project.QuizSystem{
     public interface ISingleChoice 
     {   
         string[] GetOptions();
+        int AnswerIndex {get;}
     }
     public abstract class SingleChoice<T> : BaseQuestion<int>, ISingleChoice
     {

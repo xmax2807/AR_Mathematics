@@ -14,6 +14,7 @@ namespace Project.UI.Panel
         private IQuestion currentQuestion;
         protected override void InitT(PreloadableQuizPanelView panelView)
         {
+            Manager.HideNavigator();
             panelView.AnswerUI.OnAnswerCorrect -= AskShowNavigator;
             foreach (Transform child in answersContainer.transform)
             {
@@ -35,6 +36,7 @@ namespace Project.UI.Panel
         private void AskShowNavigator(bool answerResult)
         {
             // Tell Manager to show navigator
+            Manager.ShowNavigator();
         }
     }
 }

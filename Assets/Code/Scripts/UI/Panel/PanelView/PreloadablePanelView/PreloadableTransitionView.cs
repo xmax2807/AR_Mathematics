@@ -32,20 +32,7 @@ namespace Project.UI.Panel
             if (isPrepared) yield break;
             isPrepared = true;
             yield return PrepareNextLesson();
-        }
-
-        public override IEnumerator UnloadAsync()
-        {
-            yield break;
-        }
-        public override Task ShowAsync(CancellationToken cancellationToken)
-        {
-            if(!isUIPrepared){
-                CreateButton();
-                isUIPrepared = true;
-            }
-
-            return base.ShowAsync(cancellationToken);
+            CreateButton();
         }
 
         private void CreateButton()
@@ -61,6 +48,11 @@ namespace Project.UI.Panel
 
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = UserManager.Instance.CurrentLesson.LessonTitle;
             button.onClick.AddListener(() => NextLessonReq.Request(req));
+        }
+
+        public override IEnumerator UnloadAsync()
+        {
+            yield break;
         }
     }
 

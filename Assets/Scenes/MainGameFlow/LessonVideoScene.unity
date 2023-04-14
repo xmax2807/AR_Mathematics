@@ -354,8 +354,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127725839}
-        m_TargetAssemblyTypeName: Project.UI.Panel.ViewPagerController, Projec
+      - m_Target: {fileID: 2021461375}
+        m_TargetAssemblyTypeName: Project.UI.Panel.ViewPagerUIManager, Projec
         m_MethodName: MoveNext
         m_Mode: 1
         m_Arguments:
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127725839}
-        m_TargetAssemblyTypeName: Project.UI.Panel.ViewPagerController, Projec
+      - m_Target: {fileID: 2021461375}
+        m_TargetAssemblyTypeName: Project.UI.Panel.ViewPagerUIManager, Projec
         m_MethodName: MovePrev
         m_Mode: 1
         m_Arguments:

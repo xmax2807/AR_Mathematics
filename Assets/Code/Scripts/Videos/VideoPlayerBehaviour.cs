@@ -102,7 +102,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
         videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
         videoPlayer.SetTargetAudioSource(0, audioSource);
         videoPlayer.controlledAudioTrackCount = 1;
-        videoPlayer.frame = 0;
+        //videoPlayer.frame = 0;
         videoPlayer.prepareCompleted += PlayVideo;
         
         yield return new WaitUntil(()=>VideoUrl != null);

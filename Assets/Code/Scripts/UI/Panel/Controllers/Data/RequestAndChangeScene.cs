@@ -10,12 +10,10 @@ namespace Project.UI.Panel
 
         protected override void AddPostRequestCallback()
         {
-            Debug.Log("added");
             onPostRequest += ShouldLoadScene;
         }
         protected override void RemovePostRequestCallback()
         {
-            Debug.Log("removed");
             onPostRequest -= ShouldLoadScene;
         }
         public Task<bool> TryRequst(string data){

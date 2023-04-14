@@ -2,6 +2,7 @@ using UnityEngine;
 using Project.Utils.ExtensionMethods;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel
 {
@@ -28,14 +29,14 @@ namespace Project.UI.Panel
             pagerController.OnPageChanged += PagerChangedPage;
         }
 
-        private void OnEnable(){
-            prevButton.onClick.AddListener(MovePrev);
-            nextButton.onClick.AddListener(MoveNext);
-        }
-        private void OnDisable(){
-            prevButton.onClick.RemoveListener(MovePrev);
-            nextButton.onClick.RemoveListener(MoveNext);
-        }
+        // private void OnEnable(){
+        //     prevButton.onClick.AddListener(MovePrev);
+        //     nextButton.onClick.AddListener(MoveNext);
+        // }
+        // private void OnDisable(){
+        //     prevButton.onClick.RemoveListener(MovePrev);
+        //     nextButton.onClick.RemoveListener(MoveNext);
+        // }
 
         private void PagerChangedPage(PreloadablePanelView panelView)
         {
@@ -55,8 +56,8 @@ namespace Project.UI.Panel
             }
             else{
                 var newPagerUI = Instantiate(pagerUI, mainView);
-                newPagerUI.InitUI(panelView);
                 newPagerUI.Manager = this;
+                newPagerUI.InitUI(panelView);
                 
                 cache.Add(panelName, newPagerUI);
                 currentPagerUI = newPagerUI;
@@ -72,5 +73,14 @@ namespace Project.UI.Panel
         }
         public void MovePrev()=>pagerController.MovePrev();
         public void MoveNext()=>pagerController.MoveNext();
+
+        public void HideNavigator(){
+            if(prevButton != null) prevButton.gameObject.SetActive(false);
+            if(nextButton != null) nextButton.gameObject.SetActive(false);
+        }
+        public void ShowNavigator(){
+            if(prevButton != null) prevButton.gameObject.SetActive(true);
+            if(nextButton != null) nextButton.gameObject.SetActive(true);
+        }
     }
 }
