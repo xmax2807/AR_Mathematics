@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pagerUI: {fileID: 6408485926895340690, guid: c4b2d1087affc544d91e490bdefd45cb, type: 3}
   NextLessonReq: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
+  GameSceneReq: {fileID: 11400000, guid: ac8b9853c35e271498d6120985f38532, type: 2}
+  QuizSceneReq: {fileID: 11400000, guid: cda2f5ff5bf59c94f84d39376c69dd53, type: 2}

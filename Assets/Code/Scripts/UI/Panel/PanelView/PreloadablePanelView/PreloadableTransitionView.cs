@@ -4,50 +4,89 @@ using System.Threading.Tasks;
 using Project.Managers;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 namespace Project.UI.Panel
 {
     public class PreloadableTransitionView : PreloadablePanelView
     {
         [SerializeField] private RequestAndChangeScene NextLessonReq;
-        public event System.Func<Button> OnCreateLinkButton;
-
-        private bool ResultRequest = false;
-        private bool isUIPrepared = false;
-
+        [SerializeField] private RequestAndChangeScene GameSceneReq;
+        [SerializeField] private RequestAndChangeScene QuizSceneReq;
+        public System.Collections.Generic.List<(string, UnityAction)> buttonCreationTasks;
+        private void Awake()
+        {
+            buttonCreationTasks = new(5);
+        }
         private IEnumerator PrepareNextLesson()
         {
             if (NextLessonReq == null) yield break;
 
-            var currentLesson = UserManager.Instance.CurrentLesson;
-            if(currentLesson == null) yield break;
-            string req = $"{currentLesson.LessonUnit + 1},{currentLesson.LessonChapter}";
-            bool? result = null;
+            var currentUnit = UserManager.Instance.CurrentUnitProgress;
+            if (currentUnit.IsEmpty()) yield break;
+            bool? attempt = null;
+            LessonModel nextLesson = null;
 
-            NextLessonReq.TryRequest(req).ContinueWith(task => result = task.Result);
-            yield return new WaitUntil(() => result != null);
-            ResultRequest = (bool)result;
+            GameSceneReq.GetNextLessonModel().ContinueWith(task =>
+            {
+                nextLesson = task.Result;
+                attempt = nextLesson != null;
+            });
+            yield return new WaitUntil(() => attempt != null);
+            bool result = (bool)attempt;
+
+            if (!result) {
+                string quizReq = $",{currentUnit.chapter},{currentUnit.semester}";
+                void onPreviewClick() => QuizSceneReq.Request(quizReq);
+                buttonCreationTasks.Add(("Ôn tập", onPreviewClick));
+                yield break;
+            }
+
+
+            string req = $"{nextLesson.LessonUnit},{nextLesson.LessonChapter}";
+            void onButtonClick() => NextLessonReq.Request(req);
+
+            string label = nextLesson.LessonTitle;
+            buttonCreationTasks.Add((label, onButtonClick));
+
+        }
+
+        private IEnumerator PrepareGameLink()
+        {
+            if (GameSceneReq == null) yield break;
+
+            var currentLesson = UserManager.Instance.CurrentUnitProgress;
+            if (currentLesson.IsEmpty()) yield break;
+
+            bool? attempt = null;
+            GameModel[] games = null;
+
+            GameSceneReq.GetIncomingGames().ContinueWith(task =>
+            {
+                games = task.Result;
+                attempt = games != null;
+            });
+            yield return new WaitUntil(() => attempt != null);
+            bool result = (bool)attempt;
+
+            if (!result) yield break;
+
+
+            foreach (GameModel gameModel in games)
+            {
+                string req = gameModel.GameScene;
+                void onButtonClick() => GameSceneReq.ManualLoadScene(req);
+
+                string label = gameModel.GameTitle;
+                buttonCreationTasks.Add((label, onButtonClick));
+            }
         }
         public override IEnumerator PrepareAsync()
         {
             if (isPrepared) yield break;
             isPrepared = true;
             yield return PrepareNextLesson();
-            CreateButton();
-        }
+            yield return PrepareGameLink();
 
-        private void CreateButton()
-        {
-            if(!ResultRequest) return;
-
-            Button button = OnCreateLinkButton?.Invoke();
-
-            if (button == null) return;
-
-            var currentLesson = UserManager.Instance.CurrentLesson;
-            string req = $"{currentLesson.LessonUnit},{currentLesson.LessonChapter}";
-
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = UserManager.Instance.CurrentLesson.LessonTitle;
-            button.onClick.AddListener(() => NextLessonReq.Request(req));
         }
 
         public override IEnumerator UnloadAsync()

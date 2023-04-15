@@ -7,18 +7,24 @@ namespace Project.UI.Panel{
         [SerializeField] private Button SampleButton;
         protected override void InitT(PreloadableTransitionView panelView)
         {
-            if(currentPanelView != null){
-                currentPanelView.OnCreateLinkButton -= CreateLinkButton;
-            }
-
+            DeleteLinkButtons();
             base.InitT(panelView);
-
-            if(currentPanelView != null){
-                currentPanelView.OnCreateLinkButton += CreateLinkButton;
-            }
+            CreateLinkButtons();
         }
         private Button CreateLinkButton(){
             return Instantiate(SampleButton, scrollRect);
         }
+        private void CreateLinkButtons(){
+            foreach(var task in currentPanelView.buttonCreationTasks){
+                Button button = CreateLinkButton();
+                button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = task.Item1;
+                button.onClick.AddListener(task.Item2); 
+            }
+        }
+        private void DeleteLinkButtons(){
+            foreach(Transform child in scrollRect.transform){
+                Destroy(child.gameObject); 
+            }
+        } 
     }
 }

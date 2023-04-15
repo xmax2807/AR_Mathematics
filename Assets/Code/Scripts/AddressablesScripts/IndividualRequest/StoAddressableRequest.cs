@@ -4,7 +4,6 @@ using Project.Managers;
 using System.Threading.Tasks;
 
 namespace Project.Addressable{
-    [CreateAssetMenu(menuName ="STO/Addressables/StoRequest", fileName ="StoAddressableRequest")]
     public class StoAddressableRequest : IndividualAddressableRequest<ScriptableObject>
     {
         [SerializeField] private AssetReferenceT<ScriptableObject>[] requests;

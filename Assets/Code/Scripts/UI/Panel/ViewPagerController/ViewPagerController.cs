@@ -53,7 +53,6 @@ namespace Project.UI.Panel{
         }
 
         public virtual async void MoveNext(){
-            Debug.Log("MoveNext");
             if(!CanMoveNext()) return;
 
             await preloadList[currentIndex].HideAsync();

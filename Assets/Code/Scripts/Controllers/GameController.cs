@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase.Firestore;
+using Project.Managers;
 using UnityEngine;
 public class GameController
 {
@@ -50,13 +51,39 @@ public class GameController
 
     public async Task<List<GameModel>> GetListGames(int unit, int chapter)
     {
+        if (unit == -1)
+        {
+            return await GetListGamesInChapter(chapter);
+        }
+
         List<GameModel> listGames = new();
-        string req = $"{unit},{chapter}";
+
         CollectionReference gamesRef = db.Collection("games");
-        // Query query = gamesRef.WhereEqualTo("Unit", unit).WhereEqualTo("Chapter", chapter);
+        Query query = gamesRef.WhereArrayContains("UnitChapter", $"{unit},{chapter}");
+        var snapshots = await query.GetSnapshotAsync();
 
+        foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
+        {
+            listGames.Add(documentSnapshot.ConvertTo<GameModel>());
+        }
 
-        Query query = gamesRef.WhereArrayContains("UnitChapter", req);
+        return listGames;
+    }
+    public async Task<List<GameModel>> GetListGamesInChapter(int chapter)
+    {
+        CollectionReference gamesRef = db.Collection("games");
+        List<GameModel> listGames = new();
+
+        if (chapter >= UserManager.Instance.CourseModel.chapCount.Count) return null;
+        int maxChapCount = UserManager.Instance.CourseModel.chapCount[chapter];
+        string[] req = new string[maxChapCount];
+        for (int i = 1; i < maxChapCount; i++)
+        {
+            req[i - 1] = $"{i},{chapter}";
+        }
+
+        Query query = gamesRef.WhereArrayContainsAny("UnitChapter", req);
+
         var snapshots = await query.GetSnapshotAsync();
         foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
         {

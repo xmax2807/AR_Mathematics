@@ -48,7 +48,6 @@ public class QuizController
         if(unit != null) {
             query_Quizzes = query_Quizzes.WhereEqualTo(Unit, unit);
         }
-        Debug.Log((unit == null ? "null" : unit.ToString(), chapter.ToString(), semester.ToString()));
         
         var quizSnapshot = await query_Quizzes.GetSnapshotAsync();
      
@@ -56,7 +55,6 @@ public class QuizController
         {
             var quizModel = quiz.ConvertTo<QuizModel>(); 
             QuizModels.Add(quizModel);
-            Debug.Log(quizModel.QuizSemester);
         }
         return QuizModels.ToArray();
     }

@@ -18,9 +18,9 @@ namespace Project.Addressable
         
         private List<AsyncOperationHandle<GameObject>> cacheOperations;
 
-        public void Start()
+        public async void Start()
         {
-            stackSystem.PushAsync(new PanelViewController(type));
+            await stackSystem.PushAsync(new PanelViewController(type));
             TimeCoroutineManager.Instance.WaitUntil(() => FirebaseAddressablesManager.IsFirebaseSetupFinished, PreLoad);
         }
         private async void PreLoad()
@@ -28,18 +28,22 @@ namespace Project.Addressable
             cacheOperations = new();
             var operations = AddressableManager.Instance.InstantiatePrefabs(preInitPrefabs);
             cacheOperations.AddRange(operations);
+            Debug.Log("preInitPrefabs");
 
             var prefabs = await AddressableManager.Instance.PreLoadAssets(prefabRefs.References);
             prefabRefs.OnComplete?.Invoke(prefabs);
+            Debug.Log("refs");
 
             var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
             AudioManager.Instance.SwapSoundPack(audioPack);
+            Debug.Log("audio");
             await stackSystem.PopAsync();
 
             GameManager.Instance.OnGameFinishLoading?.Invoke();
         }
 
         private void OnDestroy(){
+            Debug.Log("Destroyed");
             AddressableManager.Instance.UnloadAssets(prefabRefs.References);
             AddressableManager.Instance.UnloadAsset(audioRefs.Reference);
             AddressableManager.Instance.UnloadInstancePrefabs(cacheOperations);

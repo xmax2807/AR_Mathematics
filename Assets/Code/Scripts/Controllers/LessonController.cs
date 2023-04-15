@@ -48,7 +48,6 @@ public class LessonController
 
         Query doc = db.Collection("lessons").WhereEqualTo("LessonUnit", unit).WhereEqualTo("LessonChapter", chapter);
         QuerySnapshot snapshot = await doc.GetSnapshotAsync();
-        Debug.Log(snapshot.Count);
         if (snapshot.Count == 0) return null;
 
         LessonModel = snapshot[0].ConvertTo<LessonModel>();

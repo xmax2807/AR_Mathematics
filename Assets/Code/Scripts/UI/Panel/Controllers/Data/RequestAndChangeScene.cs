@@ -16,9 +16,7 @@ namespace Project.UI.Panel
         {
             onPostRequest -= ShouldLoadScene;
         }
-        public Task<bool> TryRequst(string data){
-            return TryRequest(data);
-        }
+        
         private void ShouldLoadScene(bool isRequestSuccess){
             
             if(isRequestSuccess){
@@ -28,6 +26,9 @@ namespace Project.UI.Panel
                 //TODO: Show dialog could not load scene
                 Debug.Log("request failed");
             }
+        }
+        public void ManualLoadScene(string sceneName){
+            sceneLoadData.LoadScene(sceneName);
         }
     }
 }

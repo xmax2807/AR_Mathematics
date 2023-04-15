@@ -73,6 +73,12 @@ public class DatabaseManager : MonoBehaviour
                 LessonController = new();
                 GameController = new();
                 QuizController = new();
+
+                FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
+                    task => {
+                        UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
+                    }
+                );
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);

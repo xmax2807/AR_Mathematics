@@ -28,12 +28,12 @@ namespace Project.MiniGames.FishingGame
         public virtual void Enter(){
             isAnimationFinish = false;
 
-            if(animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
+            if(animator == null ||animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
             
             animator.SetBool(animName, true);    
         }
         public virtual void Exit(){
-            if(animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
+            if(animator == null || animator.runtimeAnimatorController == null || !animator.GetBool(animName)) return;
 
             animator.SetBool(animName, false);
         }

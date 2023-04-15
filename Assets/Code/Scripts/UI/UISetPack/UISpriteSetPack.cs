@@ -12,11 +12,13 @@ namespace Project.UI.UISetPack
         public Sprite[] AssetPacks {get; private set;}
         public override async Task Init()
         {
+            if(IsInitialized) return;
             AssetPacks = await AddressableManager.Instance.PreLoadAssets(spriteRefs);
             IsInitialized = true;
         }
 
         protected override void OnDestroy(){
+            Debug.Log("Asset pack destroyed");
             AddressableManager.Instance.UnloadAssets(spriteRefs);
             IsInitialized = false;
         }
