@@ -11,8 +11,8 @@ public class LessonModel{
     [FirestoreProperty] public bool LessonStatus {get; set;}
 
     public string GetFileFormat(int index){
-        index.EnsureInRange(VideoNumbers + 1, 1);
+        index.EnsureInRange(VideoNumbers);
 
-        return LessonVideoFolder +'/'+ $"chuong{this.LessonChapter}_bai{this.LessonUnit}_{index}.mp4" ; 
+        return LessonVideoFolder +'/'+ $"chuong{this.LessonChapter}_bai{this.LessonUnit}_{index + 1}.mp4" ; 
     }
 }

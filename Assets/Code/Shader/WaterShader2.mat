@@ -26,7 +26,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -34,6 +34,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _SampleTexture2D_0dd4cb9cc099412c86953a19cee28d80_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 09eb8c3f19d0ea1499f66e36ad86dd9b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a75153670ba946d88893f9cd92a2ef96_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 09eb8c3f19d0ea1499f66e36ad86dd9b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -50,11 +58,12 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RefractionScale: 2
-    - _RefractionSpeed: 0.05
-    - _RefractionStrength: 1
-    - _Water_Depth: 15
+    - _RefractionScale: 200
+    - _RefractionSpeed: 0.1
+    - _RefractionStrength: 0.3
+    - _Water_Depth: 25
     m_Colors:
-    - _DeepWater: {r: 0, g: 0.28594303, b: 1, a: 0.6901961}
-    - _ShallowWater: {r: 0, g: 0.95505905, b: 1, a: 0.45490196}
+    - _DeepWater: {r: 0, g: 0.338975, b: 1, a: 1}
+    - _ShallowWater: {r: 0, g: 0.8163688, b: 1, a: 0.654902}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

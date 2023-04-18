@@ -6,9 +6,11 @@ using System.Linq;
 
 
 using Firebase.Firestore;
-using Project.Utils.ExtensionMethods;
+using Project.Managers;
 using System.Threading.Tasks;
 using Firebase;
+using RobinBird.FirebaseTools.Storage.Addressables;
+using Firebase.Extensions;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -49,16 +51,9 @@ public class DatabaseManager : MonoBehaviour
     }
     private async void InitFirebase()
     {
-        FirebaseFireStore = FirebaseFirestore.DefaultInstance;
-        Auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        Storage = Firebase.Storage.FirebaseStorage.DefaultInstance;
+        AddressableManager.AddDependencies();
 
-        UserController = new UserController();
-        AchievementController = new AchievementController();
-        LessonController = new();
-        GameController = new();
-        QuizController = new();
-        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(async task =>
+        await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
@@ -67,10 +62,30 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
-                // bool result = await UserController.SignInAuth(Email,Password);
-                var result = await GameController.GetListGames(8,5);
+                FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
                 
-                Debug.Log(result.Count);
+                FirebaseFireStore = FirebaseFirestore.GetInstance(app);
+                Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
+                Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+
+                UserController = new UserController();
+                AchievementController = new AchievementController();
+                LessonController = new();
+                GameController = new();
+                QuizController = new();
+
+                FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
+                    task => {
+                        UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
+                    }
+                );
+                // LessonController.UploadLesson(LessonData);
+                //LessonController.GetVideo(1, 2);
+                // CreateUser(Username, Password);
+
+                // Debug.Log(LessonController.GetLessonID(1,1).Result);
+            
+                //bool result = await UserController.SignInAuth(Email,Password);
                 // UserController.RegisterAuth(Email,Password);
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
 

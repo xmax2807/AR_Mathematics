@@ -17,11 +17,20 @@ MonoBehaviour:
   - {fileID: 11400000}
   - {fileID: 11400000}
   ButtonNames:
-  - Name: "Ca\u0301ch ho\u0323c"
+  - Name: "C\xE1ch h\u1ECDc"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  - Name: "Ca\u0301ch ch\u01A1i"
+  - Name: "C\xE1ch ch\u01A1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  - Name: "Ca\u0301ch la\u0300m \xF4n t\xE2\u0323p"
+  - Name: "C\xE1ch l\xE0m \xF4n t\u1EADp"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  Title: "H\u01B0\u01A1\u0301ng d\xE2\u0303n"
+  Title: "H\u01B0\u1EDBng d\u1EABn"
   Description: 

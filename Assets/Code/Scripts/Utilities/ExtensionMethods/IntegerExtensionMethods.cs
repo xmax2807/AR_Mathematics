@@ -14,6 +14,9 @@ namespace Project.Utils.ExtensionMethods{
         public static void EnsureInRange(this ref int value, int max, int min = 0){
             value = value < min ? min : Math.Min(value, max);
         }
+        public static int EnsureInIndexRange(this int value, int Length, int min = 0){
+            return value < min ? min : Math.Min(value, Length - 1);
+        }
 
         /// <summary>
         /// Find pairs that sums equals to the given number

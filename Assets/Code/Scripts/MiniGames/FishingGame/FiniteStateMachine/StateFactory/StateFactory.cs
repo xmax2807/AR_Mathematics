@@ -15,13 +15,15 @@ namespace Project.MiniGames.FishingGame{
     {
         public FishIdleState IdleState {get;private set;}
         public FishMovementState MovementState {get;private set;}
+        public FishCaughtState CaughtState {get;private set;}
         public FishStateFactory(Fish host) : base(host){}
 
         protected override void CreateStates()
         {
             IdleState = new (host, "idle");
             MovementState = new (host, "move");
-
+            CaughtState = new(host, "caught");
+            
             host.StateMachine.ChangeState(IdleState);
         }
     }

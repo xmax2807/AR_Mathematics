@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
 
@@ -17,7 +18,9 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
+            gameObject.EnsureChildComponent<UserManager>(childName: "User Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
+            gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
         }
         protected void Awake()
         {
@@ -30,6 +33,10 @@ namespace Project.Managers
                 Destroy(this.gameObject);
             }
             DontDestroyOnLoad(this);
+            Application.targetFrameRate = 30;
+            Screen.SetResolution(1280, 720, true);
         }
+
+        public System.Func<Task> OnGameFinishLoading;
     }
 }

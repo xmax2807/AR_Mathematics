@@ -19,8 +19,8 @@ public class UserModel
     [FirestoreProperty] public List<GameData> SavedGame { get; set; }
 
     public UserModel(){
-        User_ListAchievement = new(1);
-        SavedGame = new(1);
+        User_ListAchievement = new();
+        SavedGame = new();
     }
 
 }

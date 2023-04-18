@@ -46,6 +46,7 @@ public class PlaceClock : MonoBehaviour
                 if (string.Compare(curPrefab.name, imageName, System.StringComparison.OrdinalIgnoreCase) == 0 && !_instantiatedPrefabs.ContainsKey(imageName))
                 {
                     var newPrefab = Instantiate(curPrefab, trackedImage.transform);
+                    newPrefab.transform.Rotate(newPrefab.transform.rotation.x, newPrefab.transform.rotation.y - 90, newPrefab.transform.rotation.z - 90);
                     //add the created prefab to our array
                     _instantiatedPrefabs[imageName] = newPrefab;
                 }
@@ -63,8 +64,10 @@ public class PlaceClock : MonoBehaviour
                 if (!_instantiatedPrefabs.ContainsKey(imageName))
                 {
                     var newPrefab = Instantiate(curPrefab, trackedImage.transform);
-                    //add the created prefab to our array
-                    _instantiatedPrefabs[imageName] = newPrefab;
+					newPrefab.transform.Rotate(newPrefab.transform.rotation.x, newPrefab.transform.rotation.y - 90, newPrefab.transform.rotation.z - 90);
+
+					//add the created prefab to our array
+					_instantiatedPrefabs[imageName] = newPrefab;
                 }
                 
                 _instantiatedPrefabs[imageName].SetActive(trackedImage.trackingState == TrackingState.Tracking);
@@ -75,7 +78,6 @@ public class PlaceClock : MonoBehaviour
         foreach (var trackedImage in eventArgs.removed)
         {
             var name = trackedImage.referenceImage.name;
-            Debug.Log($"Destroyed {name}");
             //Destroy its prefab
             // Destroy(_instantiatedPrefabs[name]);
             // //Also remove the instance from our array

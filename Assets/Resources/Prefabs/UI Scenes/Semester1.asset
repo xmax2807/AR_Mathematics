@@ -18,10 +18,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 717c9fec38b405948ad3cd5dbb219b90, type: 2}
   ButtonNames:
   - Name: "Ch\u01B0\u01A1ng 1"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   - Name: "Ch\u01B0\u01A1ng 2"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   - Name: "Ch\u01B0\u01A1ng 3"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  Title: "Ch\u01B0\u01A1ng Tr\xECnh H\u1ECDc"
+  Title: "H\u1ECDc K\u1EF3 1"
   Description: 

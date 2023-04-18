@@ -35,6 +35,10 @@ namespace Project.Utils.ExtensionMethods
             }
             return result;
         }
+        public static Vector3 SpawnPoint(Vector3 source, Vector3 baseDir, float range){
+            baseDir = baseDir.ToDirection();
+            return source + Randomize(range, baseDir);
+        }
         public static Vector3 ToDirection(this Vector3 vector)
         {
             float x, y, z;

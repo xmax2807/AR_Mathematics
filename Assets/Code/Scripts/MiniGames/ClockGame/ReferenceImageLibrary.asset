@@ -18,12 +18,12 @@ MonoBehaviour:
     m_Storage: []
   m_Images:
   - m_SerializedGuid:
-      m_GuidLow: 4642806380981648801
-      m_GuidHigh: 13687387732298744723
+      m_GuidLow: 4908996964965754155
+      m_GuidHigh: 8968379219948940977
     m_SerializedTextureGuid:
-      m_GuidLow: 14435397757646435822
-      m_GuidHigh: 12432267120105659945
-    m_Size: {x: 0.05, y: 0.056032173}
-    m_SpecifySize: 1
-    m_Name: Clock
-    m_Texture: {fileID: 2800000, guid: 4ffc75eed5c7c854299eaaa6134988ac, type: 3}
+      m_GuidLow: 4360739947068533599
+      m_GuidHigh: 1274592788154126889
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: God of time achievement
+    m_Texture: {fileID: 0}

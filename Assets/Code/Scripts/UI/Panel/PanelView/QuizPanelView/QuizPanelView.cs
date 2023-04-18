@@ -5,7 +5,7 @@ using Project.QuizSystem;
 
 namespace Project.UI.Panel
 {
-    public class QuizPanelView : AnimatorPanelView
+    public class QuizPanelView : MonoBehaviour
     {
         [SerializeField] private LayoutGroup Layout;
         private Quiz quiz;
@@ -17,7 +17,7 @@ namespace Project.UI.Panel
         }
 
         private void ChangeQuest(IQuestion newQuestion){
-            newQuestion.UpdateUI(Layout);
+            //newQuestion.CreateUIElement(Layout);
         }
     }
 }

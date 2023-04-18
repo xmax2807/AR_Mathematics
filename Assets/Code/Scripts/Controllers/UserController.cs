@@ -7,8 +7,29 @@ public class UserController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
     Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
+    public Firebase.Auth.FirebaseUser FireBaseUser {get;private set;}
     const string Collection = "users";
-    UserModel user;
+    public UserController()
+    {
+        auth.StateChanged += AuthStateChanged;
+    }
+
+    private void AuthStateChanged(object sender, EventArgs e)
+    {
+        if (auth.CurrentUser != FireBaseUser)
+        {
+            bool signedIn = FireBaseUser != auth.CurrentUser && auth.CurrentUser != null;
+            if (!signedIn && userModel != null)
+            {
+                Debug.Log("Signed out " + FireBaseUser.UserId);
+            }
+            FireBaseUser = auth.CurrentUser;
+            if (signedIn)
+            {
+                Debug.Log("Signed in " + FireBaseUser.UserId);
+            }
+        }
+    }
 
     public async Task<Firebase.Auth.FirebaseUser> RegisterAuth(string email, string password)
     {
@@ -73,9 +94,9 @@ public class UserController
             DocumentSnapshot snapshot = task.Result;
             try{
 
-                user = snapshot.ConvertTo<UserModel>();
+                userModel = snapshot.ConvertTo<UserModel>();
                 Debug.Log("ok");
-                Debug.Log(user.User_ListAchievement.Count);
+                Debug.Log(userModel.User_ListAchievement.Count);
             }
             catch(Exception e){
                 Debug.Log(e.Message);
@@ -93,11 +114,17 @@ public class UserController
             Debug.Log(e.Message);
         }
     }
+    UserModel userModel;
     public void UploadModel(Firebase.Auth.FirebaseUser newUser)
     {
-        user = new();
+        userModel = new();
         // user.UserID = newUser.UserId;
-        db.Collection("users").Document(newUser.UserId).SetAsync(user);
+        db.Collection("users").Document(newUser.UserId).SetAsync(userModel);
 
+    }
+
+    public async Task<UserModel> GetUserModel(string userId){
+        DocumentSnapshot doc = await db.Collection("users").Document(userId).GetSnapshotAsync();
+        return doc.ConvertTo<UserModel>();
     }
 }

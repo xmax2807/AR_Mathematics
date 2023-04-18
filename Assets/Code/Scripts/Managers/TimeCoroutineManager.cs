@@ -9,7 +9,6 @@ namespace Project.Managers{
         if(Instance == null){
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
     
     protected void OnDestroy(){
@@ -24,6 +23,15 @@ namespace Project.Managers{
         return StartCoroutine(ExecuteWaitCoroutine(()=>Time.time >= timeout, result));
     }
     public Coroutine WaitUntil(Func<bool> condition, Action result) => StartCoroutine(ExecuteWaitCoroutine(condition, result));
+    public Coroutine WaitUntil(Func<bool> condition, Action result, float timeout = -1f){
+        if(condition == null) return null;
+
+        if(timeout <= -1f) return WaitUntil(condition, result);
+
+        float endTime = Time.time + timeout;
+        return WaitUntil(() => condition.Invoke() && (endTime >= Time.time), result);
+    }
+    
     private IEnumerator ExecuteWaitCoroutine(Func<bool> condition, Action result){
         yield return new WaitUntil(condition);
         result?.Invoke();

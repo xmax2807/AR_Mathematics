@@ -23,11 +23,11 @@ namespace Project.UI.ProgressBar{
         }
         public virtual void StartAnimation(){
             currentValue = _slider.value;
-            animationProgress = TimeCoroutineManager.Instance.DoLoopAction(UpdateUI, StopCondition, 1/60f, EndAnimation);
+            animationProgress = TimeCoroutineManager.Instance.DoLoopAction(UpdateUI, StopCondition, Time.deltaTime, EndAnimation);
         }
         public virtual void SettingUp(float end, float duration){
             endValue = end/maxValue * _slider.maxValue + _slider.minValue;
-            deltaValue = (endValue - _slider.value) / duration/40f;
+            deltaValue = (endValue - _slider.value) / duration;
         }
         public virtual void EndAnimation(){
             if(animationProgress == null) return;
@@ -49,7 +49,7 @@ namespace Project.UI.ProgressBar{
         }
         protected override void UpdateUI()
         {
-            currentValue += deltaValue;
+            currentValue += deltaValue * Time.deltaTime;
             if(currentValue > sliderMaxVal){
                 currentValue -= sliderMaxVal;
                 endValue -= sliderMaxVal;
@@ -89,7 +89,7 @@ namespace Project.UI.ProgressBar{
 
         public override void StartAnimation()
         {
-            AudioManager.Instance.PlaySoundFX(_clip);
+            AudioManager.Instance.PlayEffect(Project.Audio.SoundFXController.SoundFXType.OnRewarded);
             base.StartAnimation();
         }
     }

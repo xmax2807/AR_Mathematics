@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chapter1
   m_EditorClassIdentifier: 
   Children:
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 6224ede55a4cfff43b9d1d267b1b8b5f, type: 2}
   - {fileID: 11400000, guid: dbf30c16d6116d447b7bd74d34e329db, type: 2}
   - {fileID: 11400000}
   ButtonNames:
@@ -30,7 +30,19 @@ MonoBehaviour:
   - Name: "\xD4n t\xE2\u0323p"
     OnClick:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: cda2f5ff5bf59c94f84d39376c69dd53, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: ',1,1'
+            m_BoolArgument: 0
+          m_CallState: 2
     Description: 
   Title: "Ch\u01B0\u01A1ng 1"
-  Description: "La\u0300m quen v\u01A1\u0301i m\xF4\u0323t s\xF4\u0301 hi\u0300nh"
+  Description: "La\u0300m quen v\u01A1\u0301i m\xF4\u0323t s\xF4\u0301 h\xECnh"
