@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class OctopusController : MonoBehaviour
 {
+    enum OctopusState{
+        BasicJump,
+        HighJump,
+        FailedJump
+    }
+    private OctopusState currentState = OctopusState.BasicJump;
     public Rigidbody2D myRigidbody;
     // Start is called before the first frame update
     void Start()
@@ -11,12 +17,20 @@ public class OctopusController : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) == true)
+        if (currentState == OctopusState.HighJump)
         {
-            myRigidbody.velocity = Vector2.up * 5;
+            
+        }
+        else if(currentState == OctopusState.FailedJump)
+        {
+
+        }
+        else
+        {
 
         }
     }
