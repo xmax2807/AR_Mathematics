@@ -27,8 +27,11 @@ public class Merge : MonoBehaviour
             {
                 //if () { return; }
                 Debug.Log("Merge" + gameObject.name);
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
+                
+                //Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
+                //Destroy(gameObject);
+                gameObject.SetActive(false);
 
                 if (cube_merge == null) return;
                 Instantiate(cube_merge.gameObject, new Vector3 (0, 1, 0), cube_merge.transform.rotation);

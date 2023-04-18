@@ -28,7 +28,7 @@ public class PlacementObject : MonoBehaviour
     public void AddFore(float force)
     {
         //Rigidbody.AddForce(new Vector3(Random.Range(-1f, 1f), 1 , Random.Range(-1f, 1f)) * force);
-        Rigidbody.AddForceAtPosition(new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 1f)) * force, new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 1f)));
+        Rigidbody.AddForceAtPosition(new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 0f)) * force, new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 1f)));
         //Rigidbody.AddExplosionForce(force, this.transform.position, 100);
     }
 }

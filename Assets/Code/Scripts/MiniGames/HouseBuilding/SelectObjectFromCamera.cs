@@ -10,12 +10,6 @@ public class SelectObjectFromCamera : MonoBehaviour
     private PlacementObject[] placedObjects;
 
     [SerializeField]
-    private Color activeColor = Color.green;
-
-    [SerializeField]
-    private Color inactiveColor = Color.gray;
-
-    [SerializeField]
     private Camera arCamera;
 
     private Vector2 touchPosition = default;
@@ -68,12 +62,12 @@ public class SelectObjectFromCamera : MonoBehaviour
             if (selected != current)
             {
                 current.Selected = false;
-                meshRenderer.material.color = inactiveColor;
             }
             else
             {
                 current.Selected = true;
-                current.transform.position = new Vector3(0, 10, 0);
+                current.transform.position = new Vector3(0, 10f, 0);
+                current.Selected = false;
             }
         }
     }
