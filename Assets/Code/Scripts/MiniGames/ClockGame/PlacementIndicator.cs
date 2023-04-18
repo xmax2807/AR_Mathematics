@@ -20,7 +20,7 @@ public class PlacementIndicator : MonoBehaviour
 		//visual = gameObject;
 
 		// hide the placement indicator visual
-		visual.SetActive(false);
+		//visual.SetActive(false);
 	}
 	float curRotation = 90;
 	void Update()

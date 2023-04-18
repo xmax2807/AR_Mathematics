@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Project.Utils.ExtensionMethods;
+using System;
+using Assets.Code.Scripts.Utilities.ExtensionMethods;
 
 public class TouchToChangeDate : MonoBehaviour
 {
@@ -9,26 +12,21 @@ public class TouchToChangeDate : MonoBehaviour
     [SerializeField]
     public TMPro.TextMeshProUGUI dateText;
     public TMPro.TextMeshProUGUI daysOfWeek;
+    public TMPro.TextMeshProUGUI month;
     public Button button;
-	List<int> dateList = new List<int>();
 	List<string> daysList = new List<string>();
 	// Start is called before the first frame update
 	void Start()
     {
-        //create a list of date from 1 to 31
-        for (int i = 1; i <= 31; i++)
-        {
-			dateList.Add(i);
-		}
         //create a list of days of the week
         
+        daysList.Add("Chủ nhật");
         daysList.Add("Thứ hai");
         daysList.Add("Thứ ba");
         daysList.Add("Thứ tư");
         daysList.Add("Thứ năm");
         daysList.Add("Thứ sáu");
         daysList.Add("Thứ bảy");
-        daysList.Add("Chủ nhật");
 
     }
 
@@ -38,10 +36,12 @@ public class TouchToChangeDate : MonoBehaviour
         //if the button is clicked and released, choose a random date from the lists
         if (Input.GetMouseButtonDown(0))
         {
-			int randomDate = Random.Range(0, dateList.Count);
-			int randomDay = Random.Range(0, daysList.Count);
-			dateText.text = dateList[randomDate].ToString();
-			daysOfWeek.text = daysList[randomDay].ToString();
+            DateTime randomDate = DateTimeExtensionMethods.RandomDayWithinAYear();
+            dateText.text = randomDate.Day.ToString();
+
+            int dayOfWeek = (int)randomDate.DayOfWeek;
+            daysOfWeek.text = daysList[dayOfWeek];
+            month.text = "Tháng " + randomDate.Month.ToString();
 		}
     }
 }

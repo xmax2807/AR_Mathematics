@@ -18,13 +18,14 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	[SerializeField]
 	[Tooltip("Instantiates this prefab on a plane at the touch location.")]
 	GameObject m_PlacedPrefab;
-
+	public Vector3 rotateObject;
 	public GameObject ARCamera;
 
 	UnityEvent placementUpdate;
 
 	[SerializeField]
 	GameObject visualObject;
+
 	/// <summary>
 	/// The prefab to instantiate on touch.
 	/// </summary>
@@ -38,7 +39,6 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	/// The object instantiated as a result of a successful raycast intersection with a plane.
 	/// </summary>
 	public GameObject spawnedObject { get; private set; }
-
 
 	void Awake()
 	{
@@ -65,7 +65,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	void Update()
 	{
 		//get ARCAmera current roation y
-		//var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+		var curRotation = ARCamera.transform.rotation.eulerAngles.y;
 
 		if (!TryGetTouchPosition(out Vector2 touchPosition))
 			return;
@@ -79,16 +79,20 @@ public class PlaceOnPlaneMain : MonoBehaviour
 			if (spawnedObject == null)
 			{
 				spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-				// make spawnedobject rotate -90 degree Y and Z
-				//spawnedObject.transform.LookAt(ARCamera.transform);
-				//var rotation = spawnedObject.transform.rotation;
-				//spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
+				spawnedObject.transform.LookAt(ARCamera.transform);
+				var rotation = spawnedObject.transform.rotation;
+				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 
 
 			}
-			spawnedObject.transform.position = hitPose.position;
-			spawnedObject.transform.rotation = hitPose.rotation;
-			
+			else
+			{
+				spawnedObject.transform.position = hitPose.position;
+				spawnedObject.transform.LookAt(ARCamera.transform);
+				var rotation = spawnedObject.transform.rotation;
+				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
+			}
+
 			placementUpdate.Invoke();
 		}
 	}
