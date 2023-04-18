@@ -10,15 +10,16 @@ namespace Project.UI.Panel{
         [SerializeField] private QuizGenerator generator;
 
         private async void Start(){
-            loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
-            await loadingView.ShowAsync();
+            loadingView?.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
+            if(loadingView != null) await loadingView.ShowAsync();
+
             await generator.InitAsset();
             await FetchPanelView(quizModels.Length, OnBuildVideoView);
             InvokeOnPageChanged(0);
             LoadMore();
             await preloadList[0].ShowAsync();
 
-            await loadingView.HideAsync();
+            if(loadingView != null)await loadingView.HideAsync();
         }
 
         private Task OnBuildVideoView(PreloadableQuizPanelView view, int index)

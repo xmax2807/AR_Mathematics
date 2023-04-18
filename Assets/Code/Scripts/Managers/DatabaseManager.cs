@@ -15,8 +15,8 @@ using Firebase.Extensions;
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    // [SerializeField] QuizData quizData;
-    // [SerializeField] string collection = "quizzes";
+    [SerializeField] QuizData quizData;
+    [SerializeField] string collection = "quizzes";
     // private string userID;
     [SerializeField] private string Email;
     [SerializeField] private string Password;
@@ -89,15 +89,15 @@ public class DatabaseManager : MonoBehaviour
                 // UserController.RegisterAuth(Email,Password);
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
 
-                // UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                //     QuizUnit = quizData.QuizUnit,
-                //     QuizTitle = quizData.QuizTitle,
-                //     QuizIMG = quizData.QuizIMG,
-                //     QuizAnswer = quizData.QuizAnswer,
-                //     QuizCorrectAnswer = quizData.QuizCorrectAnswer,
-                //     QuizSemester = quizData.QuizSemester,
-                //     QuizChapter = quizData.QuizChapter,
-                // });
+                UploadData<QuizModel>(collection, ()=>new QuizModel(){
+                    QuizUnit = quizData.QuizUnit,
+                    QuizTitle = quizData.QuizTitle,
+                    QuizIMG = quizData.QuizIMG,
+                    QuizAnswer = quizData.QuizAnswer,
+                    QuizCorrectAnswer = quizData.QuizCorrectAnswer,
+                    QuizSemester = quizData.QuizSemester,
+                    QuizChapter = quizData.QuizChapter,
+                });
                 // LessonController.GetVideo(1,2);
                 // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
                 // UserController.UploadModel(user);

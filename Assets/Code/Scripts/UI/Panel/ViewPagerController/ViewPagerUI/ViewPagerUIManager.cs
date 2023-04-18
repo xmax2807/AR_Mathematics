@@ -68,8 +68,8 @@ namespace Project.UI.Panel
 
         private void UpdateButtonUI()
         {
-            prevButton.interactable = pagerController.CanMovePrev();
-            nextButton.interactable = pagerController.CanMoveNext();
+            if(prevButton != null) prevButton.interactable = pagerController.CanMovePrev();
+            if(nextButton != null) nextButton.interactable = pagerController.CanMoveNext();
         }
         public void MovePrev()=>pagerController.MovePrev();
         public void MoveNext()=>pagerController.MoveNext();
