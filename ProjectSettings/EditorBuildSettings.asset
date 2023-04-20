@@ -47,6 +47,8 @@ EditorBuildSettings:
       guid: 4b04a2f5c86d19f43acd91660b05b2ac, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: a1f0a9c607e2e4d45a78a84bb2fc49ca,
       type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
+      type: 2}
     com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: c2f7b8d7c0bff4d10874cbcf3f24af78,
       type: 2}
     com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: b27ec7d82a91a48e69fd689ad6808e5e,

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Project.Managers;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField] private Collider eventTrigger;
     private OctopusController octopus;
 
     // Start is called before the first frame update
@@ -15,15 +12,6 @@ public class Obstacle : MonoBehaviour
         Debug.Log(octopus.name);
         Time.timeScale = 0;
         TimeCoroutineManager.Instance.WatiForFixedSeconds(1, ()=> Time.timeScale = 1);
-    }
-    void Start()
-    {
-            
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        octopus.SpawnTile();
     }
 }

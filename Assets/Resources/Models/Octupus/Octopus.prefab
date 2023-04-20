@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7694b7cf41cb96b4cabae3fd3b4a3b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 6916572842012033145}
   myRigidbody: {fileID: 1213602484826188337}
 --- !u!135 &7986428384123690218
 SphereCollider:
