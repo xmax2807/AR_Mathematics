@@ -56,12 +56,10 @@ public class OctopusController : MonoBehaviour
         if (currentState == OctopusState.HighJump)
         {
             currentAnimName = "jump";
-            tileManager.IncreaseSpeed(1f);
         }
         else if (currentState == OctopusState.FailedJump)
         {
             currentAnimName = "fail";
-            tileManager.SetSpeed(0);
         }
         else
         {
