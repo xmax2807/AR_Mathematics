@@ -6,7 +6,7 @@ namespace Project.MiniGames{
     [CreateAssetMenu(menuName ="STO/GameMission/TaskSTO", fileName ="TaskSTO")]
     public class TaskSTO : ScriptableObject{
         public enum TaskType{
-            ShapeTask,
+            ShapeTask, ClockTask
         }
         public TaskType Type;
         public int Goal;
@@ -15,6 +15,7 @@ namespace Project.MiniGames{
             return Type switch
             {
                 TaskType.ShapeTask => new ShapeTask(Goal, Description),
+                TaskType.ClockTask => new ClockTask(Goal, Description),
                 _ => null,
             };
         }

@@ -645,6 +645,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1786508099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786508101}
+  - component: {fileID: 1786508100}
+  m_Layer: 0
+  m_Name: TaskGiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1786508100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786508099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfc0223f00bfe54383a938b1a9d622b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RewardData: {fileID: 11400000, guid: 83f84bae74e879147a6a344ce0f4dc8e, type: 2}
+  OnRewardAccquired:
+    m_PersistentCalls:
+      m_Calls: []
+  rewardPanelController: {fileID: 0}
+  stackPanel: {fileID: 11400000, guid: a47d394c465a24d1194fce337a94c971, type: 2}
+  maxGenerated: 5
+  Template: {fileID: 11400000, guid: 5c063108ad102d54faf88f0ab8357e5d, type: 2}
+--- !u!4 &1786508101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786508099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 601.62787, y: 390.40506, z: 130.55046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7004860215671566896
 PrefabInstance:
   m_ObjectHideFlags: 0

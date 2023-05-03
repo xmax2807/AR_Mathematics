@@ -28,6 +28,12 @@ namespace Project.Managers
             newGameObj.transform.SetParent(theParent, false);
             onBuildObj?.Invoke(newGameObj);
         }
+        public void SpawnObjectInParent(GameObject gameObj, Transform theParent, Action<GameObject> onBuildObj = null)
+        {
+            GameObject newGameObj = Instantiate(gameObj, theParent);
+            newGameObj.transform.SetParent(theParent, false);
+            onBuildObj?.Invoke(newGameObj);
+        }
         public Task SpawnObjectInParentAsync<T>(T gameObj, Transform theParent, Func<T, Task> onBuildObj = null) where T : MonoBehaviour{
             T newGameObj;
             newGameObj = Instantiate(gameObj, theParent);

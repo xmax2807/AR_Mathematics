@@ -34,7 +34,7 @@ namespace Project.Managers
             }
             DontDestroyOnLoad(this);
             Application.targetFrameRate = 30;
-            Screen.SetResolution(1280, 720, true);
+            Screen.SetResolution(1280, 720, fullscreen: true);
         }
 
         public System.Func<Task> OnGameFinishLoading;
