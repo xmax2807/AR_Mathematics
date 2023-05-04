@@ -44,7 +44,7 @@ namespace Project.UI.Panel
             List<GameModel> result = await DatabaseManager.Instance.GameController.GetListGames(currentUnit.unit, currentUnit.chapter);
             return result.ToArray();
         }
-        private async Task<bool> Request(RequestType type, string data, bool postRequest = true)
+        public async Task<bool> Request(RequestType type, string data, bool postRequest = true)
         {
             Task<bool> requestResult = null;
             switch (type)
@@ -71,7 +71,7 @@ namespace Project.UI.Panel
             {
                 onPostRequest?.Invoke(result);
             }
-            return true;
+            return result;
         }
 
         private async Task<bool> RequestGames(string unitChapter)
@@ -80,7 +80,10 @@ namespace Project.UI.Panel
             if (datas.Length != 2) return false;
 
             bool parseResult = int.TryParse(datas[0], out int unit);
-            parseResult = int.TryParse(datas[1], out int chapter) && parseResult;
+            if(parseResult == false){
+                unit = -1;
+            }
+            parseResult = int.TryParse(datas[1], out int chapter);
             
             if(parseResult == false) return false;
 

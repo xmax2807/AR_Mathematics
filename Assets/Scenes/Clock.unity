@@ -2007,7 +2007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfc0223f00bfe54383a938b1a9d622b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RewardData: {fileID: 11400000, guid: 83f84bae74e879147a6a344ce0f4dc8e, type: 2}
+  RewardData:
+  - {fileID: 11400000, guid: 83f84bae74e879147a6a344ce0f4dc8e, type: 2}
   OnRewardAccquired:
     m_PersistentCalls:
       m_Calls:
@@ -2023,8 +2024,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  rewardPanelController: {fileID: 0}
-  stackPanel: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
   Template: {fileID: 11400000, guid: 5c063108ad102d54faf88f0ab8357e5d, type: 2}
 --- !u!1001 &2016709742
 PrefabInstance:

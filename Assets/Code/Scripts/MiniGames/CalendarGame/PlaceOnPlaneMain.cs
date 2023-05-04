@@ -21,10 +21,10 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	public Vector3 rotateObject;
 	public GameObject ARCamera;
 
-	UnityEvent placementUpdate;
+	//UnityEvent placementUpdate;
 
-	[SerializeField]
-	GameObject visualObject;
+	// [SerializeField]
+	// GameObject visualObject;
 
 	/// <summary>
 	/// The prefab to instantiate on touch.
@@ -44,10 +44,10 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	{
 		m_RaycastManager = GetComponent<ARRaycastManager>();
 
-		if (placementUpdate == null)
-			placementUpdate = new UnityEvent();
+		// if (placementUpdate == null)
+		// 	placementUpdate = new UnityEvent();
 
-		placementUpdate.AddListener(DiableVisual);
+		//placementUpdate.AddListener(DiableVisual);
 	}
 
 	bool TryGetTouchPosition(out Vector2 touchPosition)
@@ -65,7 +65,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
 	void Update()
 	{
 		//get ARCAmera current roation y
-		var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+		//var curRotation = ARCamera.transform.rotation.eulerAngles.y;
 
 		if (!TryGetTouchPosition(out Vector2 touchPosition))
 			return;
@@ -74,35 +74,35 @@ public class PlaceOnPlaneMain : MonoBehaviour
 		{
 			// Raycast hits are sorted by distance, so the first one
 			// will be the closest hit.
-			var hitPose = s_Hits[0].pose;
+			var trackablePlane = s_Hits[0].trackable;
 
 			if (spawnedObject == null)
 			{
-				spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-				spawnedObject.transform.LookAt(ARCamera.transform);
-				var rotation = spawnedObject.transform.rotation;
-				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
+				spawnedObject = Instantiate(m_PlacedPrefab, trackablePlane.transform.position, m_PlacedPrefab.transform.rotation);
+				// spawnedObject.transform.LookAt(ARCamera.transform);
+				// var rotation = spawnedObject.transform.rotation;
+				// spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 
 
 			}
-			else
-			{
-				spawnedObject.transform.position = hitPose.position;
-				spawnedObject.transform.LookAt(ARCamera.transform);
-				var rotation = spawnedObject.transform.rotation;
-				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-			}
+			// else
+			// {
+			// 	spawnedObject.transform.position = hitPose.position;
+			// 	spawnedObject.transform.LookAt(ARCamera.transform);
+			// 	var rotation = spawnedObject.transform.rotation;
+			// 	spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
+			// }
 
-			placementUpdate.Invoke();
+			//placementUpdate.Invoke();
 		}
 	}
 
-	public void DiableVisual()
-	{
-		visualObject.SetActive(false);
-	}
+	// public void DiableVisual()
+	// {
+	// 	visualObject.SetActive(false);
+	// }
 
-	static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
+	static List<ARRaycastHit> s_Hits = new();
 
 	ARRaycastManager m_RaycastManager;
 }

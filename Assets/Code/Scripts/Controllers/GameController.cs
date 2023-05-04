@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Managers;
-using UnityEngine;
+using Project.Utils.ExtensionMethods;
 public class GameController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
@@ -49,6 +49,34 @@ public class GameController
         });
     }
 
+    public async void SaveGame(int task)
+    {
+        UserModel user = UserManager.Instance.CurrentUser;
+        GameModel game = UserManager.Instance.CurrentGame;
+        string gameId = game.GameId;
+        int index = user.SavedGame.FindIndex((x) => x.GameID == gameId);
+
+        if (index == -1)
+        {
+            user.SavedGame.Add(new GameData()
+            {
+                GameID = gameId,
+                Task = task,
+            });
+        }
+        else
+        {
+            user.SavedGame[index].Task = task;
+        }
+        if (!user.User_ListAchievement.Contains(game.AchievementID[task - 1]))
+        {
+            user.User_ListAchievement.Add(game.AchievementID[task - 1]);
+        }
+
+        DocumentReference userRef = db.Collection("users").Document(user.UserID);
+        await userRef.SetAsync(user, SetOptions.Overwrite);
+    }
+
     public async Task<List<GameModel>> GetListGames(int unit, int chapter)
     {
         if (unit == -1)
@@ -87,10 +115,20 @@ public class GameController
         var snapshots = await query.GetSnapshotAsync();
         foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
         {
-            Debug.Log(String.Format("Document {0} returned", documentSnapshot.Id));
+            //            Debug.Log(String.Format("Document {0} returned", documentSnapshot.Id));
             listGames.Add(documentSnapshot.ConvertTo<GameModel>());
         }
 
         return listGames;
+    }
+
+    public int GetLastSavedTask(string gameId)
+    {
+        UserModel currentUser = UserManager.Instance.CurrentUser;
+        if (currentUser == null) return 0;
+
+        GameData data = currentUser.SavedGame.FindMatch((x) => x.GameID == gameId);
+        if (data == null) return 0;
+        return data.Task;
     }
 }

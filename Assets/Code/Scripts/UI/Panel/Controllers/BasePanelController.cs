@@ -9,19 +9,20 @@ namespace Project.UI.Panel{
         [SerializeField] public Button BackButton;
         public UnityEngine.Events.UnityAction onBackButtonClicked;
         public abstract PanelEnumType Type {get;}
+        public abstract bool CheckType(PanelViewData data);
         public abstract void SetUI(PanelViewData Data);
-        private void OnEnable(){
+        protected virtual void OnEnable(){
             if(BackButton == null || onBackButtonClicked == null) return;
             BackButton.onClick?.AddListener(onBackButtonClicked);
         }
-        private void OnDisable(){
+        protected virtual void OnDisable(){
             if(BackButton == null || onBackButtonClicked == null) return;
             BackButton?.onClick?.RemoveListener(onBackButtonClicked);
         }
-        public async Task Hide(){
+        public virtual async Task Hide(){
             await View.HideAsync();
         }
-        public async Task Show(){
+        public virtual async Task Show(){
             await View.ShowAsync();
         }
     }

@@ -13,6 +13,11 @@ namespace Project.UI.Panel{
 
         public override PanelEnumType Type => PanelEnumType.Menu;
 
+        public override bool CheckType(PanelViewData data)
+        {
+            return Type == data.Type;
+        }
+
         public override void SetUI(MenuPanelViewData Data){
             
             SpawnerManager.Instance.SpawnObjectsList<Button>(ButtonPrefab, 

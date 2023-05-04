@@ -59,6 +59,11 @@ public class PlaceOnPlane : MonoBehaviour
             touchPosition = Input.GetTouch(0).position;
             return true;
         }
+        if(m_PlacedPrefab == null){
+            touchPosition = default;
+            Debug.Log("Null Placed Prefab");
+            return false;
+        }
 
         touchPosition = default;
         return false;
@@ -67,7 +72,7 @@ public class PlaceOnPlane : MonoBehaviour
 	public void OnGetDownloadedClock(GameObject[] objs){
 		if(objs == null || objs.Length == 0) return;
 		
-		placedPrefab = objs[0];
+		m_PlacedPrefab = objs[0];
 	}
 
     void Update()
@@ -85,7 +90,7 @@ public class PlaceOnPlane : MonoBehaviour
 
             var hitPose = s_Hits[0].pose;
 			var trackableTrans = s_Hits[0].trackable.transform;
-
+            
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, trackableTrans.position, m_PlacedPrefab.transform.rotation);

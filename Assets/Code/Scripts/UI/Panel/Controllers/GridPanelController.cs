@@ -14,6 +14,11 @@ namespace Project.UI.Panel{
         [SerializeField] private UnityEvent<int> OnItemClick;
         public override PanelEnumType Type => PanelEnumType.Grid;
 
+        public override bool CheckType(PanelViewData data)
+        {
+            return Type == data.Type;
+        }
+
         public override void SetUI(GridPanelViewData Data){
             
             SpawnerManager.Instance.SpawnObjectsList<Button>(Item, 

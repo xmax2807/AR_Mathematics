@@ -13,12 +13,17 @@ namespace Project.MiniGames
         
         protected override async Task InitTasks()
         {
+            await base.InitTasks();
+            if(CurrentReward == null){
+                return;
+                //TODO Endless mode
+            }
             await Task.Run(() =>
             {
-                Tasks = new(Reward.Goal, "");
-                Tasks.OnTaskChanged += ChangeTask;
+                Tasks = new(CurrentReward.Goal, "");
+                Tasks.OnTaskChanged += base.ChangeTask;
 
-                for (int i = 0; i < Reward.Goal; i++)
+                for (int i = 0; i < CurrentReward.Goal; i++)
                 {
                     BaseTask task = Template.GetTask();
                     Tasks.AddTask(task);

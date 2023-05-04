@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Firebase.Firestore;
+using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
 public class UserController
@@ -95,6 +96,7 @@ public class UserController
             try{
 
                 userModel = snapshot.ConvertTo<UserModel>();
+                UserManager.Instance.CurrentUser = userModel;
                 Debug.Log("ok");
                 Debug.Log(userModel.User_ListAchievement.Count);
             }

@@ -40,7 +40,7 @@ namespace Project.UI.Panel
                 data.ButtonNames[currIndex].OnClick.AddListener(() => PushUI(data.Children[currIndex]));
             }
 
-            var controller = Samples.FindMatch((item) => item.Type == data.Type);
+            var controller = Samples.FindMatch((item) => item.CheckType(data));
 
             if (controller == null) return;
             SpawnerManager.Instance.SpawnObjectInParent(controller, this.transform, (obj) =>
