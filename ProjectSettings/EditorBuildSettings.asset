@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Clock.unity
     guid: 13e2124e6cde907409e75edd20e16a92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Calendar.unity
     guid: 1bebd17e6477f8d4cafcc59f16139e88
+  - enabled: 1
+    path: Assets/Scenes/CompareNumberGame.unity
+    guid: 89913bbbac3689943b27a4d7bfca24f6
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
