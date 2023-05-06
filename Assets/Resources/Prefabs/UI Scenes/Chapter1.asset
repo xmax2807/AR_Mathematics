@@ -17,17 +17,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8427c79153b4d3d4590661bc0f21985c, type: 2}
   - {fileID: 11400000}
   ButtonNames:
-  - Name: "Ba\u0300i ho\u0323c"
+  - Name: "B\xE0i h\u1ECDc"
     OnClick:
       m_PersistentCalls:
         m_Calls: []
     Description: 
-  - Name: "Tro\u0300 ch\u01A1i"
+  - Name: "Tr\xF2 ch\u01A1i"
     OnClick:
       m_PersistentCalls:
         m_Calls: []
     Description: 
-  - Name: "\xD4n t\xE2\u0323p"
+  - Name: "\xD4n t\u1EADp"
     OnClick:
       m_PersistentCalls:
         m_Calls:

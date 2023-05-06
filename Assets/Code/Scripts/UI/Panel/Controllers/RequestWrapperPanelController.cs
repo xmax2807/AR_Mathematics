@@ -9,8 +9,6 @@ namespace Project.UI.Panel{
         [SerializeField] private Canvas noDataFoundCanvas;
         private BasePanelController wrappedController;
         public override PanelEnumType Type => PanelEnumType.Request;
-
-        protected override Button GetBackButton()=>wrappedController?.BackButton;
         protected override void OnEnable()
         {
             base.OnEnable();

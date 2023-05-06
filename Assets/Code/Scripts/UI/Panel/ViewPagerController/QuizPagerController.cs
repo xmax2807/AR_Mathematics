@@ -13,7 +13,7 @@ namespace Project.UI.Panel{
             loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
             await loadingView.ShowAsync();
             await generator.InitAsset();
-            await FetchPanelView(quizModels.Length, OnBuildVideoView);
+            await FetchPanelView(quizModels.Length, OnBuildQuizUIView);
             InvokeOnPageChanged(0);
             LoadMore();
             await preloadList[0].ShowAsync();
@@ -21,7 +21,7 @@ namespace Project.UI.Panel{
             await loadingView.HideAsync();
         }
 
-        private Task OnBuildVideoView(PreloadableQuizPanelView view, int index)
+        private Task OnBuildQuizUIView(PreloadableQuizPanelView view, int index)
         {
             QuizModel current = quizModels[index];
             int quizChapter = current.QuizChapter;

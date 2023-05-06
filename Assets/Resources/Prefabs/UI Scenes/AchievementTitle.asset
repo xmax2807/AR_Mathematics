@@ -16,15 +16,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
   - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
   ButtonNames:
-  - Name: "Danh hi\xEA\u0323u"
+  - Name: "Danh hi\u1EC7u"
     OnClick:
       m_PersistentCalls:
         m_Calls: []
     Description: 
-  - Name: "V\xE2\u0323t ph\xE2\u0309m"
+  - Name: "V\u1EADt ph\u1EA9m"
     OnClick:
       m_PersistentCalls:
         m_Calls: []
     Description: 
-  Title: "B\xF4\u0323 s\u01B0u t\xE2\u0323p"
+  Title: "B\u1ED9 s\u01B0u t\u1EADp"
   Description: 

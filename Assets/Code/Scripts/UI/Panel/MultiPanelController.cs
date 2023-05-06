@@ -3,6 +3,7 @@ using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
 using Gameframe.GUI.Camera.UI;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel
 {
@@ -11,6 +12,8 @@ namespace Project.UI.Panel
         [SerializeField] PanelViewData ListData;
         [SerializeField] BasePanelController[] Samples;
         [SerializeField] UIEventManager eventManager;
+        [SerializeField] private UnityEngine.UI.Button backButton;
+        [SerializeField] private Transform mainViewTransform;
         class PanelPack
         {
             public PanelViewData Data;
@@ -31,6 +34,12 @@ namespace Project.UI.Panel
             CreateUI(ListData);
             PushUI(ListData);
         }
+        private void OnEnable(){
+            backButton?.onClick.AddListener(PopUI);
+        }
+        private void OnDisable(){
+            backButton?.onClick.RemoveListener(PopUI);
+        }
         private void CreateUI(PanelViewData data)
         {
             int min = Mathf.Min(data.Children.Length, data.ButtonNames.Length);
@@ -43,16 +52,10 @@ namespace Project.UI.Panel
             var controller = Samples.FindMatch((item) => item.CheckType(data));
 
             if (controller == null) return;
-            SpawnerManager.Instance.SpawnObjectInParent(controller, this.transform, (obj) =>
+            SpawnerManager.Instance.SpawnObjectInParent(controller, mainViewTransform, (obj) =>
             {
                 obj.SetUI(data);
 
-                UnityEngine.UI.Button backButton = obj.BackButton;
-                if (backButton != null)
-                {
-                    backButton.interactable = stack.Count > 0;
-                    backButton.onClick.AddListener(PopUI);
-                }
                 var newPanel = new PanelPack(data, obj);
                 cached.Add(data.name, newPanel);
             });
@@ -60,38 +63,56 @@ namespace Project.UI.Panel
         private async void PopUI()
         {
             eventManager?.Lock();
-
+            Task[] uiTask = new Task[2];
             {
                 if (!stack.TryPop(out var result)) return;
 
-                await result.Controller.Hide();
+                ShouldEnableBackButton();
+                
+                uiTask[0] = result.Controller.Hide();
+
+                uiTask[1] = Task.CompletedTask;
                 if(CurrentData != null){
-                    await CurrentData.Controller.Show();
+                    uiTask[1] = CurrentData.Controller.Show();
                 }
             }
-
+            
+            await Task.WhenAll(uiTask);
             eventManager?.Unlock();
         }
         private async void PushUI(PanelViewData data)
         {
+            eventManager?.Lock();
+
             if (!cached.ContainsKey(data.name))
             {
                 CreateUI(data);
             }
-            eventManager?.Lock();
-
+            
+            Task[] uiTask = new Task[2];
             {
                 var pack = cached[data.name];
 
+                uiTask[0] = Task.CompletedTask;
                 if(CurrentData != null){
-                    await CurrentData.Controller.Hide();
+                    uiTask[0] = CurrentData.Controller.Hide();
                 }
-                await pack.Controller.Show();
+                uiTask[1] = pack.Controller.Show();
 
                 stack.Push(pack);
+                ShouldEnableBackButton();
             }
 
+
+            await Task.WhenAll(uiTask);
             eventManager?.Unlock();
+            
+        }
+
+        private void ShouldEnableBackButton(){
+            if(backButton != null){
+                backButton.interactable = stack.Count > 1;
+            }
         }
     }
 }
