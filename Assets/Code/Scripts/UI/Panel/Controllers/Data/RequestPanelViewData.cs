@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Project.Managers;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Project.UI.Panel
     public class RequestPanelViewData : PanelViewData
     {
         [SerializeField] private PanelViewData realData;
+        [SerializeField] private BasePanelController wrappedController;
+        public BasePanelController WrappedController => wrappedController;
         public PanelViewData RealPanelViewData => realData;
         [SerializeField] private string stringData;
         [SerializeField] private SingleRequestData.RequestType requestType;
@@ -16,6 +19,9 @@ namespace Project.UI.Panel
         [SerializeField] private SingleSceneLoadData sceneLoadData;
         public override PanelEnumType Type => PanelEnumType.Request;
 
+        public bool CheckType(){
+            return realData.Type == wrappedController.Type;
+        }
         public async Task<bool> RequestData()
         {
             bool result = await requestData.Request(requestType, stringData);
@@ -40,6 +46,9 @@ namespace Project.UI.Panel
                 case SingleRequestData.RequestType.Game:
                     PopulateGameButtons();
                     break;
+                case SingleRequestData.RequestType.Achievement:
+                    PopulateAchievementButton();
+                    break;
             }
         }
 
@@ -57,6 +66,28 @@ namespace Project.UI.Panel
                     Name = models[currentIndex].GameTitle,
                     OnClick = buttonClicked
                 };
+            }
+        }
+
+        private void PopulateAchievementButton(){
+            List<string> accquiredAchivements = new(0);
+            var currentUser = UserManager.Instance.CurrentUser;
+            if(currentUser != null){
+                accquiredAchivements = currentUser.User_ListAchievement;
+            }
+
+            RewardSystem.RewardPackSTO pack = ResourceManager.Instance.RewardPack;
+            string[] packKeys = pack.Keys;
+            realData.ButtonNames = new UnlockableImageButtonData[pack.PackCount];
+            for(int i = 0; i < pack.PackCount; i++){
+                RewardSystem.RewardBadgeSTO badge =  pack.GetReward(packKeys[i]);
+                UnlockableImageButtonData data = new(){
+                    Name = badge.Title,
+                    Image = badge.Visual,
+                    isUnlocked = accquiredAchivements.Contains(packKeys[i]),
+                    LockedImage = pack.defaultSprite,
+                };
+                realData.ButtonNames[i] = data;
             }
         }
 

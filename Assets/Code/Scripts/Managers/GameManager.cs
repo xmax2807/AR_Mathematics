@@ -21,6 +21,7 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<UserManager>(childName: "User Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
+            gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
         }
         protected void Awake()
         {

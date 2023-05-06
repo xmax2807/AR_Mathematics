@@ -61,14 +61,22 @@ public class Clock : MonoBehaviour
     public void RandomHour(){
         SetTime(UnityEngine.Random.Range(1,13));
     }
+
+    private int seconds;
     public void SetTime(int hour){
         SetHour(hour);
         SetMinute(0);
         SetSecond(0);
+        if(tickCoroutine != null){
+            TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);
+        }
+        seconds = 0;
+        tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1f);
     }
     public void IncreaseSecond(){
-        float newX = secondsHand.localRotation.x - 1f/6f;
-        secondsHand.localRotation = Quaternion.Euler(new Vector3(newX, 0, 0));
+        seconds = (seconds + 1) % 60;
+        float newXRotation = -(seconds / 60f) * 360f;
+        secondsHand.localRotation = Quaternion.Euler(new Vector3(newXRotation, 0, 0));
     }
 
     //Update is called once per frame

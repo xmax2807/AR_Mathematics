@@ -4,12 +4,7 @@ using UnityEngine.UI;
 
 namespace Project.UI.Panel{
 
-    [System.Serializable]
-    public class ButtonData{
-        public string Name;
-        public Button.ButtonClickedEvent OnClick;
-        public string Description;
-    }
+    
     public enum PanelEnumType{
         Menu, Grid, Request
     }

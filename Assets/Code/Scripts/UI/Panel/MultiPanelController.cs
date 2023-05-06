@@ -47,10 +47,11 @@ namespace Project.UI.Panel
             {
                 obj.SetUI(data);
 
-                if (obj.BackButton != null)
+                UnityEngine.UI.Button backButton = obj.BackButton;
+                if (backButton != null)
                 {
-                    obj.BackButton.interactable = stack.Count > 0;
-                    obj.BackButton.onClick.AddListener(PopUI);
+                    backButton.interactable = stack.Count > 0;
+                    backButton.onClick.AddListener(PopUI);
                 }
                 var newPanel = new PanelPack(data, obj);
                 cached.Add(data.name, newPanel);

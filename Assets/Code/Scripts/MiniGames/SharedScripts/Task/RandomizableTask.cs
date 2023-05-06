@@ -8,6 +8,7 @@ namespace Project.MiniGames{
         string GetQuestion();
         string[] GetOptions();
         bool IsCorrect(int index);
+        int GetAnswerIndex();
     }
     internal interface IVisitableQuizTask<T> : IVisitableQuizTask{
         T GetAnswer();
@@ -40,6 +41,8 @@ namespace Project.MiniGames{
         {
             return checker.GetAnswer();
         }
+
+        public int GetAnswerIndex() => checker.AnswerIndex;
 
         public string[] GetOptions()
         {
@@ -74,6 +77,7 @@ namespace Project.MiniGames{
         {
             return _checker.GetAnswer();
         }
+        public int GetAnswerIndex() => _checker.AnswerIndex;
 
         public string[] GetOptions()=> _checker.GetOptions();
 

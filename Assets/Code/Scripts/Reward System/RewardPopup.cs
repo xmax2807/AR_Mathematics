@@ -7,9 +7,11 @@ namespace Project.RewardSystem{
         [SerializeField] private Image rewardImg;
         [SerializeField] private TMPro.TextMeshProUGUI rewardName;
         private OkCancelPanelView view;
+        private Canvas canvas;
         private void Awake(){
             view = GetComponent<OkCancelPanelView>();
-            view.HideAsync();
+            canvas = GetComponent<Canvas>();
+//            view.HideAsync();
         }
         private void OnEnable(){
             view.onConfirm += Hide;
@@ -18,13 +20,24 @@ namespace Project.RewardSystem{
             view.onConfirm -= Hide;
         }
         public void OnRewardAcquired(RewardBadgeSTO badgeSTO){
-            rewardImg.sprite = badgeSTO.GetReward();
-            rewardName.text  =  badgeSTO.Title;
-            view.ShowAsync();
+            SetRewardData(badgeSTO.Title, badgeSTO.GetReward());
+
+
+            if(view == null){
+                view = GetComponent<OkCancelPanelView>();
+            }
+            canvas.enabled = true;
+            view?.ShowAsync();
         }
 
-        private void Hide(){
-            view.HideAsync();
+        public void SetRewardData(string title, Sprite image){
+            rewardImg.sprite = image;
+            rewardName.text = title;
+        }
+
+        private async void Hide(){
+            await view?.HideAsync();
+            canvas.enabled = false;
         }
     }
 }

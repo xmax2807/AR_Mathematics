@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: AchievementTitle
   m_EditorClassIdentifier: 
   Children:
-  - {fileID: 11400000, guid: 8326f4f3d20956949a89afdb8eb97f13, type: 2}
-  - {fileID: 11400000, guid: 5234ca71ed263ea4ca47e7f50a1c9d77, type: 2}
+  - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
+  - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
   ButtonNames:
   - Name: "Danh hi\xEA\u0323u"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   - Name: "V\xE2\u0323t ph\xE2\u0309m"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   Title: "B\xF4\u0323 s\u01B0u t\xE2\u0323p"
   Description: 

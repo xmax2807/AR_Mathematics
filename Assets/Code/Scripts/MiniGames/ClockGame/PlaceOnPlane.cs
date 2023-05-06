@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Project.Managers;
 
 /// <summary>
 /// Listens for touch events and performs an AR raycast from the screen touch point.
@@ -51,6 +52,9 @@ public class PlaceOnPlane : MonoBehaviour
 
         // placementUpdate.AddListener(DiableVisual);
     }
+    void Start(){
+        TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>enabled=false);
+    }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
@@ -70,9 +74,11 @@ public class PlaceOnPlane : MonoBehaviour
     }
 
 	public void OnGetDownloadedClock(GameObject[] objs){
+        Debug.Log("placed object");
 		if(objs == null || objs.Length == 0) return;
 		
 		m_PlacedPrefab = objs[0];
+        enabled = true;
 	}
 
     void Update()
@@ -88,7 +94,7 @@ public class PlaceOnPlane : MonoBehaviour
             // Raycast hits are sorted by distance, so the first one
             // will be the closest hit.
 
-            var hitPose = s_Hits[0].pose;
+            // var hitPose = s_Hits[0].pose;
 			var trackableTrans = s_Hits[0].trackable.transform;
             
             if (spawnedObject == null)

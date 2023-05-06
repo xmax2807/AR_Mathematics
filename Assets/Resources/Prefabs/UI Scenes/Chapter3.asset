@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children:
   - {fileID: 11400000}
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: e181b7ee940c0874e95f0e140ea1c36a, type: 2}
   - {fileID: 11400000}
   ButtonNames:
   - Name: "Ba\u0300i ho\u0323c"
@@ -30,7 +30,19 @@ MonoBehaviour:
   - Name: "\xD4n t\xE2\u0323p"
     OnClick:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: cda2f5ff5bf59c94f84d39376c69dd53, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: ',3,1'
+            m_BoolArgument: 0
+          m_CallState: 2
     Description: 
   Title: "Ch\u01B0\u01A1ng 3"
   Description: "Ph\xE9p c\xF4\u0323ng tr\u01B0\u0300 trong pha\u0323m vi 10"

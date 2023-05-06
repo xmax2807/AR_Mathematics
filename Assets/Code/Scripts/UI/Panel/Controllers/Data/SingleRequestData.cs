@@ -58,6 +58,9 @@ namespace Project.UI.Panel
                 case RequestType.Game:
                     requestResult = RequestGames(data);
                     break;
+                case RequestType.Achievement:
+                    requestResult = Task.FromResult(true);
+                    break;
             }
 
             if (requestResult == null)

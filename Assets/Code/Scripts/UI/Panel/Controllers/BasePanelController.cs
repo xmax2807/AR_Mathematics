@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 namespace Project.UI.Panel{
     public abstract class BasePanelController : MonoBehaviour{
         [SerializeField] public PanelViewBase View;
-        [SerializeField] public Button BackButton;
+        [SerializeField] private Button backButton;
+        public Button BackButton => GetBackButton();
         public UnityEngine.Events.UnityAction onBackButtonClicked;
         public abstract PanelEnumType Type {get;}
         public abstract bool CheckType(PanelViewData data);
         public abstract void SetUI(PanelViewData Data);
+        protected virtual Button GetBackButton() => backButton;
         protected virtual void OnEnable(){
-            if(BackButton == null || onBackButtonClicked == null) return;
-            BackButton.onClick?.AddListener(onBackButtonClicked);
+            if(backButton == null || onBackButtonClicked == null) return;
+            backButton.onClick?.AddListener(onBackButtonClicked);
         }
         protected virtual void OnDisable(){
-            if(BackButton == null || onBackButtonClicked == null) return;
-            BackButton?.onClick?.RemoveListener(onBackButtonClicked);
+            if(backButton == null || onBackButtonClicked == null) return;
+            backButton?.onClick?.RemoveListener(onBackButtonClicked);
         }
         public virtual async Task Hide(){
             await View.HideAsync();

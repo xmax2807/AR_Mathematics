@@ -1,13 +1,16 @@
 using Project.Managers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.UI.Panel{
     public class RequestWrapperPanelController : BasePanelController<RequestPanelViewData>
     {
         [SerializeField] private Canvas loadingCanvas;
         [SerializeField] private Canvas noDataFoundCanvas;
-        [SerializeField] private BasePanelController wrappedController;
+        private BasePanelController wrappedController;
         public override PanelEnumType Type => PanelEnumType.Request;
+
+        protected override Button GetBackButton()=>wrappedController?.BackButton;
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -25,8 +28,12 @@ namespace Project.UI.Panel{
                 return;
             }
             
-            wrappedController.SetUI(Data.RealPanelViewData);
-            await wrappedController.Show();
+            SpawnerManager.Instance.SpawnObjectInParent<BasePanelController>(Data.WrappedController, this.transform, (obj)=>{
+                wrappedController = obj;
+                wrappedController.SetUI(Data.RealPanelViewData);
+                //wrappedController.Show();
+            });
+            
         }
 
         public override bool CheckType(PanelViewData data)
@@ -34,7 +41,7 @@ namespace Project.UI.Panel{
             if(data is not RequestPanelViewData reqData){
                 return false;
             }
-            return reqData.Type == this.Type && reqData.RealPanelViewData.Type == wrappedController.Type; 
+            return reqData.Type == this.Type && reqData.CheckType(); 
         }
     }
 }
