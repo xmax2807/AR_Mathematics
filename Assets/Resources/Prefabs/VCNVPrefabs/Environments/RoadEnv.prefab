@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 7258238654609422755, guid: 45f3cc188bbcb7946a2febc7e00e1381, type: 3}
-  - {fileID: 7258238654609422755, guid: 345dce69bdbc52544bd8cb46da164e5f, type: 3}
+  - {fileID: 7258238654609422755, guid: 614528b869203d9438a596816a25c8d9, type: 3}
+  - {fileID: 7258238654609422755, guid: 4cfbc066ab40f034b99b7755d0a14dca, type: 3}
   - {fileID: 7258238654609422755, guid: 5d10678f5d31c304894916075c6bd868, type: 3}
   xSpawn: 0
-  tileLength: 10
+  tileLength: 37.8
   numberOfTiles: 2
   spawnRate: 5.2
   forwardSpeed: -1.5
