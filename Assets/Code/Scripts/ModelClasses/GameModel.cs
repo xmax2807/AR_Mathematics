@@ -2,7 +2,9 @@ using Firebase.Firestore;
 [FirestoreData]
 public class GameModel
 {
-    [FirestoreProperty] public string GameTitle { get; set; } 
+    [FirestoreProperty] public string GameID { get; set; }
+
+    [FirestoreProperty] public string GameTitle { get; set; }
     [FirestoreProperty] public string[] UnitChapter { get; set; }
     [FirestoreProperty] public string GameScene { get; set; }
 
