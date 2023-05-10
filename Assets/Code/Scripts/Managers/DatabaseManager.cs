@@ -15,11 +15,16 @@ using Firebase.Extensions;
 public class DatabaseManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] QuizData quizData;
-    [SerializeField] string collection = "quizzes";
+    // [SerializeField] QuizData quizData;
+    // [SerializeField] string collection = "quizzes";
     // private string userID;
-    [SerializeField] private string Email;
-    [SerializeField] private string Password;
+    // [SerializeField] private string Email;
+    // [SerializeField] private string Password;
+    [SerializeField] private int chapter;
+    [SerializeField] private int unit;
+    [SerializeField] private int semester = 1;
+
+
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
@@ -31,6 +36,7 @@ public class DatabaseManager : MonoBehaviour
     public LessonController LessonController { get; private set; }
     public GameController GameController { get; private set; }
     public QuizController QuizController { get; private set; }
+    public TestController TestController { get; private set; }
     void Awake()
     {
         if (Instance == null)
@@ -73,12 +79,14 @@ public class DatabaseManager : MonoBehaviour
                 LessonController = new();
                 GameController = new();
                 QuizController = new();
-
+                TestController = new();
                 FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
                     task => {
                         UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
                     }
                 );
+                // QuizController.GetQuizzesByLesson(unit,chapter);
+                TestController.GetTest(semester);
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);
@@ -89,15 +97,15 @@ public class DatabaseManager : MonoBehaviour
                 // UserController.RegisterAuth(Email,Password);
                 // Debug.Log(LessonController.GetLessonID(1,1).Result);
 
-                UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                    QuizUnit = quizData.QuizUnit,
-                    QuizTitle = quizData.QuizTitle,
-                    QuizIMG = quizData.QuizIMG,
-                    QuizAnswer = quizData.QuizAnswer,
-                    QuizCorrectAnswer = quizData.QuizCorrectAnswer,
-                    QuizSemester = quizData.QuizSemester,
-                    QuizChapter = quizData.QuizChapter,
-                });
+                // UploadData<QuizModel>(collection, ()=>new QuizModel(){
+                //     QuizUnit = quizData.QuizUnit,
+                //     QuizTitle = quizData.QuizTitle,
+                //     QuizIMG = quizData.QuizIMG,
+                //     QuizAnswer = quizData.QuizAnswer,
+                //     QuizCorrectAnswer = quizData.QuizCorrectAnswer,
+                //     QuizSemester = quizData.QuizSemester,
+                //     QuizChapter = quizData.QuizChapter,
+                // });
                 // LessonController.GetVideo(1,2);
                 // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
                 // UserController.UploadModel(user);
