@@ -31,6 +31,11 @@ namespace Project.QuizSystem{
             return visitor.AskForSprite(this);
         }
 
+        public override IQuestion Clone()
+        {
+            return new GeneralQuestion(this._question, this.options, this._answer, this.imageUrl);
+        }
+
         public string GetImageType()
         {
             return imageUrl;

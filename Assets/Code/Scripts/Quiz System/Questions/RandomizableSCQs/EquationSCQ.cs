@@ -42,5 +42,10 @@ namespace Project.QuizSystem{
         {
             return options.Select((val)=>val.ToString()).ToArray();       
         }
+
+        public override IQuestion Clone()
+        {
+            return new EquationSCQ(this.maxNumber, this.options.Length);
+        }
     }
 }

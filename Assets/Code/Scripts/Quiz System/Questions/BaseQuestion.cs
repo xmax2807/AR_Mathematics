@@ -16,6 +16,7 @@ namespace Project.QuizSystem{
         public bool IsCorrect();
         public bool HasAnswered();
         public void SetAnswer(object value);
+        public IQuestion Clone();
     }
     public abstract class BaseQuestion<T> : IQuestion where T : IEquatable<T>{
         public abstract QuestionType QuestionType {get;}
@@ -24,7 +25,7 @@ namespace Project.QuizSystem{
 
         protected string _question;
         protected T _answer;
-        private T _playerAnswered;
+        protected T _playerAnswered;
         public BaseQuestion(string question, T answer){
             _question = question;
             _answer = answer;
@@ -51,5 +52,7 @@ namespace Project.QuizSystem{
         {
             value.TryCastTo<T>(out _playerAnswered);
         }
+
+        public abstract IQuestion Clone();
     }
 }

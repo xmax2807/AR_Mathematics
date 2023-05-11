@@ -43,5 +43,10 @@ namespace Project.QuizSystem{
         {
             return visitor.AskForSprite(this);
         }
+
+        public override IQuestion Clone()
+        {
+            return new ShapeSCQ(this.options.Length);
+        }
     }
 }

@@ -45,6 +45,11 @@ namespace Project.QuizSystem{
             }
         }
 
+        public override IQuestion Clone()
+        {
+            return new DateTimeSCQ(this.options.Length);
+        }
+
         public override QuestionContentType QuestionContentType => QuestionContentType.Text;
 
         protected override string constQuestion => "Em hãy chỉ đúng thứ ngày tháng trên tờ lịch";

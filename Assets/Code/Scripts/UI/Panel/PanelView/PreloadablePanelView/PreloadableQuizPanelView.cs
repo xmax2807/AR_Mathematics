@@ -10,6 +10,7 @@ namespace Project.UI.Panel{
         public IQuestion Question {get;private set;}
         public QuizUIContent ContentUI {get; private set;}
         public AnswerUI AnswerUI {get; private set;}
+        public AnswerUIState AnswerUIState {get;private set;}
         public void Setup(IQuestion question, QuizUIContent contentUI, AnswerUI answerUI){
             this.Question = question;
             this.ContentUI = contentUI;
@@ -25,6 +26,10 @@ namespace Project.UI.Panel{
         {
             isPrepared = false;
             yield break;
+        }
+        public void ChangeAnswerUIState(AnswerUIState state){
+            AnswerUIState = state;
+            AnswerUI.ChangeUIState(state);
         }
     }
 }

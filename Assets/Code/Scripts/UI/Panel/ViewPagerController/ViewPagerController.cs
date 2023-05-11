@@ -10,9 +10,11 @@ namespace Project.UI.Panel{
         [SerializeField] protected PreloadablePanelView LastPageView;
         
         protected int currentIndex = 0;
+        public int CurrentIndex => currentIndex;
         protected int cacheIndex;
 
         protected List<PreloadablePanelView> preloadList;
+        public List<PreloadablePanelView> PreloadList => preloadList;
         public event System.Action<PreloadablePanelView> OnPageChanged;
         protected void InvokeOnPageChanged(int index) => OnPageChanged?.Invoke(preloadList[index]);
         protected virtual void Awake(){
@@ -72,7 +74,18 @@ namespace Project.UI.Panel{
             await preloadList[currentIndex].ShowAsync();
         }
 
+        public virtual async void MoveTo(int index){
+            if(!CanMoveTo(index)) return;
+
+            await preloadList[currentIndex].HideAsync();
+            currentIndex = index;
+            ShouldLoadMore();
+            InvokeOnPageChanged(currentIndex);
+            await preloadList[currentIndex].ShowAsync();
+        }
+
         public bool CanMoveNext() => currentIndex + 1 < preloadList.Count;
         public bool CanMovePrev() => currentIndex - 1 >= 0;
+        public bool CanMoveTo(int index)=> index >= 0 && index < preloadList.Count;
     }
 }

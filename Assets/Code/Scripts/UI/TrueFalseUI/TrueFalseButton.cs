@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Project.UI.Indicator;
 
 namespace Project.UI.TrueFalseUI{
 
     [RequireComponent(typeof(Button),typeof(Image))]
-    public class TrueFalseButton : BaseTrueFalseUI<Color>
+    public class TrueFalseButton : BaseTrueFalseUI<Color>, IIndicatorItem
     {
         public Button Button{get;private set;}
         private Image background;
@@ -21,6 +22,16 @@ namespace Project.UI.TrueFalseUI{
         public override void Reset()
         {
             background.color = DefaultUI;
+        }
+
+        public void SwitchToUnselectedUI()
+        {
+            ChangeUI(false);
+        }
+
+        public void SwitchToSelectedUI()
+        {
+            ChangeUI(true);
         }
     }
 }

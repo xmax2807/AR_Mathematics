@@ -18,13 +18,16 @@ namespace Project.AssetIO
                 string ext = Path.GetExtension(fullPath).ToLower();
                 byte[] loadData = await File.ReadAllBytesAsync(fullPath);
 
-                Texture2D origin = new(1024, 1024, ext == ".png" ? TextureFormat.ARGB32 : TextureFormat.RGB24, false);
-                origin.LoadImage(loadData);
+                Texture2D origin = new(1024, 1024, ext == ".png" ? TextureFormat.ARGB32 : TextureFormat.RGB24, false, false);
+                //Texture2D origin = new(2,2);
+                ImageConversion.LoadImage(origin, loadData);
+                //origin.LoadImage(loadData);
+                //origin.filterMode = FilterMode.Bilinear;
 
                 if (origin.width > Texture2DConfiguration.MobileDimension || origin.height > Texture2DConfiguration.MobileDimension)
                 {
                     origin = Texture2DConfiguration.MobileConfig(origin);
-                    await WriteAsync(origin, fullPath);
+                    //_ = WriteAsync(origin, fullPath);
                 }
 
                 return origin;
@@ -37,7 +40,17 @@ namespace Project.AssetIO
 
         public async Task WriteAsync(UnityEngine.Texture2D data, string fullPath)
         {
-            byte[] bytesArray = data.GetRawTextureData();
+            string ext = Path.GetExtension(fullPath).ToLower();
+            byte[] bytesArray;
+            if(ext == ".png"){
+                bytesArray = data.EncodeToPNG();
+            }
+            else if(ext == ".jpg"){
+                bytesArray = data.EncodeToJPG();
+            }
+            else{
+                return;
+            }
             if (!File.Exists(fullPath))
             {
                 File.Create(fullPath);

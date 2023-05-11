@@ -46,9 +46,8 @@ namespace Project.QuizSystem
         public IQuestion CreateRandomQuestion(int unit, int chapter){
             (int,int) unitChapter =  (unit, chapter);
             if(RandomizableQuestionDict.ContainsKey(unitChapter)){
-                return RandomizableQuestionDict[unitChapter];
+                return RandomizableQuestionDict[unitChapter].Clone();
             }
-            Debug.Log("Sorry, we haven't provided that kind of Question yet");
             return null;
         }
     }

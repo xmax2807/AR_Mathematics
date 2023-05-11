@@ -9,16 +9,27 @@ namespace Project.UI.Panel{
         QuizModel[] quizModels => UserManager.Instance.CurrentQuizzes;
         [SerializeField] private QuizGenerator generator;
 
+        public IQuestion[] AllQuestions {get;private set;}
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _ = generator.InitAsset();
+            AllQuestions = new IQuestion[quizModels.Length];
+        }
+
         private async void Start(){
             loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
             await loadingView.ShowAsync();
-            await generator.InitAsset();
+            //await generator.InitAsset();
+            
             await FetchPanelView(quizModels.Length, OnBuildQuizUIView);
+            
             InvokeOnPageChanged(0);
             LoadMore();
-            await preloadList[0].ShowAsync();
 
-            await loadingView.HideAsync();
+            _=preloadList[0].ShowAsync();
+            _=loadingView.HideAsync();
         }
 
         private Task OnBuildQuizUIView(PreloadableQuizPanelView view, int index)
@@ -36,7 +47,7 @@ namespace Project.UI.Panel{
             var answerUI = generator.GetAnswerUI(question.QuestionType);
             var quizUIContent = generator.GetQuizUIContent(question.QuestionContentType);
             view.Setup(question, quizUIContent, answerUI);
-                
+            AllQuestions[index] = question;
             return Task.CompletedTask;
         }
     }

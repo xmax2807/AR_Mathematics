@@ -53,5 +53,10 @@ namespace Project.QuizSystem{
             var shapeType = FlagExtensionMethods.Randomize<Shape.ShapeType>(random);
             _answer = new Shape(shapeType);
         }
+
+        public override IQuestion Clone()
+        {
+            return new ShapeQuestion(this._question);
+        }
     }
 }

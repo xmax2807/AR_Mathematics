@@ -30,7 +30,6 @@ namespace Project.UI.UISetPack{
             if(!pack.IsInitialized){
                 Task.Run(pack.Init).GetAwaiter().GetResult();
             }
-
             int randomIndex = UnityEngine.Random.Range(0, pack.AssetPacks.Length);
 
             return pack.AssetPacks[randomIndex];

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4877733022904822878}
   - component: {fileID: 4877733022904822877}
   - component: {fileID: 4877733022904822876}
-  - component: {fileID: 3031258947606484216}
+  - component: {fileID: 2180065455074052725}
   m_Layer: 0
   m_Name: QuizButton
   m_TagString: Untagged
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.6
---- !u!114 &3031258947606484216
+--- !u!114 &2180065455074052725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,11 +132,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4877733022904822867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3847b66754dc54cbf52678a071a274, type: 3}
+  m_Script: {fileID: 11500000, guid: e52101589ded39b4cb9bee677553c69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   FalseUI: {r: 1, g: 0, b: 0, a: 1}
   TrueUI: {r: 0, g: 1, b: 0, a: 1}
+  SelectedUI: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
   DefaultUI: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &4877733023247665587
 GameObject:

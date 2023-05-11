@@ -33,5 +33,10 @@ namespace Project.QuizSystem{
             }
             return result;
         }
+
+        public override IQuestion Clone()
+        {
+            return new TimeSCQ(this.options.Length);
+        }
     }
 }

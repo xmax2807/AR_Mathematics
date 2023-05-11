@@ -28,6 +28,13 @@ namespace Project.Managers
             newGameObj.transform.SetParent(theParent, false);
             onBuildObj?.Invoke(newGameObj);
         }
+        public void SpawnComponentInParent<T>(T component, Transform theParent, Action<T> onBuildObj = null) where T : Component
+        {
+            T newComponent;
+            newComponent = Instantiate(component, theParent);
+            newComponent.transform.SetParent(theParent, false);
+            onBuildObj?.Invoke(newComponent);
+        }
         public void SpawnObjectInParent(GameObject gameObj, Transform theParent, Action<GameObject> onBuildObj = null)
         {
             GameObject newGameObj = Instantiate(gameObj, theParent);

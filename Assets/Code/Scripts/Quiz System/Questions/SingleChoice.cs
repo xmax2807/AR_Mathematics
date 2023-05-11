@@ -15,8 +15,10 @@ namespace Project.QuizSystem{
         public int AnswerIndex => _answer;
         public SingleChoice(string question,T[] options, int answer) : base(question, answer)
         {
+            _playerAnswered = -1;
             this.options = options;
         }
+        public override bool HasAnswered() => _playerAnswered != -1;
 
         public abstract string[] GetOptions();
     }

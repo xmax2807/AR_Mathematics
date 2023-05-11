@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Managers;
 using UnityEngine;
+using System.Linq;
 
 public class QuizController
 {
@@ -56,7 +57,7 @@ public class QuizController
             var quizModel = quiz.ConvertTo<QuizModel>(); 
             QuizModels.Add(quizModel);
         }
-        return QuizModels.ToArray();
+        return QuizModels.OrderBy(x=>SpawnerManager.RandomInstance.Next()).ToArray();
     }
     public void GetQuizzesByLesson(int unit, int chapter)
     {

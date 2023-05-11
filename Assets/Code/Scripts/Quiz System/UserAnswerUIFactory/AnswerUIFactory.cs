@@ -17,7 +17,6 @@ namespace Project.QuizSystem.UIFactory
         }
         public AnswerUI CreateAnswerUI(QuestionType type)
         {
-            Debug.Log(type);
             GameObject prefab = builtInPrefabs.GetPrefab(type);
             if (prefab == null) return null;
 
