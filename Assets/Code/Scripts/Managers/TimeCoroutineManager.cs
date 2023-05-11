@@ -22,6 +22,10 @@ namespace Project.Managers{
         float timeout = Time.time + seconds;
         return StartCoroutine(ExecuteWaitCoroutine(()=>Time.time >= timeout, result));
     }
+    public Coroutine WatiForFixedSeconds(float seconds, Action result){
+        float timeout = Time.unscaledTime + seconds;
+        return StartCoroutine(ExecuteWaitCoroutine(()=>Time.unscaledTime >= timeout, result));
+    }
     public Coroutine WaitUntil(Func<bool> condition, Action result) => StartCoroutine(ExecuteWaitCoroutine(condition, result));
     public Coroutine WaitUntil(Func<bool> condition, Action result, float timeout = -1f){
         if(condition == null) return null;

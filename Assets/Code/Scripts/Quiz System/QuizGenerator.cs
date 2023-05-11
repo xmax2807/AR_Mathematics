@@ -21,11 +21,18 @@ namespace Project.QuizSystem
         private QuestionVisitor QuestionVisitor;
         private static Dictionary<(int,int), IQuestion> RandomizableQuestionDict;
 
-        public bool isInitialized = false;
+        private bool isInitialized = false;
         private void Awake(){
             RandomizableQuestionDict ??= new(){
                     {(2,1), new ShapeSCQ(4)},
                     {(3,1), new ShapeSCQ(4)},
+                    {(1,3), new EquationSCQ(10,4)},
+                    {(3,3), new EquationSCQ(10,4)},
+                    {(2,4), new EquationSCQ(20,4)},
+                    {(2,5), new EquationSCQ(90,4)},
+                    {(6,5), new EquationSCQ(100,4)},
+                    {(7,5), new EquationSCQ(100,4)},
+                    {(8,5), new EquationSCQ(100,4)},
                 };
             QuestionVisitor =  new QuestionVisitor(spriteGroupPack);
             AnswerUIFactory = new AnswerUIFactory(BuiltInAnswerUIPrefabs);

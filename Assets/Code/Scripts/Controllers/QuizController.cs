@@ -27,7 +27,9 @@ public class QuizController
         {
             var quizModel = quiz.ConvertTo<QuizModel>(); 
             QuizModels.Add(quizModel);
+            Debug.Log(quiz.Id);
             Debug.Log(quizModel.QuizTitle);
+            
         }
     }
     public async Task<QuizModel[]> GetQuizModelsAsync(object unit, object chapter, object semester){
@@ -74,4 +76,18 @@ public class QuizController
         QueryQuizzes(Semester, semester, null, null);
     }
 
+    public async Task<List<QuizModel>> GetQuizzesByIDs(string[] quizIDs)
+    {
+        Query queryQuizzes = Db.Collection("quizzes").WhereIn("QuizId", quizIDs);
+        var quizSnapshot = await queryQuizzes.GetSnapshotAsync();
+        Debug.Log("got snapshot");
+        List<QuizModel> result = new ();
+        foreach (DocumentSnapshot quiz in quizSnapshot.Documents)
+        {
+            var quizModel = quiz.ConvertTo<QuizModel>(); 
+            result.Add(quizModel);
+            Debug.Log(quizModel.QuizId);
+        }
+        return result;
+    }
 }

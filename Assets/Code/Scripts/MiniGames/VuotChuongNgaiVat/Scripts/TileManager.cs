@@ -22,16 +22,18 @@ public class TileManager : MonoBehaviour
         {
             SpawnTile(Random.Range(0, tilePrefabs.Length));
         }
-        TimeCoroutineManager.Instance.DoLoopAction(SpawnTileRandomly, stopCondition: ()=>false, spawnRate);
+        //TimeCoroutineManager.Instance.DoLoopAction(SpawnTileRandomly, stopCondition: () => false, spawnRate);
 
     }
-    private void SpawnTileRandomly(){
+    public void SpawnTileRandomly()
+    {
         SpawnTile(Random.Range(0, tilePrefabs.Length));
     }
-    private void Update(){
+    private void Update()
+    {
         this.transform.position += direction * Time.deltaTime;
     }
-    public void SpawnTile(int tileIndex)
+    private void SpawnTile(int tileIndex)
     {
         var obj = Instantiate(tilePrefabs[tileIndex], transform);
         obj.transform.localPosition = Vector3.right * xSpawn;
@@ -39,9 +41,25 @@ public class TileManager : MonoBehaviour
         xSpawn += tileLength;
         listMap.Enqueue(obj);
 
-        if(listMap.Count > 3){
+        if (listMap.Count > 3)
+        {
             var destroyObj = listMap.Dequeue();
             Destroy(destroyObj);
         }
+    }
+    public void IncreaseSpeed(float speed)
+    {
+        forwardSpeed -= speed;
+        direction = Vector3.right * forwardSpeed;
+    }
+    public void DecreaseSpeed(float speed)
+    {
+        forwardSpeed += speed;
+        direction = Vector3.right * forwardSpeed;
+    }
+    public void SetSpeed(float speed)
+    {
+        forwardSpeed = speed;
+        direction = Vector3.right * forwardSpeed;
     }
 }

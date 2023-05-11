@@ -4,20 +4,70 @@ using UnityEngine;
 
 public class OctopusController : MonoBehaviour
 {
-    public Rigidbody2D myRigidbody;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Animator animator;
+    [SerializeField] private TileManager tileManager;
+    private string currentAnimName = "idle";
+    private float currentSpeed = -2;
+    public enum OctopusState
     {
-
+        BasicJump,
+        HighJump,
+        FailedJump
     }
+    private OctopusState currentState = OctopusState.BasicJump;
+    public OctopusState CurrentState
+    {
+        get => currentState; set
+        {
+            if (currentState != value)
+            {
+                currentState = value;
+            }
+        }
+    }
+    public Rigidbody myRigidbody;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) == true)
+        if (Input.GetKey(KeyCode.A))
         {
-            myRigidbody.velocity = Vector2.up * 5;
-
+            CurrentState = OctopusState.HighJump;
+            ChangeState();
+            return;
         }
+        if (Input.GetKey(KeyCode.B))
+        {
+            CurrentState = OctopusState.FailedJump;
+            ChangeState();
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            CurrentState = OctopusState.BasicJump;
+            ChangeState();
+        }
+    }
+    public void ChangeState()
+    {
+        animator.SetBool(currentAnimName, false);
+        tileManager.SetSpeed(currentSpeed);
+        if (currentState == OctopusState.HighJump)
+        {
+            currentAnimName = "jump";
+        }
+        else if (currentState == OctopusState.FailedJump)
+        {
+            currentAnimName = "fail";
+        }
+        else
+        {
+            currentAnimName = "idle";
+        }
+        animator.SetBool(currentAnimName, true);
+    }
+    public void SpawnTile(){
+        tileManager.SpawnTileRandomly();
     }
 }
