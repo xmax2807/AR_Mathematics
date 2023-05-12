@@ -9,9 +9,8 @@ public class Random2number : MonoBehaviour
 	[SerializeField]
 	public TMPro.TextMeshProUGUI firstNumber;
 	public TMPro.TextMeshProUGUI secondNumber;
-	public Button button;
-	int[] randomNumbers = new int[2];
 
+	int[] randomNumbers = new int[2];
 	void Start()
     {
 		randomNumbers[0] = Random.Range(0, 100);
@@ -20,12 +19,15 @@ public class Random2number : MonoBehaviour
 
 	// Update is called once per frame
 	void Update()
-    {
-		if (Input.GetMouseButtonDown(0))
+	{
+		//if (randomNumbers[0] == randomNumbers[1])
 		{
-			Start();
-			firstNumber.text = randomNumbers[0].ToString();
-			secondNumber.text = randomNumbers[1].ToString();
+			if (Input.GetMouseButtonDown(0))
+			{
+				Start();
+				firstNumber.text = randomNumbers[0].ToString();
+				secondNumber.text = randomNumbers[1].ToString();
+			}
 		}
     }
 }
