@@ -10,6 +10,23 @@ namespace Project.UI.UISetPack
     {
         [SerializeField] protected AssetReferenceSprite[] spriteRefs;
         public Sprite[] AssetPacks {get; private set;}
+
+        public override async Task<Sprite> FindASprite(string name)
+        {
+            if(!IsInitialized){
+                await Init();
+            }
+            foreach(Sprite sprite in AssetPacks){
+                if(sprite.name == name) return sprite;
+            }
+            return null;
+        }
+
+        void OnEnable(){
+            IsInitialized = false;
+        }
+        void OnDisable() => IsInitialized = false;
+
         public override async Task Init()
         {
             if(IsInitialized) return;

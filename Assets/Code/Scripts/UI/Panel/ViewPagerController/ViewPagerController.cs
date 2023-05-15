@@ -1,14 +1,18 @@
 using UnityEngine;
-using Project.Managers;
+using Gameframe.GUI.Extensions;
 using System.Collections.Generic;
 using System;
 
 namespace Project.UI.Panel{
     public class ViewPagerController : MonoBehaviour{
+        public enum SetupEventEnum{
+            Start, Manual
+        }
+        [SerializeField] protected SetupEventEnum setupStartAt = SetupEventEnum.Start;
         [SerializeField] private int cacheCount = 1;
         [SerializeField] PreloadablePanelView[] Samples;
         [SerializeField] protected PreloadablePanelView LastPageView;
-        
+
         protected int currentIndex = 0;
         public int CurrentIndex => currentIndex;
         protected int cacheIndex;
@@ -24,10 +28,26 @@ namespace Project.UI.Panel{
             }
         }
 
+        private void Start(){
+            if(setupStartAt == SetupEventEnum.Start){
+                SetupList();
+            }
+        }
+
         protected virtual void AddLastView(){
             if(LastPageView == null) return;
             var newObj = Instantiate(LastPageView, this.transform);
             preloadList.Add(newObj);
+        }
+
+        protected virtual void SetupList(){}
+        public void ManualSetup(){
+            if(setupStartAt == SetupEventEnum.Manual){
+                SetupList();
+            }
+            else{
+                Debug.Log("You don't have permission to Setup the list");
+            }
         }
 
         public void ShouldLoadMore(){

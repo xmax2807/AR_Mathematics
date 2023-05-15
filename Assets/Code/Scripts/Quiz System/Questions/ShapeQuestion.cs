@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Project.Utils;
 using System.Linq;
 using Project.Utils.ExtensionMethods;
+using Project.QuizSystem.SaveLoadQuestion;
 using UnityEngine.UI;
 
 namespace Project.QuizSystem{
@@ -20,13 +21,13 @@ namespace Project.QuizSystem{
         public enum ShapeType{
             Square, Rectangle, Circle, Triangle
         }
-        public bool Equals(Shape other) => other.type == this.type;
-        public override string ToString()
+        public readonly bool Equals(Shape other) => other.type == this.type;
+        public override readonly string ToString()
         {
             return TextMap[type];
         }
     }
-    public class ShapeQuestion : BaseQuestion<Shape>, IRandomizable<ShapeQuestion>
+    public class ShapeQuestion : BaseQuestion<Shape>, IEquatable<ShapeQuestion>, IRandomizable<ShapeQuestion>
     {
         public override QuestionType QuestionType => QuestionType.Other;
 

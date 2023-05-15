@@ -844,7 +844,6 @@ MonoBehaviour:
   BuiltInQuizContentPrefabs: {fileID: 11400000, guid: a15f212cb08763f48a2d0b3a949ab6ef,
     type: 2}
   spriteGroupPack: {fileID: 11400000, guid: 50846beb968e1e241ba0e40dabdb84fa, type: 2}
-  isInitialized: 0
 --- !u!4 &245543333
 Transform:
   m_ObjectHideFlags: 0
@@ -1358,6 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2cd6a62765418429e90e78d9c88f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setupStartAt: 0
   cacheCount: 1
   Samples: []
   LastPageView: {fileID: 0}
@@ -2108,11 +2108,11 @@ MonoBehaviour:
   nextButton: {fileID: 1312788131}
   backButton: {fileID: 2045191279}
   pagerController: {fileID: 646190833}
+  SubmitTest: {fileID: 674812406}
   timer: {fileID: 1987480796}
   Indicator: {fileID: 1228357282}
   readyToStartTestView: {fileID: 1565127843}
   quizResult: {fileID: 2065009196}
-  SubmitTest: {fileID: 674812406}
 --- !u!1 &938932242
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,7 +3242,7 @@ PrefabInstance:
     - target: {fileID: 7909147670819863425, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7909147670819863425, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7,
         type: 3}
@@ -3534,8 +3534,8 @@ RectTransform:
   - {fileID: 852443364}
   - {fileID: 2035552794}
   - {fileID: 1565127842}
-  - {fileID: 1699374763}
   - {fileID: 2065009195}
+  - {fileID: 1699374763}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4043,7 +4043,7 @@ RectTransform:
   - {fileID: 969372063}
   - {fileID: 661836837}
   m_Father: {fileID: 1897615331}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

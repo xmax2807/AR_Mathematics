@@ -23,7 +23,7 @@ namespace Project.QuizSystem.QuizUIContent{
             BuildUI(parent);
         }
         protected abstract void BuildUI(Transform parent);
-        protected virtual Task GetQuestionInfo(IQuestion question){
+        public virtual Task GetQuestionInfo(IQuestion question){
             this.question = question;
             return Task.CompletedTask;
         }
@@ -53,7 +53,7 @@ namespace Project.QuizSystem.QuizUIContent{
         protected override void OnBuildUI(TMPro.TextMeshProUGUI textMesh){
             textMesh.text = questContent;
         }
-        protected override async Task GetQuestionInfo(IQuestion question)
+        public override async Task GetQuestionInfo(IQuestion question)
         {
             await base.GetQuestionInfo(question);
             questContent = question.GetQuestion();
@@ -69,16 +69,13 @@ namespace Project.QuizSystem.QuizUIContent{
             image.sprite = sprite;
             image.preserveAspect = true;
         }
-        protected override async Task GetQuestionInfo(IQuestion question)
+        public override async Task GetQuestionInfo(IQuestion question)
         {
             await base.GetQuestionInfo(question);
-            if(sprite != null){
-                return;
-            }
-            if(question is not IVisitableImageQuestion imageQuestion) {
-                sprite = null;
-            }
-            else{
+            // if(sprite != null){
+            //     return;
+            // }
+            if(question is IVisitableImageQuestion imageQuestion) {
                 sprite = await imageQuestion.AcceptVisitor(this.Visitor);
             }
         }

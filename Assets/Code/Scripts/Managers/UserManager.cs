@@ -15,6 +15,7 @@ namespace Project.Managers{
         public UserModel CurrentUser {get;set;}
         public LessonModel CurrentLesson {get;set;}
         public QuizModel[] CurrentQuizzes;
+        public TestModel CurrentTestModel;
         public CurrentUnit CurrentUnitProgress;
         public GameModel[] CurrentGameScenes;
         public GameModel CurrentGame;

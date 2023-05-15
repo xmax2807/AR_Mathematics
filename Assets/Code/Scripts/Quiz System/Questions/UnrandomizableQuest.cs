@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Project.QuizSystem.SaveLoadQuestion;
 using UnityEngine;
 
 namespace Project.QuizSystem{
@@ -36,6 +37,24 @@ namespace Project.QuizSystem{
             return new GeneralQuestion(this._question, this.options, this._answer, this.imageUrl);
         }
 
+        public override QuestionSaveData ConvertToData()
+        {
+            return new UnrandomizableSCQSaveData(){
+                Question = _question,
+                ImageURL = imageUrl,
+                Options = options,
+                UserAnswerIndex = _answer,
+                CorrectAnswerIndex = _playerAnswered,
+            };
+        }
+        public override void SetData(QuestionSaveData data)
+        {
+            base.SetData(data);
+            if(data is UnrandomizableSCQSaveData saveData){
+                imageUrl = saveData.ImageURL;
+            }
+        }
+
         public string GetImageType()
         {
             return imageUrl;
@@ -45,7 +64,5 @@ namespace Project.QuizSystem{
         {
             return options;
         }
-    
-
     }
 }

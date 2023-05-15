@@ -8,7 +8,7 @@ namespace Project.UI.Panel{
     public class QuizResultPanelView : OkCancelPanelView{
         [SerializeField] private TMPro.TextMeshProUGUI resultText;
         private IQuestion[] questions;
-        private int correctedQuestionCount;
+        public int CorrectedQuestionCount {get;private set;}
         private bool isCalculated;
         public void SetupQuestions(IQuestion[] questions) {
             this.questions = questions;
@@ -19,7 +19,7 @@ namespace Project.UI.Panel{
             
             foreach(IQuestion question in questions){
                 if(question.IsCorrect()){
-                    correctedQuestionCount++;
+                    CorrectedQuestionCount++;
                 }
             }
             isCalculated = true;
@@ -27,7 +27,7 @@ namespace Project.UI.Panel{
 
         public override Task ShowAsync(CancellationToken cancellationToken)
         {
-            resultText.text = $"{correctedQuestionCount}/{questions.Length}";
+            resultText.text = $"{CorrectedQuestionCount}/{questions.Length}";
             return base.ShowAsync(cancellationToken);
         }
 

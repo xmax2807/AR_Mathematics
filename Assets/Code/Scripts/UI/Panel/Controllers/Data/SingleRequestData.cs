@@ -12,7 +12,7 @@ namespace Project.UI.Panel
         protected const char separator = ',';
         public enum RequestType
         {
-            None, Lesson, Quiz, Game, Achievement
+            None, Lesson, Quiz, Game, Achievement, Test
         }
         [SerializeField] protected RequestType requestType = RequestType.None;
         protected event System.Action<bool> onPostRequest;
@@ -60,6 +60,9 @@ namespace Project.UI.Panel
                     break;
                 case RequestType.Achievement:
                     requestResult = Task.FromResult(true);
+                    break;
+                case RequestType.Test:
+                    requestResult = RequestTest(data);
                     break;
             }
 
@@ -147,6 +150,19 @@ namespace Project.UI.Panel
                 chapter = chapter,
                 semester = semester,
             };
+            return true;
+        }
+        protected async Task<bool> RequestTest(string data)
+        {
+            bool parseResult = int.TryParse(data, out int semester);
+            if (!parseResult) semester = -1;
+
+            var Result = await DatabaseManager.Instance.TestController.GetTest(semester);
+
+            if (Result.Item1 == null || Result.Item2 == null) return false;
+
+            UserManager.Instance.CurrentTestModel = Result.Item1;
+            UserManager.Instance.CurrentQuizzes = Result.Item2;
             return true;
         }
         protected virtual void AddPostRequestCallback() { }

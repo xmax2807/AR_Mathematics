@@ -6,25 +6,28 @@ using UnityEngine;
 namespace Project.UI.Panel{
     public class QuizPagerController : ViewPagerControllerT<PreloadableQuizPanelView>{
         [SerializeField] private LoadingPanelView loadingView;
-        QuizModel[] quizModels => UserManager.Instance.CurrentQuizzes;
+        QuizModel[] QuizModels => UserManager.Instance.CurrentQuizzes;
         [SerializeField] private QuizGenerator generator;
 
         public IQuestion[] AllQuestions {get;private set;}
 
-        protected override void Awake()
+        protected override async void Awake()
         {
             base.Awake();
-            _ = generator.InitAsset();
-            AllQuestions = new IQuestion[quizModels.Length];
+            await generator.InitAsset();
+            AllQuestions = new IQuestion[QuizModels.Length];
         }
 
-        private async void Start(){
+        protected override async void SetupList (){
             loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
             await loadingView.ShowAsync();
             //await generator.InitAsset();
             
-            await FetchPanelView(quizModels.Length, OnBuildQuizUIView);
-            
+            await FetchPanelView(QuizModels.Length, OnBuildUIView);
+            if(preloadList.Count == 0){
+                await loadingView.HideAsync();
+                return;  
+            }
             InvokeOnPageChanged(0);
             LoadMore();
 
@@ -32,9 +35,9 @@ namespace Project.UI.Panel{
             _=loadingView.HideAsync();
         }
 
-        private Task OnBuildQuizUIView(PreloadableQuizPanelView view, int index)
+        protected override Task OnBuildUIView(PreloadableQuizPanelView view, int index)
         {
-            QuizModel current = quizModels[index];
+            QuizModel current = QuizModels[index];
             int quizChapter = current.QuizChapter;
             int quizUnit = current.QuizUnit;
 

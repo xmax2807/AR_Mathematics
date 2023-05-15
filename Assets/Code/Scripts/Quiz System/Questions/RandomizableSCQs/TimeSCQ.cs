@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Project.QuizSystem.SaveLoadQuestion;
 
 namespace Project.QuizSystem{
     public class TimeSCQ : RandomizableSCQ<int>
@@ -9,7 +10,6 @@ namespace Project.QuizSystem{
             if(optionsLength > 12){
                 options = new int [12];
             }
-            Randomize(random);
         }
 
         public override QuestionContentType QuestionContentType => QuestionContentType.Text;
@@ -34,9 +34,21 @@ namespace Project.QuizSystem{
             return result;
         }
 
-        public override IQuestion Clone()
+        protected override RandomizableSCQ<int> DeepClone()
         {
             return new TimeSCQ(this.options.Length);
+        }
+
+        protected override int ParseFromString(string data)
+        {
+            bool parseResult = int.TryParse(data, out int result);
+            if(parseResult == false) return -1;
+            return result;
+        }
+
+        protected override QuestionSaveData ConvertToData(RandomizableSCQSaveData<int> parent)
+        {
+            return new ImageSCQSaveData<int>("", parent);
         }
     }
 }

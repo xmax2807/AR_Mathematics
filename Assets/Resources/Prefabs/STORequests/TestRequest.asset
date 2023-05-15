@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69bd29f1c1044749a9ba4476bdd7e32, type: 3}
   m_Name: TestRequest
   m_EditorClassIdentifier: 
-  requestType: 2
+  requestType: 5
   sceneLoadData: {fileID: 11400000, guid: c62a80156b47e4844858d75e2237067f, type: 2}

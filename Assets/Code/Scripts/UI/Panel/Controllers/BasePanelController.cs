@@ -27,6 +27,5 @@ namespace Project.UI.Panel{
 
             SetUI((T)Data);
         }
-        
     }
 }

@@ -50,7 +50,7 @@ namespace Project.QuizSystem{
 
         public void SetAnswer(object value)
         {
-            value.TryCastTo<T>(out _playerAnswered);
+            value.TryCastTo<T>(onError: null,out _playerAnswered);
         }
 
         public abstract IQuestion Clone();

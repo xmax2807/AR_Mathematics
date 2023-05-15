@@ -26,15 +26,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameFlow/QuizScene.unity
     guid: f02ff65be7351d94cad0b56b377111a9
+  - enabled: 1
+    path: Assets/Scenes/MainGameFlow/FinalTestScene.unity
+    guid: eae400bea5faf8e448b1d4d0df36ddfd
+  - enabled: 1
+    path: Assets/Scenes/MainGameFlow/ParentScene.unity
+    guid: e4c44e06fddcf7c4d8096e7de6335557
   - enabled: 0
     path: Assets/Scenes/FishingScene.unity
     guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
   - enabled: 0
     path: Assets/Scenes/Calendar.unity
     guid: 1bebd17e6477f8d4cafcc59f16139e88
-  - enabled: 1
-    path: Assets/Scenes/MainGameFlow/FinalTestScene.unity
-    guid: eae400bea5faf8e448b1d4d0df36ddfd
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

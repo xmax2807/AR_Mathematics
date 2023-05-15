@@ -12,9 +12,6 @@ public class QuizModel
     [FirestoreProperty] public int QuizSemester { get; set; }
 
     [FirestoreProperty] public int QuizChapter { get; set; }
-
-
-
 }
 
 [System.Serializable]

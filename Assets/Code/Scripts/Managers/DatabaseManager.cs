@@ -86,7 +86,7 @@ public class DatabaseManager : MonoBehaviour
                     }
                 );
                 // QuizController.GetQuizzesByLesson(unit,chapter);
-                TestController.GetTest(semester);
+                // TestController.GetTest(semester);
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);

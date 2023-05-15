@@ -5,6 +5,10 @@ using System;
 using Project.UI.Indicator;
 using Project.QuizSystem.UIFactory;
 using UnityEngine.UI;
+using Project.Managers;
+using Project.QuizSystem.SaveLoadQuestion;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Project.UI.Panel{
     public class TimerPagerUIManager : ViewPagerUIManager{
@@ -13,6 +17,8 @@ namespace Project.UI.Panel{
         [SerializeField] private ButtonIndicator Indicator;
         [SerializeField] private OkCancelPanelView readyToStartTestView;
         [SerializeField] private QuizResultPanelView quizResult;
+        private TestModel TestModel => UserManager.Instance.CurrentTestModel;
+        private UserModel CurrentUser => UserManager.Instance.CurrentUser;
         private QuizPagerUI quizPagerUI;
         
         private QuizPagerController realController; 
@@ -29,8 +35,8 @@ namespace Project.UI.Panel{
             Indicator.ItemClickedCallback += MoveTo;
             base.Awake();
             
-            timer.SetMinutes(1);
-            timer.DoneCountingdown += PopResultPanel;
+            timer.SetMinutes(TestModel.TestTime);
+            timer.DoneCountingdown += FinishTest;
         }
 
         private void PopResultPanel()
@@ -97,7 +103,37 @@ namespace Project.UI.Panel{
         public void FinishTest(){
             timer.StopTimer();
             quizPagerUI.OnUserAnsweredHandler -= OnUserAnswered;
+
             PopResultPanel();
+            Save();
         }
+
+        private void Save(){
+            QuizSystem.IQuestion[] allQuestions = realController.AllQuestions;
+            List<QuestionSaveData> questionSaveList = new();
+
+            foreach (var question in allQuestions)
+            {
+                if(question is ISavableQuestion savableQuestion){
+                    questionSaveList.Add(savableQuestion.ConvertToData());
+                }
+            }
+            
+            string userId = "test";
+            if(CurrentUser != null){
+                userId = CurrentUser.UserID;
+            }
+            SemesterTestSaveData data = new(){
+                UserId = userId,
+                Id = $"{userId}_{TestModel.TestSemester}",
+                Title = $"{TestModel.TestTitle}",
+                Semester = TestModel.TestSemester,
+                NumberOfCorrections = quizResult.CorrectedQuestionCount,
+                NumberOfQuestions = allQuestions.Length,
+                ListData = questionSaveList.ToArray(),
+            };
+            ResourceManager.Instance.SaveTestAsync(data, null);
+        }
+        
     }
 }

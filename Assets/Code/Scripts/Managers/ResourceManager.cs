@@ -2,6 +2,8 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Project.SaveLoad;
+using Project.QuizSystem.SaveLoadQuestion;
 
 namespace Project.Managers
 {
@@ -40,6 +42,23 @@ namespace Project.Managers
                 RewardPack = request.asset as RewardSystem.RewardPackSTO;
             }
 
+        }
+
+        public async void SaveTestAsync(SemesterTestSaveData data, System.Action onResult = null){
+            QuestionJsonIO jsonIO = new ();
+            await jsonIO.SaveSemester(data);
+            onResult?.Invoke();
+        }
+        public async Task<SemesterTestSaveData> LoadTestAsync(int semester){
+            QuestionJsonIO jsonIO = new ();
+            SemesterTestSaveData result;
+            try{
+                result = await jsonIO.LoadSemester(semester);
+            }
+            catch{
+                result = null;
+            }
+            return result;
         }
     }
 }

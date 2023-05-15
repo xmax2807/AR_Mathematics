@@ -59,7 +59,7 @@ public class QuizController
             var quizModel = quiz.ConvertTo<QuizModel>(); 
             QuizModels.Add(quizModel);
         }
-        return QuizModels.OrderBy(x=>SpawnerManager.RandomInstance.Next()).ToArray();
+        return QuizModels.ToArray();
     }
     public void GetQuizzesByLesson(int unit, int chapter)
     {
@@ -80,13 +80,11 @@ public class QuizController
     {
         Query queryQuizzes = Db.Collection("quizzes").WhereIn("QuizId", quizIDs);
         var quizSnapshot = await queryQuizzes.GetSnapshotAsync();
-        Debug.Log("got snapshot");
         List<QuizModel> result = new ();
         foreach (DocumentSnapshot quiz in quizSnapshot.Documents)
         {
             var quizModel = quiz.ConvertTo<QuizModel>(); 
             result.Add(quizModel);
-            Debug.Log(quizModel.QuizId);
         }
         return result;
     }

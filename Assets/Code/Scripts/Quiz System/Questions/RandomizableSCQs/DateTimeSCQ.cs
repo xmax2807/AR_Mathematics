@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils.ExtensionMethods;
 
 namespace Project.QuizSystem{
@@ -19,7 +20,6 @@ namespace Project.QuizSystem{
             if(optionsLength > 4){
                 options = new System.DateTime[4];
             }
-            Randomize(random);
         }
         public DateTime GetAnswer() => options[_answer];
         public override string[] GetOptions()
@@ -45,9 +45,22 @@ namespace Project.QuizSystem{
             }
         }
 
-        public override IQuestion Clone()
+        protected override RandomizableSCQ<DateTime> DeepClone()
         {
             return new DateTimeSCQ(this.options.Length);
+        }
+
+        protected override DateTime ParseFromString(string data)
+        {
+            if(DateTime.TryParse(data, out DateTime result)){
+                return result;
+            }
+            return DateTime.MinValue;
+        }
+
+        protected override QuestionSaveData ConvertToData(RandomizableSCQSaveData<DateTime> parent)
+        {
+            return new ImageSCQSaveData<DateTime>("", parent);
         }
 
         public override QuestionContentType QuestionContentType => QuestionContentType.Text;

@@ -1,10 +1,15 @@
 using System;
+using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils;
 
 namespace Project.QuizSystem{
-    public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizable<RandomizableSCQ<T>> where T : IEquatable<T>
+    public interface IRandomizableQuestion : IRandomizable{
+        IQuestion Random(Random rand = null);
+        IQuestion GetClone();
+    }
+    public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizableQuestion where T : IEquatable<T>
     {
-        protected static readonly System.Random random = new();
+        protected static readonly System.Random random = new(DateTime.Now.Millisecond);
         protected abstract string constQuestion {get;}
         public RandomizableSCQ(int optionsLength) : base("", new T[optionsLength],0){}
 
@@ -33,5 +38,37 @@ namespace Project.QuizSystem{
         {
             return constQuestion;
         }
+
+        public override void SetData(QuestionSaveData data)
+        {
+            if(data is RandomizableSCQSaveData<T> realData){
+                options = realData.ConvertToOptionT(ParseFromString);
+                
+            }
+            base.SetData(data);
+        }
+        protected abstract T ParseFromString(string data);
+        public sealed override QuestionSaveData ConvertToData()
+        {
+            var parent = new RandomizableSCQSaveData<T>(options, _answer, _playerAnswered)
+            {
+                Question = GetQuestion()
+            };
+            return ConvertToData(parent);
+        }
+        protected abstract QuestionSaveData ConvertToData(RandomizableSCQSaveData<T> parent);
+
+        public IQuestion Random(Random rand){
+            var instance = DeepClone();
+            instance.Randomize(rand);
+            return instance;
+        }
+        public sealed override IQuestion Clone()
+        {
+            var instance = DeepClone();
+            return instance;
+        }
+        protected abstract RandomizableSCQ<T> DeepClone();
+        public IQuestion GetClone() => Clone();
     }
 }

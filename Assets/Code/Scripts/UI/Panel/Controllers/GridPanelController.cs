@@ -6,6 +6,7 @@ using Project.UI.Panel.PanelItem;
 
 namespace Project.UI.Panel{
     public class GridPanelController : BasePanelController<GridPanelViewData>{
+        public event System.Action<BasePanelItemUI, int> OnBuildUI;
         [SerializeField] private Transform ButtonGroupTransform;
         [SerializeField] private BasePanelItemUI Item;
         [SerializeField] private TMPro.TextMeshProUGUI Title;
@@ -16,6 +17,11 @@ namespace Project.UI.Panel{
         {
             return Type == data.Type;
         }
+        
+        public void SetUI(BasePanelItemUI itemUI, GridPanelViewData data){
+            Item = itemUI;
+            SetUI(data);
+        }
 
         public override void SetUI(GridPanelViewData Data){
             
@@ -24,6 +30,7 @@ namespace Project.UI.Panel{
             ButtonGroupTransform,
             (obj,i)=>{
                 obj.SetUI(Data.ButtonNames[i]);
+                OnBuildUI?.Invoke(obj, i);
                 // obj.name = Data.ButtonNames[i].Name;
                 // obj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Data.ButtonNames[i].Name;
                 // obj.onClick.AddListener(()=>OnItemClick?.Invoke(i));

@@ -16,15 +16,10 @@ public class TestController
         {
             var testModel = test.ConvertTo<TestModel>();
             TestModels.Add(testModel);
-            Debug.Log(test.Id);
-            Debug.Log(testModel.TestQuestion.Length);
         }
 
         int index = Random.Range(0, TestModels.Count);
         List<QuizModel> quizModels = await DatabaseManager.Instance.QuizController.GetQuizzesByIDs(TestModels[index].TestQuestion);
-        foreach(QuizModel model in quizModels){
-            Debug.Log(model.QuizId);
-        }
         return (TestModels[index], quizModels.ToArray());
 
     }

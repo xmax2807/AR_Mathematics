@@ -7,6 +7,7 @@ using Project.QuizSystem.UIFactory;
 using Project.QuizSystem.QuizUIContent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Project.Utils;
 
 namespace Project.QuizSystem
 {
@@ -19,7 +20,7 @@ namespace Project.QuizSystem
         private AnswerUIFactory AnswerUIFactory;
         private QuizUIContentFactory ContentUIFactory;
         private QuestionVisitor QuestionVisitor;
-        private static Dictionary<(int,int), IQuestion> RandomizableQuestionDict;
+        private static Dictionary<(int,int), IRandomizableQuestion> RandomizableQuestionDict;
 
         private bool isInitialized = false;
         private void Awake(){
@@ -53,7 +54,14 @@ namespace Project.QuizSystem
         public IQuestion CreateRandomQuestion(int unit, int chapter){
             (int,int) unitChapter =  (unit, chapter);
             if(RandomizableQuestionDict.ContainsKey(unitChapter)){
-                return RandomizableQuestionDict[unitChapter].Clone();
+                return RandomizableQuestionDict[unitChapter].Random();
+            }
+            return null;
+        }
+        public IQuestion CreateQuestion(int unit, int chapter){
+            (int,int) unitChapter =  (unit, chapter);
+            if(RandomizableQuestionDict.ContainsKey(unitChapter)){
+                return RandomizableQuestionDict[unitChapter].GetClone();
             }
             return null;
         }

@@ -78,6 +78,7 @@ namespace Project.QuizSystem.UIFactory
             else
             {
                 answerIndex = singleChoiceQuestion.AnswerIndex;
+                userAnsweredIndex = singleChoiceQuestion.UserAnswerIndex;
                 this.question = question;
                 this.options = singleChoiceQuestion.GetOptions();
                 optionButtons = new ButtonAnswerUI[options.Length];
@@ -107,9 +108,9 @@ namespace Project.QuizSystem.UIFactory
             SetUserAnswer();
         }
 
-        protected void ChangeButtonsUI(int index)
+        protected void ChangeButtonsUI(int userAnsweredIndex)
         {
-            answerGroupState.ChangeUserAnswer(index);
+            answerGroupState.ChangeUserAnswer(userAnsweredIndex);
             answerGroupState.ChangeUI(uiState);
         }
 

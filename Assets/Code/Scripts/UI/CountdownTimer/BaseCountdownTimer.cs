@@ -55,7 +55,7 @@ namespace Project.UI.CountdownTimer{
             timeRemainingInSeconds = 0;
         }
         public void PauseTimer(){
-            if(isCountingdown == null) return;
+            if(TimeCoroutineManager.Instance == null || isCountingdown == null) return;
             TimeCoroutineManager.Instance.StopCoroutine(isCountingdown);
         }
 

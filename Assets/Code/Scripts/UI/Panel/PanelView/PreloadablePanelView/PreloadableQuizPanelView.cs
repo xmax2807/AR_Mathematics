@@ -3,6 +3,7 @@ using Project.QuizSystem;
 using Project.QuizSystem.UIFactory;
 using Project.QuizSystem.QuizUIContent;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 namespace Project.UI.Panel{
     public class PreloadableQuizPanelView : PreloadablePanelView
@@ -18,8 +19,11 @@ namespace Project.UI.Panel{
         }
         public override IEnumerator PrepareAsync()
         {
+            if(isPrepared) yield break;
+
+            Task getContentTask =  ContentUI.GetQuestionInfo(Question);
+            yield return new UnityEngine.WaitUntil(()=>getContentTask.IsCompleted);
             isPrepared = true;
-            yield break;
         }
 
         public override IEnumerator UnloadAsync()
