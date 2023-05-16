@@ -2,6 +2,8 @@ using Firebase.Firestore;
 [FirestoreData]
 public class QuizModel
 {
+
+    [FirestoreProperty] public string QuizId { get; set; }
     [FirestoreProperty] public int QuizUnit { get; set; }
     [FirestoreProperty] public string QuizTitle { get; set; }
     [FirestoreProperty] public string QuizIMG { get; set; }
@@ -10,9 +12,6 @@ public class QuizModel
     [FirestoreProperty] public int QuizSemester { get; set; }
 
     [FirestoreProperty] public int QuizChapter { get; set; }
-
-
-
 }
 
 [System.Serializable]

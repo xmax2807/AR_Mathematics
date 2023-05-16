@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07773a230e415114a95ab0a628e6443d, type: 3}
+  m_Name: RulerRewardData
+  m_EditorClassIdentifier: 
+  rewardSound: {fileID: 0}
+  Goal: 0
+  Badge: {fileID: 11400000, guid: c825e41f2b9b74147886265889374b3b, type: 2}
+  UnacquiredBadge: {fileID: 21300000, guid: 596b176e9bbd0e34da219b0c4fec6003, type: 3}

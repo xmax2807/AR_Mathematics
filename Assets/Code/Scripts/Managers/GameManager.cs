@@ -21,6 +21,7 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<UserManager>(childName: "User Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
+            gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
         }
         protected void Awake()
         {
@@ -34,7 +35,7 @@ namespace Project.Managers
             }
             DontDestroyOnLoad(this);
             Application.targetFrameRate = 30;
-            Screen.SetResolution(1280, 720, true);
+            Screen.SetResolution(1280, 720, fullscreen: true);
         }
 
         public System.Func<Task> OnGameFinishLoading;

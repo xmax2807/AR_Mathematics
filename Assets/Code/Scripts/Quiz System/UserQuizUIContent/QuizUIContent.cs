@@ -14,7 +14,7 @@ namespace Project.QuizSystem.QuizUIContent{
             this.prefab = prefab;
             this.Visitor = visitor;
         }
-        public async void CreateUI(Transform parent, IQuestion question){
+        public async Task CreateUI(Transform parent, IQuestion question){
             if(question.QuestionContentType != contentType){
                 throw new UnassignedReferenceException("Question's content type is not match with this UI");
             }
@@ -23,7 +23,7 @@ namespace Project.QuizSystem.QuizUIContent{
             BuildUI(parent);
         }
         protected abstract void BuildUI(Transform parent);
-        protected virtual Task GetQuestionInfo(IQuestion question){
+        public virtual Task GetQuestionInfo(IQuestion question){
             this.question = question;
             return Task.CompletedTask;
         }
@@ -37,6 +37,11 @@ namespace Project.QuizSystem.QuizUIContent{
                 throw new MissingComponentException($"Prefab missing {mainComponent.GetType().Name}");
             }
         }
+        protected override void BuildUI(Transform parent)
+        {
+            SpawnerManager.Instance.SpawnComponentInParent(mainComponent,parent,OnBuildUI);
+        }
+        protected abstract void OnBuildUI(T component);
     }
     public class TMProUIQuizContent : QuizUIContent<TMPro.TextMeshProUGUI>
     {
@@ -45,18 +50,13 @@ namespace Project.QuizSystem.QuizUIContent{
 
         public TMProUIQuizContent(GameObject prefab, IQuestionVisitor visitor) : base(prefab, visitor){}
 
-        protected override void BuildUI(Transform parent)
-        {
-            SpawnerManager.Instance.SpawnObjectInParent(mainComponent,parent,OnBuildUI);
-        }
-        private void OnBuildUI(TMPro.TextMeshProUGUI textMesh){
+        protected override void OnBuildUI(TMPro.TextMeshProUGUI textMesh){
             textMesh.text = questContent;
         }
-        protected override Task GetQuestionInfo(IQuestion question)
+        public override async Task GetQuestionInfo(IQuestion question)
         {
-            base.GetQuestionInfo(question);
+            await base.GetQuestionInfo(question);
             questContent = question.GetQuestion();
-            return Task.CompletedTask;
         }
     }
     public class ImageQuizContent : QuizUIContent<Image>
@@ -65,21 +65,17 @@ namespace Project.QuizSystem.QuizUIContent{
         private Sprite sprite;
         public ImageQuizContent(GameObject prefab, IQuestionVisitor visitor) : base(prefab, visitor){}
 
-        protected override void BuildUI(Transform parent)
-        {
-            SpawnerManager.Instance.SpawnObjectInParent(mainComponent,parent,OnBuildUI);
-        }
-        private void OnBuildUI(Image image){
+        protected override void OnBuildUI(Image image){
             image.sprite = sprite;
             image.preserveAspect = true;
         }
-        protected override async Task GetQuestionInfo(IQuestion question)
+        public override async Task GetQuestionInfo(IQuestion question)
         {
             await base.GetQuestionInfo(question);
-            if(question is not IVisitableImageQuestion imageQuestion) {
-                sprite = null;
-            }
-            else{
+            // if(sprite != null){
+            //     return;
+            // }
+            if(question is IVisitableImageQuestion imageQuestion) {
                 sprite = await imageQuestion.AcceptVisitor(this.Visitor);
             }
         }

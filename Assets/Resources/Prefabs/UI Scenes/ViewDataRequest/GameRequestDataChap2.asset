@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d1abcc27bb06f47801a5c12115e560, type: 3}
+  m_Name: GameRequestDataChap2
+  m_EditorClassIdentifier: 
+  Children: []
+  ButtonNames: []
+  realData: {fileID: 11400000, guid: 3fb36fc104662c74dab9b129acea6461, type: 2}
+  wrappedController: {fileID: 8268570796667732546, guid: ce442e9ca8195c64995a5ed3df0b9340,
+    type: 3}
+  stringData: ',2'
+  requestType: 3
+  requestData: {fileID: 11400000, guid: c5d820199003312479ba97e5e2eaaa6d, type: 2}
+  sceneLoadData: {fileID: 11400000, guid: 0f56610d6c28467428d550e40e3741b1, type: 2}

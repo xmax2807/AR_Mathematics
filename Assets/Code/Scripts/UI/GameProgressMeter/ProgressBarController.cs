@@ -22,7 +22,7 @@ namespace Project.UI.ProgressBar
         public override void SetupAnimation(float maxValue)
         {
             _slider.value = 0;
-            _animation = new ProgressSoundAnim(buildUpSFX, new InfiniteProgressAnim(_slider, maxValue));
+            _animation = new ProgressSoundAnim(buildUpSFX, new BaseProgressAnim(_slider, maxValue));
         }
 
         private void OnSliderChanged(float value){

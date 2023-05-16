@@ -39,26 +39,6 @@ EditorBuildSettings:
     path: Assets/Scenes/FindingObjGame.unity
     guid: bc33e2916a673d34498fa8ea93bf7a0d
   m_configObjects:
-    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
-      type: 2}
-    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 89a6d18d3df8d3e4fa917b0f9a963bc0,
-      type: 2}
-    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: de8a8e4f987434338a4b1062feb8d069,
-      type: 2}
-    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d1bd197292d24bf4498c917b678c3826,
-      type: 2}
-    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
-      guid: fbb0f38cb866c43469ef07d706a0893d, type: 2}
-    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
-      guid: 4b04a2f5c86d19f43acd91660b05b2ac, type: 2}
-    com.unity.addressableassets: {fileID: 11400000, guid: a1f0a9c607e2e4d45a78a84bb2fc49ca,
-      type: 2}
-    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: c2f7b8d7c0bff4d10874cbcf3f24af78,
-      type: 2}
-    com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: b27ec7d82a91a48e69fd689ad6808e5e,
-      type: 2}
-    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 1eb95d77acb39444e8cf44313496a874,
-      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58f40b12bbc864f3c96c6505a9a1e1e3,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 1bbc41a9e5fd7ba40831bb6450a14dd2,

@@ -38,6 +38,7 @@ namespace Project.AssetIO{
         public override async Task<T> GetFile(string url)
         {
             if(cache.ContainsKey(url)) return cache[url];
+            cache.Add(url, default);
 
             var fileRef = FirebaseStorageDownloadHandler.GetFileRef(url);
             System.Uri uri = await fileRef.GetDownloadUrlAsync();
@@ -51,9 +52,11 @@ namespace Project.AssetIO{
 
             T result = await _IFileHandler.ReadAsync(fullFilePath);
             
-            if(result == null) return default;
-
-            cache.Add(url, result);
+            if(result == null){
+                cache.Remove(url);
+                return default;
+            } 
+            cache[url] = result;
             return result;
         }
     }

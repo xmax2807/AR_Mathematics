@@ -6,24 +6,38 @@ using UnityEngine;
 namespace Project.UI.Panel{
     public class QuizPagerController : ViewPagerControllerT<PreloadableQuizPanelView>{
         [SerializeField] private LoadingPanelView loadingView;
-        QuizModel[] quizModels => UserManager.Instance.CurrentQuizzes;
+        QuizModel[] QuizModels => UserManager.Instance.CurrentQuizzes;
         [SerializeField] private QuizGenerator generator;
 
-        private async void Start(){
-            loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
-            await loadingView.ShowAsync();
-            await generator.InitAsset();
-            await FetchPanelView(quizModels.Length, OnBuildVideoView);
-            InvokeOnPageChanged(0);
-            LoadMore();
-            await preloadList[0].ShowAsync();
+        public IQuestion[] AllQuestions {get;private set;}
 
-            await loadingView.HideAsync();
+        protected override async void Awake()
+        {
+            base.Awake();
+            await generator.InitAsset();
+            AllQuestions = new IQuestion[QuizModels.Length];
         }
 
-        private Task OnBuildVideoView(PreloadableQuizPanelView view, int index)
+        protected override async void SetupList (){
+            loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
+            await loadingView.ShowAsync();
+            //await generator.InitAsset();
+            
+            await FetchPanelView(QuizModels.Length, OnBuildUIView);
+            if(preloadList.Count == 0){
+                await loadingView.HideAsync();
+                return;  
+            }
+            InvokeOnPageChanged(0);
+            LoadMore();
+
+            _=preloadList[0].ShowAsync();
+            _=loadingView.HideAsync();
+        }
+
+        protected override Task OnBuildUIView(PreloadableQuizPanelView view, int index)
         {
-            QuizModel current = quizModels[index];
+            QuizModel current = QuizModels[index];
             int quizChapter = current.QuizChapter;
             int quizUnit = current.QuizUnit;
 
@@ -36,7 +50,7 @@ namespace Project.UI.Panel{
             var answerUI = generator.GetAnswerUI(question.QuestionType);
             var quizUIContent = generator.GetQuizUIContent(question.QuestionContentType);
             view.Setup(question, quizUIContent, answerUI);
-                
+            AllQuestions[index] = question;
             return Task.CompletedTask;
         }
     }

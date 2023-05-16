@@ -30,6 +30,18 @@ namespace Project.UI.UISetPack
             return null;
         }
 
+        public override async Task<Sprite> FindASprite(string name)
+        {
+            Sprite result = null;
+            foreach(var pack in packs){
+                result = await pack.FindASprite(name);
+                
+                if(result != null) break;
+            }
+
+            return result;
+        }
+
         protected override void OnDestroy(){
             foreach(var pack in packs){
                 Destroy(pack);   

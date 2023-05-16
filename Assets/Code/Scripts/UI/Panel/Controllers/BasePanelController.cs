@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 namespace Project.UI.Panel{
     public abstract class BasePanelController : MonoBehaviour{
         [SerializeField] public PanelViewBase View;
-        [SerializeField] public Button BackButton;
-        public UnityEngine.Events.UnityAction onBackButtonClicked;
         public abstract PanelEnumType Type {get;}
+        public abstract bool CheckType(PanelViewData data);
         public abstract void SetUI(PanelViewData Data);
-        private void OnEnable(){
-            if(BackButton == null || onBackButtonClicked == null) return;
-            BackButton.onClick?.AddListener(onBackButtonClicked);
-        }
-        private void OnDisable(){
-            if(BackButton == null || onBackButtonClicked == null) return;
-            BackButton?.onClick?.RemoveListener(onBackButtonClicked);
-        }
-        public async Task Hide(){
+        protected virtual void OnEnable(){}
+        protected virtual void OnDisable(){}
+        public virtual async Task Hide(){
             await View.HideAsync();
         }
-        public async Task Show(){
+        public virtual async Task Show(){
             await View.ShowAsync();
         }
     }
@@ -34,6 +27,5 @@ namespace Project.UI.Panel{
 
             SetUI((T)Data);
         }
-        
     }
 }

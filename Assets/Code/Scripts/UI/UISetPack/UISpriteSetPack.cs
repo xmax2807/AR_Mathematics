@@ -10,6 +10,19 @@ namespace Project.UI.UISetPack
     {
         [SerializeField] protected AssetReferenceSprite[] spriteRefs;
         public Sprite[] AssetPacks {get; private set;}
+
+        public override async Task<Sprite> FindASprite(string name)
+        {
+            if(!IsInitialized){
+                await Init();
+            }
+            foreach(Sprite sprite in AssetPacks){
+                if(sprite.name == name) return sprite;
+            }
+            return null;
+        }
+        void OnDisable() => IsInitialized = false;
+
         public override async Task Init()
         {
             if(IsInitialized) return;
@@ -19,6 +32,9 @@ namespace Project.UI.UISetPack
 
         protected override void OnDestroy(){
             Debug.Log("Asset pack destroyed");
+            UnLoadAssets();
+        }
+        public void UnLoadAssets(){
             AddressableManager.Instance.UnloadAssets(spriteRefs);
             IsInitialized = false;
         }

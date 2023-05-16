@@ -14,7 +14,7 @@ public class UserModel
 {
     // [FirestoreProperty] public string Username { get; set; }
 
-    // [FirestoreProperty] public string UserID { get; set; }
+    [FirestoreProperty] public string UserID { get; set; }
     [FirestoreProperty] public List<string> User_ListAchievement { get; set; }
     [FirestoreProperty] public List<GameData> SavedGame { get; set; }
 

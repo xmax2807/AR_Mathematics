@@ -7,6 +7,8 @@ namespace Project.MiniGames{
         public string TaskDescription;
         public int CurrentProgress {get;protected set;}
         public bool IsCompleted => CurrentProgress >= Goal;
+        public event System.Action OnTaskCompleted;
+        protected void InvokeTaskCompleted()=>OnTaskCompleted?.Invoke();
         public BaseTask(int goal, string description){
             Goal = goal;
             TaskDescription = description;
@@ -33,14 +35,21 @@ namespace Project.MiniGames{
         }
         public override void UpdateProgress(int value)
         {
-            if(IsCompleted) return;
+            if(IsCompleted) {
+                InvokeTaskCompleted();
+                return;
+            }
 
             CurrentTask.UpdateProgress(value);
 
             if(CurrentTask.IsCompleted){
                 CurrentProgress = System.Math.Min(CurrentProgress + 1, Goal);
 
-                if(CurrentProgress == Goal) return;
+                if(CurrentProgress == Goal) {
+                    UnityEngine.Debug.Log("Completed");
+                    InvokeTaskCompleted();
+                    return;
+                }
 
                 OnTaskChanged?.Invoke(CurrentTask);
             }

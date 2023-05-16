@@ -14,6 +14,7 @@ namespace Project.Addressable
         [SerializeField] private PanelType type;
         [Header("Prefab"), SerializeField] private GameObjectReferencePack prefabRefs;
         [Header ("Initialized Prefabs"), SerializeField] private AssetReferenceT<GameObject>[] preInitPrefabs;
+        [Header("Parent for PreInit"), SerializeField] private Transform parentPreInitPrefabs;
         [Header("SFXPack"), SerializeField] private AssetReferenceSingle<Audio.AudioPackSTO> audioRefs;
         
         private List<AsyncOperationHandle<GameObject>> cacheOperations;
@@ -27,6 +28,9 @@ namespace Project.Addressable
         {
             cacheOperations = new();
             var operations = AddressableManager.Instance.InstantiatePrefabs(preInitPrefabs);
+            foreach(var operation in operations){
+               operation.Completed += (operation) => SpawnerManager.Instance.SpawnObjectInParent(operation.Result, parentPreInitPrefabs);
+            }
             cacheOperations.AddRange(operations);
             Debug.Log("preInitPrefabs");
 
@@ -34,9 +38,12 @@ namespace Project.Addressable
             prefabRefs.OnComplete?.Invoke(prefabs);
             Debug.Log("refs");
 
-            var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
-            AudioManager.Instance.SwapSoundPack(audioPack);
-            Debug.Log("audio");
+            if(audioRefs.Reference != null) {
+                var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
+                AudioManager.Instance.SwapSoundPack(audioPack);
+                Debug.Log("audio");
+            }
+            
             await stackSystem.PopAsync();
 
             GameManager.Instance.OnGameFinishLoading?.Invoke();

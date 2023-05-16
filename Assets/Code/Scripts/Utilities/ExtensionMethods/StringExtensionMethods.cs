@@ -42,6 +42,30 @@ namespace Project.Utils.ExtensionMethods
         {
             return long.TryParse(value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out var result);
         }
+        public static bool IsOperator(this string value){
+            value = value.Replace(" ", "");
+            if(value.Length != 1) return false;
+
+            char ch = value[0];
+            return IsOperator(ch);
+        }
+        public static bool IsOperator(this char ch){
+            foreach(char c in MathProvider.MathProvider.Operators){
+                if(ch == c) return true;
+            }
+            return false;
+        }
+        public static char InvertOperator(this char ch){
+            if(!IsOperator(ch)) return ch;
+
+            if(ch == '+') return '-';
+            if(ch == '-') return '+';
+
+            //else the other is the same
+            // if(ch == '*') return '*';
+            // if(ch == '/') return '/';
+            return ch;
+        }
         public static T ToEnum<T>(this string value) where T : Enum
         {
             return (T)Enum.Parse(typeof(T), value, true);

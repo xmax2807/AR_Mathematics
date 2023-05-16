@@ -8,16 +8,17 @@ namespace Project.UI.Panel
 {
     public class ViewPagerUIManager : MonoBehaviour
     {
-        [SerializeField] private Transform mainView;
+        [SerializeField] private Canvas loadingView;
+        [SerializeField] protected Transform mainView;
         [SerializeField] private Button prevButton;
         [SerializeField] private Button nextButton;
         [SerializeField] private Button backButton;
-        [SerializeField] private ViewPagerController pagerController;
+        [SerializeField] protected ViewPagerController pagerController;
 
         private Dictionary<string,ViewPagerUI> cache;
-        private ViewPagerUI currentPagerUI;
+        protected ViewPagerUI currentPagerUI;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             cache = new (1);
             if (pagerController == null)
@@ -38,7 +39,7 @@ namespace Project.UI.Panel
         //     nextButton.onClick.RemoveListener(MoveNext);
         // }
 
-        private void PagerChangedPage(PreloadablePanelView panelView)
+        protected virtual void PagerChangedPage(PreloadablePanelView panelView)
         {
             UpdateViewUI(panelView);
             UpdateButtonUI();
@@ -66,13 +67,14 @@ namespace Project.UI.Panel
             currentPagerUI?.Show();
         }
 
-        private void UpdateButtonUI()
+        protected virtual void UpdateButtonUI()
         {
-            prevButton.interactable = pagerController.CanMovePrev();
-            nextButton.interactable = pagerController.CanMoveNext();
+            if(prevButton != null) prevButton.interactable = pagerController.CanMovePrev();
+            if(nextButton != null) nextButton.interactable = pagerController.CanMoveNext();
         }
         public void MovePrev()=>pagerController.MovePrev();
         public void MoveNext()=>pagerController.MoveNext();
+        public void MoveTo(int index) => pagerController.MoveTo(index);
 
         public void HideNavigator(){
             if(prevButton != null) prevButton.gameObject.SetActive(false);
@@ -81,6 +83,12 @@ namespace Project.UI.Panel
         public void ShowNavigator(){
             if(prevButton != null) prevButton.gameObject.SetActive(true);
             if(nextButton != null) nextButton.gameObject.SetActive(true);
+        }
+
+        public void ToggleLoadingView(bool isOn){
+            if(loadingView == null) return;
+
+            loadingView.enabled = isOn;
         }
     }
 }

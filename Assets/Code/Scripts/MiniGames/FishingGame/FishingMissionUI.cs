@@ -24,7 +24,7 @@ namespace Project.MiniGames.FishingGame{
             Giver.OnTaskChanged += UpdateQuestion;
         }
         void Start(){
-            var CurrentRewardData = Giver.Reward;
+            var CurrentRewardData = Giver.CurrentReward;
 
             Image.ManualSetup(CurrentRewardData.UnacquiredBadge,CurrentRewardData.Badge.GetReward(), Giver.AllTaskCompleted);
             OverallGameTask.SetupAnimation(Giver.Tasks.Goal);

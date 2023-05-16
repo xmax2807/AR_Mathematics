@@ -17,14 +17,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6566a0fd27328ba43890a103a319611f, type: 2}
   - {fileID: 11400000, guid: c29eda5456f94e440a586111e0620d6c, type: 2}
   - {fileID: 11400000, guid: d3d1889dd4a55d04884bd96efa043518, type: 2}
+  - {fileID: 11400000, guid: 4cff52c2d3eb3ae499536c208045fb17, type: 2}
   ButtonNames:
   - Name: "B\u1EAFt \u0111\u1EA7u h\u1ECDc"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  - Name: "H\u01B0\u01A1\u0301ng d\xE2\u0303n"
+  - Name: "H\u01B0\u1EDBng d\u1EABn"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  - Name: "B\xF4\u0323 s\u01B0u t\xE2\u0323p"
+  - Name: "B\u1ED9 s\u01B0u t\u1EADp"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
-  - Name: "Ca\u0300i \u0111\u0103\u0323t"
+  - Name: "C\xE0i \u0111\u1EB7t"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "Ph\u1EE5 huynh"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   Title: "To\xE1n L\u1EDBp 1"
   Description: 

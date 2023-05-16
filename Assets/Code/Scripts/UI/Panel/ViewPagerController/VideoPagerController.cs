@@ -11,7 +11,7 @@ namespace Project.UI.Panel
         LessonController lessonController => DatabaseManager.Instance.LessonController;
         LessonModel lessonModel => UserManager.Instance.CurrentLesson;
 
-        private async void Start()
+        protected override async void SetupList()
         {
             downloadingPanel.SetupUI("Đang tải bài học, bé chờ chút nhé...");
             
@@ -19,7 +19,7 @@ namespace Project.UI.Panel
                 await downloadingPanel.HideAsync();
                 return;
             }
-            await FetchPanelView(lessonModel.VideoNumbers, OnBuildVideoView);
+            await FetchPanelView(lessonModel.VideoNumbers, OnBuildUIView);
             await downloadingPanel.StartDownload();
             
             InvokeOnPageChanged(0);
@@ -27,7 +27,7 @@ namespace Project.UI.Panel
             await preloadList[0].ShowAsync();
         }
 
-        private async Task OnBuildVideoView(PreloadableVideoPanelView view, int index)
+        protected override async Task OnBuildUIView(PreloadableVideoPanelView view, int index)
         {
             var reference = lessonController.GetVideoReference(lessonModel, index);
             if (reference == null) return;

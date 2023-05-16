@@ -18,8 +18,13 @@ public class DatabaseManager : MonoBehaviour
     // [SerializeField] QuizData quizData;
     // [SerializeField] string collection = "quizzes";
     // private string userID;
-    [SerializeField] private string Email;
-    [SerializeField] private string Password;
+    // [SerializeField] private string Email;
+    // [SerializeField] private string Password;
+    [SerializeField] private int chapter;
+    [SerializeField] private int unit;
+    [SerializeField] private int semester = 1;
+
+
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
@@ -31,6 +36,7 @@ public class DatabaseManager : MonoBehaviour
     public LessonController LessonController { get; private set; }
     public GameController GameController { get; private set; }
     public QuizController QuizController { get; private set; }
+    public TestController TestController { get; private set; }
     void Awake()
     {
         if (Instance == null)
@@ -73,12 +79,14 @@ public class DatabaseManager : MonoBehaviour
                 LessonController = new();
                 GameController = new();
                 QuizController = new();
-
+                TestController = new();
                 FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
                     task => {
                         UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
                     }
                 );
+                // QuizController.GetQuizzesByLesson(unit,chapter);
+                // TestController.GetTest(semester);
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);

@@ -12,13 +12,18 @@ public class Clock : MonoBehaviour
     [SerializeField]
     Transform secondsHand;
     // Start is called before the first frame update
+
+    private Coroutine tickCoroutine;
     void Start(){
         //init time
         System.DateTime time = System.DateTime.Now;
         SetHour(time);
         SetMinute(time);
         SetSecond(time);
-        TimeCoroutineManager.Instance.DoLoopAction(()=>SetSecond(System.DateTime.Now), ()=>false, 1);
+        tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1);
+    }
+    void onDestroy(){
+        TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);
     }
     public void SetHour(System.DateTime value)
     {
@@ -41,8 +46,37 @@ public class Clock : MonoBehaviour
             SetMinute(value);
         }
     }
+    public void SetSecond(int value){
+        float secondsRotation = -(value / 60f) * 360f;
+        secondsHand.localRotation = Quaternion.Euler(new Vector3(secondsRotation - 90, 0, 0));
+    }
+    public void SetMinute(int value){
+        float minutesRotation = -(value / 60f) * 360f;
+        minutesHand.localRotation = Quaternion.Euler(new Vector3(minutesRotation - 90, 0, 0));
+    }
+     public void SetHour(int value){
+        float hoursRotation = -(value / 12f) * 360f;
+        hoursHand.localRotation = Quaternion.Euler(new Vector3(hoursRotation - 90, 0, 0));
+    }
+    public void RandomHour(){
+        SetTime(UnityEngine.Random.Range(1,13));
+    }
+
+    private int seconds;
+    public void SetTime(int hour){
+        SetHour(hour);
+        SetMinute(0);
+        SetSecond(0);
+        if(tickCoroutine != null){
+            TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);
+        }
+        seconds = 0;
+        tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1f);
+    }
     public void IncreaseSecond(){
-        secondsHand.localRotation = Quaternion.Euler(new Vector3(360f/60f - 90, 0, 0));
+        seconds = (seconds + 1) % 60;
+        float newXRotation = -(seconds / 60f) * 360f;
+        secondsHand.localRotation = Quaternion.Euler(new Vector3(newXRotation, 0, 0));
     }
 
     //Update is called once per frame

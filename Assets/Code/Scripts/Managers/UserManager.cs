@@ -12,10 +12,13 @@ namespace Project.Managers{
             }
         }
         public static UserManager Instance;
+        public UserModel CurrentUser {get;set;}
         public LessonModel CurrentLesson {get;set;}
         public QuizModel[] CurrentQuizzes;
+        public TestModel CurrentTestModel;
         public CurrentUnit CurrentUnitProgress;
         public GameModel[] CurrentGameScenes;
+        public GameModel CurrentGame;
         public CourseModel CourseModel;
         public void Awake(){
             if(Instance == null){

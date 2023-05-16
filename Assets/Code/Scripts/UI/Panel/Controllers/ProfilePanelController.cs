@@ -5,6 +5,11 @@ namespace Project.UI.Panel{
     {
         public override PanelEnumType Type => throw new System.NotImplementedException();
 
+        public override bool CheckType(PanelViewData data)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void SetUI(PanelViewData Data)
         {
             throw new System.NotImplementedException();

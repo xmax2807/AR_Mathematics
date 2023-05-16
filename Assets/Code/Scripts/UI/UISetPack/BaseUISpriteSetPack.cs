@@ -6,5 +6,7 @@ namespace Project.UI.UISetPack{
         public bool IsInitialized {get; protected set;}
         public abstract Task Init();
         protected abstract void OnDestroy();
+
+        public abstract Task<Sprite> FindASprite(string name);
     }
 }

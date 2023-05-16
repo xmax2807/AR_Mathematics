@@ -22,5 +22,6 @@ namespace Project.UI.Panel
             }
             AddLastView();
         }
+        protected virtual Task OnBuildUIView(T item, int index) => Task.CompletedTask;
     }
 }
