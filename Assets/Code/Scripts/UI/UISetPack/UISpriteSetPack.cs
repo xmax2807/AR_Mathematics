@@ -21,10 +21,6 @@ namespace Project.UI.UISetPack
             }
             return null;
         }
-
-        void OnEnable(){
-            IsInitialized = false;
-        }
         void OnDisable() => IsInitialized = false;
 
         public override async Task Init()
@@ -36,6 +32,9 @@ namespace Project.UI.UISetPack
 
         protected override void OnDestroy(){
             Debug.Log("Asset pack destroyed");
+            UnLoadAssets();
+        }
+        public void UnLoadAssets(){
             AddressableManager.Instance.UnloadAssets(spriteRefs);
             IsInitialized = false;
         }

@@ -13,14 +13,20 @@ public class ParentControllerBehaviour : MonoBehaviour{
 
     #region Database/Server
     FirebaseUser CurrentUser => DatabaseManager.Auth.CurrentUser;
-    private bool canAccess;
+    private bool acceessGranted;
     private TestController TestController => DatabaseManager.Instance.TestController;
+
+    [Header("AccessView")]
+    [SerializeField] private OkCancelPanelView passwordFieldView;
     #endregion
     
     #region TestResults
     private List<SemesterTestSaveData> allTests;
+    [Header("Detail Test Pager")]
     [SerializeField] private TestResultPagerController pagerController;
     [SerializeField] private PanelViewBase pagerUIView;
+    
+    [Header("Tests Overview")]
     [SerializeField] private GridPanelController testOverviews;
     [SerializeField] private GridPanelViewData testOverviewData;
     [SerializeField] private TestResultItemUI ItemUIPrefab;
@@ -28,11 +34,13 @@ public class ParentControllerBehaviour : MonoBehaviour{
 
     private void OnEnable(){
         pagerUIView.HideAsync();
+        passwordFieldView.onConfirm += HandleAccess;
     }
     private async void Start(){
-        if(!canAccess){
+        if(!acceessGranted){
             //Require user type password
-            HandleAccess();
+            await passwordFieldView.ShowAsync();
+            return;
         }
         await LoadChildTest();
         SetUpOverviewTestResult();
