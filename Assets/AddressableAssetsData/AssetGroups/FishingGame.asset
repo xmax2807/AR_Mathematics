@@ -133,10 +133,6 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Models/fish20
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 6a4ff0398748f784cb9a998daf743624
-    m_Address: Assets/Resources_moved/Models/Wuppy
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 3d522716e358d154ab5df7322501c0bb
     m_Address: Assets/Resources_moved/Models/Merlin
     m_ReadOnly: 0

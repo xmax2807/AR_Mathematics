@@ -48,7 +48,12 @@ public class PlaceOnPlaneMain : MonoBehaviour
 			placementUpdate = new UnityEvent();
 
 		placementUpdate.AddListener(DiableVisual);
-	}
+
+        /*spawnedObject = Instantiate(m_PlacedPrefab, m_PlacedPrefab.transform.position, m_PlacedPrefab.transform.rotation);
+        spawnedObject.transform.LookAt(ARCamera.transform);
+        var rotation = spawnedObject.transform.rotation;
+        spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);*/
+    }
 
 	bool TryGetTouchPosition(out Vector2 touchPosition)
 	{
@@ -85,13 +90,13 @@ public class PlaceOnPlaneMain : MonoBehaviour
 
 
 			}
-			else
+			/*else
 			{
 				spawnedObject.transform.position = hitPose.position;
 				spawnedObject.transform.LookAt(ARCamera.transform);
 				var rotation = spawnedObject.transform.rotation;
 				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-			}
+			}*/
 
 			placementUpdate.Invoke();
 		}
