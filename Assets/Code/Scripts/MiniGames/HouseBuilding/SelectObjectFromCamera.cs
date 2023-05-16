@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class SelectObjectFromCamera : MonoBehaviour
 {
-
+    [SerializeField] private Transform spawnParent;
     [SerializeField]
     private PlacementObject[] placedObjects;
+
+    private PlacementObject[] placements;
 
     [SerializeField]
     private Camera arCamera;
@@ -17,9 +19,13 @@ public class SelectObjectFromCamera : MonoBehaviour
     [SerializeField]
     private bool displayCanvas = true;
 
-    void Awake()
+    public void onSpawnMainPlane()
     {
-        
+        placements = new PlacementObject[placedObjects.Length];
+        for(int i = 0; i < placements.Length; i++)
+        {
+           placements[i] = Instantiate(placedObjects[i], spawnParent);
+        }
     }
 
     void Update()
@@ -56,7 +62,7 @@ public class SelectObjectFromCamera : MonoBehaviour
 
     void ChangeSelectedObject(PlacementObject selected = null)
     {
-        foreach (PlacementObject current in placedObjects)
+        foreach (PlacementObject current in placements)
         {
             MeshRenderer meshRenderer = current.GetComponent<MeshRenderer>();
             if (selected != current)
@@ -67,6 +73,7 @@ public class SelectObjectFromCamera : MonoBehaviour
             {
                 current.Selected = true;
                 current.transform.position = new Vector3(0, 10f, 0);
+                Debug.Log(current.transform.localPosition);
                 current.Selected = false;
             }
         }

@@ -1,3 +1,4 @@
+using Project.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Merge : MonoBehaviour
     private string tag;
     public int ID;
     public Merge cube_merge;
+    //public ParticleSystem firework;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,14 @@ public class Merge : MonoBehaviour
                 if (cube_merge == null) return;
                 Instantiate(cube_merge.gameObject, new Vector3 (0, 1, 0), cube_merge.transform.rotation);
                 cube_merge.ID = ID + 1;
+
+
+                /*fwPrefab = Instantiate(firework, new Vector3 (0, 0 ,-2), fwPrefab.transform.rotation);
+                fwPrefab.gameObject.SetActive(true);
+                fwPrefab.Play(true);
+                Debug.Log("firework is running");
+                TimeCoroutineManager.Instance.WaitForSeconds(fwPrefab.main.duration, () => fwPrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting));*/
+                
             }
             else
             {
