@@ -7,6 +7,7 @@ namespace Project.QuizSystem{
         IQuestion Random(Random rand = null);
         IQuestion GetClone();
     }
+    
     public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizableQuestion where T : IEquatable<T>
     {
         protected static readonly System.Random random = new(DateTime.Now.Millisecond);
@@ -58,11 +59,7 @@ namespace Project.QuizSystem{
         }
         protected abstract QuestionSaveData ConvertToData(RandomizableSCQSaveData<T> parent);
 
-        public IQuestion Random(Random rand){
-            var instance = DeepClone();
-            instance.Randomize(rand);
-            return instance;
-        }
+        public IQuestion Random(Random rand) => RandomT(rand);
         public sealed override IQuestion Clone()
         {
             var instance = DeepClone();
@@ -70,5 +67,12 @@ namespace Project.QuizSystem{
         }
         protected abstract RandomizableSCQ<T> DeepClone();
         public IQuestion GetClone() => Clone();
+
+        public RandomizableSCQ<T> RandomT(Random rand = null)
+        {
+            var instance = DeepClone();
+            instance.Randomize(rand);
+            return instance;
+        }
     }
 }

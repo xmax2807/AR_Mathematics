@@ -4,94 +4,113 @@ using Project.Utils;
 using Project.Utils.ExtensionMethods;
 
 namespace Project.MiniGames{
-    internal interface IVisitableQuizTask{
+    internal interface IVisitableSCQTask{
         string GetQuestion();
         string[] GetOptions();
         bool IsCorrect(int index);
         int GetAnswerIndex();
     }
-    internal interface IVisitableQuizTask<T> : IVisitableQuizTask{
+    internal interface IVisitableQuizTask<T> {
         T GetAnswer();
     }
-    public class ShapeTask : BaseTask{
-        private ShapeQuestion checker;
+    public abstract class RandomizableTask : BaseTask
+    {
+        protected IQuestion checker;
+
+        public RandomizableTask(int goal, string description) : base(goal, description)
+        {
+            checker = CreateQuestion().Random();
+        }
+
+        protected abstract IRandomizableQuestion CreateQuestion();
+
+        public sealed override bool IsCorrect(object value){
+            checker.SetAnswer(value);
+            return checker.IsCorrect();
+        }
+    }
+    public class ShapeTask : RandomizableTask{
+        //private ShapeQuestion checker;
         public ShapeTask(int goal, string description) : base(goal, description)
         {
-            checker = new ShapeQuestion("");
             TaskDescription += checker.GetQuestion();
         }
 
-        public override bool IsCorrect(object value)
-        {
-            if(value is not Shape.ShapeType type) return false;
-            
-            return checker.IsCorrect(new Shape(type));
-        }
+        protected override IRandomizableQuestion CreateQuestion() => new ShapeQuestion("");
     }
 
-    public class ClockTask : BaseTask, IVisitableQuizTask<int>{
-        private TimeSCQ checker;
-
-        public ClockTask(int goal, string description) : base(goal, description)
+    public abstract class RandomizableSingleChoiceTask<T> : RandomizableTask, IVisitableQuizTask<T> where T : System.IEquatable<T>
+    {
+        protected RandomizableSCQ<T> realQuestion;
+        public RandomizableSingleChoiceTask(int goal, string description) : base(goal, description)
         {
-            checker = new TimeSCQ(4);
         }
 
-        public int GetAnswer()
+         public T GetAnswer()
         {
-            return checker.GetAnswer();
+            return realQuestion.GetAnswer();
         }
 
-        public int GetAnswerIndex() => checker.AnswerIndex;
+        public int GetAnswerIndex() => realQuestion.AnswerIndex;
 
         public string[] GetOptions()
         {
-            return checker.GetOptions();
+            return realQuestion.GetOptions();
         }
 
         public string GetQuestion()
         {
-            return checker.GetQuestion();
-        }
-
-        public override bool IsCorrect(object value)
-        {
-            if(value is not int hour) return false;
-            return checker.IsCorrect(hour);
+            return realQuestion.GetQuestion();
         }
 
         public bool IsCorrect(int index)
         {
-            return checker.AnswerIndex == index;
+            return realQuestion.AnswerIndex == index;
         }
+
+        protected sealed override IRandomizableQuestion CreateQuestion(){
+            realQuestion = CreateSingleChoiceQuestion();
+            realQuestion.Randomize();
+            return realQuestion;
+        }
+        protected abstract RandomizableSCQ<T> CreateSingleChoiceQuestion();
     }
-    public class CalendarTask : BaseTask, IVisitableQuizTask<System.DateTime>
+
+    public class ClockTask : RandomizableSingleChoiceTask<int>{
+
+        public ClockTask(int goal, string description) : base(goal, description)
+        {
+        }
+
+        protected override RandomizableSCQ<int> CreateSingleChoiceQuestion() => new TimeSCQ(4);
+    }
+    public class CalendarTask : RandomizableSingleChoiceTask<DateTime>
     {
-        private DateTimeSCQ _checker;
         public CalendarTask(int goal, string description) : base(goal, description)
         {
-            _checker = new DateTimeSCQ();
         }
 
-        public DateTime GetAnswer()
+        protected override RandomizableSCQ<DateTime> CreateSingleChoiceQuestion() => new DateTimeSCQ();
+    }
+
+    public class HouseBuildingTask : RandomizableTask, IVisitableQuizTask<int[]>
+    {
+        private int[] m_Answer;
+        public HouseBuildingTask(int goal, string description) : base(goal, description)
         {
-            return _checker.GetAnswer();
-        }
-        public int GetAnswerIndex() => _checker.AnswerIndex;
-
-        public string[] GetOptions()=> _checker.GetOptions();
-
-        public string GetQuestion() => _checker.GetQuestion();
-
-        public bool IsCorrect(int index)
-        {
-            return _checker.AnswerIndex == index;
         }
 
-        public override bool IsCorrect(object value)
+        public int[] GetAnswer()
         {
-            if(value is not int time) return false;
-            return _checker.IsCorrect(time);
+            return m_Answer;
+        }
+
+        protected override IRandomizableQuestion CreateQuestion()
+        {
+            var instance = new NumberOrderQuestion(TaskDescription,5, 10);
+            instance.Randomize();
+            m_Answer = instance.Answer;
+            return instance;
         }
     }
 }

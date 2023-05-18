@@ -11,6 +11,7 @@ namespace Project.Managers
     {
         public static ResourceManager Instance { get; private set; }
         private const string RewardPackPath = "Material UI/Reward/RewardPackSTO";
+        private const string ErrorUIPath = "Material UI/ErrorUIs";
         public RewardSystem.RewardPackSTO RewardPack { get; private set; }
         void Awake()
         {
@@ -41,6 +42,7 @@ namespace Project.Managers
                 yield return request;
                 RewardPack = request.asset as RewardSystem.RewardPackSTO;
             }
+            
 
         }
 

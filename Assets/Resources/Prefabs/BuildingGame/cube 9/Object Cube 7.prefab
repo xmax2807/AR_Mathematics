@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5608592938679526194}
   - component: {fileID: 4360216559200050480}
   - component: {fileID: 5287164059040188453}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 988318787304430120}
   - component: {fileID: 240048276023059460}
   - component: {fileID: 8230617631397797864}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 1974904585578443800}
   - component: {fileID: 230890918210420841}
   - component: {fileID: 1951132640748473343}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 4654018014019063195}
   - component: {fileID: 161336331940063465}
   - component: {fileID: 3037092152506866383}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 2498078053773774726}
   - component: {fileID: 6846524863026135296}
   - component: {fileID: 7470159661196842918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: tag
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 285136950570760468}
   - component: {fileID: 8282742943887555932}
   - component: {fileID: 2901374877000066028}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 1889960229902349913}
   - component: {fileID: 6180030351486579068}
   - component: {fileID: 8272850278658700947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Object Cube 7
   m_TagString: tag
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 3516902311822863184}
   - component: {fileID: 5847550123672780421}
   - component: {fileID: 605631088410021070}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 4374448044624768385}
   - component: {fileID: 1433184666819316113}
   - component: {fileID: 4459695684335117501}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Num
   m_TagString: Untagged
   m_Icon: {fileID: 0}

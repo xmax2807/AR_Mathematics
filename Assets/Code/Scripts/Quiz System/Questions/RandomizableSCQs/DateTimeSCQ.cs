@@ -21,7 +21,7 @@ namespace Project.QuizSystem{
                 options = new System.DateTime[4];
             }
         }
-        public DateTime GetAnswer() => options[_answer];
+
         public override string[] GetOptions()
         {
             string[] result = new string[options.Length];

@@ -27,11 +27,11 @@ namespace Project.QuizSystem{
             return TextMap[type];
         }
     }
-    public class ShapeQuestion : BaseQuestion<Shape>, IEquatable<ShapeQuestion>, IRandomizable<ShapeQuestion>
+    public class ShapeQuestion : BaseQuestion<Shape>, IEquatable<ShapeQuestion>, IRandomizableQuestion
     {
         public override QuestionType QuestionType => QuestionType.Other;
 
-        public override QuestionContentType QuestionContentType => throw new NotImplementedException();
+        public override QuestionContentType QuestionContentType => QuestionContentType.None;
 
         public ShapeQuestion(string question) : base(question){
             Randomize();
@@ -43,6 +43,12 @@ namespace Project.QuizSystem{
         public bool Equals(ShapeQuestion other)
         {
             return other._answer.Equals(_answer);
+        }
+        protected override void TrySetAnswer(object value)
+        {
+            if(value is Shape.ShapeType shapeType){
+                SetAnswer(new Shape(shapeType));
+            }
         }
 
         public override string GetQuestion()
@@ -58,6 +64,17 @@ namespace Project.QuizSystem{
         public override IQuestion Clone()
         {
             return new ShapeQuestion(this._question);
+        }
+
+        public IQuestion Random(Random rand = null){
+            var result = new ShapeQuestion(this._question);
+            result.Randomize();
+            return result;
+        }
+
+        public IQuestion GetClone()
+        {
+            return Clone();
         }
     }
 }

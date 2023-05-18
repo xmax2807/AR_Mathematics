@@ -22,8 +22,6 @@ namespace Project.QuizSystem{
             _answer = rand.Next(options.Length);
             options = Enumerable.Range(1,12).OrderBy(x => rand.Next()).Take(options.Length).ToArray();
         }
-        public int GetAnswer() => options[_answer];
-
         public override string[] GetOptions()
         {
             string[] options = base.GetOptions();

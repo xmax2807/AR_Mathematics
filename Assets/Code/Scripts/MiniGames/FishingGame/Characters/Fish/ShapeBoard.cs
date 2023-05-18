@@ -25,9 +25,8 @@ namespace Project.MiniGames.FishingGame
             if (Randomizer == null)
             {
                 ScriptableObject[] result = await request.GetResultT();
-                bool castResult = true;
-                result[0].TryCastTo<ShapePackAsset>(onError: ()=>castResult = false,out var asset);
-                if (result.Length == 0 || !castResult)
+                result[0].TryCastTo<ShapePackAsset>(out var asset);
+                if (result.Length == 0 || asset == null)
                 {
                     throw new System.InvalidCastException("Cannot cast ScriptableObject to ShapePackAsset");
                 }

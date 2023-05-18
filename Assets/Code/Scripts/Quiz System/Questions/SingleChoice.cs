@@ -44,5 +44,7 @@ namespace Project.QuizSystem{
             }
             _question = data.Question;
         }
+
+        public T GetAnswer() => options[_answer];
     }
 }

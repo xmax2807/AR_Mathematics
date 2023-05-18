@@ -11,6 +11,8 @@ namespace Project.MiniGames{
     /// </summary>
     public abstract class TaskGiver : MonoBehaviour{
         [SerializeField] private RewardScriptableObject[] RewardData;
+        [SerializeField] private bool IsDebugging = false;
+        public event System.Action OnInitialized;
         public RewardScriptableObject CurrentReward {
             get{
                 if(CurrentTaskIndex < 0 || CurrentTaskIndex >= RewardData.Length){
@@ -30,8 +32,12 @@ namespace Project.MiniGames{
         // [SerializeField] private PanelStackSystem stackPanel;
 
         public bool AllTaskCompleted()=> Tasks.IsCompleted;
-        protected virtual void Awake(){
-            GameManager.Instance.OnGameFinishLoading += Initialize; 
+        protected virtual async void Awake(){
+            CurrentTaskIndex = 0;
+            GameManager.Instance.OnGameFinishLoading += Initialize;
+            if(IsDebugging){
+                await Initialize();
+            }
         }
         protected virtual void OnDestroy(){
             GameManager.Instance.OnGameFinishLoading -= Initialize;
@@ -49,6 +55,7 @@ namespace Project.MiniGames{
         private async Task Initialize(){
             await InitTasks();
             Tasks.OnTaskCompleted += CompleteMission;
+            OnInitialized?.Invoke();
         }
         protected virtual Task InitTasks(){
             GameModel currentGame = UserManager.Instance.CurrentGame;

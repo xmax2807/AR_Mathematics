@@ -59,7 +59,7 @@ namespace Project.QuizSystem{
             NumberSentence<int>.TryParse(textData.TextContent,mathProvider, out sentence);
             sentence?.SetValueToUnknown(options[_answer]);
 
-            UnityEngine.Debug.Log(sentence.GetFullSentence());
+            //UnityEngine.Debug.Log(sentence.GetFullSentence());
         }
         protected override QuestionSaveData ConvertToData(RandomizableSCQSaveData<int> parent)
         {

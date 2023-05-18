@@ -11,7 +11,7 @@ namespace Project.Managers
     {
         public static NetworkManager Instance;
 
-        public bool IsNetworkAvailable {get; private set;}
+        public bool IsNetworkAvailable { get; private set; }
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -32,10 +32,12 @@ namespace Project.Managers
                 })
             );
         }
-        public async Task<bool> CheckInternetConnectionAsync(string url = "http://google.com"){
+        public async Task<bool> CheckInternetConnectionAsync(string url = "http://google.com")
+        {
             UnityWebRequestAsyncOperation operation = SendRequest(url);
-            while(!operation.isDone){
-               await Task.Delay(1);
+            while (!operation.isDone)
+            {
+                await Task.Delay(1);
             }
             return operation.webRequest.result != UnityWebRequest.Result.ConnectionError;
         }
@@ -56,7 +58,8 @@ namespace Project.Managers
             OnResult?.Invoke(request);
             request.Dispose();
         }
-        private UnityWebRequestAsyncOperation SendRequest(string url){
+        private UnityWebRequestAsyncOperation SendRequest(string url)
+        {
             UnityWebRequest request = new(url);
             return request.SendWebRequest();
         }
@@ -71,6 +74,37 @@ namespace Project.Managers
                         OnResult?.Invoke(DownloadHandlerAudioClip.GetContent(req));
                     }
                 }));
+        }
+
+        public void RequestWithErrorHandling(Action action, Action<Exception> onError, int maxRetries = 3)
+        {
+            for (int i = 0; i < maxRetries; i++)
+            {
+                try
+                {
+                    action.Invoke();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    // A network error occurred, retry the operation
+                    if (i == maxRetries - 1)
+                    {
+                        // This was the last retry, call the onError callback
+                        onError(ex);
+                    }
+                }
+            }
+        }
+
+        public void RequestWithNotificationOnError(Action action, int maxRetries = 3){
+            RequestWithErrorHandling(action, (error) => HandleRequestError(action, error), maxRetries);
+        }
+
+        private void HandleRequestError(Action request, Exception error){
+            if(error is Firebase.FirebaseException firebaseException){
+                
+            }
         }
     }
 }
