@@ -540,6 +540,57 @@ MonoBehaviour:
   - {fileID: 781674046003364936, guid: 4aae836b2416bc544a970093985e3c39, type: 3}
   arCamera: {fileID: 245719651}
   displayCanvas: 1
+  taskGiver: {fileID: 1575057615}
+--- !u!1 &1575057614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575057616}
+  - component: {fileID: 1575057615}
+  m_Layer: 0
+  m_Name: TaskGiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1575057615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575057614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfc0223f00bfe54383a938b1a9d622b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RewardData: []
+  IsDebugging: 0
+  OnRewardAccquired:
+    m_PersistentCalls:
+      m_Calls: []
+  Template: {fileID: 11400000, guid: 0942e42413c76ac439a4f8693f8453cc, type: 2}
+--- !u!4 &1575057616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575057614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.18221667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1738383162
 GameObject:
   m_ObjectHideFlags: 0

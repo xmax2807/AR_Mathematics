@@ -6,7 +6,7 @@ namespace Project.MiniGames{
     [CreateAssetMenu(menuName ="STO/GameMission/TaskSTO", fileName ="TaskSTO")]
     public class TaskSTO : ScriptableObject{
         public enum TaskType{
-            ShapeTask, ClockTask, CalendarTask, HouseBuldingTask
+            ShapeTask, ClockTask, CalendarTask, HouseBuldingTask, FindingObjectTask
         }
         public TaskType Type;
         public int Goal;
@@ -18,6 +18,7 @@ namespace Project.MiniGames{
                 TaskType.ClockTask => new ClockTask(Goal, Description),
                 TaskType.CalendarTask => new CalendarTask(Goal, Description),
                 TaskType.HouseBuldingTask => new HouseBuildingTask(Goal, Description),
+                TaskType.FindingObjectTask => new FindingObjectTask(Goal, Description),
                 _ => null,
             };
         }

@@ -1,3 +1,4 @@
+using Project.MiniGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class SelecObjectFromCameraFO : MonoBehaviour
     [SerializeField]
     private bool displayCanvas = true;
 
-    private RandomQuestion aimText;
+    private ObjectPositionQuestion aimText;
+    [SerializeField] private TaskGiver taskGiver;
 
     public void onSpawnMainPlane()
     {
@@ -67,7 +69,6 @@ public class SelecObjectFromCameraFO : MonoBehaviour
     {
         foreach (PlacementObject current in placements)
         {
-            MeshRenderer meshRenderer = current.GetComponent<MeshRenderer>();
             if (selected != current)
             {
                 current.Selected = false;
@@ -76,9 +77,14 @@ public class SelecObjectFromCameraFO : MonoBehaviour
             {
                 current.Selected = true;
                 //current.transform.position = new Vector3(0, 10f, 0);
-                if (current.ID == aimText.numForPos)
+                if (taskGiver.CurrentTask.IsCorrect(current.ID))
                 {
                     Debug.Log("SUCCESS !!!");
+                    taskGiver.Tasks.UpdateProgress(1);
+                }
+                else
+                {
+                    Debug.Log("Fail");
                 }
                 Debug.Log(current.transform.localPosition);
                 current.Selected = false;
