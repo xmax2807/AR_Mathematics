@@ -47,6 +47,13 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
         spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
         onSpawnPlane?.Invoke();
+        Debug.Log(spawnedObject.transform.localPosition);
+
+        /*Vector3 position0 = new Vector3(0, 0, 0);
+        spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
+        onSpawnPlane?.Invoke();
+        Debug.Log(spawnedObject.transform.localPosition);*/
+        //spawnedObject.transform.LookAt(ARCamera.transform);
     }
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
@@ -85,11 +92,10 @@ public class PlaceOnPlaneHouse : MonoBehaviour
             if (spawnedObject == null)
             {
                 Vector3 position0 = new Vector3(0, 0, 0);
-                spawnedObject = Instantiate(m_PlacedPrefab, position0 , hitPose.rotation) ;
-                spawnedObject.transform.position = position0;
+                spawnedObject = Instantiate(m_PlacedPrefab, position0 ,Quaternion.identity) ;
                 onSpawnPlane?.Invoke();
                 Debug.Log(spawnedObject.transform.localPosition);
-                //spawnedObject.transform.LookAt(ARCamera.transform);
+                spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 

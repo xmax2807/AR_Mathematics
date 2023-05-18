@@ -113,4 +113,25 @@ namespace Project.MiniGames{
             return instance;
         }
     }
+
+    public class FindingObjectTask : RandomizableTask, IVisitableQuizTask<int>
+    {
+        private int m_Answer;
+        public FindingObjectTask(int goal, string description) : base(goal, description)
+        {
+        }
+
+        public int GetAnswer()
+        {
+            return m_Answer;
+        }
+
+        protected override IRandomizableQuestion CreateQuestion()
+        {
+            var instance = new ObjectPositionQuestion(TaskDescription);
+            instance.Randomize();
+            m_Answer = instance.Answer;
+            return instance;
+        }
+    }
 }
