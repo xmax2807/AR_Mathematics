@@ -363,9 +363,8 @@ GameObject:
   - component: {fileID: 1282351216}
   - component: {fileID: 1282351215}
   - component: {fileID: 1282351214}
-  - component: {fileID: 1282351213}
   - component: {fileID: 1282351223}
-  - component: {fileID: 1282351222}
+  - component: {fileID: 1282351224}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -373,23 +372,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1282351213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282351212}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d334f1de865a04197847a7b2686a22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlacedPrefab: {fileID: 5862094713749389613, guid: c1faa3878218cfd4188d2a02b05e413d,
-    type: 3}
-  rotateObject: {x: 0, y: 0, z: 0}
-  ARCamera: {fileID: 245719646}
-  visualObject: {fileID: 5363105045676772088}
 --- !u!114 &1282351214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,27 +485,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1282351222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282351212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facead539a0e3f544a582503bd37b146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnParent: {fileID: 0}
-  placedObjects:
-  - {fileID: -4776157902886438016, guid: 98939963686952341b9d716e4f09b913, type: 3}
-  - {fileID: 5163524631748172528, guid: 994f5beb5bb79914587f22fc7c490d70, type: 3}
-  - {fileID: -9039057195872924294, guid: 8656929b777ce9241b0d50f571ff0ae5, type: 3}
-  - {fileID: -6144573160456925644, guid: 375d97048fd689b4ebf5a30ac0552f53, type: 3}
-  - {fileID: 1401581706437376055, guid: 9a4b36a5402130749a78a1c23e2d5208, type: 3}
-  arCamera: {fileID: 245719651}
-  displayCanvas: 1
 --- !u!114 &1282351223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,8 +506,8 @@ MonoBehaviour:
   onSpawnPlane:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282351222}
-        m_TargetAssemblyTypeName: SelectObjectFromCamera, MiniGamesAssembly
+      - m_Target: {fileID: 1282351224}
+        m_TargetAssemblyTypeName: SelecObjectFromCameraFO, MiniGamesAssembly
         m_MethodName: onSpawnMainPlane
         m_Mode: 1
         m_Arguments:
@@ -557,6 +518,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1282351224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282351212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86ae19d0eccc094c855cc83efc6ca17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnParent: {fileID: 0}
+  placedObjects:
+  - {fileID: -4776157902886438016, guid: 98939963686952341b9d716e4f09b913, type: 3}
+  - {fileID: 5163524631748172528, guid: 994f5beb5bb79914587f22fc7c490d70, type: 3}
+  - {fileID: -9039057195872924294, guid: 8656929b777ce9241b0d50f571ff0ae5, type: 3}
+  - {fileID: -6144573160456925644, guid: 375d97048fd689b4ebf5a30ac0552f53, type: 3}
+  - {fileID: 1401581706437376055, guid: 9a4b36a5402130749a78a1c23e2d5208, type: 3}
+  - {fileID: 781674046003364936, guid: 4aae836b2416bc544a970093985e3c39, type: 3}
+  arCamera: {fileID: 245719651}
+  displayCanvas: 1
 --- !u!1 &1738383162
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,11 +758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 8009370826780904866, guid: 5a45375c280081346bf5b76291624c36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a45375c280081346bf5b76291624c36, type: 3}
---- !u!1 &5363105045676772088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8009370826780904866, guid: 5a45375c280081346bf5b76291624c36,
-    type: 3}
-  m_PrefabInstance: {fileID: 5363105045676772087}
-  m_PrefabAsset: {fileID: 0}
