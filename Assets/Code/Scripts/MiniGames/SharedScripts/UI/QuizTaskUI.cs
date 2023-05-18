@@ -6,7 +6,9 @@ using Project.Managers;
 namespace Project.MiniGames{
     public class QuizTaskUI : BaseTaskUI
     {
-        [SerializeField] private TrueFalseButton[] options;
+        [SerializeField] private TrueFalseButton buttonPrefab;
+        [SerializeField] private Transform buttonGroupTransform;
+        private TrueFalseButton[] options;
         [SerializeField] private TMPro.TextMeshProUGUI question;
         protected override void OnDisable()
         {
@@ -17,21 +19,24 @@ namespace Project.MiniGames{
         }
         protected override void UpdateUI(BaseTask task)
         {
-            if(task is not IVisitableQuizTask quizTask){
+            if(task is not IVisitableSCQTask quizTask){
                 return;
             }
             
             question.text = quizTask.GetQuestion();
             string[] quizOptions = quizTask.GetOptions();
-            for(int i = 0; i < options.Length; i++){
-                int currentIndex = i;
-                options[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = quizOptions[i];
-                options[i].Button.onClick.RemoveAllListeners();
-                options[i].Button.onClick.AddListener(()=>OnOptionChosen(quizTask, currentIndex));  
-            }
+            
+            options = new TrueFalseButton[quizOptions.Length];
+
+            SpawnerManager.Instance.SpawnObjectsList(buttonPrefab, quizOptions.Length, buttonGroupTransform, 
+            (obj, index)=>{
+                options[index].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = quizOptions[index];
+                options[index].Button.onClick.RemoveAllListeners();
+                options[index].Button.onClick.AddListener(()=>OnOptionChosen(quizTask, index));  
+            });
         }
 
-        private void OnOptionChosen(IVisitableQuizTask task ,int index){
+        private void OnOptionChosen(IVisitableSCQTask task ,int index){
             
             bool isCorrect = task.IsCorrect(index);
             options[index].ChangeUI(isCorrect);

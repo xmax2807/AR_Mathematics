@@ -1384,7 +1384,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9172506980700310868}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -1407,4 +1407,3 @@ MonoBehaviour:
   ID: 1
   cube_merge: {fileID: 6785494797462440916, guid: 41134c3a39e9d9c44b70ec1e3233d953,
     type: 3}
-  firework: {fileID: 855981538786392927, guid: ceb7de65231eb7146ae2499f346201a2, type: 3}

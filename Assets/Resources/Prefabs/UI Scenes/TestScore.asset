@@ -14,32 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children:
   - {fileID: 11400000}
-  - {fileID: 11400000}
   ButtonNames:
-  - Name: "H\u1ECDc k\u1EF3 1"
-    OnClick:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 6a190f948950e574998c40cf9d78d485, type: 2}
-          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
-          m_MethodName: Request
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 1
-            m_BoolArgument: 0
-          m_CallState: 2
-    Description: 
   - Name: "H\u1ECDc k\u1EF3 2"
     OnClick:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 11400000, guid: 6a190f948950e574998c40cf9d78d485, type: 2}
-          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
-          m_MethodName: Request
+          m_TargetAssemblyTypeName: Project.UI.Panel.RequestAndChangeScene, Projec
+          m_MethodName: ManualLoadScene
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

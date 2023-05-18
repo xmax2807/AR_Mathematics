@@ -24,7 +24,7 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>casted object</returns>
-        public static T CastTo<T>(this object obj, Action onError)
+        public static T CastTo<T>(this object obj, Action<object, InvalidCastException> onError = null)
         {
             if (obj is T)
             {
@@ -34,9 +34,9 @@ namespace Project.Utils.ExtensionMethods
             {
                 return (T)Convert.ChangeType(obj, typeof(T));
             }
-            catch (InvalidCastException)
+            catch (InvalidCastException e)
             {
-                onError?.Invoke();
+                onError?.Invoke(obj, e);
                 return default;
             }
         }
@@ -48,8 +48,11 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="result"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>false if can't cast, vice versa</returns>
-        public static void TryCastTo<T>(this object obj, Action onError, out T result){
+        public static void TryCastTo<T>(this object obj, Action<object, InvalidCastException> onError, out T result){
             result = obj.CastTo<T>(onError);
+        }
+        public static void TryCastTo<T> (this object obj, out T result){
+            result = obj.CastTo<T>();
         }
 
         /// <summary>

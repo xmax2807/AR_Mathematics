@@ -35,7 +35,12 @@ namespace Project.Utils.ExtensionMethods
             }
             return result;
         }
-        public static Vector3 SpawnPoint(Vector3 source, Vector3 baseDir, float range){
+        public static Vector3 Simplify(this Vector3 v)
+        {
+            return new Vector3(v.x != 0 ? 1 : 0, v.y != 0 ? 1 : 0, v.z != 0 ? 1 : 0);
+        }
+        public static Vector3 SpawnPoint(Vector3 source, Vector3 baseDir, float range)
+        {
             baseDir = baseDir.ToDirection();
             return source + Randomize(range, baseDir);
         }
@@ -81,6 +86,20 @@ namespace Project.Utils.ExtensionMethods
                 isBetween = isBetween && target[i] >= lowestPoint[i] && target[i] <= highestPoint[i];
             }
             return isBetween;
+        }
+        public static bool IsOneDirection(Vector3 direction)
+        {
+            if (direction == Vector3.zero) return false;
+
+            int count = 0;
+            count += direction.x != 0 ? 1 : 0;
+            count += direction.y != 0 ? 1 : 0;
+            count += direction.z != 0 ? 1 : 0;
+            return count == 1;
+        }
+        public static Vector3 AddExceptZero(Vector3 left, Vector3 right, Vector3 simplified)
+        {
+            return left + Vector3.Scale(right, simplified);
         }
     }
 }

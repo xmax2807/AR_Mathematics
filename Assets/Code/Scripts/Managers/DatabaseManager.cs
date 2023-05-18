@@ -37,12 +37,15 @@ public class DatabaseManager : MonoBehaviour
     public GameController GameController { get; private set; }
     public QuizController QuizController { get; private set; }
     public TestController TestController { get; private set; }
+    public bool IsConfigured {get;private set;}
+    public event Action OnFirebaseConfigured;
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             InitFirebase();
+            IsConfigured = true;
         }
         else if (Instance != this)
         {
@@ -73,6 +76,8 @@ public class DatabaseManager : MonoBehaviour
                 FirebaseFireStore = FirebaseFirestore.GetInstance(app);
                 Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
                 Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+                OnFirebaseConfigured?.Invoke();
+                Debug.Log("loaded Database");
 
                 UserController = new UserController();
                 AchievementController = new AchievementController();

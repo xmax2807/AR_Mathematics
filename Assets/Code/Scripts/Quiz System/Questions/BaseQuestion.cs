@@ -1,5 +1,6 @@
 using Project.Utils.ExtensionMethods;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace Project.QuizSystem{
@@ -7,7 +8,7 @@ namespace Project.QuizSystem{
         SingleChoice, ShortAnswer, Other
     }
     public enum QuestionContentType{
-        Image,Text, Slider
+        Image,Text, Slider, None
     }
     public interface IQuestion {
         public QuestionType QuestionType {get;}
@@ -18,14 +19,13 @@ namespace Project.QuizSystem{
         public void SetAnswer(object value);
         public IQuestion Clone();
     }
-    public abstract class BaseQuestion<T> : IQuestion where T : IEquatable<T>{
+    public abstract class BaseQuestion<T> : IQuestion{
         public abstract QuestionType QuestionType {get;}
-
         public abstract QuestionContentType QuestionContentType {get;}
-
         protected string _question;
         protected T _answer;
         protected T _playerAnswered;
+        public T Answer => _playerAnswered;
         public BaseQuestion(string question, T answer){
             _question = question;
             _answer = answer;
@@ -41,17 +41,32 @@ namespace Project.QuizSystem{
         // }
         public bool IsCorrect()
         {
-            return _answer.Equals(_playerAnswered);
+            if(_answer is IEquatable<T> equatableAnswer){
+                return equatableAnswer.Equals(_playerAnswered);
+            }
+            var comparer = GetEqualityComparer();
+            if(comparer == null){
+                UnityEngine.Debug.LogError("Can't compare 2 answer");
+                return false;
+            }
+            return comparer.Equals(_answer, _playerAnswered);
         }
+        protected virtual IEqualityComparer<T> GetEqualityComparer() => null;
         public bool IsCorrect(T answer){
             SetAnswer(answer);
             return IsCorrect();
         }
 
-        public void SetAnswer(object value)
+        public virtual void SetAnswer(object value)
         {
-            value.TryCastTo<T>(onError: null,out _playerAnswered);
+            value.TryCastTo<T>(onError: OnSetAnswerFailed,out _playerAnswered);
         }
+
+        private void OnSetAnswerFailed(object value, InvalidCastException e){
+            UnityEngine.Debug.Log(e.Message);
+            TrySetAnswer(value);
+        }
+        protected virtual void TrySetAnswer(object value){}
 
         public abstract IQuestion Clone();
     }

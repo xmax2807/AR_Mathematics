@@ -8,6 +8,8 @@ namespace Project.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        public static Camera MainGameCam => Instance?.mainGameCam;
+        private Camera mainGameCam;
 
         /// <summary>
         /// Initialize GameManager with required Managers
@@ -36,6 +38,13 @@ namespace Project.Managers
             DontDestroyOnLoad(this);
             Application.targetFrameRate = 30;
             Screen.SetResolution(1280, 720, fullscreen: true);
+        }
+
+        protected void OnDisable(){
+            Instance.mainGameCam = null;
+        }
+        protected void OnEnable(){
+            Instance.mainGameCam = Camera.main;
         }
 
         public System.Func<Task> OnGameFinishLoading;

@@ -129,4 +129,17 @@ public class UserController
         DocumentSnapshot doc = await db.Collection("users").Document(userId).GetSnapshotAsync();
         return doc.ConvertTo<UserModel>();
     }
+
+    public async Task<bool> ReAuthenticateWithCredential(string email, string password){
+        var credential = Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
+
+        try{
+            var signInResult = await auth.CurrentUser.ReauthenticateAndRetrieveDataAsync(credential);
+            return signInResult != null;
+        }
+        catch(Firebase.FirebaseException e){
+            Debug.Log(e.Message);
+            return false;
+        }
+    }
 }

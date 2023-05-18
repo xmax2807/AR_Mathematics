@@ -2035,6 +2035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardData:
   - {fileID: 11400000, guid: 11c364a9da6fda74f8d343cdbe685579, type: 2}
+  IsDebugging: 0
   OnRewardAccquired:
     m_PersistentCalls:
       m_Calls:

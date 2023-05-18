@@ -45,9 +45,7 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
         //placementUpdate.AddListener(DiableVisual);
 
-        /*Vector3 position0 = new Vector3(0, 0, 0);
-        spawnedObject = Instantiate(m_PlacedPrefab, position0, Quaternion.identity);
-        spawnedObject.transform.position = position0;
+        spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
         onSpawnPlane?.Invoke();
         Debug.Log(spawnedObject.transform.localPosition);*/
 
@@ -60,6 +58,13 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
+        #if UNITY_EDITOR
+        if(Input.GetMouseButtonUp(0)){
+            var mousePosition = Input.mousePosition;
+            touchPosition = new Vector2(mousePosition.x, mousePosition.y);
+            return true;
+        }
+        #endif
         if (Input.touchCount > 0)
         {
             touchPosition = Input.GetTouch(0).position;
@@ -73,7 +78,7 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     void Update()
     {
         //get ARCAmera current roation y
-        var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+        //var curRotation = ARCamera.transform.rotation.eulerAngles.y;
 
         if (!TryGetTouchPosition(out Vector3 touchPosition))
             return;

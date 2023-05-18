@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
 
-namespace Project.QuizSystem.QuizUIContent{
+namespace Project.QuizSystem.QuizUIContent
+{
     public class QuizUIContentFactory
     {
         private Dictionary<QuestionContentType, Stack<QuizUIContent>> _cache;
@@ -13,7 +14,7 @@ namespace Project.QuizSystem.QuizUIContent{
         {
             this.builtInPrefabs = builtInPrefabs;
             this.QuestionVisitor = visitor;
-            
+
             _cache = new Dictionary<QuestionContentType, Stack<QuizUIContent>>(FlagExtensionMethods.GetLength<QuestionContentType>());
         }
         public QuizUIContent CreateQuizContentUI(QuestionContentType type)
@@ -21,18 +22,15 @@ namespace Project.QuizSystem.QuizUIContent{
             GameObject prefab = builtInPrefabs.GetPrefab(type);
             if (prefab == null) return null;
 
-            QuizUIContent answerUI = GetPreloadedUI(type);
-
-            if (answerUI == null)
+            //QuizUIContent answerUI = GetPreloadedUI(type);
+            QuizUIContent answerUI;
+            answerUI = type switch
             {
-                answerUI = type switch
-                {
-                    QuestionContentType.Image => new ImageQuizContent(prefab, QuestionVisitor),
-                    QuestionContentType.Text => new TMProUIQuizContent(prefab, QuestionVisitor),
-                    QuestionContentType.Slider => null,
-                    _ => null,
-                };
-            }
+                QuestionContentType.Image => new ImageQuizContent(prefab, QuestionVisitor),
+                QuestionContentType.Text => new TMProUIQuizContent(prefab, QuestionVisitor),
+                QuestionContentType.Slider => null,
+                _ => null,
+            };
             return answerUI;
         }
         private QuizUIContent GetPreloadedUI(QuestionContentType type)
@@ -46,16 +44,20 @@ namespace Project.QuizSystem.QuizUIContent{
 
             return null;
         }
-        public void Relase(QuestionContentType type, QuizUIContent UI){
+        public void Relase(QuestionContentType type, QuizUIContent UI)
+        {
             EnsureStackAvailable(type);
             _cache[type].Push(UI);
         }
 
-        private void EnsureStackAvailable(QuestionContentType type){
-            if(_cache == null){
+        private void EnsureStackAvailable(QuestionContentType type)
+        {
+            if (_cache == null)
+            {
                 _cache = new Dictionary<QuestionContentType, Stack<QuizUIContent>>(FlagExtensionMethods.GetLength<QuestionType>());
             }
-            if(!_cache.ContainsKey(type)){
+            if (!_cache.ContainsKey(type))
+            {
                 _cache[type] = new Stack<QuizUIContent>();
             }
         }

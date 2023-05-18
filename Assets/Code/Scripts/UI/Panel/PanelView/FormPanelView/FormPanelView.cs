@@ -1,10 +1,25 @@
+using System.Threading.Tasks;
 using Gameframe.GUI.PanelSystem;
-namespace Project.UI.Panel.Form{
-    public class FormPanelView : OkCancelPanelView{
-        public event System.Action<string[]> onUserConfirmed;
+using TMPro;
 
-        private void OnEnable(){
+namespace Project.UI.Panel.Form{
+    public abstract class FormPanelView : OkCancelPanelView{
+        public event System.Action<string[]> onUserConfirmed;
+        [UnityEngine.SerializeField] protected TextMeshProUGUI TitleText;
+        public Task ShowAsync(string title){
+            if(TitleText != null){
+                TitleText.text = title;
+            }
+            return ShowAsync();
         }
-        private void OnDisable(){}
+        private void OnEnable(){
+            onConfirm += InvokeConfirm;
+        }
+        private void OnDisable(){
+            onConfirm -= InvokeConfirm;
+        }
+
+        private void InvokeConfirm() => onUserConfirmed?.Invoke(GetFieldDatas());
+        public abstract string[] GetFieldDatas();
     } 
 }
