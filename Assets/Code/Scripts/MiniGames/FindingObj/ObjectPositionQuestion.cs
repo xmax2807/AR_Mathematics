@@ -116,7 +116,9 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
 
     public IQuestion Random(System.Random rand = null)
     {
-        throw new NotImplementedException();
+        var instance = new ObjectPositionQuestion(this._question, questionType);
+        instance.Randomize(rand);
+        return instance;
     }
 
     public void Randomize(System.Random rand = null)

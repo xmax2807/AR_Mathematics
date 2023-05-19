@@ -20,6 +20,9 @@ namespace Project.MiniGames{
         public RandomizableTask(int goal, string description) : base(goal, description)
         {
             checker = CreateQuestion().Random();
+            if(TaskDescription == ""){
+                TaskDescription = checker.GetQuestion();
+            }
         }
 
         protected abstract IRandomizableQuestion CreateQuestion();
@@ -39,7 +42,7 @@ namespace Project.MiniGames{
         protected override IRandomizableQuestion CreateQuestion() => new ShapeQuestion("");
     }
 
-    public abstract class RandomizableSingleChoiceTask<T> : RandomizableTask, IVisitableQuizTask<T> where T : System.IEquatable<T>
+    public abstract class RandomizableSingleChoiceTask<T> : RandomizableTask, IVisitableSCQTask, IVisitableQuizTask<T> where T : System.IEquatable<T>
     {
         protected RandomizableSCQ<T> realQuestion;
         public RandomizableSingleChoiceTask(int goal, string description) : base(goal, description)

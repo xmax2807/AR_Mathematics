@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c649fdd43dacf4ea2a2d6bc9479b27, type: 3}
   m_Name: FindingObjectTaskSTO
   m_EditorClassIdentifier: 
-  Type: 0
-  Goal: 0
+  Type: 4
+  Goal: 1
   Description: 

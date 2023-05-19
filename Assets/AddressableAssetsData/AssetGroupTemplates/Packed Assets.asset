@@ -39,8 +39,8 @@ MonoBehaviour:
     m_Id: d257dc9eb2df1324e8211ce6845a3127
   m_BundleMode: 0
   m_AssetBundleProviderType:
-    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider
+    m_AssemblyName: RobinBird.FirebaseTools, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: RobinBird.FirebaseTools.Storage.Addressables.FirebaseStorageAssetBundleProvider
   m_BundleNaming: 0
   m_AssetLoadMode: 0
 --- !u!114 &-6324000000406611953

@@ -24,7 +24,7 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>casted object</returns>
-        public static T CastTo<T>(this object obj, Action<object, InvalidCastException> onError = null)
+        public static T CastTo<T>(this object obj, Func<object, InvalidCastException, T> onErrorFallback = null)
         {
             if (obj is T)
             {
@@ -36,8 +36,9 @@ namespace Project.Utils.ExtensionMethods
             }
             catch (InvalidCastException e)
             {
-                onError?.Invoke(obj, e);
-                return default;
+                if(onErrorFallback == null) return default;
+
+                return onErrorFallback.Invoke(obj, e);
             }
         }
 
@@ -48,8 +49,8 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="result"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>false if can't cast, vice versa</returns>
-        public static void TryCastTo<T>(this object obj, Action<object, InvalidCastException> onError, out T result){
-            result = obj.CastTo<T>(onError);
+        public static void TryCastTo<T>(this object obj, Func<object, InvalidCastException, T> onErrorFallback, out T result){
+            result = obj.CastTo<T>(onErrorFallback);
         }
         public static void TryCastTo<T> (this object obj, out T result){
             result = obj.CastTo<T>();

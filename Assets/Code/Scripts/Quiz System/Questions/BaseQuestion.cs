@@ -59,12 +59,13 @@ namespace Project.QuizSystem{
 
         public virtual void SetAnswer(object value)
         {
-            value.TryCastTo<T>(onError: OnSetAnswerFailed,out _playerAnswered);
+            value.TryCastTo<T>(onErrorFallback: OnSetAnswerFailed,out _playerAnswered);
         }
 
-        private void OnSetAnswerFailed(object value, InvalidCastException e){
+        private T OnSetAnswerFailed(object value, InvalidCastException e){
             UnityEngine.Debug.Log(e.Message);
             TrySetAnswer(value);
+            return _answer;
         }
         protected virtual void TrySetAnswer(object value){}
 

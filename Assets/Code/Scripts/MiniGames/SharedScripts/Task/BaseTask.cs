@@ -8,6 +8,7 @@ namespace Project.MiniGames{
         public int CurrentProgress {get;protected set;}
         public bool IsCompleted => CurrentProgress >= Goal;
         public event System.Action OnTaskCompleted;
+        public event System.Action<int> OnProgressChanged;
         protected void InvokeTaskCompleted()=>OnTaskCompleted?.Invoke();
         public BaseTask(int goal, string description){
             Goal = goal;
@@ -15,6 +16,7 @@ namespace Project.MiniGames{
         }
         public virtual void UpdateProgress(int value){
             CurrentProgress += value;
+            OnProgressChanged?.Invoke(CurrentProgress);
         }
         public abstract bool IsCorrect(object value);
     }

@@ -39,15 +39,16 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     void Awake()
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
+        m_PlaneManager = GetComponent<ARPlaneManager>();
 
         if (placementUpdate == null)
             placementUpdate = new UnityEvent();
 
         //placementUpdate.AddListener(DiableVisual);
 
-        spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
-        onSpawnPlane?.Invoke();
-        Debug.Log(spawnedObject.transform.localPosition);
+        // spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
+        // onSpawnPlane?.Invoke();
+        // Debug.Log(spawnedObject.transform.localPosition);
 
         /*Vector3 position0 = new Vector3(0, 0, 0);
         spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
@@ -88,14 +89,20 @@ public class PlaceOnPlaneHouse : MonoBehaviour
             // Raycast hits are sorted by distance, so the first one
             // will be the closest hit.
             var hitPose = s_Hits[0].pose;
+            var trackable = s_Hits[0].trackable;
 
             if (spawnedObject == null)
             {
                 Vector3 position0 = new Vector3(0, 0, 0);
-                spawnedObject = Instantiate(m_PlacedPrefab, position0 ,Quaternion.identity) ;
+                spawnedObject = Instantiate(m_PlacedPrefab, trackable.transform.position ,Quaternion.identity) ;
+                spawnedObject.AddComponent<ARAnchor>();
+                //spawnedObject.transform.LookAt(ARCamera.transform);
+                //var rotation = spawnedObject.transform.rotation;
+                //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
+				DisablePlaneDetection();
                 onSpawnPlane?.Invoke();
-                Debug.Log(spawnedObject.transform.localPosition);
-                spawnedObject.transform.LookAt(ARCamera.transform);
+                //Debug.Log(spawnedObject.transform.localPosition);
+                //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 
@@ -118,7 +125,17 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         visualObject.SetActive(false);
     }
 
+    private void DisablePlaneDetection()
+    {
+        m_PlaneManager.enabled = false;
+        foreach (var plane in m_PlaneManager.trackables)
+        {
+            plane.gameObject.SetActive(false);
+        }
+    }
+
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
+    ARPlaneManager m_PlaneManager;
     ARRaycastManager m_RaycastManager;
 }

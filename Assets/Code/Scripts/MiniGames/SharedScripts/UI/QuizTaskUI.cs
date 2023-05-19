@@ -17,6 +17,11 @@ namespace Project.MiniGames{
                 option.Button.onClick.RemoveAllListeners();
             }
         }
+         protected override void UpdateProgress(int currentProgress)
+        {
+            //Empty
+            return;
+        }
         protected override void UpdateUI(BaseTask task)
         {
             if(task is not IVisitableSCQTask quizTask){

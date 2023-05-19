@@ -462,7 +462,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5862094713749389612}
-  - component: {fileID: 2172171389874427013}
+  - component: {fileID: -6289797530619520329}
+  - component: {fileID: 2101687086383006619}
   m_Layer: 0
   m_Name: aimObject
   m_TagString: Untagged
@@ -491,7 +492,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2172171389874427013
+--- !u!114 &-6289797530619520329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -500,13 +501,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 5862094713749389613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2101b72358e98c84998c2b9b1567f8c3, type: 3}
+  m_Script: {fileID: 11500000, guid: ccfc0223f00bfe54383a938b1a9d622b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giver: {fileID: 0}
-  buttonPrefab: {fileID: 0}
-  buttonGroupTransform: {fileID: 0}
-  question: {fileID: 5028671844145450001}
+  RewardData:
+  - {fileID: 11400000, guid: b3fffb8c82f05a14a80cddb2fa10dd77, type: 2}
+  IsDebugging: 1
+  OnRewardAccquired:
+    m_PersistentCalls:
+      m_Calls: []
+  Template: {fileID: 11400000, guid: 0942e42413c76ac439a4f8693f8453cc, type: 2}
+--- !u!114 &2101687086383006619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862094713749389613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4e991bc212dc6449dd0f9b6ee64315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverallGameTask: {fileID: 0}
+  Image: {fileID: 0}
+  MissionContent: {fileID: 5028671844145450001}
+  Giver: {fileID: -6289797530619520329}
 --- !u!1 &7655582167113017005
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SelecObjectFromCameraFO : MonoBehaviour
 {
-
+    [SerializeField] private LayerMask filteredMask;
     [SerializeField] private Transform spawnParent;
     [SerializeField]
     private PlacementObject[] placedObjects;
@@ -22,10 +22,14 @@ public class SelecObjectFromCameraFO : MonoBehaviour
     private bool displayCanvas = true;
 
     private ObjectPositionQuestion aimText;
-    [SerializeField] private TaskGiver taskGiver;
+    private TaskGiver taskGiver;
 
     public void onSpawnMainPlane()
     {
+        taskGiver = FindObjectOfType<TaskGiver>();
+        if(taskGiver != null){
+            
+        }
         placements = new PlacementObject[placedObjects.Length];
         for (int i = 0; i < placements.Length; i++)
         {
@@ -33,36 +37,62 @@ public class SelecObjectFromCameraFO : MonoBehaviour
         }
     }
 
-    void Update()
+    bool TryGetTouchPosition(out Vector3 touchPosition)
     {
-        // touch object in camera android
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonUp(0))
+        {
+            var mousePosition = Input.mousePosition;
+            touchPosition = new Vector2(mousePosition.x, mousePosition.y);
+            return true;
+        }
+#endif
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-
-            touchPosition = touch.position;
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                Ray ray = arCamera.ScreenPointToRay(touch.position);
-                RaycastHit hitObject;
-
-                // if we got a hit meaning that it was selected
-                if (Physics.Raycast(ray, out hitObject))
-                {
-                    PlacementObject placementObject = hitObject.transform.GetComponent<PlacementObject>();
-
-                    if (placementObject != null)
-                    {
-                        ChangeSelectedObject(placementObject);
-                    }
-                } // nothing selected so set the sphere color to inactive
-                else
-                {
-                    ChangeSelectedObject();
-                }
-            }
+            touchPosition = Input.GetTouch(0).position;
+            return true;
         }
+
+        touchPosition = default;
+        return false;
+    }
+
+    void Update()
+    {
+        if (!TryGetTouchPosition(out Vector3 touchPosition)) return;
+
+#if UNITY_EDITOR
+        OnTouch(touchPosition);
+        return;
+#else
+        // touch object in camera android
+        var touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began)
+        {
+            OnTouch(touchPosition);
+        }
+#endif
+    }
+
+    private void OnTouch(Vector3 touchPosition)
+    {
+        Ray ray = arCamera.ScreenPointToRay(touchPosition);
+
+        // if we got a hit meaning that it was selected
+        if (Physics.Raycast(ray, out RaycastHit hitObject, 100, filteredMask))
+        {
+            PlacementObject placementObject = hitObject.transform.GetComponent<PlacementObject>();
+
+            if (placementObject != null)
+            {
+                ChangeSelectedObject(placementObject);
+            }
+        } // nothing selected so set the sphere color to inactive
+        // else
+        // {
+        //     ChangeSelectedObject();
+        // }
     }
 
     void ChangeSelectedObject(PlacementObject selected = null)
@@ -86,7 +116,6 @@ public class SelecObjectFromCameraFO : MonoBehaviour
                 {
                     Debug.Log("Fail");
                 }
-                Debug.Log(current.transform.localPosition);
                 current.Selected = false;
             }
         }

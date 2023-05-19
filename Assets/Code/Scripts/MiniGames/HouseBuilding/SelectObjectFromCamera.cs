@@ -30,8 +30,8 @@ public class SelectObjectFromCamera : MonoBehaviour
             var size = renderer.bounds.size;
             Vector3 spacing = new(0.5f,0,0);
             //Debug.Log(size.x);
-            // startPosition = VectorExtensionMethods.AddExceptZero(startPosition, size, Vector3.right) + spacing;
-            startPosition += spacing;
+            startPosition = VectorExtensionMethods.AddExceptZero(startPosition, size, Vector3.right) + spacing;
+            //startPosition += spacing;
         }
     }
 

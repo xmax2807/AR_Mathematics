@@ -47,7 +47,7 @@ namespace Project.MiniGames{
             OnRewardAccquired?.Invoke(CurrentReward.Badge);
             Debug.Log(CurrentTaskIndex);
             CurrentTaskIndex++;
-            GameController.SaveGame(CurrentTaskIndex);
+            GameController?.SaveGame(CurrentTaskIndex);
             await Initialize();
             //stackPanel.Push(rewardPanelController);
             //pusher.Push();

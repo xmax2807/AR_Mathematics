@@ -153,6 +153,10 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Materials/Sea/Textures/Water_Texture_B.png
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c916fb73140a6a7439d3bdce50c14883
+    m_Address: Assets/Resources_moved/Models/Wuppy/Wubby.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
   m_SchemaSet:
