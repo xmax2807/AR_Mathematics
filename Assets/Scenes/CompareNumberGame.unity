@@ -678,6 +678,31 @@ PrefabInstance:
       propertyPath: ARCamera
       value: 
       objectReference: {fileID: 1146157470}
+    - target: {fileID: 5511568885868285204, guid: d1eda11a8ab274047b1cb58c0d669aa2,
+        type: 3}
+      propertyPath: m_text
+      value: "Cha\u0323m \u0111\xEA\u0309 b\u0103\u0301t \u0111\xE2\u0300u"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511568885868285204, guid: d1eda11a8ab274047b1cb58c0d669aa2,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511568885868285204, guid: d1eda11a8ab274047b1cb58c0d669aa2,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -99.703415
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511568885868285204, guid: d1eda11a8ab274047b1cb58c0d669aa2,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -99.98198
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511568885868285204, guid: d1eda11a8ab274047b1cb58c0d669aa2,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7475741756345818384, guid: d1eda11a8ab274047b1cb58c0d669aa2,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
