@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
 
     // Start is called before the first frame update
     void OnTriggerEnter(Collider octopusCollider){
+        Debug.Log("triggered " + octopusCollider.name);
         if(!octopusCollider.TryGetComponent<OctopusController>(out octopus)) return;
         
         Debug.Log(octopus.name);

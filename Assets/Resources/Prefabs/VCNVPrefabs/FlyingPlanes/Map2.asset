@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fec7454ba613540b7ddf4f93119ddb, type: 3}
+  m_Name: Map2
+  m_EditorClassIdentifier: 
+  EnvironmentTiles:
+  - {fileID: 7258238654609422755, guid: 5106468c51c40c84f989a8526c46c8fa, type: 3}
+  - {fileID: 7258238654609422755, guid: 46a1da7508a39a74dbe82eb1ba8cd625, type: 3}
+  - {fileID: 7258238654609422755, guid: e7666a6c27a818d4f9628ad6bc8054d1, type: 3}
+  Player: {fileID: 5225071495375448750, guid: 536faca8487da114792ba178c675ae86, type: 3}

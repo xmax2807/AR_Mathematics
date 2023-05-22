@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,25 +33,23 @@ public class OctopusController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            CurrentState = OctopusState.HighJump;
-            ChangeState();
+            ChangeState(OctopusState.HighJump);
             return;
         }
         if (Input.GetKey(KeyCode.B))
         {
-            CurrentState = OctopusState.FailedJump;
-            ChangeState();
+            ChangeState(OctopusState.FailedJump);
             return;
         }
 
         if (Input.GetKey(KeyCode.C))
         {
-            CurrentState = OctopusState.BasicJump;
-            ChangeState();
+            ChangeState(OctopusState.BasicJump);
         }
     }
-    public void ChangeState()
+    public void ChangeState(OctopusState state)
     {
+        currentState = state;
         animator.SetBool(currentAnimName, false);
         tileManager.SetSpeed(currentSpeed);
         if (currentState == OctopusState.HighJump)
@@ -69,5 +68,10 @@ public class OctopusController : MonoBehaviour
     }
     public void SpawnTile(){
         tileManager.SpawnTileRandomly();
+    }
+
+    internal void SetTileManager(TileManager tileManager)
+    {
+        this.tileManager = tileManager;
     }
 }

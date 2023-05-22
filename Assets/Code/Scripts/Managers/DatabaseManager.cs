@@ -14,15 +14,15 @@ using Firebase.Extensions;
 
 public class DatabaseManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // // Start is called before the first frame update
     // [SerializeField] QuizData quizData;
-    // [SerializeField] string collection = "quizzes";
+    [SerializeField] string collection = "quizzes";
     // private string userID;
     // [SerializeField] private string Email;
     // [SerializeField] private string Password;
     [SerializeField] private int chapter;
     [SerializeField] private int unit;
-    [SerializeField] private int semester = 1;
+    // [SerializeField] private int semester = 1;
 
 
     // Firebase.FirebaseApp app;
@@ -85,8 +85,8 @@ public class DatabaseManager : MonoBehaviour
                         UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
                     }
                 );
-                // QuizController.GetQuizzesByLesson(unit,chapter);
-                TestController.GetTest(semester);
+                QuizController.GetQuizzesByLesson(unit,chapter);
+                // TestController.GetTest(semester);
                 // LessonController.UploadLesson(LessonData);
                 //LessonController.GetVideo(1, 2);
                 // CreateUser(Username, Password);

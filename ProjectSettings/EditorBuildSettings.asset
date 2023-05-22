@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DynamicScrollScene.unity
     guid: 33564f6a9b781db4f84063c4e20ec69c
   - enabled: 0
-    path: Assets/Scenes/Clock.unity
+    path: Assets/Scenes/ClockScence.unity
     guid: 13e2124e6cde907409e75edd20e16a92
   - enabled: 0
     path: Assets/Plugins/Gameframe.GUI.Demo/Basic/Demo - GUI Basic.unity
@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/FishingScene.unity
     guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
   - enabled: 0
-    path: Assets/Scenes/Calendar.unity
+    path: Assets/Scenes/CalendarScence.unity
     guid: 1bebd17e6477f8d4cafcc59f16139e88
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
