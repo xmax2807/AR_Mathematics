@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/VRM/Mystiery.Textures/F00_002_Body_00.png.meta
 guid: 87fa217506b9ea54383fb7d3ad3d5e3b
+========
+guid: 0b9676be600a46945a68380af6dd884e
+>>>>>>>> Minh:Assets/Resources/Materials/Octopus/Texture/octopus_toy_texture.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

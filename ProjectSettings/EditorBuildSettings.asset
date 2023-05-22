@@ -4,5 +4,38 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/DynamicScrollScene.unity
+    guid: 33564f6a9b781db4f84063c4e20ec69c
+  - enabled: 0
+    path: Assets/Scenes/FishingScene.unity
+    guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
+  - enabled: 0
+    path: Assets/Scenes/Clock.unity
+    guid: 13e2124e6cde907409e75edd20e16a92
+  - enabled: 0
+    path: Assets/Scenes/Calendar.unity
+    guid: 1bebd17e6477f8d4cafcc59f16139e88
+  - enabled: 1
+    path: Assets/Scenes/CompareNumberGame.unity
+    guid: 89913bbbac3689943b27a4d7bfca24f6
+  m_configObjects:
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
+      type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 89a6d18d3df8d3e4fa917b0f9a963bc0,
+      type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: de8a8e4f987434338a4b1062feb8d069,
+      type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: a1f0a9c607e2e4d45a78a84bb2fc49ca,
+      type: 2}
+    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: c2f7b8d7c0bff4d10874cbcf3f24af78,
+      type: 2}
+    com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: b27ec7d82a91a48e69fd689ad6808e5e,
+      type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 1eb95d77acb39444e8cf44313496a874,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58f40b12bbc864f3c96c6505a9a1e1e3,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6bb381a8ba31f114d9724357633b4625,
+      type: 2}

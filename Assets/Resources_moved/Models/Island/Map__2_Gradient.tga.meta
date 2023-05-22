@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources_moved/Models/Island/Map__2_Gradient.tga.meta
 guid: 15fa03b2cd38bd041b8cc5ddeb9c9cb2
+========
+guid: 9a6ef8bbeeed98c4ab789eb0cea55ae7
+>>>>>>>> Minh:Assets/Code/Scripts/MiniGames/CompareNumberGame/materials/Eraiser_Texture..jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -103,6 +107,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
