@@ -43,7 +43,7 @@ namespace Project.QuizSystem{
         {
             return options.Select((val)=>val.ToString()).ToArray();   
         }
-        protected override int ParseFromString(string data)
+        protected override int ParseOptionFromString(string data)
         {
             if(int.TryParse(data, out int result)){
                 return result;

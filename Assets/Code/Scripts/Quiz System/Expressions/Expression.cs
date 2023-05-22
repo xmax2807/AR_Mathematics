@@ -10,6 +10,8 @@ namespace Project.QuizSystem.Expressions
         public abstract Expression<T> InvertExpression(MathProvider<T> provider);
         public abstract string GetString();
 
+        public abstract T Calculate(MathProvider<T> provider);
+
         public static bool TryParse(string data, MathProvider<T> provider, out Expression<T> result)
         {
             char op = '+';

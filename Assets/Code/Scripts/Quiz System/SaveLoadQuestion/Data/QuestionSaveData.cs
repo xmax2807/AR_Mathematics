@@ -11,7 +11,7 @@ namespace Project.QuizSystem.SaveLoadQuestion{
     }
     public class UnrandomizableSCQSaveData : SCQSaveData{
         public string ImageURL {get;set;}
-    } 
+    }
 
     public class RandomizableSCQSaveData<T> : SCQSaveData{
         [Newtonsoft.Json.JsonConstructor]
@@ -45,6 +45,22 @@ namespace Project.QuizSystem.SaveLoadQuestion{
             }
             return result;
         }
+    }
+
+    public class WrapperSCQSaveData<T> : RandomizableSCQSaveData<T>
+    {
+        public QuestionSaveData WrappeeData{get;set;}
+
+        [Newtonsoft.Json.JsonConstructor]
+        public WrapperSCQSaveData(QuestionSaveData data,string[] options, int UserAnswerIndex, int CorrectAnswerIndex) : base(options, UserAnswerIndex, CorrectAnswerIndex)
+        {
+            this.WrappeeData = data;
+        }
+        public WrapperSCQSaveData(QuestionSaveData data,RandomizableSCQSaveData<T> parent) : base(parent)
+        {
+            this.WrappeeData = data;
+        }
+        
     }
 
     public class ImageSCQSaveData<T> : RandomizableSCQSaveData<T>{

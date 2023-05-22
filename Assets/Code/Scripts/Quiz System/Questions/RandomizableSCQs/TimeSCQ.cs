@@ -37,7 +37,7 @@ namespace Project.QuizSystem{
             return new TimeSCQ(this.options.Length);
         }
 
-        protected override int ParseFromString(string data)
+        protected override int ParseOptionFromString(string data)
         {
             bool parseResult = int.TryParse(data, out int result);
             if(parseResult == false) return -1;

@@ -20,20 +20,24 @@ namespace Project.QuizSystem
         private AnswerUIFactory AnswerUIFactory;
         private QuizUIContentFactory ContentUIFactory;
         private QuestionVisitor QuestionVisitor;
-        private static Dictionary<(int,int), IRandomizableQuestion> RandomizableQuestionDict;
+        private static Dictionary<(int,int, string), IRandomizableQuestion> RandomizableQuestionDict;
 
         private bool isInitialized = false;
         private void Awake(){
             RandomizableQuestionDict ??= new(){
-                    {(2,1), new ShapeSCQ(4)},
-                    {(3,1), new ShapeSCQ(4)},
-                    {(1,3), new EquationSCQ(10,4)},
-                    {(3,3), new EquationSCQ(10,4)},
-                    {(2,4), new EquationSCQ(20,4)},
-                    {(2,5), new EquationSCQ(90,4)},
-                    {(6,5), new EquationSCQ(100,4)},
-                    {(7,5), new EquationSCQ(100,4)},
-                    {(8,5), new EquationSCQ(100,4)},
+                    {(2,1,""), new ShapeSCQ(4)},
+                    {(3,1,""), new ShapeSCQ(4)},
+                    {(4,2,"ss"), new ComparisonSCQ(maxNumber:10, optionsLength:4)},
+                    {(4,2,"sx"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10)},
+                    {(4,2,"ln"), new ShapeSCQ(4)},
+                    {(4,2,"bn"), new ShapeSCQ(4)},
+                    {(1,3,""), new EquationSCQ(10,4)},
+                    {(3,3,""), new EquationSCQ(10,4)},
+                    {(2,4,""), new EquationSCQ(20,4)},
+                    {(2,5,""), new EquationSCQ(90,4)},
+                    {(6,5,""), new EquationSCQ(100,4)},
+                    {(7,5,""), new EquationSCQ(100,4)},
+                    {(8,5,""), new EquationSCQ(100,4)},
                 };
             QuestionVisitor =  new QuestionVisitor(spriteGroupPack);
             AnswerUIFactory = new AnswerUIFactory(BuiltInAnswerUIPrefabs);
@@ -51,17 +55,17 @@ namespace Project.QuizSystem
         public QuizUIContent.QuizUIContent GetQuizUIContent(QuestionContentType type){
             return ContentUIFactory.CreateQuizContentUI(type);
         }
-        public IQuestion CreateRandomQuestion(int unit, int chapter){
-            (int,int) unitChapter =  (unit, chapter);
-            if(RandomizableQuestionDict.ContainsKey(unitChapter)){
-                return RandomizableQuestionDict[unitChapter].Random();
+        public IQuestion CreateRandomQuestion(int unit, int chapter, string title){
+            (int,int,string) quizType =  (unit, chapter, title);
+            if(RandomizableQuestionDict.ContainsKey(quizType)){
+                return RandomizableQuestionDict[quizType].Random();
             }
             return null;
         }
-        public IQuestion CreateQuestion(int unit, int chapter){
-            (int,int) unitChapter =  (unit, chapter);
-            if(RandomizableQuestionDict.ContainsKey(unitChapter)){
-                return RandomizableQuestionDict[unitChapter].GetClone();
+        public IQuestion CreateQuestion(int unit, int chapter, string title){
+            (int,int,string) quizType =  (unit, chapter, title);
+            if(RandomizableQuestionDict.ContainsKey(quizType)){
+                return RandomizableQuestionDict[quizType].GetClone();
             }
             return null;
         }

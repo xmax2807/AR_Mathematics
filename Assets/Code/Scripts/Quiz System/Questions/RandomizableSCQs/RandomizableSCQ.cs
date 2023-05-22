@@ -3,21 +3,22 @@ using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils;
 
 namespace Project.QuizSystem{
-    public interface IRandomizableQuestion : IRandomizable{
+    public interface IRandomizableQuestion : IQuestion, IRandomizable{
         IQuestion Random(Random rand = null);
         IQuestion GetClone();
     }
+    public interface IRandomizableQuestion<T> : IRandomizableQuestion, IRandomizableOptions<T>{}
     
-    public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizableQuestion where T : IEquatable<T>
+    public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizableQuestion
     {
         protected static readonly System.Random random = new(DateTime.Now.Millisecond);
         protected abstract string constQuestion {get;}
         public RandomizableSCQ(int optionsLength) : base("", new T[optionsLength],0){}
 
-        public bool Equals(RandomizableSCQ<T> other)
-        {
-            return this.options[_answer].Equals(other.options[_answer]);
-        }
+        // public bool Equals(RandomizableSCQ<T> other)
+        // {
+        //     return this.options[_answer].Equals(other.options[_answer]);
+        // }
 
         public override string[] GetOptions()
         {
@@ -43,12 +44,12 @@ namespace Project.QuizSystem{
         public override void SetData(QuestionSaveData data)
         {
             if(data is RandomizableSCQSaveData<T> realData){
-                options = realData.ConvertToOptionT(ParseFromString);
+                options = realData.ConvertToOptionT(ParseOptionFromString);
                 
             }
             base.SetData(data);
         }
-        protected abstract T ParseFromString(string data);
+        protected abstract T ParseOptionFromString(string data);
         public sealed override QuestionSaveData ConvertToData()
         {
             var parent = new RandomizableSCQSaveData<T>(options, _answer, _playerAnswered)

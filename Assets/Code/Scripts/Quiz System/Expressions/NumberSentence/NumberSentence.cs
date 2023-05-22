@@ -8,8 +8,8 @@ namespace Project.QuizSystem.Expressions.NumberSentence{
     }
     public abstract class NumberSentence<T> where T : IComparable<T>
     {
-        protected Expression<T> leftSide;
-        protected Expression<T> rightSide;
+        public Expression<T> LeftSide {get;protected set;}
+        public Expression<T> RightSide {get;protected set;}
         private readonly NumberSentenceOperator seperator;
 
         public static bool TryParse(string data, MathProvider<T> provider, out NumberSentence<T> result){
@@ -50,29 +50,31 @@ namespace Project.QuizSystem.Expressions.NumberSentence{
             return true;
         }
         protected NumberSentence(Expression<T> left, Expression<T> right, NumberSentenceOperator sentenceOperator){
-            this.leftSide = left;
-            this.rightSide = right;
+            this.LeftSide = left;
+            this.RightSide = right;
             this.seperator = sentenceOperator;
         }
         public string GetFullSentence()
         {
-            return $"{leftSide} {(char)seperator} {rightSide}";
+            return $"{LeftSide} {(char)seperator} {RightSide}";
         }
         public override string ToString()
         {
-            return $"{leftSide.GetString()} {(char)seperator} {rightSide.GetString()}";
+            return $"{LeftSide.GetString()} {(char)seperator} {RightSide.GetString()}";
         }
+
+        public int UnknownIndex {get;protected set;}
         public T GetUnknownRandomly(Random rand)
         {
-            int index = rand.Next(2); // 0 or 1
-            if(index == 0) return leftSide.GetUnknownRandomly(rand);
+            UnknownIndex = rand.Next(2); // 0 or 1
+            if(UnknownIndex == 0) return LeftSide.GetUnknownRandomly(rand);
 
             // else index == 1
-            return rightSide.GetUnknownRandomly(rand);
+            return RightSide.GetUnknownRandomly(rand);
         }
         public bool SetValueToUnknown(T value){
-            bool result = leftSide.SetValueToUnknown(value);
-            result = result || rightSide.SetValueToUnknown(value);
+            bool result = LeftSide.SetValueToUnknown(value);
+            result = result || RightSide.SetValueToUnknown(value);
             return result;
         }
     }

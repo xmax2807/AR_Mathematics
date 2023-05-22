@@ -16,8 +16,7 @@ public class SelectObjectFromCamera : MonoBehaviour
     public void onSpawnMainPlane()
     {
         placements = new PlacementObject[placedObjects.Length];
-        var clone = placedObjects.Clone() as PlacementObject[];
-        clone.Shuffle();
+        var clone = placements.Shuffle();
 
         Vector3 startPosition = new(-6,1,-5);
 

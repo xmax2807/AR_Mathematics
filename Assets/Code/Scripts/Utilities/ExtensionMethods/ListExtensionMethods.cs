@@ -208,13 +208,14 @@ namespace Project.Utils.ExtensionMethods
 
         public static T[] Shuffle<T>(this T[] array)
         {
+            T[] result = (T[])array.Clone();
             System.Random random = new();
-            for (int i = array.Length - 1; i > 0; i--)
+            for (int i = array.Length - 1; i > 0; --i)
             {
                 int j = random.Next(i + 1);
-                (array[j], array[i]) = (array[i], array[j]);
+                (result[j], result[i]) = (result[i], result[j]);
             }
-            return array;
+            return result;
         }
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
         {

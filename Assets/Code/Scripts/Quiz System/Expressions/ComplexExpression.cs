@@ -55,5 +55,12 @@ namespace Project.QuizSystem.Expressions{
 
             return result;
         }
+
+        public override T Calculate(MathProvider<T> provider)
+        {
+            T leftValue = this.leftOperand.Calculate(provider);
+            T rightValue = this.rightOperand.Calculate(provider);
+            return provider.Calculate(leftValue, rightValue, op);
+        }
     }
 }

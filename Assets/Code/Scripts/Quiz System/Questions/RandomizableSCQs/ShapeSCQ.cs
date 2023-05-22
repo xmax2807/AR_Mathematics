@@ -52,7 +52,7 @@ namespace Project.QuizSystem{
             return new ShapeSCQ(this.options.Length);
         }
 
-        protected override Shape ParseFromString(string data)
+        protected override Shape ParseOptionFromString(string data)
         {
             if(Shape.TextMap.ContainsValue(data)){
                 return new Shape(Shape.TextMap.FindMatch((keyVal)=> keyVal.Value == data).Key);

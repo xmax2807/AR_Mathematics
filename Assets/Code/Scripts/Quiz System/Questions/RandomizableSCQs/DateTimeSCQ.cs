@@ -50,7 +50,7 @@ namespace Project.QuizSystem{
             return new DateTimeSCQ(this.options.Length);
         }
 
-        protected override DateTime ParseFromString(string data)
+        protected override DateTime ParseOptionFromString(string data)
         {
             if(DateTime.TryParse(data, out DateTime result)){
                 return result;

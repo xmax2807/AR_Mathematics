@@ -47,5 +47,10 @@ namespace Project.QuizSystem.Expressions{
             }
             return false;
         }
+
+        public override T Calculate(MathProvider<T> provider)
+        {
+            return number;
+        }
     }
 }

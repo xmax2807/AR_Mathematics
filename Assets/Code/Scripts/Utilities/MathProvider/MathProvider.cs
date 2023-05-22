@@ -63,6 +63,19 @@ namespace Project.Utils.MathProvider
         }
         protected abstract T RandomNumberInRange(T range);
         public abstract T Parse(string data);
+
+        public T Calculate(T a, T b, char op){
+            switch (op)
+            {
+                case '+': return Add(a, b);
+                case '-': return Subtract(a, b);
+                case '*': return Multiply(a, b);
+                case '/': return Divide(a, b);
+                default:
+                    break;
+            }
+            return default;
+        }
     }
 
     public class DoubleMathProvider : MathProvider<double>

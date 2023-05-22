@@ -37,10 +37,14 @@ namespace Project.UI.Panel
             if (!result) {
                 string quizReq = $",{currentUnit.chapter},{currentUnit.semester}";
                 void onPreviewClick() => QuizSceneReq.Request(quizReq);
-                buttonCreationTasks.Add(("Ôn tập", onPreviewClick));
+                buttonCreationTasks.Add(($"Ôn tập bài {currentUnit.unit}", onPreviewClick));
                 yield break;
             }
-
+            else{
+                string quizReq = $"{currentUnit.unit},{currentUnit.chapter},{currentUnit.semester}";
+                void onPreviewClick() => QuizSceneReq.Request(quizReq);
+                buttonCreationTasks.Add(($"Ôn tập chương {currentUnit.chapter}", onPreviewClick));
+            }
 
             string req = $"{nextLesson.LessonUnit},{nextLesson.LessonChapter}";
             void onButtonClick() => NextLessonReq.Request(req);

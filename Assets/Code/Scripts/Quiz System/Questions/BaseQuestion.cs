@@ -25,7 +25,7 @@ namespace Project.QuizSystem{
         protected string _question;
         protected T _answer;
         protected T _playerAnswered;
-        public T Answer => _playerAnswered;
+        public T Answer => _answer;
         public BaseQuestion(string question, T answer){
             _question = question;
             _answer = answer;

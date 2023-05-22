@@ -40,8 +40,9 @@ namespace Project.UI.Panel{
             QuizModel current = QuizModels[index];
             int quizChapter = current.QuizChapter;
             int quizUnit = current.QuizUnit;
+            string quizTitle = current.QuizTitle;
 
-            IQuestion question = generator.CreateRandomQuestion(quizUnit, quizChapter);
+            IQuestion question = generator.CreateRandomQuestion(quizUnit, quizChapter, quizTitle);
             
             if(question == null)// Can't random question
             {
