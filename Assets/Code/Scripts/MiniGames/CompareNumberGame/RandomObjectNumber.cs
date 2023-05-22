@@ -170,7 +170,7 @@ void Update()
 			DestroyChildren(parentSecondObjTransform, 5);
 		}
 
-		placementUpdate.Invoke();
+		//placementUpdate.Invoke();
 
 	}
 
