@@ -3,16 +3,16 @@ using Project.Managers;
 
 public class Obstacle : MonoBehaviour
 {
-    private OctopusController octopus;
+    private PlayerController player;
 
     // Start is called before the first frame update
     void OnTriggerEnter(Collider octopusCollider){
         Debug.Log("triggered " + octopusCollider.name);
-        if(!octopusCollider.TryGetComponent<OctopusController>(out octopus)) return;
+        if(!octopusCollider.TryGetComponent<PlayerController>(out player)) return;
         
-        Debug.Log(octopus.name);
+        Debug.Log(player.name);
         Time.timeScale = 0;
         TimeCoroutineManager.Instance.WatiForFixedSeconds(1, ()=> Time.timeScale = 1);
-        octopus.SpawnTile();
+        player.SpawnTile();
     }
 }

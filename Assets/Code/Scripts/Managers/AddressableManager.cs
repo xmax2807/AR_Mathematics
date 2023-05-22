@@ -101,6 +101,8 @@ namespace Project.Managers
         }
         public async Task<GameObject[]> PreLoadAssets(AssetReference[] required)
         {
+            if(required == null) return null;
+
             List<Task<GameObject>> tasks = new();
             foreach (AssetReference asset in required)
             {
@@ -112,6 +114,8 @@ namespace Project.Managers
         }
         public async Task<T[]> PreLoadAssets<T>(AssetReferenceT<T>[] required) where T : UnityEngine.Object
         {
+            if(required == null) return null;
+
             List<Task<T>> tasks = new();
             foreach (AssetReferenceT<T> asset in required)
             {
@@ -128,6 +132,9 @@ namespace Project.Managers
             }
         }
         public void UnloadAsset<T>(AssetReferenceT<T> asset) where T : UnityEngine.Object{
+            if(!asset.IsValid()){
+                return;
+            }
             asset.ReleaseAsset();
         }
 
@@ -146,6 +153,7 @@ namespace Project.Managers
             }
         }
         public void UnloadInstancePrefabs(IEnumerable<AsyncOperationHandle<GameObject>> operations){
+            if(operations == null) return;
             foreach(var operation in operations){
                 Addressables.ReleaseInstance(operation);
             }

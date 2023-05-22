@@ -126,12 +126,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5225071495375448750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7694b7cf41cb96b4cabae3fd3b4a3b30, type: 3}
+  m_Script: {fileID: 11500000, guid: b01584c71171cc6498876d1824bd37bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 487424338086316856}
   tileManager: {fileID: 0}
-  myRigidbody: {fileID: 0}
+  myRigidbody: {fileID: 6446989087439947659}
 --- !u!1001 &2679659499158173840
 PrefabInstance:
   m_ObjectHideFlags: 0

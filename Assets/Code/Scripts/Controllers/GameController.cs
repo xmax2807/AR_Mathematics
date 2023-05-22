@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Managers;
 using Project.Utils.ExtensionMethods;
+using UnityEngine;
+
 public class GameController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
@@ -115,9 +117,14 @@ public class GameController
         var snapshots = await query.GetSnapshotAsync();
         foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
         {
-            //            Debug.Log(String.Format("Document {0} returned", documentSnapshot.Id));
-            listGames.Add(documentSnapshot.ConvertTo<GameModel>());
+            GameModel model = documentSnapshot.ConvertTo<GameModel>();
+            listGames.Add(model);
         }
+
+        UserManager.Instance.CurrentUnitProgress = new UserManager.CurrentUnit(){
+            chapter = chapter,
+            unit = -1,
+        };
 
         return listGames;
     }

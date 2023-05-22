@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2941427793412127029}
   - component: {fileID: 1528372547532307076}
+  - component: {fileID: 449667209653899390}
   m_Layer: 0
   m_Name: RoadEnv
   m_TagString: Untagged
@@ -53,3 +54,16 @@ MonoBehaviour:
   numberOfTiles: 2
   spawnRate: 5.2
   forwardSpeed: -1.5
+--- !u!114 &449667209653899390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5672186357857830332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb898793194e03f4bb10dba03ec2cb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1

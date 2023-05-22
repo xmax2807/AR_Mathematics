@@ -12,6 +12,8 @@ namespace Project.Addressable
     {
         [SerializeField] private PanelStackSystem stackSystem;
         [SerializeField] private PanelType type;
+
+        [Header("ScriptableObject"), SerializeField] private AssetReferencePack<ScriptableObject> soRefs;
         [Header("Prefab"), SerializeField] private GameObjectReferencePack prefabRefs;
         [Header ("Initialized Prefabs"), SerializeField] private AssetReferenceT<GameObject>[] preInitPrefabs;
         [Header("Parent for PreInit"), SerializeField] private Transform parentPreInitPrefabs;
@@ -38,7 +40,11 @@ namespace Project.Addressable
             prefabRefs.OnComplete?.Invoke(prefabs);
             Debug.Log("refs");
 
-            if(audioRefs.Reference != null) {
+            var ScriptableObjects = await AddressableManager.Instance.PreLoadAssets(soRefs.References);
+            soRefs.OnComplete?.Invoke(ScriptableObjects);
+            Debug.Log("scriptableObject");
+
+            if(audioRefs.Reference.IsValid()) {
                 var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
                 AudioManager.Instance.SwapSoundPack(audioPack);
                 Debug.Log("audio");
@@ -51,6 +57,7 @@ namespace Project.Addressable
 
         private void OnDestroy(){
             Debug.Log("Destroyed");
+            AddressableManager.Instance.UnloadAssets(soRefs.References);
             AddressableManager.Instance.UnloadAssets(prefabRefs.References);
             AddressableManager.Instance.UnloadAsset(audioRefs.Reference);
             AddressableManager.Instance.UnloadInstancePrefabs(cacheOperations);

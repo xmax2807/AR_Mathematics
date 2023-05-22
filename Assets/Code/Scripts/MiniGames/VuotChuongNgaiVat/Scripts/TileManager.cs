@@ -16,10 +16,9 @@ public class TileManager : MonoBehaviour
     public float forwardSpeed = -2;
     void Start()
     {
-
+        //enabled = false;
         SetupEnvironment();
         //TimeCoroutineManager.Instance.DoLoopAction(SpawnTileRandomly, stopCondition: () => false, spawnRate);
-
     }
     private void SetupEnvironment(){
         direction = Vector3.right * forwardSpeed;
@@ -28,6 +27,7 @@ public class TileManager : MonoBehaviour
         {
             SpawnTile(Random.Range(0, tilePrefabs.Length));
         }
+        enabled = true;
     }
     public void SpawnTileRandomly()
     {
