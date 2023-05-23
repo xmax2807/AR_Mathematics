@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Project.Utils.ExtensionMethods;
 using System.Threading.Tasks;
 using Project.Managers;
 using UnityEngine;
@@ -70,10 +70,10 @@ namespace Project.UI.Panel
         }
 
         private void PopulateAchievementButton(){
-            List<string> accquiredAchivements = new(0);
+            AchievementModel[] accquiredAchivements = new AchievementModel[0];
             var currentUser = UserManager.Instance.CurrentUser;
             if(currentUser != null){
-                accquiredAchivements = currentUser.User_ListAchievement;
+                accquiredAchivements = UserManager.Instance.AcquiredAchivements;
             }
 
             RewardSystem.RewardPackSTO pack = ResourceManager.Instance.RewardPack;
@@ -84,7 +84,7 @@ namespace Project.UI.Panel
                 UnlockableImageButtonData data = new(){
                     Name = badge.Title,
                     Image = badge.Visual,
-                    isUnlocked = accquiredAchivements.Contains(packKeys[i]),
+                    isUnlocked = accquiredAchivements.IsContains((x)=>x.AchieveTitle == packKeys[i]),
                     LockedImage = pack.defaultSprite,
                 };
                 realData.ButtonNames[i] = data;

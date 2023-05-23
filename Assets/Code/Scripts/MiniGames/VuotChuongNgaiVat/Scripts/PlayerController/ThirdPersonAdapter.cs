@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-class ThirdPersonAdapter : PlayerController{
+public class ThirdPersonAdapter : PlayerController{
         [SerializeField]private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Vector3 m_Move = Vector3.right;
         private bool m_Jump;
@@ -12,13 +12,18 @@ class ThirdPersonAdapter : PlayerController{
         {
             m_Move = Vector3.right;
             m_Jump = true;
+            UpdateState();
+            m_Jump = false;
         }
         else if (CurrentState == PlayerState.FailedJump)
         {
+            m_Move = Vector3.zero;
+            m_Jump = false;
         }
         else
         {
             m_Move = Vector3.right;
+            m_Jump = false;
         }
     }
 

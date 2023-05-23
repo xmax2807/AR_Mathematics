@@ -13,6 +13,9 @@ namespace Project.RewardSystem{
             canvas = GetComponent<Canvas>();
 //            view.HideAsync();
         }
+        private void Start(){
+            view.HideAsync();
+        }
         private void OnEnable(){
             view.onConfirm += Hide;
         }

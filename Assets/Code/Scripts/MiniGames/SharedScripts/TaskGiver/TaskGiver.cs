@@ -61,7 +61,7 @@ namespace Project.MiniGames{
             GameModel currentGame = UserManager.Instance.CurrentGame;
             if(currentGame == null) return Task.CompletedTask;
             
-            this.CurrentTaskIndex =  GameController.GetLastSavedTask(UserManager.Instance.CurrentGame.GameId);
+            this.CurrentTaskIndex =  GameController.GetLastSavedTask(currentGame.GameID);
             Debug.Log(CurrentTaskIndex);
             return Task.CompletedTask;
         }

@@ -54,6 +54,7 @@ MonoBehaviour:
   numberOfTiles: 2
   spawnRate: 5.2
   forwardSpeed: -1.5
+  eventSTO: {fileID: 11400000, guid: 0b4246b226ce76a47873e42a9b4e0666, type: 2}
 --- !u!114 &449667209653899390
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Project.MiniGames;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IEventListenerT<bool> 
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private TileManager tileManager;
     private string currentAnimName = "idle";
-    private float currentSpeed = -2;
     public enum PlayerState
     {
         BasicJump,
@@ -26,27 +24,30 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public string Name => throw new NotImplementedException();
+
     public Rigidbody myRigidbody;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            ChangeState(PlayerState.HighJump);
-            return;
-        }
-        if (Input.GetKey(KeyCode.B))
-        {
-            ChangeState(PlayerState.FailedJump);
-            return;
-        }
+    // void Update()
+    // {
+    //     if (Input.GetKey(KeyCode.A))
+    //     {
+    //         ChangeState(PlayerState.HighJump);
+    //         return;
+    //     }
+    //     if (Input.GetKey(KeyCode.B))
+    //     {
+    //         ChangeState(PlayerState.FailedJump);
+    //         return;
+    //     }
 
-        if (Input.GetKey(KeyCode.C))
-        {
-            ChangeState(PlayerState.BasicJump);
-        }
-    }
+    //     if (Input.GetKey(KeyCode.C))
+    //     {
+    //         ChangeState(PlayerState.BasicJump);
+    //     }
+    // }
     void FixedUpdate(){
         UpdateState();
     }
@@ -72,12 +73,44 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetBool(currentAnimName, true);
     }
-    public void SpawnTile(){
-        tileManager.SpawnTileRandomly();
+    
+
+    #region GameEvents
+    void OnDisable(){
+        this.colliderEvent?.UnregisterListener(this);
+        this.quizEvent?.UnregisterListener(this);
+    }
+    private EventSTO colliderEvent;
+    public void SetColliderEvent(EventSTO colliderEvent){
+        this.colliderEvent = colliderEvent;
+        this.colliderEvent?.RegisterListener(this);
+    }
+    public EventSTO GetEventSTO()
+    {
+        return colliderEvent;
     }
 
-    internal void SetTileManager(TileManager tileManager)
-    {
-        this.tileManager = tileManager;
+    private QuizEventSTO quizEvent;
+    public void SetQuizEvent(QuizEventSTO quizEvent){
+        this.quizEvent = quizEvent;
+        this.quizEvent?.RegisterListener(this);
     }
+    public void OnEventRaised(bool result)
+    {
+        if(result == true){
+            ChangeState(PlayerState.HighJump);
+            Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>ChangeState(PlayerState.BasicJump));
+        }
+        else{
+            ChangeState(PlayerState.FailedJump);
+        }
+    }
+
+    public void OnEventRaised()
+    {
+        
+    }
+
+    
+    #endregion
 }

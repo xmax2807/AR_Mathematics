@@ -32,7 +32,6 @@ namespace Project.UI.Panel.PanelItem{
             if(rewardPopup == null){
                 GetRewardPopup();
             }
-            rewardPopup?.SetRewardData(uiData.Name, uiData.GetImage());
 
             if(button == null) return;
             if(!uiData.isUnlocked){
@@ -44,6 +43,7 @@ namespace Project.UI.Panel.PanelItem{
             }
         }
         private void Push(){
+            rewardPopup?.SetRewardData(uiData.Name, uiData.GetImage());
             modalStack.Push(new PanelViewController(panelType));
         }
 

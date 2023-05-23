@@ -23,7 +23,6 @@ namespace Project.MiniGames.FishingGame
         }
 
         public Task<bool> OnCaughtFish(Shape.ShapeType type){
-            Debug.Log("Invoked " + type);
             if(Giver.IsCorrect(type)){
                 Giver.Tasks.UpdateProgress(1);
                 OnCatchRightFish?.Invoke();

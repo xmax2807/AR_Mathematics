@@ -55,7 +55,7 @@ public class GameController
     {
         UserModel user = UserManager.Instance.CurrentUser;
         GameModel game = UserManager.Instance.CurrentGame;
-        string gameId = game.GameId;
+        string gameId = game.GameID;
         int index = user.SavedGame.FindIndex((x) => x.GameID == gameId);
 
         if (index == -1)
@@ -101,13 +101,20 @@ public class GameController
     }
     public async Task<List<GameModel>> GetListGamesInChapter(int chapter)
     {
+        int chapIndex = chapter - 1;
+        if(chapIndex < 0) return null;
+
         CollectionReference gamesRef = db.Collection("games");
         List<GameModel> listGames = new();
 
-        if (chapter >= UserManager.Instance.CourseModel.chapCount.Count) return null;
-        int maxChapCount = UserManager.Instance.CourseModel.chapCount[chapter];
+        int[] chapCounts = UserManager.Instance.CourseModel.chapCount.ToArray();
+        
+        if (chapIndex >= chapCounts.Length) return null;
+
+        int maxChapCount = chapCounts[chapIndex];
+        
         string[] req = new string[maxChapCount];
-        for (int i = 1; i < maxChapCount; i++)
+        for (int i = 1; i <= maxChapCount; i++)
         {
             req[i - 1] = $"{i},{chapter}";
         }
@@ -118,6 +125,7 @@ public class GameController
         foreach (DocumentSnapshot documentSnapshot in snapshots.Documents)
         {
             GameModel model = documentSnapshot.ConvertTo<GameModel>();
+            Debug.Log(model.GameTitle);
             listGames.Add(model);
         }
 
@@ -131,9 +139,10 @@ public class GameController
 
     public int GetLastSavedTask(string gameId)
     {
+        Debug.Log(gameId);
         UserModel currentUser = UserManager.Instance.CurrentUser;
         if (currentUser == null) return 0;
-
+        
         GameData data = currentUser.SavedGame.FindMatch((x) => x.GameID == gameId);
         if (data == null) return 0;
         return data.Task;

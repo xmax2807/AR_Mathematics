@@ -59,7 +59,7 @@ namespace Project.UI.Panel
                     requestResult = RequestGames(data);
                     break;
                 case RequestType.Achievement:
-                    requestResult = Task.FromResult(true);
+                    requestResult = RequestAchivement();
                     break;
                 case RequestType.Test:
                     requestResult = RequestTest(data);
@@ -165,6 +165,19 @@ namespace Project.UI.Panel
             UserManager.Instance.CurrentQuizzes = Result.Item2;
             return true;
         }
+
+        protected async Task<bool> RequestAchivement(){
+            UserModel currentUser = UserManager.Instance.CurrentUser;
+            if(currentUser == null) return false;
+
+            var result = await DatabaseManager.Instance.AchievementController.GetAchievementsOfUser(currentUser);
+            UserManager.Instance.AcquiredAchivements = result;
+            foreach(var i in result){
+                Debug.Log(i.AchieveTitle);
+            }
+            return result != null;
+        }
+
         protected virtual void AddPostRequestCallback() { }
         protected virtual void RemovePostRequestCallback() { }
     }

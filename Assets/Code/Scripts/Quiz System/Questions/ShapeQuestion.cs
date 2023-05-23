@@ -21,7 +21,9 @@ namespace Project.QuizSystem{
         public enum ShapeType{
             Square, Rectangle, Circle, Triangle
         }
-        public readonly bool Equals(Shape other) => other.type == this.type;
+        public readonly bool Equals(Shape other) {
+            return other.type == this.type;
+        }
         public override readonly string ToString()
         {
             return TextMap[type];
@@ -47,7 +49,7 @@ namespace Project.QuizSystem{
         protected override void TrySetAnswer(object value)
         {
             if(value is Shape.ShapeType shapeType){
-                SetAnswer(new Shape(shapeType));
+                _playerAnswered = new Shape(shapeType);
             }
         }
 

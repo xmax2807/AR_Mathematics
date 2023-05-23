@@ -159,6 +159,24 @@ namespace Project.Utils.ExtensionMethods
             }
         }
 
+        public static bool IsContains<T>(this IEnumerable<T> List, Func<T, bool> condition){
+            if (condition == null) return default;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+
+            if (!iterator.MoveNext()) return default;
+
+            do
+            {
+                if (condition.Invoke(iterator.Current))
+                {
+                    return true;
+                }
+            } while (iterator.MoveNext());
+            
+            return false;
+        }
+
         public static T FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition)
         {
             if (condition == null) return default;

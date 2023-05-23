@@ -15,6 +15,12 @@ namespace Project.Managers{
         StopAllCoroutines();
     }
 
+    public Coroutine PauseGame(float seconds){
+        PauseGame();
+        return WaitForSeconds(seconds, ResumeGame);
+    }
+    public void ResumeGame() => Time.timeScale = 1;
+    private void PauseGame() => Time.timeScale = 0;
     public Coroutine WaitFor(YieldInstruction instruction, Action result){
         return StartCoroutine(ExecuteWaitCoroutine(instruction, result));
     }

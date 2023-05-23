@@ -5,11 +5,6 @@ namespace Project.MiniGames{
     public class ClockQuizTaskUI : QuizTaskUI{
 
         private Clock clock;
-        private Canvas canvas;
-        private void Awake(){
-            canvas = GetComponent<Canvas>();
-            canvas.enabled = false;
-        }
         protected override void UpdateUI(BaseTask task)
         {
             base.UpdateUI(task);

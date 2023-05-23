@@ -5,11 +5,9 @@ namespace Project.MiniGames{
 
         protected virtual void OnEnable(){
             giver.OnTaskChanged += UpdateUI;
-            giver.CurrentTask.OnProgressChanged += UpdateProgress;
         }
         protected virtual void OnDisable(){
             giver.OnTaskChanged -= UpdateUI;
-            giver.CurrentTask.OnProgressChanged -= UpdateProgress;
         }
         protected void Start(){
             if(giver == null){
@@ -18,6 +16,5 @@ namespace Project.MiniGames{
         }
 
         protected abstract void UpdateUI(BaseTask task);
-        protected abstract void UpdateProgress(int currentProgress);
     } 
 }

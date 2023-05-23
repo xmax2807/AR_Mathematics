@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0063b47229223aa439d41af64ed63b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColliderTriggerEvent: {fileID: 11400000, guid: 0b4246b226ce76a47873e42a9b4e0666,
+    type: 2}
 --- !u!54 &6092134509017464810
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -279,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892cd1464d753824e80c350137abaa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: -2
+  availableObstacles: []
 --- !u!218 &5102060238847022837
 Terrain:
   m_ObjectHideFlags: 0

@@ -63,7 +63,6 @@ namespace Project.QuizSystem{
         }
 
         private T OnSetAnswerFailed(object value, InvalidCastException e){
-            UnityEngine.Debug.Log(e.Message);
             TrySetAnswer(value);
             return _answer;
         }

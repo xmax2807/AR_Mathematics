@@ -5,11 +5,6 @@ namespace Project.MiniGames{
     public class CalendarQuizTaskUI : QuizTaskUI
     {
         private Calendar calendar;
-        private Canvas canvas;
-        private void Awake(){
-            canvas = GetComponent<Canvas>();
-            canvas.enabled = false;
-        }
         protected override void UpdateUI(BaseTask task)
         {
             base.UpdateUI(task);

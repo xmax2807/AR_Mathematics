@@ -137,4 +137,24 @@ namespace Project.MiniGames{
             return instance;
         }
     }
+
+    public class VCNVTask : RandomizableSingleChoiceTask<int>
+    {
+        private int currentChap;
+        public VCNVTask(int currentChap,int goal, string description) : base(goal, description)
+        {
+            this.currentChap = currentChap;
+        }
+
+        protected override RandomizableSCQ<int> CreateSingleChoiceQuestion()
+        {
+            return currentChap switch
+            {
+                3 => new EquationSCQ(10, 4),
+                4 => new EquationSCQ(20, 4),
+                5 => new EquationSCQ(100, 4),
+                _ => new EquationSCQ(10, 4),
+            };
+        }
+    }
 }

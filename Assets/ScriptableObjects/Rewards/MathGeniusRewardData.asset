@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MathGeniusRewardData
   m_EditorClassIdentifier: 
   rewardSound: {fileID: 0}
-  Goal: 0
+  Goal: 10
   Badge: {fileID: 11400000, guid: 41b24b534366c3e4b8f5e968a2e0bab7, type: 2}
   UnacquiredBadge: {fileID: 21300000, guid: 596b176e9bbd0e34da219b0c4fec6003, type: 3}

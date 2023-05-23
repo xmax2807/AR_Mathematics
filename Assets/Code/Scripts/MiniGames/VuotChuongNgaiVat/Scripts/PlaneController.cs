@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.MiniGames;
 using UnityEngine;
 
 public class PlaneController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    private Vector3 direction;
-    public float forwardSpeed = -2;
-    // void Start()
-    // {
-    //     direction = Vector3.right * forwardSpeed;
-    // }
+{   
+    [SerializeField] Obstacle[] availableObstacles;
 
-    // private void Update(){
-    //     this.transform.position += direction * Time.deltaTime;
-    // }
+    private void Awake(){
+        if(availableObstacles == null || availableObstacles.Length == 0){
+            availableObstacles = GetComponentsInChildren<Obstacle>();
+        }
+    }
+
+    public void SetTriggerEvent(EventSTO eventSTO){
+        foreach(Obstacle obstacle in availableObstacles){
+            obstacle.SetTriggerEvent(eventSTO);
+        }
+    }
 }

@@ -52,9 +52,6 @@ public class PlaceOnPlane : MonoBehaviour
 
         // placementUpdate.AddListener(DiableVisual);
     }
-    void Start(){
-        TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>enabled=false);
-    }
 
     bool TryGetTouchPosition(out Vector2 touchPosition)
     {
@@ -65,7 +62,6 @@ public class PlaceOnPlane : MonoBehaviour
         }
         if(m_PlacedPrefab == null){
             touchPosition = default;
-            Debug.Log("Null Placed Prefab");
             return false;
         }
 
@@ -78,7 +74,12 @@ public class PlaceOnPlane : MonoBehaviour
 		if(objs == null || objs.Length == 0) return;
 		
 		m_PlacedPrefab = objs[0];
-        enabled = true;
+
+        // spawnedObject = Instantiate(m_PlacedPrefab);
+        // spawnedObject.AddComponent<ARAnchor>();
+        // DisablePlaneDetection();
+        // onPlacedObject?.Invoke(spawnedObject);
+        // enabled = false;
 	}
 
     void Update()
@@ -106,6 +107,7 @@ public class PlaceOnPlane : MonoBehaviour
                 //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
 				DisablePlaneDetection();
                 onPlacedObject?.Invoke(spawnedObject);
+                enabled =false;
             }
             // else
             // {

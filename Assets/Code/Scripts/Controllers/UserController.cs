@@ -89,16 +89,15 @@ public class UserController
 
     private void ProfileUser(string userID)
     {
-        DocumentReference userDoc = db.Collection("users").Document(userID);
-        userDoc.GetSnapshotAsync().ContinueWith(task =>
+        Query query = db.Collection("users").WhereEqualTo("UserID",userID);
+        query.GetSnapshotAsync().ContinueWith(task =>
         {
-            DocumentSnapshot snapshot = task.Result;
             try{
-
+                DocumentSnapshot snapshot = task.Result[0];
+                
                 userModel = snapshot.ConvertTo<UserModel>();
                 UserManager.Instance.CurrentUser = userModel;
                 Debug.Log("ok");
-                Debug.Log(userModel.User_ListAchievement.Count);
             }
             catch(Exception e){
                 Debug.Log(e.Message);
@@ -119,7 +118,9 @@ public class UserController
     UserModel userModel;
     public void UploadModel(Firebase.Auth.FirebaseUser newUser)
     {
-        userModel = new();
+        userModel = new(){
+            UserID = newUser.UserId,
+        };
         // user.UserID = newUser.UserId;
         db.Collection("users").Document(newUser.UserId).SetAsync(userModel);
 
