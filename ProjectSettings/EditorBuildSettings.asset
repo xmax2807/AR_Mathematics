@@ -11,34 +11,34 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Plugins/Gameframe.GUI.Demo/Basic/Demo - GUI Basic.unity
     guid: a75bbcacfa24c4283b3530aa84e49de8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/LoginScene.unity
     guid: 1471d764e823ee345b17040e9de02d59
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/MainMenuScene.unity
     guid: f23ed8b621c5e9e43835f07836fa9096
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/LessonVideoScene.unity
     guid: b427491b6e58baa49b6897c55f37e55c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/QuizScene.unity
     guid: f02ff65be7351d94cad0b56b377111a9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/FinalTestScene.unity
     guid: eae400bea5faf8e448b1d4d0df36ddfd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/ParentScene.unity
     guid: e4c44e06fddcf7c4d8096e7de6335557
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FishingScene.unity
     guid: 60e04c6f4e5816c4b8eb2c1dabb2b5ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CalendarScene.unity
     guid: 1bebd17e6477f8d4cafcc59f16139e88
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ClockScene.unity
     guid: 13e2124e6cde907409e75edd20e16a92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGameFlow/GameBuilding.unity
     guid: 24038f933a5d5d74aa5a5015324be760
   - enabled: 1

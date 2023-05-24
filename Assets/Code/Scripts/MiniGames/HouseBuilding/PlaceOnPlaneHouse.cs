@@ -50,10 +50,10 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         // onSpawnPlane?.Invoke();
         // Debug.Log(spawnedObject.transform.localPosition);
 
-        /*Vector3 position0 = new Vector3(0, 0, 0);
+        Vector3 position0 = new Vector3(0, 0, 0);
         spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
         onSpawnPlane?.Invoke();
-        Debug.Log(spawnedObject.transform.localPosition);*/
+        Debug.Log(spawnedObject.transform.localPosition);
         //spawnedObject.transform.LookAt(ARCamera.transform);
     }
 
@@ -94,12 +94,13 @@ public class PlaceOnPlaneHouse : MonoBehaviour
             if (spawnedObject == null)
             {
                 Vector3 position0 = new Vector3(0, 0, 0);
-                spawnedObject = Instantiate(m_PlacedPrefab, trackable.transform.position ,Quaternion.identity) ;
+                //spawnedObject = Instantiate(m_PlacedPrefab, trackable.transform.position ,Quaternion.identity) ;
+                spawnedObject = Instantiate(m_PlacedPrefab, m_PlacedPrefab.transform.position, Quaternion.identity);
                 spawnedObject.AddComponent<ARAnchor>();
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
-				DisablePlaneDetection();
+                DisablePlaneDetection();
                 onSpawnPlane?.Invoke();
                 //Debug.Log(spawnedObject.transform.localPosition);
                 //spawnedObject.transform.LookAt(ARCamera.transform);

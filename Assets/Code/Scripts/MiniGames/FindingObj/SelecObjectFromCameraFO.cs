@@ -1,8 +1,10 @@
 using Project.MiniGames;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class SelecObjectFromCameraFO : MonoBehaviour
 {
@@ -106,18 +108,40 @@ public class SelecObjectFromCameraFO : MonoBehaviour
             else
             {
                 current.Selected = true;
-                //current.transform.position = new Vector3(0, 10f, 0);
+                Animator anim = current.transform.GetComponentInChildren<Animator>(true);
+                bool RightAns = false;
                 if (taskGiver.CurrentTask.IsCorrect(current.ID))
                 {
+                    RightAns = true;
+                    StartCoroutine(VideoStart(anim,RightAns));
                     Debug.Log("SUCCESS !!!");
                     taskGiver.Tasks.UpdateProgress(1);
                 }
                 else
                 {
+                    RightAns = false;
+                    StartCoroutine(VideoStart(anim,RightAns));
                     Debug.Log("Fail");
                 }
                 current.Selected = false;
+                
             }
         }
+    }
+    IEnumerator VideoStart(Animator anim, bool RightAns)
+    {
+        anim.gameObject.SetActive(true);
+        if(RightAns == true)
+        {
+            anim.Play("RightAnswerAnimation");
+        }
+        else
+        {
+            anim.Play("WrongAnswerAnimation");
+        }
+        anim.transform.LookAt(arCamera.transform);
+        yield return new WaitForSeconds(2);
+        anim.gameObject.SetActive(false);
+        Debug.Log("Run video");
     }
 }
