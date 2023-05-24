@@ -18,15 +18,15 @@ MonoBehaviour:
   m_GUID: a627de79773a89f4180416a955794ae9
   m_SerializeEntries:
   - m_GUID: a312cf5c7d5e3f2448a5424cc50eed49
-    m_Address: Prefabs/VCNVPrefabs/FlyingPlanes/Map2
+    m_Address: Assets/Resources_moved/Prefabs/VCNVPrefabs/FlyingPlanes/Map2.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 32d9073cfe304044e9762bfdc421d2b0
-    m_Address: Prefabs/VCNVPrefabs/SeaPlanes/Map1
+    m_Address: Assets/Resources_moved/Prefabs/VCNVPrefabs/SeaPlanes/Map1.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 4d433c531a812744faeaa25e922bd981
-    m_Address: Prefabs/VCNVPrefabs/RunningPlanes/Map3
+    m_Address: Assets/Resources_moved/Prefabs/VCNVPrefabs/RunningPlanes/Map3.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

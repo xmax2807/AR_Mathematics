@@ -8,14 +8,14 @@ public class PlaneController : MonoBehaviour
     [SerializeField] Obstacle[] availableObstacles;
 
     private void Awake(){
-        if(availableObstacles == null || availableObstacles.Length == 0){
-            availableObstacles = GetComponentsInChildren<Obstacle>();
-        }
+        // if(availableObstacles == null || availableObstacles.Length == 0){
+        //     availableObstacles = GetComponentsInChildren<Obstacle>();
+        // }
     }
 
-    public void SetTriggerEvent(EventSTO eventSTO){
-        foreach(Obstacle obstacle in availableObstacles){
-            obstacle.SetTriggerEvent(eventSTO);
-        }
-    }
+    // public void SetTriggerEvent(EventSTO eventSTO){
+    //     foreach(Obstacle obstacle in availableObstacles){
+    //         obstacle.SetTriggerEvent(eventSTO);
+    //     }
+    // }
 }

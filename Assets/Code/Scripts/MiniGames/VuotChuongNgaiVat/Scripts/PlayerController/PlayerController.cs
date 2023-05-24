@@ -3,9 +3,9 @@ using System.Collections;
 using Project.MiniGames;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IEventListenerT<bool> 
+public class PlayerController : MonoBehaviour, IEventListener
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
     private string currentAnimName = "idle";
     public enum PlayerState
     {
@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour, IEventListenerT<bool>
             }
         }
     }
-
-    public string Name => throw new NotImplementedException();
-
-    public Rigidbody myRigidbody;
 
     // Update is called once per frame
     // void Update()
@@ -76,27 +72,34 @@ public class PlayerController : MonoBehaviour, IEventListenerT<bool>
     
 
     #region GameEvents
-    void OnDisable(){
-        this.colliderEvent?.UnregisterListener(this);
-        this.quizEvent?.UnregisterListener(this);
+    public string UniqueName => this.name;
+    void OnEnable(){
+        VCNVGameEventManager.Instance.RegisterEvent<bool>(VCNVGameEventManager.AnswerResultEventName,this, OnAnswerQuestion);
     }
-    private EventSTO colliderEvent;
-    public void SetColliderEvent(EventSTO colliderEvent){
-        this.colliderEvent = colliderEvent;
-        this.colliderEvent?.RegisterListener(this);
-    }
-    public EventSTO GetEventSTO()
+    // void OnDisable(){
+    //     this.colliderEvent?.UnregisterListener(this);
+    //     //this.quizEvent?.UnregisterListener(this);
+    // }
+    // private EventSTO colliderEvent;
+    // public void SetColliderEvent(EventSTO colliderEvent){
+    //     this.colliderEvent = colliderEvent;
+    //     this.colliderEvent?.RegisterListener(this);
+    // }
+
+    public void OnEventRaised<T>(EventSTO sender, T result)
     {
-        return colliderEvent;
+        // if(result is not bool realResult) return;
+
+        // if(realResult == true){
+        //     ChangeState(PlayerState.HighJump);
+        //     Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>ChangeState(PlayerState.BasicJump));
+        // }
+        // else{
+        //     ChangeState(PlayerState.FailedJump);
+        // }
     }
 
-    private QuizEventSTO quizEvent;
-    public void SetQuizEvent(QuizEventSTO quizEvent){
-        this.quizEvent = quizEvent;
-        this.quizEvent?.RegisterListener(this);
-    }
-    public void OnEventRaised(bool result)
-    {
+    private void OnAnswerQuestion(bool result){
         if(result == true){
             ChangeState(PlayerState.HighJump);
             Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>ChangeState(PlayerState.BasicJump));
@@ -105,12 +108,6 @@ public class PlayerController : MonoBehaviour, IEventListenerT<bool>
             ChangeState(PlayerState.FailedJump);
         }
     }
-
-    public void OnEventRaised()
-    {
-        
-    }
-
     
     #endregion
 }

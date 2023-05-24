@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Map1
   m_EditorClassIdentifier: 
   EnvironmentTiles:
-  - {fileID: 7258238654609422755, guid: 874a643b729f01e45b2dccdb0b980eba, type: 3}
-  - {fileID: 7258238654609422755, guid: 61be726090ca1f44ba09cbf33d0fe9e6, type: 3}
-  - {fileID: 7258238654609422755, guid: 455764dd444ff9c45a4ee37d0049a06c, type: 3}
+  - {fileID: 7258238654609422755, guid: 75d06a3912330d44eb29f76a79817036, type: 3}
+  - {fileID: 7258238654609422755, guid: 4579477aa1194f04a9340e864b77230a, type: 3}
+  - {fileID: 7258238654609422755, guid: fc803c4d9c3bda146bf71fd786f3df66, type: 3}
   Player: {fileID: 6916572842012033151, guid: 2f32317309e17eb4fa74bac8115a5cfc, type: 3}

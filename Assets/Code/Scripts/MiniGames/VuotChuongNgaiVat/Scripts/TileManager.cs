@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Project.MiniGames;
 using UnityEngine;
 
-public class TileManager : MonoBehaviour, IEventListener, IEventListenerT<bool>
+public class TileManager : MonoBehaviour, IEventListener
 {
     public GameObject[] tilePrefabs;
     public float xSpawn = 0;
@@ -45,20 +45,22 @@ public class TileManager : MonoBehaviour, IEventListener, IEventListenerT<bool>
         var obj = Instantiate(tilePrefabs[tileIndex], transform);
         obj.transform.localPosition = Vector3.right * xSpawn;
         obj.transform.rotation = tilePrefabs[tileIndex].transform.rotation;
-        if(obj.TryGetComponent(out PlaneController controller)){
-            controller.SetTriggerEvent(this.eventSTO);
-        }
+        // if(obj.TryGetComponent(out PlaneController controller)){
+        //     controller.SetTriggerEvent(this.eventSTO);
+        // }
         xSpawn += tileLength;
         listMap.Enqueue(obj);
         
 
         // numberOftile = 3
         // listMap = 4
-        canSpawn = listMap.Count <= numberOfTiles + 1;
+        canSpawn = listMap.Count <= 9;
         if (!canSpawn)
         {
-            var destroyObj = listMap.Dequeue();
-            Destroy(destroyObj);
+            for(int i = 0; i < numberOfTiles; ++i){
+                var destroyObj = listMap.Dequeue();
+                Destroy(destroyObj);
+            }
             canSpawn = true;
         }
     }
@@ -69,7 +71,7 @@ public class TileManager : MonoBehaviour, IEventListener, IEventListenerT<bool>
     }
 
     private bool canSpawn = true;
-    public void OnEventRaised()
+    public void OnObstacleReach()
     {
         if(canSpawn){
             SpawnTileRandomly();
@@ -77,35 +79,29 @@ public class TileManager : MonoBehaviour, IEventListener, IEventListenerT<bool>
         SetDirection(0);
         //Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>SetDirection(forwardSpeed));
     }
-
-    [SerializeField] private EventSTO eventSTO;
-
-    public string Name => name;
-
-    public EventSTO GetEventSTO() => eventSTO;
-    // public void SetEvent(EventSTO eventSTO){
-    //     this.eventSTO = eventSTO;
-    //     eventSTO?.RegisterListener(this);
-    // }
+    public string UniqueName => "TileManager";
     public void OnEnable(){
-        eventSTO?.RegisterListener(this);
-    }
-    public void OnDisable(){
-        eventSTO?.UnregisterListener(this);
-        quizEventSTO?.UnregisterListener(this);
+        VCNVGameEventManager.Instance.RegisterEvent<bool>(VCNVGameEventManager.AnswerResultEventName, this, OnAnswerQuestion);
+        VCNVGameEventManager.Instance.RegisterEvent(VCNVGameEventManager.ObstacleReachEventName, this, OnObstacleReach);
     }
 
-    private QuizEventSTO quizEventSTO;
-    public void SetQuizEvent(QuizEventSTO eventSTO){
-        this.quizEventSTO = eventSTO;
-        quizEventSTO?.RegisterListener(this);
-    }
-
-    public void OnEventRaised(bool result)
+    public void OnEventRaised<T>(EventSTO sender, T result)
     {
-        Debug.Log(result);
+        // Debug.Log(result);
+        // if(result is not bool realResult) return;
+        // if(realResult == true){
+        //     SetDirection(forwardSpeed * 1.5f);
+        //     Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, SetDirection);
+        // }
+        // else{
+        //     //Game over
+        //     SetDirection(0);
+        // }
+    }
+
+    private void OnAnswerQuestion(bool result){
         if(result == true){
-            SetDirection(forwardSpeed * 1.5f);
+            SetDirection(forwardSpeed * 1.75f);
             Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, SetDirection);
         }
         else{

@@ -4,14 +4,13 @@ using Project.MiniGames;
 
 public class Obstacle : MonoBehaviour
 {
-    private EventSTO ColliderTriggerEvent;
     private PlayerController player;
 
     private void RaiseColliderTriggerEvent()
     {
         //TimeCoroutineManager.Instance.PauseGame(1);
-        Debug.Log("Triggered event " + ColliderTriggerEvent.name);
-        ColliderTriggerEvent?.Raise();
+        Debug.Log("Triggered event ");
+        VCNVGameEventManager.Instance.ObstacleReachEvent?.Raise();
     }
 
     // Start is called before the first frame update
@@ -22,5 +21,4 @@ public class Obstacle : MonoBehaviour
         RaiseColliderTriggerEvent();
     }
 
-    public void SetTriggerEvent(EventSTO eventSTO) => ColliderTriggerEvent = eventSTO;
 }

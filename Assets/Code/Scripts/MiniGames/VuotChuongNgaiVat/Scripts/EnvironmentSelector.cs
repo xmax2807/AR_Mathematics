@@ -5,8 +5,6 @@ using Project.MiniGames;
 public class EnvironmentSelector : MonoBehaviour
 {
     [SerializeField] private TileManager tileManager;
-    [SerializeField] private QuizEventSTO QuizEvent;
-    [SerializeField] private EventSTO ColliderEvent;
     
     // public void Start(){
     //     int index = Random.Range(0,packs.Length);
@@ -40,12 +38,8 @@ public class EnvironmentSelector : MonoBehaviour
         GameObject player = Instantiate(pack.Player);
         player.transform.position += new Vector3(0,-5,8);
         player.AddComponent<UnityEngine.XR.ARFoundation.ARAnchor>();
-        PlayerController controller = player.GetComponent<PlayerController>();
-        controller?.SetQuizEvent(this.QuizEvent);
-        controller?.SetColliderEvent(this.ColliderEvent);
         
         tileManager.SetTileGroup(pack.EnvironmentTiles);
-        tileManager.SetQuizEvent(this.QuizEvent);
     }
     public void GetEnvironment(ScriptableObject[] packs){
         if(packs == null){

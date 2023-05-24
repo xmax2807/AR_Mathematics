@@ -19,6 +19,7 @@ public class ThirdPersonAdapter : PlayerController{
         {
             m_Move = Vector3.zero;
             m_Jump = false;
+            animator.SetBool("Die",true);
         }
         else
         {
@@ -29,6 +30,8 @@ public class ThirdPersonAdapter : PlayerController{
 
     protected override void UpdateState()
     {
-        m_Character.Move(m_Move, false, m_Jump);
+        if(CurrentState != PlayerState.FailedJump){
+            m_Character.Move(m_Move, false, m_Jump);
+        }
     }
 }

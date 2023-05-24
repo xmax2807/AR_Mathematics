@@ -1,11 +1,10 @@
 using Project.MiniGames;
 using UnityEngine;
-public class VCNVMissionUI : MonoBehaviour, IEventListener
+public class VCNVMissionUI : MonoBehaviour
 {
     [SerializeField] private Canvas missionCanvas;
     [SerializeField] private TaskGiver giver;
     [SerializeField] private EventSTO eventSTO;
-    public EventSTO GetEventSTO() => eventSTO;
 
     #region GUI
     [SerializeField] private TMPro.TextMeshProUGUI questionTitle;
@@ -13,7 +12,7 @@ public class VCNVMissionUI : MonoBehaviour, IEventListener
     public string Name => name;
     #endregion
 
-    public void OnEventRaised()
+    public void OnEventRaised(EventSTO sender,object value)
     {
         // pop ui
     }

@@ -1,10 +1,6 @@
 namespace Project.MiniGames{
     public interface IEventListener{
-        public void OnEventRaised();
-        public EventSTO GetEventSTO();
-    }
-
-    public interface IEventListenerT<T> : IEventListener{
-        public void OnEventRaised(T result);
+        public void OnEventRaised<T>(EventSTO sender, T result);
+        public string UniqueName{get;}
     }
 }
