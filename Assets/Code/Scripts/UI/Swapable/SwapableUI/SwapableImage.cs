@@ -19,7 +19,7 @@ namespace Project.UI{
         public void ManualSetup(Sprite defaultSprite, Sprite realSprite, System.Func<bool> condition){
             this.defaultSprite = defaultSprite;
             this.realSprite = realSprite;
-            this.OnCheckCondition += condition;
+            this.OnCheckCondition = condition;
             controller = new SwapableLogicDefault<Sprite>(defaultSprite, new SwapableLogic<Sprite>(realSprite), OnCheckCondition);
         }
     }

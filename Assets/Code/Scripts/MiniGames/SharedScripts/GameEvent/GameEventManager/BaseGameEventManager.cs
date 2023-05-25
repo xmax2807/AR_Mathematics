@@ -103,17 +103,19 @@ namespace Project.MiniGames{
             }
             result.GameEvent.Raise<T>(value);
         }
+        public void RaiseEvent(string eventName){
+            RaiseEvent<bool>(eventName, default);   
+        }
 
         public void RegisterEvent(string eventName,IEventListener listener, System.Action onEventPraised){
             if(onEventPraised == null){
                 Debug.Log("Can't register without action callback");
                 return;
             }
-            if(!hashEventName.TryGetValue(eventName, out GameEventStruct gameEvent)){
-                Debug.Log("Can't find event name with given: " + eventName);
-                return;
-            }
-            string realName = gameEvent.GameEvent.name;
+            
+            string realName = FindEventRealName(eventName);
+            if(realName == "") return;
+
             int index = allListenersAction[realName].FindIndex((x)=>x.ListenerName == listener.UniqueName);
             if(index == -1){
                 allListenersAction[realName].Add(new ListenerAction(listener.UniqueName, (fake)=>onEventPraised()));
@@ -128,11 +130,9 @@ namespace Project.MiniGames{
                 Debug.Log("Can't register without action callback");
                 return;
             }
-            if(!hashEventName.TryGetValue(eventName, out GameEventStruct gameEvent)){
-                Debug.Log("Can't find event name with given: " + eventName);
-                return;
-            }
-            string realName = gameEvent.GameEvent.name;
+
+            string realName = FindEventRealName(eventName);
+            if(realName == "") return;
 
             int index = allListenersAction[realName].FindIndex((x)=>x.ListenerName == listener.UniqueName);
             if(index == -1){
@@ -141,7 +141,25 @@ namespace Project.MiniGames{
             else{
                 allListenersAction[realName][index] = new ListenerAction<T>(listener.UniqueName, onEventPraised);
             }
-            Debug.Log(allListenersAction[realName].Count);
+        }
+        public void UnregisterListener(string eventName, IEventListener listener){
+            string realName = FindEventRealName(eventName);
+            if(realName == "") return;
+
+            int index = allListenersAction[realName].FindIndex((x)=>x.ListenerName == listener.UniqueName);
+            if(index == -1){
+                Debug.Log($"{listener.UniqueName} is not listening to {eventName}");
+                return;
+            }
+            allListenersAction[realName].RemoveAt(index);
+        }
+
+        private string FindEventRealName(string givenName){
+            if(!hashEventName.TryGetValue(givenName, out GameEventStruct gameEvent)){
+                Debug.Log("Can't find event name with given: " + givenName);
+                return "";
+            }
+            return gameEvent.GameEvent.name;
         }
 
         // public void AskWhichEventRaised(EventSTO source, IEventListener asker){

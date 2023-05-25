@@ -8,7 +8,8 @@ namespace Project.MiniGames{
     {
         [SerializeField] private TMPro.TextMeshProUGUI result;
         [SerializeField] private ProgressBarController progressBarController;
-        [SerializeField] private OkCancelPanelView view; 
+        [SerializeField] private OkCancelPanelView view;
+        private string defaultText;
 
         public string UniqueName => "FalseResultUI";
 
@@ -16,11 +17,14 @@ namespace Project.MiniGames{
         {
         }
 
+        private void Awake(){
+            defaultText = result?.text;
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
-
-            BaseGameEventManager.Instance.RegisterEvent<bool>(BaseGameEventManager.EndGameEventName, this, OnResult);
+            BaseGameEventManager.Instance?.RegisterEvent<bool>(BaseGameEventManager.EndGameEventName, this, OnResult);
         }
         protected override void Start()
         {
@@ -29,18 +33,30 @@ namespace Project.MiniGames{
         }
         protected override void UpdateUI(BaseTask task)
         {
+            Debug.Log("Update UI");
+            // int progress = this.giver.Tasks.CurrentProgress;
+            // int goal = this.giver.Tasks.Goal;
+            
+            // result.text = $"{defaultText} {progress}/{goal}";
+
+            // progressBarController.SetupAnimation(goal);
+            // progressBarController.UpdateEndValue(progress);
+            // progressBarController.StartAnimation();
+        }
+        private void UpdateUI(){
             int progress = this.giver.Tasks.CurrentProgress;
             int goal = this.giver.Tasks.Goal;
             
-            result.text += $"{progress}/{goal}";
+            result.text = $"{defaultText} {progress}/{goal}";
 
             progressBarController.SetupAnimation(goal);
-            progressBarController.UpdateEndValue(progress);
-            progressBarController.StartAnimation();
+            progressBarController.UpdateEndValue(progress, 3);
+            
         }
-        protected void OnResult(bool result){
-            view?.ShowAsync();
-            UpdateUI(giver.CurrentTask);
+        protected async void OnResult(bool result){
+            UpdateUI();
+            await view?.ShowAsync();
+            progressBarController.StartAnimation();
         }
     }
 }

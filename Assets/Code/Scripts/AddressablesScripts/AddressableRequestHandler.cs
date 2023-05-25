@@ -41,7 +41,6 @@ namespace Project.Addressable
             Debug.Log("refs");
 
             var ScriptableObjects = await AddressableManager.Instance.PreLoadAssets(soRefs.References);
-            Debug.Log(ScriptableObjects[0].name);
             soRefs.OnComplete?.Invoke(ScriptableObjects);
             Debug.Log("scriptableObject");
 

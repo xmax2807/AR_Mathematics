@@ -55,7 +55,7 @@ public class GameController
     {
         UserModel user = UserManager.Instance.CurrentUser;
         GameModel game = UserManager.Instance.CurrentGame;
-        string gameId = game.GameID;
+        string gameId = game?.GameID;
         int index = user.SavedGame.FindIndex((x) => x.GameID == gameId);
 
         if (index == -1)

@@ -42,7 +42,6 @@ public class TileManager : MonoBehaviour, IEventListener
     }
     private void SpawnTile(int tileIndex)
     {
-        Debug.Log(tilePrefabs[tileIndex]);
         var obj = Instantiate(tilePrefabs[tileIndex], transform);
         obj.transform.localPosition = Vector3.right * xSpawn;
         obj.transform.rotation = tilePrefabs[tileIndex].transform.rotation;
@@ -67,7 +66,6 @@ public class TileManager : MonoBehaviour, IEventListener
     }
 
     public void SetTileGroup(GameObject[] group) {
-        Debug.Log("Added group " + group.Length);
         tilePrefabs = new GameObject[group.Length];
         for(int i = 0; i < group.Length; ++i){
             tilePrefabs[i] = group[i];
