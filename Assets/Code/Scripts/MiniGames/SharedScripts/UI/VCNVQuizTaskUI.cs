@@ -27,13 +27,14 @@ namespace Project.MiniGames{
         protected override void OnCorrectAnswer()
         {
             canvas.enabled = false;
-            VCNVGameEventManager.Instance.AnswerResultEvent.Raise<bool>(true);
+            BaseGameEventManager.RealInstance<VCNVGameEventManager>().AnswerResultEvent.Raise<bool>(true);
             NextQuestion();
         }
         protected override void OnWrongAnswer()
         {
+            UIEventManager?.Unlock();
             canvas.enabled = false;
-            VCNVGameEventManager.Instance.AnswerResultEvent.Raise<bool>(false);
+            BaseGameEventManager.RealInstance<VCNVGameEventManager>().AnswerResultEvent.Raise<bool>(false);
         }
 
         public string UniqueName => "VCNVQuizTaskUI";

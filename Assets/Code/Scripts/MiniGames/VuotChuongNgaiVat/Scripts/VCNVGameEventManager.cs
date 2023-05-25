@@ -1,6 +1,6 @@
 using UnityEngine;
 namespace Project.MiniGames{
-    public sealed class VCNVGameEventManager : BaseGameEventManager<VCNVGameEventManager>{
+    public sealed class VCNVGameEventManager : BaseGameEventManager{
         [SerializeField] private EventSTO obstacleReachEvent;
         [SerializeField] private EventSTO answerResultEvent;
         public EventSTO AnswerResultEvent => hashEventName[AnswerResultEventName].GameEvent;

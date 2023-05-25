@@ -20,6 +20,8 @@ public class ThirdPersonAdapter : PlayerController{
             m_Move = Vector3.zero;
             m_Jump = false;
             animator.SetBool("Die",true);
+            UpdateState();
+            Die();
         }
         else
         {

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Project.MiniGames{
-    public class BaseGameEventManager<TChild> : SingletonEventManager<TChild>, IEventListener where TChild : BaseGameEventManager<TChild>{
+    public class BaseGameEventManager : SingletonEventManager<BaseGameEventManager>, IEventListener{
+        #region ListenerActionClasses
         public class ListenerAction{
             public string ListenerName;
             protected System.Action<object> Action;
@@ -27,24 +28,30 @@ namespace Project.MiniGames{
                 realAction.Invoke(realValue);
             }
         }
+        
 
         [System.Serializable]
         public struct GameEventStruct{
             public string Name;
             public EventSTO GameEvent;
         }
+        #endregion
+
+        
+        public static T RealInstance<T>() where T : BaseGameEventManager => (T)Instance;
 
         [SerializeField] protected GameEventStruct[] GameEvents;
 
-        // [SerializeField] private EventSTO GameLoadedEvent;
-        // [SerializeField] private EventSTO GameStartedEvent;
-        // [SerializeField] private EventSTO GameEndedEvent;
-
         Dictionary<string, List<ListenerAction>> allListenersAction;
         
+        protected Dictionary<string, GameEventStruct> hashEventName;
+
+        #region ConstEventName
+        public const string StartGameEventName = "GameStartEvent";
+        public const string EndGameEventName = "GameEndEvent";
+        #endregion
 
         public string UniqueName => "GameEventManager";
-        protected Dictionary<string, GameEventStruct> hashEventName;
         protected override void Awake(){
             base.Awake();
             Debug.Log("init");
@@ -52,11 +59,14 @@ namespace Project.MiniGames{
             InitAllListenersAction();
             RegisterAllAvailableEvent();
         }
-        // private void OnDestroy(){
-        //     foreach(List<ListenerAction> list in allListenersAction.Values){
-        //         list.Clear();
-        //     }
-        // }
+        private void OnDestroy(){
+            foreach(List<ListenerAction> list in allListenersAction.Values){
+                list.Clear();
+            }
+            foreach(GameEventStruct gameEvent in hashEventName.Values){
+                gameEvent.GameEvent.UnregisterListener(this);
+            }
+        }
 
         protected virtual void InitHashEventName(){
             hashEventName = new(GameEvents.Length);
@@ -84,6 +94,14 @@ namespace Project.MiniGames{
             foreach(GameEventStruct gameEvent in GameEvents){
                 gameEvent.GameEvent?.RegisterListener(this);
             }
+        }
+
+        public void RaiseEvent<T>(string eventName, T value){
+            if(!hashEventName.TryGetValue(eventName, out GameEventStruct result)){
+                Debug.Log("No event found with given name: " + eventName);
+                return;
+            }
+            result.GameEvent.Raise<T>(value);
         }
 
         public void RegisterEvent(string eventName,IEventListener listener, System.Action onEventPraised){
@@ -147,7 +165,7 @@ namespace Project.MiniGames{
             bool isAvailable = allListenersAction.TryGetValue(sender.name, out List<ListenerAction> actions);
             if(isAvailable){
                 for(int i = actions.Count - 1; i >= 0; --i){
-                    Debug.Log(actions[i].ListenerName);
+//                    Debug.Log(actions[i].ListenerName);
                     actions[i].Invoke(result);
                 }
                 return;

@@ -9,7 +9,7 @@ namespace Project.MiniGames{
         protected virtual void OnDisable(){
             giver.OnTaskChanged -= UpdateUI;
         }
-        protected void Start(){
+        protected virtual void Start(){
             if(giver == null){
                 this.enabled = false;
             }

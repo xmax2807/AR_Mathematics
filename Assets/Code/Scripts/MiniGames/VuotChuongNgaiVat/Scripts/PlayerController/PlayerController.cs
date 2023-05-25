@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Project.Managers;
 using Project.MiniGames;
 using UnityEngine;
 
@@ -62,12 +63,21 @@ public class PlayerController : MonoBehaviour, IEventListener
         else if (currentState == PlayerState.FailedJump)
         {
             currentAnimName = "fail";
+            UpdateState();
+            Die();
         }
         else
         {
             currentAnimName = "idle";
         }
         animator.SetBool(currentAnimName, true);
+    }
+
+    protected void Die(){
+        float animationLen = animator.GetCurrentAnimatorStateInfo(0).length;
+        TimeCoroutineManager.Instance.WaitForSeconds(animationLen, ()=>{
+            VCNVGameEventManager.Instance.RaiseEvent(VCNVGameEventManager.EndGameEventName, false);
+        });
     }
     
 

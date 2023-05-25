@@ -5,6 +5,7 @@ using TMPro;
 using Project.QuizSystem;
 using System;
 using Project.Managers;
+using Project.Utils.ExtensionMethods;
 
 public enum ObjectPosition
 {
@@ -124,6 +125,7 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     public void Randomize(System.Random rand = null)
     {
         rand ??= SpawnerManager.RandomInstance;
+        questionType = FlagExtensionMethods.Randomize<ObjectFindingQuestionType>(rand);
         _answer = rand.Next(0, 6) + 1;
     }
 }

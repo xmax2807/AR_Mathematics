@@ -26,5 +26,6 @@ namespace Project.MiniGames
         public void UnregisterListener(IEventListener listener) {
             listeners.Remove(listener); 
         }
+        public void ClearEvents() => listeners.Clear();
     }
 }
