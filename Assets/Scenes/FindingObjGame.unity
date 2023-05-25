@@ -569,18 +569,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2810f5fe2febb74093742eaaf70288e, type: 3}
---- !u!4 &1012226892 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-    type: 3}
-  m_PrefabInstance: {fileID: 4940161921709316670}
-  m_PrefabAsset: {fileID: 0}
---- !u!328 &1012226893 stripped
-VideoPlayer:
-  m_CorrespondingSourceObject: {fileID: 4940161920699220339, guid: 89183846c4747394b92726f70f44ef10,
-    type: 3}
-  m_PrefabInstance: {fileID: 4940161921709316670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1111241655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -790,7 +778,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 245719652}
-  - {fileID: 1012226892}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -852,7 +839,6 @@ MonoBehaviour:
   - {fileID: 1317595005939264847, guid: 68a23497d89d92c4f85be8d4d6a21697, type: 3}
   arCamera: {fileID: 245719651}
   displayCanvas: 1
-  VideoWrongAns: {fileID: 1012226893}
 --- !u!1001 &1286059563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1206,105 +1192,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5de68cc455f8ec0469a7e52917772e5d, type: 3}
---- !u!1001 &4940161921709316670
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1282351221}
-    m_Modifications:
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220338, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220339, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220339, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220339, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_TargetCamera
-      value: 
-      objectReference: {fileID: 245719651}
-    - target: {fileID: 4940161920699220339, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_WaitForFirstFrame
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220341, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_Name
-      value: emojiVideo
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220341, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940161920699220341, guid: 89183846c4747394b92726f70f44ef10,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 89183846c4747394b92726f70f44ef10, type: 3}
 --- !u!1001 &5363105045676772087
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using TMPro;
 using Project.QuizSystem;
 using System;
 using Project.Managers;
+using Project.Utils.ExtensionMethods;
 
 public enum ObjectPosition
 {
@@ -42,7 +43,7 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
         //{ ObjectPosition.Backward,"sau"},
     };
     //Tan
-    /*private static Dictionary<ObjectPosition, string> NameToString = new Dictionary<ObjectPosition, string>()
+    private static Dictionary<ObjectPosition, string> NameToString = new Dictionary<ObjectPosition, string>()
     {
         {ObjectPosition.Top,"bóng rổ" },
         {ObjectPosition.Bottom,"rubic" },
@@ -52,7 +53,6 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
         //{ObjectPosition.Backward,"trái banh" },
     };
     
-    */
     public string posit;
 
     
@@ -66,16 +66,9 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     }
     public ObjectPositionQuestion(string question) : this(question, ObjectFindingQuestionType.PositionQuestionType)
     {
+
     }
-    /*/Tan
-    public ObjectNameQuestion(string question, ObjectFindingQuestionType questionType) : base(question)
-    {
-        this.questionType = questionType;
-    }
-    public ObjectNameQuestion(string question) : this(question, ObjectFindingQuestionType.NameQuestionType)
-    {
-    }
-    /*/
+    
     public override QuestionType QuestionType => QuestionType.Other;
 
     public override QuestionContentType QuestionContentType => QuestionContentType.None;
@@ -91,18 +84,16 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     }
     public override string GetQuestion()
     {
-        return "Chọn vật có vị trí " + PosToString[(ObjectPosition)_answer] + " so với khối lập phương trắng ?";
+        if (questionType == ObjectFindingQuestionType.PositionQuestionType)
+        {
+            return "Chọn vật có vị trí " + PosToString[(ObjectPosition)_answer] + " so với khối lập phương trắng ?";
+        }
+        else
+        {
+            return "Tìm và chọn vật có hình " + NameToString[(ObjectPosition)_answer];
+        }
     }
-    /*/Tan
-    public IQuestion GetClone()
-    {
-        return new ObjectNameQuestion(this._question, questionType);
-    }
-    public override string GetQuestion()
-    {
-        return "Chọn vật " + NameToString[(ObjectPosition)_answer];
-    }
-    */
+    
     //// Update is called once per frame
     //void Update()
     //{
@@ -151,7 +142,9 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
 
     public void Randomize(System.Random rand = null)
     {
+        
         rand ??= SpawnerManager.RandomInstance;
+        questionType = FlagExtensionMethods.Randomize<ObjectFindingQuestionType>(rand);
         _answer = rand.Next(0, 5) + 1;
     }
 }

@@ -50,10 +50,10 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         // onSpawnPlane?.Invoke();
         // Debug.Log(spawnedObject.transform.localPosition);
 
-        Vector3 position0 = new Vector3(0, 0, 0);
+        /*Vector3 position0 = new Vector3(0, 0, 0);
         spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
         onSpawnPlane?.Invoke();
-        Debug.Log(spawnedObject.transform.localPosition);
+        Debug.Log(spawnedObject.transform.localPosition);*/
         //spawnedObject.transform.LookAt(ARCamera.transform);
     }
 
