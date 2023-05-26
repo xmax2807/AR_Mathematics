@@ -1206,21 +1206,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1330189157058298909, guid: 5a45375c280081346bf5b76291624c36,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330189157058298909, guid: 5a45375c280081346bf5b76291624c36,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330189157058298909, guid: 5a45375c280081346bf5b76291624c36,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330189157058298909, guid: 5a45375c280081346bf5b76291624c36,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1269,20 +1254,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1330189157058298909, guid: 5a45375c280081346bf5b76291624c36,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8009370826780904866, guid: 5a45375c280081346bf5b76291624c36,
         type: 3}
       propertyPath: m_Name
       value: Circle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8009370826780904866, guid: 5a45375c280081346bf5b76291624c36,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a45375c280081346bf5b76291624c36, type: 3}
