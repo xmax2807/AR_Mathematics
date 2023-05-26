@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87fa217506b9ea54383fb7d3ad3d5e3b
+guid: d65578d979674ef4596a80e1eca73893
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -62,8 +62,13 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
+<<<<<<<< HEAD:Assets/Resources_moved/Models/Mystier/Mystiery.Textures/F00_002_Body_00.png.meta
   applyGammaDecoding: 1
   cookieLightType: 2
+========
+  applyGammaDecoding: 0
+  cookieLightType: 0
+>>>>>>>> origin/Tan:Assets/Code/Scripts/MiniGames/3Ds Objects/mat/BasketballColor.jpg.meta
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform

@@ -14,7 +14,7 @@ public enum ObjectPosition
     Left = 3,
     Right = 4,
     Forward = 5,
-    Backward = 6,
+    //Backward = 6,
 }
 public enum ObjectFindingQuestionType
 {
@@ -40,8 +40,19 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
         {ObjectPosition.Left,"trái"},
         {ObjectPosition.Right,"phải"},
         {ObjectPosition.Forward,"trước"},
-        { ObjectPosition.Backward,"sau"},
+        //{ ObjectPosition.Backward,"sau"},
     };
+    //Tan
+    private static Dictionary<ObjectPosition, string> NameToString = new Dictionary<ObjectPosition, string>()
+    {
+        {ObjectPosition.Top,"bóng rổ" },
+        {ObjectPosition.Bottom,"rubic" },
+        {ObjectPosition.Left,"hộp quà" },
+        {ObjectPosition.Right,"kim tự tháp" },
+        {ObjectPosition.Forward,"tủ đồ" },
+        //{ObjectPosition.Backward,"trái banh" },
+    };
+    
     public string posit;
 
     
@@ -55,9 +66,9 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     }
     public ObjectPositionQuestion(string question) : this(question, ObjectFindingQuestionType.PositionQuestionType)
     {
+
     }
-
-
+    
     public override QuestionType QuestionType => QuestionType.Other;
 
     public override QuestionContentType QuestionContentType => QuestionContentType.None;
@@ -73,9 +84,16 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     }
     public override string GetQuestion()
     {
-        return "Chọn vật có vị trí " + PosToString[(ObjectPosition)_answer] + " so với khối lập phương trắng ?";
+        if (questionType == ObjectFindingQuestionType.PositionQuestionType)
+        {
+            return "Chọn vật có vị trí " + PosToString[(ObjectPosition)_answer] + " so với khối lập phương trắng ?";
+        }
+        else
+        {
+            return "Tìm và chọn vật có hình " + NameToString[(ObjectPosition)_answer];
+        }
     }
-
+    
     //// Update is called once per frame
     //void Update()
     //{
@@ -124,8 +142,9 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
 
     public void Randomize(System.Random rand = null)
     {
+        
         rand ??= SpawnerManager.RandomInstance;
         questionType = FlagExtensionMethods.Randomize<ObjectFindingQuestionType>(rand);
-        _answer = rand.Next(0, 6) + 1;
+        _answer = rand.Next(0, 5) + 1;
     }
 }
