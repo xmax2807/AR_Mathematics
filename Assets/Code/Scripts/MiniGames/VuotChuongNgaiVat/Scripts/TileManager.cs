@@ -25,7 +25,7 @@ public class TileManager : MonoBehaviour, IEventListener
     }
     private void SetDirection() => SetDirection(forwardSpeed);
     private void SetupEnvironment(){
-        SetDirection(forwardSpeed);
+        //SetDirection(forwardSpeed);
         listMap = new();
         for (int i = 0; i < numberOfTiles; i++)
         {
@@ -85,9 +85,15 @@ public class TileManager : MonoBehaviour, IEventListener
     }
     public string UniqueName => "TileManager";
     public void OnEnable(){
+        BaseGameEventManager.Instance.RegisterEvent(BaseGameEventManager.StartGameEventName, this, OnGameStarted);
         VCNVGameEventManager.Instance.RegisterEvent<bool>(VCNVGameEventManager.AnswerResultEventName, this, OnAnswerQuestion);
         VCNVGameEventManager.Instance.RegisterEvent(VCNVGameEventManager.ObstacleReachEventName, this, OnObstacleReach);
         BaseGameEventManager.Instance.RegisterEvent(BaseGameEventManager.EndGameEventName, this, OnGameEnded);
+    }
+
+    private void OnGameStarted()
+    {
+        SetDirection(forwardSpeed);
     }
 
     public void OnEventRaised<T>(EventSTO sender, T result)

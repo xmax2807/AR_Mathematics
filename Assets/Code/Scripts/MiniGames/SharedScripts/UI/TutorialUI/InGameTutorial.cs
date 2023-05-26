@@ -2,16 +2,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Project.MiniGames;
+using Project.Managers;
 
 namespace Project.MiniGames.UI{
     public class InGameTutorial : MonoBehaviour{
         [SerializeField] private string videoUrl;
         [SerializeField] private VideoPlayerBehaviour videoPlayer;
-
+        [SerializeField] private Gameframe.GUI.PanelSystem.AnimatedPanelView view;
         [SerializeField] private Button startGameButton;
         
         void OnDisable(){
-            StartCoroutine(DisableVideoPlayer());
+            TimeCoroutineManager.Instance.StartCoroutine(DisableVideoPlayer());
             startGameButton?.onClick.RemoveListener(StartGame);
         }
         void OnEnable(){
@@ -29,8 +30,9 @@ namespace Project.MiniGames.UI{
         private IEnumerator DisableVideoPlayer(){
             yield return videoPlayer?.Unload();
         }
-        private void StartGame(){
-            BaseGameEventManager.Instance.RaiseEvent(BaseGameEventManager.StartGameEventName);
+        private async void StartGame(){
+            await view?.HideAsync();
+            BaseGameEventManager.Instance?.RaiseEvent(BaseGameEventManager.StartGameEventName);
         }
     }
 }
