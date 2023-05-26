@@ -5,8 +5,10 @@ namespace Project.RewardSystem{
     {
         public T Goal {get;protected set;}
         public T CurrentValue {get;protected set;}
+
+        public bool IsAcquired => CanBeRewarded();
+
         private bool isAcquired;
-        public bool IsAcquired => isAcquired;
 
         public Reward(T goal){
             Goal = goal;
@@ -17,7 +19,7 @@ namespace Project.RewardSystem{
         }
         public bool CanBeRewarded(){
             if(isAcquired) return true;
-
+            
             isAcquired = CurrentValue.CompareTo(Goal) >= 0;
             return isAcquired;
         }

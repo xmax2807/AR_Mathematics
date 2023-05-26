@@ -17,15 +17,18 @@ namespace Project.MiniGames{
         }
         public class ListenerAction<T> : ListenerAction{
 
-            private Action<T> realAction;
+            private readonly Action<T> RealAction;
             public ListenerAction(string listenerName, Action<T> action) : base(listenerName, (obj)=>action((T)obj))
             {
-                realAction = action;
+                RealAction = action;
             }
             public override void Invoke(object value)
             {
-                if(value is not T realValue) return;
-                realAction.Invoke(realValue);
+                if(value is not T realValue){
+                    Action.Invoke(value);
+                    return;
+                }
+                RealAction.Invoke(realValue);
             }
         }
         
@@ -183,7 +186,7 @@ namespace Project.MiniGames{
             bool isAvailable = allListenersAction.TryGetValue(sender.name, out List<ListenerAction> actions);
             if(isAvailable){
                 for(int i = actions.Count - 1; i >= 0; --i){
-//                    Debug.Log(actions[i].ListenerName);
+                   //Debug.Log(actions[i].ListenerName);
                     actions[i].Invoke(result);
                 }
                 return;

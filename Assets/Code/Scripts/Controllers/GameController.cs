@@ -54,9 +54,11 @@ public class GameController
     public async void SaveGame(int task)
     {
         UserModel user = UserManager.Instance.CurrentUser;
+        if(user == null) return;
+        
         GameModel game = UserManager.Instance.CurrentGame;
         string gameId = game?.GameID;
-        int index = user.SavedGame.FindIndex((x) => x.GameID == gameId);
+        int index = user.SavedGame == null ? -1 : user.SavedGame.FindIndex((x) => x.GameID == gameId);
 
         if (index == -1)
         {

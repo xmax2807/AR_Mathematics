@@ -6,9 +6,13 @@ namespace Project.RewardSystem{
     [CreateAssetMenu(menuName ="STO/Reward/3D Model", fileName = "Model")]
     public class RemoteRewardSTO : UnityEngine.ScriptableObject{
         [SerializeField] private AssetReference RemoteModel;
+        public string Description;
         private GameObject cache;
         public Task<GameObject> PreLoadAsset(){
             return RemoteModel.LoadAssetAsync<GameObject>().Task;
+        }
+        public void UnloadAsset(){
+            RemoteModel.ReleaseAsset();
         }
 
         public async Task<GameObject> GetModel(){

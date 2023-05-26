@@ -4,41 +4,48 @@ using UnityEngine;
 
 public class RotatingFingerSwipe : MonoBehaviour
 {
-    private Touch touch;
-    private Vector2 touchPosition;
-    private Quaternion rotationY;
-    private float rotateSpeedModifier = 0.1f;
+    [Header("Default Setting (recommended)")]
+    public float rotationDamping = 5f;
+    public float rotationSpeed = 200f;
+    public Vector3 currentRotationSpeed;
+    public Vector3 targetRotationSpeed;
 
+    private Vector3 centerPoint;
+    private Renderer modelRenderer;
+    private bool dragging = false;
 
-    [SerializeField] float rotationSpeed = 100f;
-    bool dragging = false;
-    Rigidbody rb;
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        modelRenderer = GetComponentInChildren<Renderer>();
+        centerPoint = modelRenderer.bounds.center;
     }
 
-    void OnMouseDrag()
-    {
-        dragging = true;
-    }
-    // Update is called once per frame
     void Update()
     {
-        // if (Input.GetMouseButtonUp(0))
-        // {
-        //     dragging = false;
-        // }
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+        {
+            dragging = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            dragging = false;
+            targetRotationSpeed = Vector3.zero;
+        }
+#else
         if (Input.touchCount > 0)
         {
-            touch = Input.GetTouch(0);
+            var touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
-                rotationY = Quaternion.Euler(touch.deltaPosition.y * rotateSpeedModifier, -touch.deltaPosition.x * rotateSpeedModifier, 0f);
-                transform.rotation = rotationY * transform.rotation;
+                dragging = true;
+            }
+            else{
+                dragging = false;
+                targetRotationSpeed =Vector3.zero;
             }
         }
+#endif
     }
 
     void FixedUpdate()
@@ -48,8 +55,10 @@ public class RotatingFingerSwipe : MonoBehaviour
             float x = Input.GetAxis("Mouse X") * rotationSpeed * Time.fixedDeltaTime;
             float y = Input.GetAxis("Mouse Y") * rotationSpeed * Time.fixedDeltaTime;
 
-            rb.AddTorque(Vector3.down * x);
-            rb.AddTorque(Vector3.right * y);
+            targetRotationSpeed = new Vector3(y, -x, 0f);
         }
+        currentRotationSpeed = Vector3.Lerp(currentRotationSpeed, targetRotationSpeed, rotationDamping * Time.fixedDeltaTime);
+        transform.RotateAround(centerPoint, Vector3.up, currentRotationSpeed.y);
+        transform.RotateAround(centerPoint, Vector3.right, currentRotationSpeed.x);
     }
 }

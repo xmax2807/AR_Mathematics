@@ -7,5 +7,6 @@ namespace Project.RewardSystem{
         public int Goal;
         public RewardBadgeSTO Badge;
         public Sprite UnacquiredBadge;
+        public RemoteRewardSTO RemoteModel;
     }
 }

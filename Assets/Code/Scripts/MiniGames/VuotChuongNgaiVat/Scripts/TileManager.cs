@@ -87,6 +87,7 @@ public class TileManager : MonoBehaviour, IEventListener
     public void OnEnable(){
         VCNVGameEventManager.Instance.RegisterEvent<bool>(VCNVGameEventManager.AnswerResultEventName, this, OnAnswerQuestion);
         VCNVGameEventManager.Instance.RegisterEvent(VCNVGameEventManager.ObstacleReachEventName, this, OnObstacleReach);
+        BaseGameEventManager.Instance.RegisterEvent(BaseGameEventManager.EndGameEventName, this, OnGameEnded);
     }
 
     public void OnEventRaised<T>(EventSTO sender, T result)
@@ -101,6 +102,11 @@ public class TileManager : MonoBehaviour, IEventListener
         //     //Game over
         //     SetDirection(0);
         // }
+    }
+    private void OnGameEnded(){
+        Debug.Log("TIlemanager, game ended");
+        SetDirection(0);
+        enabled = false;
     }
 
     private void OnAnswerQuestion(bool result){
