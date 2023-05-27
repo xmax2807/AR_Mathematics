@@ -355,6 +355,7 @@ MonoBehaviour:
   ID: 2
   cube_merge: {fileID: -5109852089865137818, guid: 4bafd6e77f2635c46adf0a649a6e7295,
     type: 3}
+  firework: {fileID: 1700703774955841139}
 --- !u!65 &-4060287424961706255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -515,6 +516,12 @@ PrefabInstance:
 --- !u!4 &1700703774955841136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 855981538786392924, guid: ceb7de65231eb7146ae2499f346201a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052255762898427180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1700703774955841139 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 855981538786392927, guid: ceb7de65231eb7146ae2499f346201a2,
     type: 3}
   m_PrefabInstance: {fileID: 2052255762898427180}
   m_PrefabAsset: {fileID: 0}

@@ -3,20 +3,29 @@ using Project.Utils.ExtensionMethods;
 
 public class SelectObjectFromCamera : MonoBehaviour
 {
-    [SerializeField] private Transform spawnParent;
+    private Transform spawnParent;
     [SerializeField]
     private PlacementObject[] placedObjects;
     [SerializeField] private LayerMask filteredMask;
-
     private PlacementObject[] placements;
 
     [SerializeField]
     private Camera arCamera;
 
+    private void Start(){
+        if(arCamera == null){
+            arCamera = Camera.main;
+        }
+    }
+    public void SetPlacements(PlacementObject[] placementObjects, Transform placementParent = null){
+        placedObjects = placementObjects;
+        spawnParent = placementParent;
+        onSpawnMainPlane();
+    }
     public void onSpawnMainPlane()
     {
         placements = new PlacementObject[placedObjects.Length];
-        var clone = placements.Shuffle();
+        var clone = placedObjects.Shuffle();
 
         Vector3 startPosition = new(-6,1,-5);
 

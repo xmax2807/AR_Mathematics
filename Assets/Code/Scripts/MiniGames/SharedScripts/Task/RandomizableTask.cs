@@ -110,7 +110,7 @@ namespace Project.MiniGames{
 
         protected override IRandomizableQuestion CreateQuestion()
         {
-            var instance = new NumberOrderQuestion(TaskDescription,5, 10);
+            var instance = new NumberOrderQuestion(TaskDescription,5, 9);
             instance.Randomize();
             m_Answer = instance.Answer;
             return instance;

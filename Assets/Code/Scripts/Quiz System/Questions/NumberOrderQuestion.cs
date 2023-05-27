@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils.ExtensionMethods;
+using System.Linq;
 
 namespace Project.QuizSystem{
     public class NumberOrderQuestion : BaseQuestion<int[]>, IRandomizableQuestion<int[]>, ISavableQuestion
@@ -61,10 +62,10 @@ namespace Project.QuizSystem{
             _answer = new int[m_count];
 
             //random first number
-            _answer[0] = rand.Next(m_maxNumber);
+            _answer[0] = rand.Next(1,m_maxNumber);
             duplicateChecker.Add(_answer[0]);
 
-            int minRange = 0;
+            int minRange = 1;
             int maxRange = m_maxNumber;
             for(int i = 1; i < m_count; ++i){
                 int value;
@@ -91,23 +92,29 @@ namespace Project.QuizSystem{
                 // _answer[i - 1] > value in ascending or < value in descending.
                 // then swap
                 _answer[i] = value;
-                int startSwap = i;
-                while(startSwap > 0){
-                    int compareResult = m_comparer.Compare(_answer[startSwap-1], _answer[startSwap]);
+                // int startSwap = i;
+                // while(startSwap > 0){
+                //     int compareResult = m_comparer.Compare(_answer[startSwap-1], _answer[startSwap]);
                     
-                    if(compareResult > 0){
-                        (_answer[startSwap - 1],_answer[startSwap]) = (_answer[startSwap],_answer[startSwap - 1]);
-                    }
+                //     if(compareResult > 0){
+                //         (_answer[startSwap - 1],_answer[startSwap]) = (_answer[startSwap],_answer[startSwap - 1]);
+                //     }
                     
-                    --startSwap;
-                }
+                //     --startSwap;
+                // }
                 
 
-                UnityEngine.Debug.Log($"{_answer[i-1]} {_answer[i]}");
+//                UnityEngine.Debug.Log($"{_answer[i-1]} {_answer[i]}");
             
                 duplicateChecker.Add(value);
             }
-            UnityEngine.Debug.Log(GetQuestion());
+            var list  = _answer.ToList();
+            list.Sort();
+            _answer = list.ToArray();
+            foreach(int i in _answer){
+                UnityEngine.Debug.Log(i);
+            }
+            //UnityEngine.Debug.Log(GetQuestion());
         }
 
         public int[][] GetRandomOptions(int count)

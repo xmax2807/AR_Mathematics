@@ -498,6 +498,7 @@ MonoBehaviour:
   ID: 3
   cube_merge: {fileID: 8634785595138808048, guid: 59e51cbe04873ed45af6ee0bc3b0594c,
     type: 3}
+  firework: {fileID: 5349646145266739476}
 --- !u!1 &8484967251426502255
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +651,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceb7de65231eb7146ae2499f346201a2, type: 3}
+--- !u!198 &5349646145266739476 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 855981538786392927, guid: ceb7de65231eb7146ae2499f346201a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745892957252407883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5349646145266739479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 855981538786392924, guid: ceb7de65231eb7146ae2499f346201a2,

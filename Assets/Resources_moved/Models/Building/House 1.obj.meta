@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b07caeff0e295324ba78831ec817e8e8
+guid: 06c0e5ae9d01fe84db63947199695409
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,73 +7,68 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ACtexture_cl
-    second: {fileID: 2100000, guid: af5b627e21a20594ca894939cf2aba6d, type: 2}
+      name: Cube.009_Cube.006_Material.132Mat
+    second: {fileID: 2100000, guid: 31d0d12f34a0a2a4aad578a6e06ec13e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 520f6413541e119468e9bdd808918aa7, type: 2}
+      name: Cube.009_Cube.006_mat18.002Mat
+    second: {fileID: 2100000, guid: 81d6444a4ea319a4aa519e83a0378963, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: brack
-    second: {fileID: 2100000, guid: 01e68ca7ef2a45340bdaadb07c9fec45, type: 2}
+      name: Cube.012_Cube.009_Material.133Mat
+    second: {fileID: 2100000, guid: 6fcc1146fe64a9b4cab3299a4f03967a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bracktexture
-    second: {fileID: 2100000, guid: 15be9805d04fbc246bc1b4da9831da70, type: 2}
+      name: Cube.012_Cube.009_Material.134Mat
+    second: {fileID: 2100000, guid: e8646ac6938af7249a7ce77feb1ae525, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: door
-    second: {fileID: 2100000, guid: 0a16cb94957c905448e5bce8e0dd3c20, type: 2}
+      name: Cylinder.037_Cylinder.023_Material.131Mat
+    second: {fileID: 2100000, guid: 809517cac92f6d545814e4b6dfceab76, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: door2
-    second: {fileID: 2100000, guid: 8c4f0b29147023640b4fd84c625e08d9, type: 2}
+      name: Cylinder.038_Cylinder.024_Material.131Mat
+    second: {fileID: 2100000, guid: eaba5a94cf83fe847ab87e17e7343262, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: iron
-    second: {fileID: 2100000, guid: a2f5fdf557d98ea498b984129737e466, type: 2}
+      name: Cylinder.039_Cylinder.032_Material.131Mat
+    second: {fileID: 2100000, guid: ad18c37931babf540abefacbac017f0a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: store
-    second: {fileID: 2100000, guid: 865f15c3c69c17e46bcb609887490eaa, type: 2}
+      name: Cylinder.040_Cylinder.033_Material.131Mat
+    second: {fileID: 2100000, guid: 8892e50163cbc8b46834f5265a19c486, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: top
-    second: {fileID: 2100000, guid: 6e3d66222bc78fc44814c379f126987a, type: 2}
+      name: Cylinder.041_Cylinder.034_Material.131Mat
+    second: {fileID: 2100000, guid: 0f07408d0d47f5745af1c73851a6cda8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: w2
-    second: {fileID: 2100000, guid: af92ac6ca3344944494069fc2a5609a1, type: 2}
+      name: Cylinder.061_Cylinder.035_Material.131Mat
+    second: {fileID: 2100000, guid: 84afbeb9786e46541b7b6c3b2097ba85, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: wf
-    second: {fileID: 2100000, guid: 6ed23f1114713494c8911b88507d8b27, type: 2}
+      name: Cylinder.062_Cylinder.036_Material.115Mat
+    second: {fileID: 2100000, guid: 1d572af422aa43147b17b06fa1f4ad6b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: window1
-    second: {fileID: 2100000, guid: 9fa3f3d64ac13e547aba35af4a615d2d, type: 2}
+      name: Cylinder.062_Cylinder.036_Material.130Mat
+    second: {fileID: 2100000, guid: ea0f68c4f0b85a7469c22f50c76932c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: window2
-    second: {fileID: 2100000, guid: 80d5f9de2119b844fb4606c3949f0567, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: window3
-    second: {fileID: 2100000, guid: 5cc49051a1ef39c48b6a2be259765d68, type: 2}
+      name: Cylinder.063_Cylinder.041_Material.131Mat
+    second: {fileID: 2100000, guid: 1fac726e211f4604ca5b941c1c6d90a5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -106,7 +101,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

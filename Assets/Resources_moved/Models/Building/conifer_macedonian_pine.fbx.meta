@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b3d18f57b2dc0947b9e082cfbef8000
+guid: cba427751f6c6d54db06c5ceebfd6018
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: K_Building_B_09Mat
-    second: {fileID: 2100000, guid: 0c6a3c11b652f5542959da732b409bdb, type: 2}
+      name: Bark_Branch_Mat
+    second: {fileID: 2100000, guid: 5e1b78ac4f59f97458c6656cadd1d4bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cap_Branch_Mat
+    second: {fileID: 2100000, guid: ba4ae09d33701f8419ff929ec5b38cfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: conifer_macedonian_pine_Leaf_Mat
+    second: {fileID: 2100000, guid: 65e9270eeec27ef4c8c7fd73e8b149ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,14 +51,14 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0

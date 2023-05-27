@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: HouseBuildingGame
+  m_EditorClassIdentifier: 
+  m_GroupName: HouseBuildingGame
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c743ba2fc30742341983b8e46ee92264
+  m_SerializeEntries:
+  - m_GUID: eb727dfe88397434ca0b34e6e8db476a
+    m_Address: Models/Building
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 41134c3a39e9d9c44b70ec1e3233d953
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4bafd6e77f2635c46adf0a649a6e7295
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 59e51cbe04873ed45af6ee0bc3b0594c
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b70dec546c7ad8e4baf9180c48c712cb
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 5.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 838caa1cd1e642b4da83643f9fc312b8
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 6.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 17d27b9a21cec7f429614eeef9429bb1
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 7.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f253ab4ad5411e4087b8e022a169f4e
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 8.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a264cfca73c57fc4a80f50570a4d0bef
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 9.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 99f5b9ba4413d4e488c45dac35195e98
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 10.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e680b665f05fbd64e8a159a262e6b3f9
+    m_Address: Assets/Resources_moved/Prefabs/BuildingGame/House 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f12e0d1318e902941a8aab58488417b8, type: 2}
+    - {fileID: 11400000, guid: b1bb6edb2c90c82409bfd49f28c6c1eb, type: 2}

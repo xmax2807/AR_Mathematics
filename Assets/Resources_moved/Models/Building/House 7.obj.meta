@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f84dfe22890534d4285c4a30943508c3
+guid: 8f6e74948d7ae0a429721e9278db3b03
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,68 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 1e98560bab473f642a04529a2f3a0e09, type: 2}
+      name: AB1_OBJ_01Mat
+    second: {fileID: 2100000, guid: 86bec6acabb3a4749bbd32b7f99ef028, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_02Mat
+    second: {fileID: 2100000, guid: 3ea621479ce95f24db212da6935544d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_03Mat
+    second: {fileID: 2100000, guid: 2f263ad543d6cb248ac412ec237f5bcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_04Mat
+    second: {fileID: 2100000, guid: c1f38db01a1a39248b619ba34c1adca5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_05Mat
+    second: {fileID: 2100000, guid: 9edcc14996fa6be498225576fc7632f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_06Mat
+    second: {fileID: 2100000, guid: 1cf69fa37aa07cb4485c071a77e8b16a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_07Mat
+    second: {fileID: 2100000, guid: 68e41d8e0e648d64788bf5b108a3dcbd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_08Mat
+    second: {fileID: 2100000, guid: e87f25504c006d04c8bd4e18a4f0c938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_09Mat
+    second: {fileID: 2100000, guid: 357feee38faa15d4d818dcf930e95da8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_10Mat
+    second: {fileID: 2100000, guid: 7599c170bc52e16498d2f079cafae0ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_11Mat
+    second: {fileID: 2100000, guid: 7db349bfa8741c4498757c1a7a112c51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_12Mat
+    second: {fileID: 2100000, guid: efaf36604348adc4286dba4576aaca48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AB1_OBJ_13Mat
+    second: {fileID: 2100000, guid: 05d0143fe7a3b484689f6b07eeb4a3cd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -41,7 +101,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

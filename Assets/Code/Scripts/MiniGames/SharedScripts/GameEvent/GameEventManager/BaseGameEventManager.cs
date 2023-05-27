@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Project.Utils.ExtensionMethods;
 namespace Project.MiniGames{
     public class BaseGameEventManager : SingletonEventManager<BaseGameEventManager>, IEventListener{
         #region ListenerActionClasses
@@ -41,7 +42,13 @@ namespace Project.MiniGames{
         #endregion
 
         
-        public static T RealInstance<T>() where T : BaseGameEventManager => (T)Instance;
+        public static T RealInstance<T>() where T : BaseGameEventManager{
+             var result = Instance.CastTo<T>();
+            if(result == null){
+                Debug.Log("Failed to get game event instance: " + typeof(T).Name);
+            }
+            return result;
+        }
 
         [SerializeField] protected GameEventStruct[] GameEvents;
 

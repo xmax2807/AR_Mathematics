@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8de1d5ef0a7a01c4ebf35a924c1a7d71
+guid: b07caeff0e295324ba78831ec817e8e8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,43 +7,73 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #44
-    second: {fileID: 2100000, guid: fd8337639d2d27c40b0815b2add64020, type: 2}
+      name: ACtexture_cl
+    second: {fileID: 2100000, guid: af5b627e21a20594ca894939cf2aba6d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #49
-    second: {fileID: 2100000, guid: 74dfdfd15115e5045823e6f35db6f83e, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 520f6413541e119468e9bdd808918aa7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #50
-    second: {fileID: 2100000, guid: 68577437bafaeb7488f37db06b9953ea, type: 2}
+      name: brack
+    second: {fileID: 2100000, guid: 01e68ca7ef2a45340bdaadb07c9fec45, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #51
-    second: {fileID: 2100000, guid: de3113fef6f598047a0ac9cd9cf96a9f, type: 2}
+      name: bracktexture
+    second: {fileID: 2100000, guid: 15be9805d04fbc246bc1b4da9831da70, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #63
-    second: {fileID: 2100000, guid: c854db215dcde1b48b5c37e30d1208ad, type: 2}
+      name: door
+    second: {fileID: 2100000, guid: 0a16cb94957c905448e5bce8e0dd3c20, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #75
-    second: {fileID: 2100000, guid: 63b0c1ddd9e3fc147b6f4d28d7196b79, type: 2}
+      name: door2
+    second: {fileID: 2100000, guid: 8c4f0b29147023640b4fd84c625e08d9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: apartment_building_night_01_Anodized AL Black
-    second: {fileID: 2100000, guid: 56b5f44f9f64b604ba88c49c45cfd50a, type: 2}
+      name: iron
+    second: {fileID: 2100000, guid: a2f5fdf557d98ea498b984129737e466, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: apartment_building_night_01_Material #47
-    second: {fileID: 2100000, guid: f2341def3e65c3d46a6eb67463424987, type: 2}
+      name: store
+    second: {fileID: 2100000, guid: 865f15c3c69c17e46bcb609887490eaa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top
+    second: {fileID: 2100000, guid: 6e3d66222bc78fc44814c379f126987a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w2
+    second: {fileID: 2100000, guid: af92ac6ca3344944494069fc2a5609a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wf
+    second: {fileID: 2100000, guid: 6ed23f1114713494c8911b88507d8b27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window1
+    second: {fileID: 2100000, guid: 9fa3f3d64ac13e547aba35af4a615d2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window2
+    second: {fileID: 2100000, guid: 80d5f9de2119b844fb4606c3949f0567, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window3
+    second: {fileID: 2100000, guid: 5cc49051a1ef39c48b6a2be259765d68, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -76,7 +106,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

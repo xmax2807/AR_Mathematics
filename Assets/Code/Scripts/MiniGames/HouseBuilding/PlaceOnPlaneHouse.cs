@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Project.MiniGames.HouseBuilding;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlaceOnPlaneHouse : MonoBehaviour
@@ -21,11 +22,11 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
     [SerializeField]
     UnityEngine.Events.UnityEvent onSpawnPlane;
-
+    public event System.Action<GameObject> OnSpawnMainPlane;
     /// <summary>
     /// The prefab to instantiate on touch.
     /// </summary>
-    public GameObject placedPrefab
+    public GameObject PlacedPrefab
     {
         get { return m_PlacedPrefab; }
         set { m_PlacedPrefab = value; }
@@ -46,15 +47,22 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
         //placementUpdate.AddListener(DiableVisual);
 
-        // spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
+        //spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
+        // HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.StartGameEventName);
         // onSpawnPlane?.Invoke();
-        // Debug.Log(spawnedObject.transform.localPosition);
 
         /*Vector3 position0 = new Vector3(0, 0, 0);
         spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
         onSpawnPlane?.Invoke();
         Debug.Log(spawnedObject.transform.localPosition);*/
         //spawnedObject.transform.LookAt(ARCamera.transform);
+    }
+
+    public void SetMainPlaneAndStart(MainPlane mainPlane){
+        m_PlacedPrefab = mainPlane.gameObject;
+        var mainPlaneObj = Instantiate(mainPlane, Vector3.zero, Quaternion.identity);
+        spawnedObject = mainPlaneObj.gameObject;
+        OnSpawnMainPlane?.Invoke(spawnedObject);
     }
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
@@ -101,7 +109,8 @@ public class PlaceOnPlaneHouse : MonoBehaviour
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
                 DisablePlaneDetection();
-                onSpawnPlane?.Invoke();
+                OnSpawnMainPlane?.Invoke(spawnedObject);
+                HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.StartGameEventName);
                 //Debug.Log(spawnedObject.transform.localPosition);
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;

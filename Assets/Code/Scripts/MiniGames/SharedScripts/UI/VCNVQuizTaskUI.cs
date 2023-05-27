@@ -10,7 +10,6 @@ namespace Project.MiniGames{
         {
             base.OnEnable();
             //ColliderEvent?.RegisterListener(this);
-            Debug.Log("register Event");
             VCNVGameEventManager.Instance.RegisterEvent(VCNVGameEventManager.ObstacleReachEventName, this, ShowQuizUI);
         }
 

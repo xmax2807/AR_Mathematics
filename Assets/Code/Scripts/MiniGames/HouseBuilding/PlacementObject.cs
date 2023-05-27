@@ -2,15 +2,17 @@ using DnsClient.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using Project.MiniGames.HouseBuilding;
+using Project.MiniGames;
 
-public class PlacementObject : MonoBehaviour
+public class PlacementObject : MonoBehaviour, IEventListener
 {
     [SerializeField] Rigidbody Rigidbody;
     private bool IsSelected;
     private void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        HouseBuildingEventManager.Instance.RegisterEvent(HouseBuildingEventManager.ResetBuildEventName, this, OnBuildReset);
     }
     public bool Selected
     {
@@ -23,6 +25,9 @@ public class PlacementObject : MonoBehaviour
             IsSelected = value;
         }
     }
+
+    public string UniqueName => "PlacementObject" + ID;
+
     public int ID;
 
     public void AddFore(float force)
@@ -31,4 +36,10 @@ public class PlacementObject : MonoBehaviour
         Rigidbody.AddForceAtPosition(new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 0f)) * force, new Vector3(Random.Range(-1f, 1f), 1, Random.Range(-1f, 1f)));
         //Rigidbody.AddExplosionForce(force, this.transform.position, 100);
     }
+
+    public void OnEventRaised<T>(EventSTO sender, T result)
+    {
+        throw new System.NotImplementedException();
+    }
+    private void OnBuildReset() => gameObject.SetActive(true);
 }
