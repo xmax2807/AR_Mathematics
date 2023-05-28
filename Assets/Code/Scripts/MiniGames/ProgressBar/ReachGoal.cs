@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Project.UI;
 
-public class ReachGoal : MonoBehaviour
+public class ReachGoal : MonoBehaviour, IProgressUI
 {
     public Slider slider;
+
+    private float newValue;
+    private float currentValue;
 
     private bool IsSliderReachedMax()
     {
@@ -21,33 +24,20 @@ public class ReachGoal : MonoBehaviour
     {
         slider.onValueChanged.AddListener(OnValueChanged);
         SwitchActive(isMaxReached: false);
+        currentValue = slider.value;
+        newValue = currentValue;
     }
     public List<GameObject> objectToActivates;
     public List<GameObject> objectToDeactivates;
 
-    // void Update()
-    // {
-    //     foreach (GameObject obj in objectToActivates)
-    //     {
-    //         obj.SetActive(false);
-    //     }
-    //     foreach (GameObject obj in objectToDeactivates)
-    //     {
-    //         obj.SetActive(true);
-    //     }
-
-    //     if (slider.value == slider.maxValue)
-    //     {
-    //         foreach (GameObject obj in objectToActivates)
-    //         {
-    //             obj.SetActive(true);
-    //         }
-    //         foreach (GameObject obj in objectToDeactivates)
-    //         {
-    //             obj.SetActive(false);
-    //         }
-    //     }
-    // }
+    void Update()
+    {
+        if(!Mathf.Approximately(currentValue, newValue)){
+            currentValue += Time.deltaTime;
+            currentValue = Mathf.Clamp(currentValue, 0, newValue);
+            slider.value = currentValue;
+        }
+    }
     void OnValueChanged(float value)
     {
         bool result = IsSliderReachedMax();
@@ -63,4 +53,15 @@ public class ReachGoal : MonoBehaviour
             obj.SetActive(!isMaxReached);
         }
 	}
+
+    public void IncreaseProgress(float value)
+    {
+        value = value / slider.maxValue + slider.minValue;
+        SetProgress(currentValue + value);
+    }
+
+    public void SetProgress(float value)
+    {
+        newValue = value / slider.maxValue + slider.minValue;
+    }
 }

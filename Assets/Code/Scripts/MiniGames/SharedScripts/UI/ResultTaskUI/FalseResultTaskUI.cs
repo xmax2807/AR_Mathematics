@@ -24,6 +24,7 @@ namespace Project.MiniGames{
         protected override void OnEnable()
         {
             base.OnEnable();
+            Debug.Log("task result enable");
             BaseGameEventManager.Instance?.RegisterEvent<bool>(BaseGameEventManager.EndGameEventName, this, OnResult);
         }
         protected override void Start()

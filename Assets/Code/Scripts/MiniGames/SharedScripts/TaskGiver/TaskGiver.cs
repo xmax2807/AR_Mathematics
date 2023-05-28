@@ -70,7 +70,6 @@ namespace Project.MiniGames{
             if(currentGame == null) return Task.CompletedTask;
             
             this.CurrentTaskIndex =  GameController.GetLastSavedTask(currentGame.GameID);
-            Debug.Log(CurrentTaskIndex);
             return Task.CompletedTask;
         }
         protected virtual void ChangeTask(BaseTask task)

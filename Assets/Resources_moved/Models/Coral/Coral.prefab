@@ -99,8 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0063b47229223aa439d41af64ed63b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColliderTriggerEvent: {fileID: 11400000, guid: 0b4246b226ce76a47873e42a9b4e0666,
-    type: 2}
 --- !u!54 &8024306017080248729
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,6 +202,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: coral (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
 --- !u!4 &356203109671488301 stripped
@@ -298,6 +301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coral (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
@@ -394,6 +402,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: coral (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
 --- !u!4 &2749183239729089337 stripped
@@ -488,6 +501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coral (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
@@ -584,6 +602,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: coral (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
 --- !u!4 &4667142394114209225 stripped
@@ -678,6 +701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coral (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
@@ -774,6 +802,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: coral (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}
 --- !u!4 &7793707098777000614 stripped
@@ -868,6 +901,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coral (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2084d52e0817f804cbfda68b09be9fd3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2084d52e0817f804cbfda68b09be9fd3, type: 3}

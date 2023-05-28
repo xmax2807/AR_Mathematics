@@ -29,6 +29,9 @@ namespace Project.RewardSystem{
             if(view == null){
                 view = GetComponent<OkCancelPanelView>();
             }
+            if(canvas == null){
+                canvas = GetComponent<Canvas>();
+            }
             canvas.enabled = true;
             view?.ShowAsync();
         }

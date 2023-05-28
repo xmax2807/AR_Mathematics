@@ -45,7 +45,7 @@ namespace Project.Managers
 
         public static void AddDependencies()
         {
-            Debug.Log("add dependency");
+            Debug.Log("AddressableManger: add dependency");
             Addressables.ResourceManager.ResourceProviders.Add(new FirebaseStorageAssetBundleProvider());
             Addressables.ResourceManager.ResourceProviders.Add(new FirebaseStorageJsonAssetProvider());
             Addressables.ResourceManager.ResourceProviders.Add(new FirebaseStorageHashProvider());

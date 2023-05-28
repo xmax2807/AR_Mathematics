@@ -55,7 +55,8 @@ namespace Project.QuizSystem{
         {
             rand ??= Managers.SpawnerManager.RandomInstance;
             
-            m_count = rand.Next(3,m_maxNumber); 
+            int min = Math.Min(5, m_maxNumber - 1);
+            m_count = rand.Next(min,m_maxNumber);
 
             //Start creating the answer (list of numbers)
             HashSet<int> duplicateChecker = new(m_count);

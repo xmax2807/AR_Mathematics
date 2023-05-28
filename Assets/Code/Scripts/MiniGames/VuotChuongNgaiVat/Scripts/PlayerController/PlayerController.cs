@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour, IEventListener
     private void OnAnswerQuestion(bool result){
         if(result == true){
             ChangeState(PlayerState.HighJump);
-            Project.Managers.TimeCoroutineManager.Instance.WaitForSeconds(1, ()=>ChangeState(PlayerState.BasicJump));
+            ChangeState(PlayerState.BasicJump);
         }
         else{
             ChangeState(PlayerState.FailedJump);

@@ -35,7 +35,6 @@ namespace Project.RewardSystem
         }
         public void OnProgressValueChanged(int newValue)
         {
-            Debug.Log(newValue);
             if (acquiredRewardIndex >= Datas.Length)
             {
                 return;

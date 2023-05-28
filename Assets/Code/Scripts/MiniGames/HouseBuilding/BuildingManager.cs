@@ -81,7 +81,6 @@ namespace Project.MiniGames.HouseBuilding{
             if(IsDebugging){
                 TimeCoroutineManager.Instance.WaitUntil(()=>questionIsReady, ()=>{
                     mainGamePlacer.SetMainPlaneAndStart(mainPlane);
-                    StartGame();
                 });
             }
         }
@@ -118,7 +117,7 @@ namespace Project.MiniGames.HouseBuilding{
                 if(currentProgress == blockIndexes.Length - 1){
                 // Complete level
                     Debug.Log("Complete");
-                    TimeCoroutineManager.Instance.WaitForSeconds(2, ()=> taskGiver.Tasks.UpdateProgress(1));
+                    taskGiver.Tasks.UpdateProgress(1);
                 }
                 else{
                 //Fail Level
@@ -139,7 +138,6 @@ namespace Project.MiniGames.HouseBuilding{
             }
 
             blockIndexes = houseBuildingTask.GetAnswer();
-            
             StartGame();
         }
 

@@ -48,6 +48,14 @@ public class Merge : MonoBehaviour
                 if(firework == null){
                     firework = this.GetComponentInChildren<ParticleSystem>(true);
                 }
+
+                if(firework == null){
+                    Debug.Log("Firework is null");
+                    gameObject.SetActive(false);
+                    HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.BlockPlacedEventName, value: cube_merge.ID);
+                    return;
+                }
+
                 firework.Play(true);
                 TimeCoroutineManager.Instance.WaitForSeconds(firework.main.duration, OnSuccessfulMerge);
                 gameObject.SetActive(false);

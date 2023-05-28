@@ -64,6 +64,9 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         spawnedObject = mainPlaneObj.gameObject;
         OnSpawnMainPlane?.Invoke(spawnedObject);
     }
+    public void SetMainPLane(MainPlane mainPlane){
+        m_PlacedPrefab = mainPlane.gameObject;
+    }
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
