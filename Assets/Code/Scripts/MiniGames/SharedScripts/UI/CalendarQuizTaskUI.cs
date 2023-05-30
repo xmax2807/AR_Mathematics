@@ -15,6 +15,7 @@ namespace Project.MiniGames{
         }
         public void OnPlacedCalendar(UnityEngine.GameObject obj){
             if(obj.TryGetComponent<Calendar>(out this.calendar)){
+                BaseGameEventManager.Instance.RaiseEvent(ARGameEventManager.ObjectPlacedEventName);
                 GameManager.Instance.OnGameFinishLoading?.Invoke();
                 canvas.enabled = true;
             }

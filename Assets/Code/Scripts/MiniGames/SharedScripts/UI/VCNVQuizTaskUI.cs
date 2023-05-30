@@ -17,12 +17,6 @@ namespace Project.MiniGames{
         {
             canvas.enabled = true;
         }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            //ColliderEvent?.UnregisterListener(this);
-        }
         protected override void OnCorrectAnswer()
         {
             canvas.enabled = false;

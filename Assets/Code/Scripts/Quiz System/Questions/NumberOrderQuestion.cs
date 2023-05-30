@@ -112,9 +112,9 @@ namespace Project.QuizSystem{
             var list  = _answer.ToList();
             list.Sort();
             _answer = list.ToArray();
-            foreach(int i in _answer){
-                UnityEngine.Debug.Log(i);
-            }
+            // foreach(int i in _answer){
+            //     UnityEngine.Debug.Log(i);
+            // }
             //UnityEngine.Debug.Log(GetQuestion());
         }
 

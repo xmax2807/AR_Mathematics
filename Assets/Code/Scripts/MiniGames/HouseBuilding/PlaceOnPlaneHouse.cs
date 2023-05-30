@@ -67,6 +67,9 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     public void SetMainPLane(MainPlane mainPlane){
         m_PlacedPrefab = mainPlane.gameObject;
     }
+    public void SetPlacedPrefab(GameObject newPlace){
+        m_PlacedPrefab = newPlace;
+    }
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {

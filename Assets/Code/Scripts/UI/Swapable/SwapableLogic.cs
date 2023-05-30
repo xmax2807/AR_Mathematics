@@ -1,3 +1,5 @@
+using System;
+
 namespace Project.UI{
     public interface ISwapableLogic<T>{
         public T GetData();
@@ -8,6 +10,7 @@ namespace Project.UI{
         public SwapableLogic(T data){
             this.data = data;
         }
+
         public T GetData()
         {
             return data;
@@ -29,5 +32,22 @@ namespace Project.UI{
             }
             return data;
         }
+    }
+    public class SwapableLogicButtonClick<T> : ISwapableLogic<T>
+    {
+        private T data;
+        private T realData;
+        private bool isSwapped;
+        public SwapableLogicButtonClick(T data, T realData, System.Action buttonClicked){
+            this.data = data; 
+            this.realData = realData;
+            buttonClicked += SwapData;
+            isSwapped = false;
+        }
+        public T GetData()
+        {
+            return isSwapped ? realData : data;
+        }
+        private void SwapData() => isSwapped = !isSwapped;
     }
 }

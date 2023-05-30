@@ -101,30 +101,22 @@ public class SelecObjectFromCameraFO : MonoBehaviour
     {
         foreach (PlacementObject current in placements)
         {
-            if (selected != current)
+            if (selected == current)
             {
-                current.Selected = false;
-            }
-            else
-            {
-                current.Selected = true;
-                Animator anim = current.transform.GetComponentInChildren<Animator>(true);
-                bool RightAns = false;
-                if (taskGiver.CurrentTask.IsCorrect(current.ID))
+                // current.Selected = true;
+                Animator anim = current.GetComponentInChildren<Animator>(true);
+                bool IsCorrect = taskGiver.CurrentTask.IsCorrect(current.ID);
+                if (IsCorrect == true)
                 {
-                    RightAns = true;
-                    StartCoroutine(VideoStart(anim,RightAns));
-                    Debug.Log("SUCCESS !!!");
                     taskGiver.Tasks.UpdateProgress(1);
                 }
                 else
                 {
-                    RightAns = false;
-                    StartCoroutine(VideoStart(anim,RightAns));
                     Debug.Log("Fail");
                 }
-                current.Selected = false;
-                
+
+                StartCoroutine(VideoStart(anim,IsCorrect));
+                // current.Selected = false;                
             }
         }
     }

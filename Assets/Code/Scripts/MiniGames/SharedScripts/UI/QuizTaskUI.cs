@@ -33,6 +33,9 @@ namespace Project.MiniGames{
             if(task is not IVisitableSCQTask quizTask){
                 return;
             }
+            if(IsDebugging){
+                canvas.enabled = true;
+            }
             
             question.text = quizTask.GetQuestion();
             string[] quizOptions = quizTask.GetOptions();

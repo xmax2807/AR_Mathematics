@@ -9,7 +9,7 @@ namespace Project.MiniGames{
     /// <summary>
     /// This class act like a Quest Manager. Whenever the world event is fired, this will filter down to quest and check correct.
     /// </summary>
-    public abstract class TaskGiver : MonoBehaviour{
+    public abstract class TaskGiver : MonoBehaviour, IEventListener{
         [SerializeField] private RewardCollection RewardCollection;
         [SerializeField] private RewardScriptableObject[] RewardData;
         public RewardScriptableObject CurrentReward {
@@ -31,34 +31,35 @@ namespace Project.MiniGames{
         public event System.Action<BaseTask> OnTaskChanged;
 
         protected GameController GameController => DatabaseManager.Instance.GameController;
+
+        public string UniqueName => "TaskGiver";
+
         // [SerializeField] private PanelViewControllerBehaviour rewardPanelController;
         // [SerializeField] private PanelStackSystem stackPanel;
 
         public bool AllTaskCompleted()=> Tasks.IsCompleted;
-        protected virtual async void Awake(){
+        protected virtual void Awake(){
             CurrentTaskIndex = 0;
-            GameManager.Instance.OnGameFinishLoading += Initialize;
-            if(IsDebugging){
-                await Initialize();
-            }
+            BaseGameEventManager.Instance.RegisterEvent(BaseGameEventManager.StartGameEventName, this, Initialize);
+            //GameManager.Instance.OnGameFinishLoading += Initialize;
+            // if(IsDebugging){
+            //     await Initialize();
+            // }
         }
-
-        protected virtual void OnDestroy(){
-            GameManager.Instance.OnGameFinishLoading -= Initialize;
-        }
-        private async void CompleteMission(){
-            
+        
+        private void CompleteMission()
+        {
             //OnRewardAccquired?.Invoke(CurrentReward.Badge);
             RewardCollection.OnProgressValueChanged(Tasks.CurrentProgress);
-            Debug.Log(CurrentTaskIndex);
-            CurrentTaskIndex++;
-            GameController?.SaveGame(CurrentTaskIndex);
             BaseGameEventManager.Instance.RaiseEvent<bool>(BaseGameEventManager.EndGameEventName, true);
-            await Initialize();
+            Debug.Log("Reward accquired");
+            ++CurrentTaskIndex;
+            GameController?.SaveGame(CurrentTaskIndex);
+            //await Initialize();
             //stackPanel.Push(rewardPanelController);
             //pusher.Push();
         }
-        private async Task Initialize(){
+        private async void Initialize(){
             await InitTasks();
 
             Debug.Log("init tasks");
@@ -79,6 +80,11 @@ namespace Project.MiniGames{
         }
         public bool IsCorrect(object item){
             return CurrentTask.IsCorrect(item);
+        }
+
+        public void OnEventRaised<T>(EventSTO sender, T result)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

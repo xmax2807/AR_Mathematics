@@ -11,6 +11,7 @@ namespace Project.RewardSystem{
         private void Awake(){
             view = GetComponent<OkCancelPanelView>();
             canvas = GetComponent<Canvas>();
+            canvas.enabled = false;
 //            view.HideAsync();
         }
         private void Start(){
@@ -32,8 +33,6 @@ namespace Project.RewardSystem{
             if(canvas == null){
                 canvas = GetComponent<Canvas>();
             }
-            canvas.enabled = true;
-            view?.ShowAsync();
         }
 
         public void SetRewardData(string title, Sprite image){
@@ -44,6 +43,11 @@ namespace Project.RewardSystem{
         private async void Hide(){
             await view?.HideAsync();
             canvas.enabled = false;
+        }
+
+        public void Show(){
+            canvas.enabled = true;
+            view?.ShowAsync();
         }
     }
 }

@@ -803,7 +803,7 @@ MonoBehaviour:
   mainGamePlacer: {fileID: 1499851194}
   mainPlane: {fileID: 942762193864006732, guid: f6f63fff339130149b8c0041e945a648,
     type: 3}
-  IsDebugging: 0
+  IsDebugging: 1
 --- !u!1 &751066078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1540,41 @@ PrefabInstance:
       propertyPath: giver
       value: 
       objectReference: {fileID: 2039748803}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298818402}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Show
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.RewardSystem.RewardPopup, Projec
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dcbe1ceac8782344b88a76bf4a4d852, type: 3}
 --- !u!224 &1268800233 stripped

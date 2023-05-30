@@ -54,8 +54,8 @@ public class GameController
     public async void SaveGame(int task)
     {
         UserModel user = UserManager.Instance.CurrentUser;
-        if(user == null) return;
-        
+        if (user == null) return;
+
         GameModel game = UserManager.Instance.CurrentGame;
         string gameId = game?.GameID;
         int index = user.SavedGame == null ? -1 : user.SavedGame.FindIndex((x) => x.GameID == gameId);
@@ -77,8 +77,17 @@ public class GameController
             user.User_ListAchievement.Add(game.AchievementID[task - 1]);
         }
 
-        DocumentReference userRef = db.Collection("users").Document(user.UserID);
-        await userRef.SetAsync(user, SetOptions.Overwrite);
+        try
+        {
+            DocumentReference userRef = db.Collection("users").Document(user.UserID);
+            await userRef.SetAsync(user, SetOptions.Overwrite);
+
+        }
+        catch (Firebase.FirebaseException e)
+        {
+            Debug.Log(e.Message);
+        }
+
     }
 
     public async Task<List<GameModel>> GetListGames(int unit, int chapter)
@@ -104,17 +113,17 @@ public class GameController
     public async Task<List<GameModel>> GetListGamesInChapter(int chapter)
     {
         int chapIndex = chapter - 1;
-        if(chapIndex < 0) return null;
+        if (chapIndex < 0) return null;
 
         CollectionReference gamesRef = db.Collection("games");
         List<GameModel> listGames = new();
 
         int[] chapCounts = UserManager.Instance.CourseModel.chapCount.ToArray();
-        
+
         if (chapIndex >= chapCounts.Length) return null;
 
         int maxChapCount = chapCounts[chapIndex];
-        
+
         string[] req = new string[maxChapCount];
         for (int i = 1; i <= maxChapCount; i++)
         {
@@ -131,7 +140,8 @@ public class GameController
             listGames.Add(model);
         }
 
-        UserManager.Instance.CurrentUnitProgress = new UserManager.CurrentUnit(){
+        UserManager.Instance.CurrentUnitProgress = new UserManager.CurrentUnit()
+        {
             chapter = chapter,
             unit = -1,
         };
@@ -144,7 +154,7 @@ public class GameController
         Debug.Log(gameId);
         UserModel currentUser = UserManager.Instance.CurrentUser;
         if (currentUser == null) return 0;
-        
+
         GameData data = currentUser.SavedGame.FindMatch((x) => x.GameID == gameId);
         if (data == null) return 0;
         return data.Task;

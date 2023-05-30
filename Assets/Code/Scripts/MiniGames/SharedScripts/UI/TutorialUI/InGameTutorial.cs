@@ -10,6 +10,12 @@ namespace Project.MiniGames.UI{
         [SerializeField] private VideoPlayerBehaviour videoPlayer;
         [SerializeField] private Gameframe.GUI.PanelSystem.AnimatedPanelView view;
         [SerializeField] private Button startGameButton;
+
+        private Canvas canvas;
+
+        private void Awake(){
+            canvas = GetComponent<Canvas>();
+        }
         
         void OnDisable(){
             TimeCoroutineManager.Instance.StartCoroutine(DisableVideoPlayer());
@@ -32,6 +38,7 @@ namespace Project.MiniGames.UI{
         }
         private async void StartGame(){
             await view?.HideAsync();
+            canvas.enabled = false;
             BaseGameEventManager.Instance?.RaiseEvent(BaseGameEventManager.StartGameEventName);
         }
     }
