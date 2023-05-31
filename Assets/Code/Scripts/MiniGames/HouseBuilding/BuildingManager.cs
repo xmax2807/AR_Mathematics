@@ -44,7 +44,8 @@ namespace Project.MiniGames.HouseBuilding
             {
                 mainPlaneObj = obj.AddComponent<MainPlane>();
             }
-            mainPlaneObj.AddFirstBuilding(builtInBuildings[blockIndexes[0] - 1], this);
+            OnGameReset();
+            //mainPlaneObj.AddFirstBuilding(builtInBuildings[blockIndexes[0] - 1], this);
         }
 
         private bool questionIsReady;
@@ -73,11 +74,7 @@ namespace Project.MiniGames.HouseBuilding
             if(!questionIsReady){
                 TimeCoroutineManager.Instance.WaitUntil(()=>questionIsReady, StartGame);
                 return;
-            }
-            currentProgress = 0;
-            PickBlocks();
-            mainPlaneObj.AddFirstBuilding(builtInBuildings[blockIndexes[0] - 1], this);
-            blockRaycaster.SetPlacements(pickedBlock, spawnParent);
+            } 
         }
 
         public void ReceiveBuildingsFromRemote(GameObject[] objs)
@@ -113,7 +110,10 @@ namespace Project.MiniGames.HouseBuilding
 
         private void OnGameReset()
         {
-
+            currentProgress = 0;
+            PickBlocks();
+            mainPlaneObj.AddFirstBuilding(builtInBuildings[blockIndexes[0] - 1], this);
+            blockRaycaster.SetPlacements(pickedBlock, spawnParent);
         }
 
         public Merge GiveNextMerge(int id)
@@ -171,7 +171,7 @@ namespace Project.MiniGames.HouseBuilding
             }
 
             blockIndexes = houseBuildingTask.GetAnswer();
-            StartGame();
+            OnGameReset();
         }
 
         private void PickBlocks()

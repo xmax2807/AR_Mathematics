@@ -24,6 +24,8 @@ namespace Project.MiniGames.ObjectFinding{
             //UpdateProgress();
         }
         void OnDestroy(){
+            if(Giver == null) return;
+
             Giver.OnTaskChanged -= UpdateQuestion;   
         }
         private void UpdateProgress(){
@@ -41,6 +43,16 @@ namespace Project.MiniGames.ObjectFinding{
         private void UpdateQuestion(BaseTask task){
             Debug.Log(task.TaskDescription);
             MissionContent.text = task.TaskDescription;
+        }
+
+        public void AddTaskGiver(TaskGiver giver){
+            if(giver == null){
+                Debug.Log("TaskGiver is null in ObjectFindingMissionUI");
+                return;
+            }
+            this.Giver = giver;
+            Giver.OnTaskChanged += UpdateQuestion;
+            UpdateQuestion(Giver.CurrentTask);
         }
     }
 }

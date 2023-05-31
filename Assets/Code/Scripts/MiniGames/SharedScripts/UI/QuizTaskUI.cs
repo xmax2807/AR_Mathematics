@@ -9,9 +9,10 @@ namespace Project.MiniGames{
     {
         protected UIEventManager UIEventManager => UIEventManager.Current; 
         [SerializeField] private TrueFalseButton buttonPrefab;
-        [SerializeField] private Transform buttonGroupTransform;
-        private TrueFalseButton[] options = new TrueFalseButton[0];
+        [SerializeField] protected Transform buttonGroupTransform;
+        protected TrueFalseButton[] options = new TrueFalseButton[0];
         [SerializeField] private TMPro.TextMeshProUGUI question;
+        [SerializeField] protected Button EndGameButton;
 
         protected Canvas canvas;
 

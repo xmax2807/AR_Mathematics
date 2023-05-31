@@ -47,6 +47,15 @@ public class PlaceOnPlane : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
 
+        // spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, m_PlacedPrefab.transform.rotation);
+        // spawnedObject.AddComponent<ARAnchor>();
+        // //spawnedObject.transform.LookAt(ARCamera.transform);
+        // //var rotation = spawnedObject.transform.rotation;
+        // //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
+        // DisablePlaneDetection();
+        // onPlacedObject?.Invoke(spawnedObject);
+        // enabled = false;
+
         // if (placementUpdate == null)
         //     placementUpdate = new UnityEvent();
 
@@ -60,7 +69,8 @@ public class PlaceOnPlane : MonoBehaviour
             touchPosition = Input.GetTouch(0).position;
             return true;
         }
-        if(m_PlacedPrefab == null){
+        if (m_PlacedPrefab == null)
+        {
             touchPosition = default;
             return false;
         }
@@ -69,18 +79,19 @@ public class PlaceOnPlane : MonoBehaviour
         return false;
     }
 
-	public void OnGetDownloadedClock(GameObject[] objs){
+    public void OnGetDownloadedClock(GameObject[] objs)
+    {
         Debug.Log("placed object");
-		if(objs == null || objs.Length == 0) return;
-		
-		m_PlacedPrefab = objs[0];
+        if (objs == null || objs.Length == 0) return;
+
+        m_PlacedPrefab = objs[0];
 
         // spawnedObject = Instantiate(m_PlacedPrefab);
         // spawnedObject.AddComponent<ARAnchor>();
         // DisablePlaneDetection();
         // onPlacedObject?.Invoke(spawnedObject);
         // enabled = false;
-	}
+    }
 
     void Update()
     {
@@ -96,8 +107,8 @@ public class PlaceOnPlane : MonoBehaviour
             // will be the closest hit.
 
             // var hitPose = s_Hits[0].pose;
-			var trackableTrans = s_Hits[0].trackable.transform;
-            
+            var trackableTrans = s_Hits[0].trackable.transform;
+
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab, trackableTrans.position, m_PlacedPrefab.transform.rotation);
@@ -105,9 +116,9 @@ public class PlaceOnPlane : MonoBehaviour
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
-				DisablePlaneDetection();
+                DisablePlaneDetection();
                 onPlacedObject?.Invoke(spawnedObject);
-                enabled =false;
+                enabled = false;
             }
             // else
             // {

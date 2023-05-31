@@ -72,6 +72,12 @@ public class GameController
         {
             user.SavedGame[index].Task = task;
         }
+
+        if(task - 1 >= game.AchievementID.Length){
+            UnityEngine.Debug.Log("SaveGame error: current progress is out of range actual tasks on database");
+            return;
+        }
+
         if (!user.User_ListAchievement.Contains(game.AchievementID[task - 1]))
         {
             user.User_ListAchievement.Add(game.AchievementID[task - 1]);

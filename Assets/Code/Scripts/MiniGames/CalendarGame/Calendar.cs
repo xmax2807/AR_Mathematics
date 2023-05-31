@@ -9,22 +9,15 @@ public class Calendar : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI daysOfWeek;
     [SerializeField] private TMPro.TextMeshProUGUI month;
 
-    string[] daysList;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //create a list of days of the week
-        daysList = new string[7];
-        daysList[0] = "Chủ nhật";
-        daysList[1] = "Thứ hai";
-        daysList[2] = "Thứ ba";
-        daysList[3] = "Thứ tư";
-        daysList[4] = "Thứ năm";
-        daysList[5] = "Thứ sáu";
-        daysList[6] = "Thứ bảy";
-
-    }
-
+    readonly static string[] daysList = new string[7]{
+        "Chủ nhật",
+        "Thứ ba",
+        "Thứ năm",
+        "Thứ hai",
+        "Thứ bảy",
+        "Thứ tư",
+        "Thứ sáu",
+    };
     // Update is called once per frame
     // void Update()
     // {

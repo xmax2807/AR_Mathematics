@@ -39,6 +39,18 @@ public class SelecObjectFromCameraFO : MonoBehaviour
         }
     }
 
+    public void SetPlacements(PlacementObject[] placements, Transform spawnParent){
+        this.spawnParent = spawnParent;
+        
+        placedObjects = placements;
+        
+        this.placements = new PlacementObject[placedObjects.Length];
+        for (int i = 0; i < placedObjects.Length; i++)
+        {
+            this.placements[i] = Instantiate(placedObjects[i], spawnParent);
+        }
+    }
+
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
 #if UNITY_EDITOR

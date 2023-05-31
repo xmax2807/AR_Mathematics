@@ -15,12 +15,12 @@ public class Clock : MonoBehaviour
 
     private Coroutine tickCoroutine;
     void Start(){
-        //init time
-        System.DateTime time = System.DateTime.Now;
-        SetHour(time);
-        SetMinute(time);
-        SetSecond(time);
-        tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1);
+        // //init time
+        // System.DateTime time = System.DateTime.Now;
+        // SetHour(time);
+        // SetMinute(time);
+        // SetSecond(time);
+        // tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1);
     }
     void onDestroy(){
         TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);

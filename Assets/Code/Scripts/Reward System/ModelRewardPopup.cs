@@ -61,7 +61,6 @@ namespace Project.RewardSystem
             ScaleAlgo2(spawnObject);
 
             DescriptionTextUI.text = modelReward.Description;
-            view?.ShowAsync();
         }
         public async void Hide()
         {
@@ -69,6 +68,10 @@ namespace Project.RewardSystem
             remoteReward?.UnloadAsset();
             Destroy(spawnObject);
             Destroy(modelViewer);
+        }
+
+        public void Show(){
+            view?.ShowAsync();
         }
 
 

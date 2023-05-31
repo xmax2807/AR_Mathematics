@@ -172,7 +172,6 @@ MonoBehaviour:
   BuiltInQuizContentPrefabs: {fileID: 11400000, guid: a15f212cb08763f48a2d0b3a949ab6ef,
     type: 2}
   spriteGroupPack: {fileID: 11400000, guid: 50846beb968e1e241ba0e40dabdb84fa, type: 2}
-  isInitialized: 0
 --- !u!1 &191648049
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 54094392b35cefb4fa199ec1b306c91a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b93b56fdd23ea1a428bcf407e1f1e6ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -487,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2cd6a62765418429e90e78d9c88f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setupStartAt: 0
   cacheCount: 1
   Samples: []
   LastPageView: {fileID: 7947768644304909737, guid: a52bee85506acb144a45d3e125dd7198,

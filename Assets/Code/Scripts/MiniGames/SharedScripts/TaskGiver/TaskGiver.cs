@@ -63,7 +63,7 @@ namespace Project.MiniGames{
             await InitTasks();
 
             Debug.Log("init tasks");
-            Tasks.OnTaskCompleted += CompleteMission;    
+            Tasks.OnTaskCompleted += CompleteMission;
             OnInitialized?.Invoke();
         }
         protected virtual Task InitTasks(){
@@ -86,5 +86,7 @@ namespace Project.MiniGames{
         {
             throw new System.NotImplementedException();
         }
+
+        public abstract void ResetTask();
     }
 }

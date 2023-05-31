@@ -95,5 +95,8 @@ namespace Project.MiniGames
         {
             return CurrentTask.IsCorrect(value);
         }
+        public void Clear(){
+            TaskList?.Clear();
+        }
     }
 }

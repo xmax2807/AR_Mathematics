@@ -11,6 +11,7 @@ namespace Project.MiniGames{
         [SerializeField] private ProgressBarController progressBarController;
         [SerializeField] private OkCancelPanelView view;
         [SerializeField] private Button GiftBox;
+        [SerializeField] private Button PlayAgainButton;
         public UnityEngine.Events.UnityEvent OnGiftBoxClicked;
         private string defaultText;
 
@@ -61,6 +62,12 @@ namespace Project.MiniGames{
             
         }
         protected async void OnResult(bool result){
+            if(PlayAgainButton != null){
+                PlayAgainButton.interactable = result == false;
+            }
+            if(GiftBox != null){
+                GiftBox.interactable = result == true;
+            }
             UpdateUI();
             canvas.enabled = true;
             await view?.ShowAsync();
@@ -73,6 +80,7 @@ namespace Project.MiniGames{
                 giftBoxClickEvent.AddListener(()=>GiftBox.interactable = false);
                 giftBoxClickEvent.AddListener(()=>OnGiftBoxClicked?.Invoke());
                 GiftBox.onClick = giftBoxClickEvent;
+                GiftBox.interactable = false;
             }
         }
     }

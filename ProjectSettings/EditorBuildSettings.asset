@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameFlow/MainMenuScene.unity
     guid: f23ed8b621c5e9e43835f07836fa9096
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/VuotChuongNgaiVatScene.unity
     guid: ee3a5bf3da0643546bfeb4a3849a26ac
   - enabled: 1

@@ -803,7 +803,7 @@ MonoBehaviour:
   mainGamePlacer: {fileID: 1499851194}
   mainPlane: {fileID: 942762193864006732, guid: f6f63fff339130149b8c0041e945a648,
     type: 3}
-  IsDebugging: 1
+  IsDebugging: 0
 --- !u!1 &751066078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,7 +1973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 4776765576899091622, guid: 3738bd65ede154463b2c35064b9e5fdb,
     type: 3}
-  m_DetectionMode: -1
+  m_DetectionMode: 1
 --- !u!114 &1499851191
 MonoBehaviour:
   m_ObjectHideFlags: 0
