@@ -84,13 +84,16 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
     }
     public override string GetQuestion()
     {
+        ObjectPosition pos = (ObjectPosition)_answer;
+        Debug.Log($"{_answer}:{pos}");
+
         if (questionType == ObjectFindingQuestionType.PositionQuestionType)
         {
-            return "Chọn vật có vị trí " + PosToString[(ObjectPosition)_answer] + " so với khối lập phương trắng ?";
+            return "Chọn vật có vị trí " + PosToString[pos] + " so với khối lập phương trắng ?";
         }
         else
         {
-            return "Tìm và chọn vật có hình " + NameToString[(ObjectPosition)_answer];
+            return "Tìm và chọn vật có hình " + NameToString[pos];
         }
     }
     
@@ -146,5 +149,6 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
         rand ??= SpawnerManager.RandomInstance;
         questionType = FlagExtensionMethods.Randomize<ObjectFindingQuestionType>(rand);
         _answer = rand.Next(0, 5) + 1;
+        Debug.Log(_answer);
     }
 }

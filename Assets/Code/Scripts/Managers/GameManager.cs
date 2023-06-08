@@ -2,6 +2,9 @@ using System.Collections;
 using System.Threading.Tasks;
 using Project.Utils.ExtensionMethods;
 using UnityEngine;
+using Project.Utils;
+using UnityEngine.SceneManagement;
+using System;
 
 namespace Project.Managers
 {
@@ -10,6 +13,8 @@ namespace Project.Managers
         public static GameManager Instance { get; private set; }
         public static Camera MainGameCam => Instance?.mainGameCam;
         private Camera mainGameCam;
+
+        [SerializeField] bool showCamValues = true;
 
         /// <summary>
         /// Initialize GameManager with required Managers
@@ -24,7 +29,19 @@ namespace Project.Managers
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
             gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
+
+            // OnSceneLoaded
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Instance.mainGameCam = Camera.main;
+            if(showCamValues){
+                this.EnsureComponent<CameraValueLogger>(autoCreate: true);
+            }
+        }
+
         protected void Awake()
         {
             if (Instance == null)
@@ -44,7 +61,9 @@ namespace Project.Managers
             Instance.mainGameCam = null;
         }
         protected void OnEnable(){
-            Instance.mainGameCam = Camera.main;
+            if(showCamValues){
+                this.EnsureComponent<CameraValueLogger>(autoCreate: true);
+            }
         }
 
         public System.Func<Task> OnGameFinishLoading;

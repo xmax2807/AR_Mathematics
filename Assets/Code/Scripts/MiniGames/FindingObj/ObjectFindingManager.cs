@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Project.Managers;
 using UnityEngine;
-namespace Project.MiniGames.ObjectFinding{
+namespace Project.MiniGames.ObjectFinding
+{
     public class ObjectFindingManager : MonoBehaviour, IEventListener
     {
         [SerializeField] private bool IsDebugging;
@@ -11,13 +13,17 @@ namespace Project.MiniGames.ObjectFinding{
         [SerializeField] private PlaceOnPlaneHouse mainGamePlacer;
         [SerializeField] private SelecObjectFromCameraFO objectRaycaster;
         [SerializeField] private TaskGiver taskGiver;
+        [SerializeField] private Animator answerGIFAnimator;
         private PlacementObject[] placementObjectPrefabs;
         private bool questionIsReady;
 
+        private Camera mainCam;
+
         public string UniqueName => "ObjectFindingManager";
 
-         private void Awake()
+        private void Awake()
         {
+            mainCam = Camera.main;
             if (taskGiver != null)
             {
                 taskGiver.OnInitialized += OnTaskGiverReady;
@@ -32,29 +38,78 @@ namespace Project.MiniGames.ObjectFinding{
             {
                 objectCenterObj = obj.AddComponent<ObjectCenter>();
             }
+
+            // Replace obj in front of camera
+            Vector3 objPos = obj.transform.position;
+            objPos = new Vector3(objPos.x, mainCam.transform.position.y, objPos.z);
+            obj.transform.position = objPos;
+
+            Vector3 direction = (obj.transform.position - mainCam.transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            obj.transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x, lookRotation.eulerAngles.y, obj.transform.rotation.eulerAngles.z);
+
+            //Vector3 camPosition = mainCam.transform.localPosition;
+            //obj.transform.LookAt(mainCam.transform.position);
+
             objectCenterObj.Setup(manager: this, giver: this.taskGiver);
             objectRaycaster.SetPlacements(placementObjectPrefabs, objectCenterObj.transform);
         }
         private void OnEnable()
         {
             ARGameEventManager.Instance.RegisterEvent(BaseGameEventManager.StartGameEventName, this, StartGame);
-            ObjectFindingEventManager.Instance.RegisterEvent<int>(ObjectFindingEventManager.ObjectTouchEventName, this, OnPlacementTouch);
+            ObjectFindingEventManager.Instance.RegisterEvent<PlacementObject>(ObjectFindingEventManager.ObjectTouchEventName, this, OnPlacementTouch);
         }
 
-        private void OnPlacementTouch(int id)
+        private void OnPlacementTouch(PlacementObject obj)
         {
-            if(taskGiver.IsCorrect(id)){
+            if (!questionIsReady)
+            {
+                return;
+            }
+
+            objectRaycaster.BlockRaycast();
+            //Animator anim = obj.GetComponentInChildren<Animator>(true);
+            Debug.Log(obj.ID);
+            bool IsCorrect = taskGiver.CurrentTask.IsCorrect(obj.ID);
+            // if (IsCorrect == true)
+            // {
+            //     taskGiver.Tasks.UpdateProgress(1);
+            // }
+            // else
+            // {
+            //     Debug.Log("Fail");
+            // }
+
+            StartCoroutine(VideoStart(answerGIFAnimator, IsCorrect,
+                postCallback: () =>
+                {
+                    UpdateProgress(IsCorrect);
+                    objectRaycaster.UnblockRaycast();
+                })
+            );
+        }
+
+        private void UpdateProgress(bool isCorrect)
+        {
+
+            if (isCorrect == true)
+            {
                 taskGiver.Tasks.UpdateProgress(1);
+            }
+            else
+            {
+                Debug.Log("Fail");
             }
         }
 
         private void StartGame()
         {
-            if(!questionIsReady){
-                TimeCoroutineManager.Instance.WaitUntil(()=>questionIsReady, StartGame);
+            if (!questionIsReady)
+            {
+                TimeCoroutineManager.Instance.WaitUntil(() => questionIsReady, StartGame);
                 return;
             }
-            
+
         }
 
         private void OnTaskGiverReady()
@@ -64,10 +119,11 @@ namespace Project.MiniGames.ObjectFinding{
             //     Debug.Log("Game does not have any task to play");
             //     return;
             // }// 2 4 8 9
-            // questionIsReady = true;
+            questionIsReady = true;
         }
 
-        public void GetModelFromRemote(GameObject[] objs){
+        public void GetModelFromRemote(GameObject[] objs)
+        {
             List<PlacementObject> items = new(objs.Length);
             foreach (GameObject obj in objs)
             {
@@ -83,7 +139,7 @@ namespace Project.MiniGames.ObjectFinding{
             {
                 if (IsDebugging)
                 {
-                    //mainGamePlacer.SetMainPlaneAndStart(objectCenter);
+                    mainGamePlacer.SetPlacedPrefabAndStart(objectCenter.gameObject);
                 }
                 else
                 {
@@ -96,5 +152,25 @@ namespace Project.MiniGames.ObjectFinding{
         {
             throw new System.NotImplementedException();
         }
-    } 
+
+        IEnumerator VideoStart(Animator anim, bool RightAns, Action postCallback)
+        {
+            anim.gameObject.SetActive(true);
+            anim.SetBool("isCorrect", RightAns);
+            // if (RightAns == true)
+            // {
+            //     anim.Play("RightAnswerAnimation");
+            // }
+            // else
+            // {
+            //     anim.Play("WrongAnswerAnimation");
+            // }
+            //anim.transform.LookAt(mainCam.transform);
+            var animInfo = anim.GetCurrentAnimatorStateInfo(0);
+            yield return new WaitForSeconds(animInfo.length);
+
+            anim.gameObject.SetActive(false);
+            postCallback?.Invoke();
+        }
+    }
 }

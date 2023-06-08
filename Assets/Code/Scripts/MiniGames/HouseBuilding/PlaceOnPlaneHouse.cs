@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using Project.MiniGames;
 using Project.MiniGames.HouseBuilding;
 
 [RequireComponent(typeof(ARRaycastManager))]
@@ -13,7 +14,7 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
     public Vector3 rotateObject;
-    public GameObject ARCamera;
+    public Camera ARCamera;
 
     UnityEvent placementUpdate;
 
@@ -45,41 +46,45 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         if (placementUpdate == null)
             placementUpdate = new UnityEvent();
 
-        //placementUpdate.AddListener(DiableVisual);
-
-        //spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, Quaternion.identity);
-        // HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.StartGameEventName);
-        // onSpawnPlane?.Invoke();
-
-        /*Vector3 position0 = new Vector3(0, 0, 0);
-        spawnedObject = Instantiate(m_PlacedPrefab,m_PlacedPrefab.transform.position, Quaternion.identity);
-        onSpawnPlane?.Invoke();
-        Debug.Log(spawnedObject.transform.localPosition);*/
-        //spawnedObject.transform.LookAt(ARCamera.transform);
+        if (ARCamera == null)
+        {
+            ARCamera = Camera.main;
+        }
     }
 
-    public void SetMainPlaneAndStart(MainPlane mainPlane){
+    public void SetMainPlaneAndStart(MainPlane mainPlane)
+    {
         m_PlacedPrefab = mainPlane.gameObject;
         var mainPlaneObj = Instantiate(mainPlane, Vector3.zero, Quaternion.identity);
         spawnedObject = mainPlaneObj.gameObject;
         OnSpawnMainPlane?.Invoke(spawnedObject);
     }
-    public void SetMainPLane(MainPlane mainPlane){
+    public void SetMainPLane(MainPlane mainPlane)
+    {
         m_PlacedPrefab = mainPlane.gameObject;
     }
-    public void SetPlacedPrefab(GameObject newPlace){
+    public void SetPlacedPrefab(GameObject newPlace)
+    {
         m_PlacedPrefab = newPlace;
+    }
+    public void SetPlacedPrefabAndStart(GameObject newPlace)
+    {
+        m_PlacedPrefab = newPlace;
+        var newPlaceObj = Instantiate(newPlace, Vector3.zero, Quaternion.identity);
+        spawnedObject = newPlaceObj;
+        OnSpawnMainPlane?.Invoke(newPlaceObj);
     }
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
-        #if UNITY_EDITOR
-        if(Input.GetMouseButtonUp(0)){
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonUp(0))
+        {
             var mousePosition = Input.mousePosition;
             touchPosition = new Vector2(mousePosition.x, mousePosition.y);
             return true;
         }
-        #endif
+#endif
         if (Input.touchCount > 0)
         {
             touchPosition = Input.GetTouch(0).position;
@@ -107,16 +112,16 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
             if (spawnedObject == null)
             {
-                Vector3 position0 = new Vector3(0, 0, 0);
+                //Vector3 position0 = new Vector3(0, 0, 0);
                 //spawnedObject = Instantiate(m_PlacedPrefab, trackable.transform.position ,Quaternion.identity) ;
-                spawnedObject = Instantiate(m_PlacedPrefab, m_PlacedPrefab.transform.position, Quaternion.identity);
+                spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, m_PlacedPrefab.transform.rotation);
                 spawnedObject.AddComponent<ARAnchor>();
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;
                 //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
                 DisablePlaneDetection();
                 OnSpawnMainPlane?.Invoke(spawnedObject);
-                HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.StartGameEventName);
+                ARGameEventManager.Instance.RaiseEvent(BaseGameEventManager.StartGameEventName);
                 //Debug.Log(spawnedObject.transform.localPosition);
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;

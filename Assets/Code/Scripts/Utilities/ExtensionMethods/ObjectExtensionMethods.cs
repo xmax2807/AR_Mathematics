@@ -63,11 +63,11 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="component"> ref param </param>
         /// <typeparam name="T"></typeparam>
         /// <returns>this monobehaviour</returns>
-        public static MonoBehaviour EnsureComponent<T>(this MonoBehaviour obj, ref T component) where T : Component
+        public static MonoBehaviour EnsureComponent<T>(this MonoBehaviour obj, ref T component, bool autoCreate = false) where T : Component
         {
             if (component == null)
             {
-                component = EnsureComponent<T>(obj);
+                component = EnsureComponent<T>(obj, autoCreate);
             }
             return obj;
         }
@@ -78,12 +78,15 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns>component or throw if can't be found</returns>
-        public static T EnsureComponent<T>(this MonoBehaviour obj) where T : Component
+        public static T EnsureComponent<T>(this MonoBehaviour obj, bool autoCreate = false) where T : Component
         {
             bool res = obj.TryGetComponent<T>(out var component);
 
             if (res == false)
             {
+                if(autoCreate){
+                    return obj.gameObject.AddComponent<T>();
+                }
                 throw new NullReferenceException($"{component.GetType()} - {obj.name}");
             }
             return component;
@@ -104,6 +107,15 @@ namespace Project.Utils.ExtensionMethods
             return child.AddComponent<T>();
         }
 
+        public static GameObject EnsureChildWithName(this GameObject obj, string childName){
+            Transform child = obj.transform.GetChildWithName(childName);
+            if(child == null){
+                child = new GameObject(childName).transform;
+                child.SetParent(obj.transform, false);
+            }
+            return child.gameObject;
+        }
+
         public static T EnsureChildComponent<T>(this GameObject obj, string childName = "Game Object") where T : Component{
             bool hasChild = obj.transform.ContainChildWithComponent<T>();
 
@@ -116,6 +128,55 @@ namespace Project.Utils.ExtensionMethods
                 if(child.GetComponent<T>() != null) return true;
             }
             return false;
+        }
+
+        public static Transform GetChildWithName(this Transform transform, string name){
+            foreach(Transform child in transform){
+                if(child.name == name) return child;
+            }
+            return null;
+        }
+
+        public static Vector3 TryGetObjectSize(this GameObject obj){
+            Vector3 result = GetSizeFromRenderer(obj);
+            if(result != Vector3.zero){
+                return result;
+            }
+
+            result = GetSizeFromCollider(obj);
+            if(result != Vector3.zero){
+                return result;
+            }
+
+            return Vector3.zero;
+        }
+
+        public static Vector3 GetSizeFromRenderer(this GameObject obj){
+            //Get renderer of this obj
+            if(obj.TryGetComponent<Renderer>(out Renderer objRenderer)){
+                return objRenderer.bounds.size;
+            }
+
+            // if not get first renderer in children
+            objRenderer = obj.GetComponentInChildren<Renderer>(true);
+            if(objRenderer == null){
+                Debug.Log($"{obj.name} doesn't have any renderer");
+                return Vector3.zero;
+            }
+            return objRenderer.bounds.size;
+        }
+
+        public static Vector3 GetSizeFromCollider(this GameObject obj){
+            if(obj.TryGetComponent<Collider>(out Collider objCollider)){
+                return objCollider.bounds.size;
+            }
+
+            objCollider = obj.GetComponentInChildren<Collider>(true);
+            if(objCollider == null){
+                Debug.Log($"{obj.name} doesn't have any renderer");
+                return Vector3.zero;
+            }
+            return objCollider.bounds.size;
         }
     }
 }

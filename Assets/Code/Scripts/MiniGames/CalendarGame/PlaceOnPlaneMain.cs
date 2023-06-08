@@ -15,82 +15,103 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlaceOnPlaneMain : MonoBehaviour
 {
-	[SerializeField]
-	[Tooltip("Instantiates this prefab on a plane at the touch location.")]
-	GameObject m_PlacedPrefab;
-	public Vector3 rotateObject;
-	public GameObject ARCamera;
+    [SerializeField]
+    [Tooltip("Instantiates this prefab on a plane at the touch location.")]
+    GameObject m_PlacedPrefab;
+    public Vector3 rotateObject;
+    public GameObject ARCamera;
 
-	UnityEvent placementUpdate;
+    UnityEvent placementUpdate;
 
-	// [SerializeField]
-	// GameObject visualObject;
+    // [SerializeField]
+    // GameObject visualObject;
 
-	/// <summary>
-	/// The prefab to instantiate on touch.
-	/// </summary>
-	public GameObject placedPrefab
-	{
-		get { return m_PlacedPrefab; }
-		set { m_PlacedPrefab = value; }
-	}
-
-	/// <summary>
-	/// The object instantiated as a result of a successful raycast intersection with a plane.
-	/// </summary>
-	public GameObject spawnedObject { get; private set; }
-
-	void Awake()
-	{
-		m_RaycastManager = GetComponent<ARRaycastManager>();
-
-		if (placementUpdate == null)
-			placementUpdate = new UnityEvent();
-
-		//placementUpdate.AddListener(DiableVisual);
-
-        /*spawnedObject = Instantiate(m_PlacedPrefab, m_PlacedPrefab.transform.position, m_PlacedPrefab.transform.rotation);
-        spawnedObject.transform.LookAt(ARCamera.transform);
-        var rotation = spawnedObject.transform.rotation;
-        spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);*/
+    /// <summary>
+    /// The prefab to instantiate on touch.
+    /// </summary>
+    public GameObject placedPrefab
+    {
+        get { return m_PlacedPrefab; }
+        set { m_PlacedPrefab = value; }
     }
 
-	bool TryGetTouchPosition(out Vector2 touchPosition)
-	{
-		if (Input.touchCount > 0)
-		{
-			touchPosition = Input.GetTouch(0).position;
-			return true;
-		}
+    /// <summary>
+    /// The object instantiated as a result of a successful raycast intersection with a plane.
+    /// </summary>
+    public GameObject spawnedObject { get; private set; }
 
-		touchPosition = default;
-		return false;
-	}
+    void Awake()
+    {
+        m_RaycastManager = GetComponent<ARRaycastManager>();
+        m_PlaneManager = GetComponent<ARPlaneManager>();
 
-	void Update()
-	{
-		//get ARCAmera current roation y
-		//var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+        if (placementUpdate == null)
+            placementUpdate = new UnityEvent();
 
-		if (!TryGetTouchPosition(out Vector2 touchPosition))
-			return;
+        //placementUpdate.AddListener(DiableVisual);
 
-		if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
-		{
-			// Raycast hits are sorted by distance, so the first one
-			// will be the closest hit.
-			var trackablePlane = s_Hits[0].trackable;
+        spawnedObject = Instantiate(m_PlacedPrefab, m_PlacedPrefab.transform.position, m_PlacedPrefab.transform.rotation);
+        Transform objTrans = spawnedObject.transform;
 
-			if (spawnedObject == null)
-			{
-				spawnedObject = Instantiate(m_PlacedPrefab, trackablePlane.transform.position, m_PlacedPrefab.transform.rotation);
-				// spawnedObject.transform.LookAt(ARCamera.transform);
-				// var rotation = spawnedObject.transform.rotation;
-				// spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
+        Vector3 direction = (objTrans.position - ARCamera.transform.position).normalized;
+        direction = new Vector3(0, direction.y, direction.z);
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        var originalAngles = objTrans.rotation.eulerAngles;
+        spawnedObject.transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x + originalAngles.x, lookRotation.eulerAngles.y + originalAngles.y, originalAngles.z);
+        spawnedObject.AddComponent<ARAnchor>();
+
+        // var rotation = objTrans.rotation;
+        // spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
+    }
+
+    bool TryGetTouchPosition(out Vector2 touchPosition)
+    {
+        if (Input.touchCount > 0)
+        {
+            touchPosition = Input.GetTouch(0).position;
+            return true;
+        }
+
+        touchPosition = default;
+        return false;
+    }
+
+    void Update()
+    {
+        //get ARCAmera current roation y
+        //var curRotation = ARCamera.transform.rotation.eulerAngles.y;
+
+        if (!TryGetTouchPosition(out Vector2 touchPosition))
+            return;
+
+        if (m_RaycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
+        {
+            // Raycast hits are sorted by distance, so the first one
+            // will be the closest hit.
+            var hitPose = s_Hits[0].pose;
+
+            if (spawnedObject == null)
+            {
+                spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
+                // Transform objTrans = spawnedObject.transform;
+
+                // Vector3 direction = (objTrans.position - ARCamera.transform.position).normalized;
+                // //direction = new Vector3(0, direction.y, direction.z);
+                // Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+                // var originalAngles = objTrans.rotation.eulerAngles;
+                // spawnedObject.transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x + originalAngles.x, lookRotation.eulerAngles.y + originalAngles.y, originalAngles.z);
+                
+                spawnedObject.AddComponent<ARAnchor>();
+                DisablePlaneDetection();
+                // spawnedObject.transform.LookAt(ARCamera.transform);
+                // var rotation = spawnedObject.transform.rotation;
+                // spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 
 
-			}
-			/*else
+            }
+            /*else
 			{
 				spawnedObject.transform.position = hitPose.position;
 				spawnedObject.transform.LookAt(ARCamera.transform);
@@ -98,16 +119,21 @@ public class PlaceOnPlaneMain : MonoBehaviour
 				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
 			}*/
 
-			//placementUpdate.Invoke();
-		}
-	}
+            //placementUpdate.Invoke();
+        }
+    }
 
-	// public void DiableVisual()
-	// {
-	// 	visualObject.SetActive(false);
-	// }
+    private void DisablePlaneDetection()
+    {
+        m_PlaneManager.enabled = false;
+        foreach (var plane in m_PlaneManager.trackables)
+        {
+            plane.gameObject.SetActive(false);
+        }
+    }
 
-	static List<ARRaycastHit> s_Hits = new();
+    static List<ARRaycastHit> s_Hits = new();
 
-	ARRaycastManager m_RaycastManager;
+    ARRaycastManager m_RaycastManager;
+    ARPlaneManager m_PlaneManager;
 }

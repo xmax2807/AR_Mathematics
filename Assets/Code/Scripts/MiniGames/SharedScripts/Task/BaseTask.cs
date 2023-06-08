@@ -31,17 +31,21 @@ namespace Project.MiniGames
     }
     public class SequenceTask : BaseTask
     {
-        private readonly List<BaseTask> TaskList;
-        public BaseTask CurrentTask => TaskList[CurrentProgress.EnsureInIndexRange(Goal)];
+        private readonly List<BaseTask> taskList;
+        public virtual List<BaseTask> TaskList => taskList;
+        public virtual BaseTask CurrentTask => TaskList[CurrentProgress.EnsureInIndexRange(Goal)];
         public int SubTaskGoal => CurrentTask.Goal;
         public event System.Action<BaseTask> OnTaskChanged;
+        protected void InvokeOnTaskChanged(BaseTask task){
+            OnTaskChanged?.Invoke(task);
+        }
         public SequenceTask(params BaseTask[] tasks) : base(tasks.Length, "")
         {
-            TaskList = tasks.ToList();
+            taskList = tasks.ToList();
         }
         public SequenceTask(int goal, string description) : base(goal, description)
         {
-            TaskList = new(goal);
+            taskList = new(goal);
             //OnTaskChanged += TrackSubtask;
         }
 
@@ -51,7 +55,7 @@ namespace Project.MiniGames
 
         public void AddTask(BaseTask task)
         {
-            TaskList.Add(task);
+            taskList.Add(task);
             task.OnTaskCompleted += SubTaskCompleted;
         }
         public override void UpdateProgress(int value)
@@ -96,7 +100,7 @@ namespace Project.MiniGames
             return CurrentTask.IsCorrect(value);
         }
         public void Clear(){
-            TaskList?.Clear();
+            taskList?.Clear();
         }
     }
 }

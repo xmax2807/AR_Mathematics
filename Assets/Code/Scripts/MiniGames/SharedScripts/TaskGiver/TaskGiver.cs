@@ -14,10 +14,7 @@ namespace Project.MiniGames{
         [SerializeField] private RewardScriptableObject[] RewardData;
         public RewardScriptableObject CurrentReward {
             get{
-                if(CurrentTaskIndex < 0 || CurrentTaskIndex >= RewardData.Length){
-                    return null;
-                }
-                return RewardCollection.CurrentRewardData;
+                return RewardCollection.GetRewardDataAt(CurrentTaskIndex);
             }
         }
         public UnityEngine.Events.UnityEvent<RewardBadgeSTO> OnRewardAccquired;
@@ -61,16 +58,21 @@ namespace Project.MiniGames{
         }
         private async void Initialize(){
             await InitTasks();
-
+            if(Tasks == null){
+                BaseGameEventManager.Instance.RaiseEvent<bool>(BaseGameEventManager.EndGameEventName, true);
+                return;
+            }
             Debug.Log("init tasks");
             Tasks.OnTaskCompleted += CompleteMission;
             OnInitialized?.Invoke();
         }
         protected virtual Task InitTasks(){
             GameModel currentGame = UserManager.Instance.CurrentGame;
+            Debug.Log(CurrentTaskIndex);
             if(currentGame == null) return Task.CompletedTask;
             
             this.CurrentTaskIndex =  GameController.GetLastSavedTask(currentGame.GameID);
+            Debug.Log(CurrentTaskIndex);
             return Task.CompletedTask;
         }
         protected virtual void ChangeTask(BaseTask task)

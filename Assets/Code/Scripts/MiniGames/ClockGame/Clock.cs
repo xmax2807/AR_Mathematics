@@ -21,6 +21,9 @@ public class Clock : MonoBehaviour
         // SetMinute(time);
         // SetSecond(time);
         // tickCoroutine = TimeCoroutineManager.Instance.DoLoopAction(IncreaseSecond, ()=>false, 1);
+        // TimeCoroutineManager.Instance.DoLoopAction(()=>{
+        //     SetHour(Random.Range(1,13));
+        // }, ()=>false, 5);
     }
     void onDestroy(){
         TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);
@@ -52,21 +55,24 @@ public class Clock : MonoBehaviour
     }
     public void SetMinute(int value){
         float minutesRotation = -(value / 60f) * 360f;
-        minutesHand.localRotation = Quaternion.Euler(new Vector3(minutesRotation - 90, 0, 0));
+        Quaternion destination = Quaternion.Euler(new Vector3(minutesRotation - 90, 0, 0));
+        minutesHand.localRotation = destination;
     }
      public void SetHour(int value){
         float hoursRotation = -(value / 12f) * 360f;
-        hoursHand.localRotation = Quaternion.Euler(new Vector3(hoursRotation - 90, 0, 0));
+        Quaternion destination = Quaternion.Euler(new Vector3(hoursRotation - 90, 0, 0));
+        StartCoroutine(Rotate(destination, hoursHand, duration));
     }
     public void RandomHour(){
         SetTime(UnityEngine.Random.Range(1,13));
     }
 
     private int seconds;
-    public void SetTime(int hour){
+    public void SetTime(int hour, float animationDuration = 2f){
+        duration = animationDuration;
         SetHour(hour);
         SetMinute(0);
-        SetSecond(0);
+        //SetSecond(0);
         if(tickCoroutine != null){
             TimeCoroutineManager.Instance.StopCoroutine(tickCoroutine);
         }
@@ -77,6 +83,21 @@ public class Clock : MonoBehaviour
         seconds = (seconds + 1) % 60;
         float newXRotation = -(seconds / 60f) * 360f;
         secondsHand.localRotation = Quaternion.Euler(new Vector3(newXRotation, 0, 0));
+    }
+
+    public Quaternion destinationRotation;
+    private float duration = 2f;
+    IEnumerator Rotate(Quaternion destinationRotation, Transform hand, float duration)
+    {        
+        float elapsed = 0f;
+        Quaternion startRotation = hand.localRotation;
+        while (elapsed < duration)
+        {
+            hand.localRotation = Quaternion.Lerp(startRotation, destinationRotation, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        hand.localRotation = destinationRotation;
     }
 
     //Update is called once per frame

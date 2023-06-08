@@ -55,7 +55,7 @@ namespace Project.QuizSystem{
         {
             rand ??= Managers.SpawnerManager.RandomInstance;
             
-            int min = Math.Min(5, m_maxNumber - 1);
+            int min = Math.Min(4, m_maxNumber - 1);
             m_count = rand.Next(min,m_maxNumber);
 
             //Start creating the answer (list of numbers)
@@ -63,11 +63,11 @@ namespace Project.QuizSystem{
             _answer = new int[m_count];
 
             //random first number
-            _answer[0] = rand.Next(1,m_maxNumber);
+            _answer[0] = rand.Next(1,m_maxNumber + 1);
             duplicateChecker.Add(_answer[0]);
 
             int minRange = 1;
-            int maxRange = m_maxNumber;
+            int maxRange = m_maxNumber + 1;
             for(int i = 1; i < m_count; ++i){
                 int value;
                 int randomRetries = 6; // try random 5 times

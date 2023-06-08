@@ -1,7 +1,6 @@
 using Project.MiniGames;
 using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
+using Project.MiniGames.ObjectFinding;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -25,6 +24,7 @@ public class SelecObjectFromCameraFO : MonoBehaviour
 
     private ObjectPositionQuestion aimText;
     private TaskGiver taskGiver;
+    private bool isRaycastBlocking = false;
 
     public void onSpawnMainPlane()
     {
@@ -53,6 +53,10 @@ public class SelecObjectFromCameraFO : MonoBehaviour
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
+        if(isRaycastBlocking == true) {
+            touchPosition = default;
+            return false;
+        }
 #if UNITY_EDITOR
         if (Input.GetMouseButtonUp(0))
         {
@@ -82,7 +86,7 @@ public class SelecObjectFromCameraFO : MonoBehaviour
         // touch object in camera android
         var touch = Input.GetTouch(0);
 
-        if (touch.phase == TouchPhase.Began)
+        if (touch.phase == TouchPhase.End)
         {
             OnTouch(touchPosition);
         }
@@ -116,36 +120,29 @@ public class SelecObjectFromCameraFO : MonoBehaviour
             if (selected == current)
             {
                 // current.Selected = true;
-                Animator anim = current.GetComponentInChildren<Animator>(true);
-                bool IsCorrect = taskGiver.CurrentTask.IsCorrect(current.ID);
-                if (IsCorrect == true)
-                {
-                    taskGiver.Tasks.UpdateProgress(1);
-                }
-                else
-                {
-                    Debug.Log("Fail");
-                }
+                ObjectFindingEventManager.Instance.RaiseEvent(ObjectFindingEventManager.ObjectTouchEventName, current);
+                // Animator anim = current.GetComponentInChildren<Animator>(true);
+                // bool IsCorrect = taskGiver.CurrentTask.IsCorrect(current.ID);
+                // if (IsCorrect == true)
+                // {
+                //     taskGiver.Tasks.UpdateProgress(1);
+                // }
+                // else
+                // {
+                //     Debug.Log("Fail");
+                // }
 
-                StartCoroutine(VideoStart(anim,IsCorrect));
+                // StartCoroutine(VideoStart(anim,IsCorrect));
                 // current.Selected = false;                
             }
         }
     }
-    IEnumerator VideoStart(Animator anim, bool RightAns)
-    {
-        anim.gameObject.SetActive(true);
-        if(RightAns == true)
-        {
-            anim.Play("RightAnswerAnimation");
-        }
-        else
-        {
-            anim.Play("WrongAnswerAnimation");
-        }
-        anim.transform.LookAt(arCamera.transform);
-        yield return new WaitForSeconds(2);
-        anim.gameObject.SetActive(false);
-        Debug.Log("Run video");
+    public void BlockRaycast(){
+        Debug.Log("Raycast is blocking");
+        isRaycastBlocking = true;
+    }
+    public void UnblockRaycast(){
+        Debug.Log("Raycast is unlocked");
+        isRaycastBlocking = false;
     }
 }

@@ -10,7 +10,7 @@ namespace Project.RewardSystem
         [SerializeField] private RewardScriptableObject[] Datas;
         private int acquiredRewardIndex;
         public Reward<int> CurrentReward => Rewards[acquiredRewardIndex];
-
+        
         public UnityEngine.Events.UnityEvent<RewardBadgeSTO> OnRewardAccquired;
         public UnityEngine.Events.UnityEvent<RemoteRewardSTO> OnRemoteRewardAccquired;
 
@@ -26,6 +26,12 @@ namespace Project.RewardSystem
         }
 
         public RewardScriptableObject CurrentRewardData => Datas[acquiredRewardIndex];
+        public RewardScriptableObject GetRewardDataAt(int index){
+            if(index < 0 || index >= Rewards.Length){
+                return null;
+            }
+            return Datas[index];
+        }
         public bool CanBeRewarded() => Rewards[acquiredRewardIndex].CanBeRewarded();
         public void IncreaseProgress(int value)
         {

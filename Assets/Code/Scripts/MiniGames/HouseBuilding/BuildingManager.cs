@@ -44,6 +44,9 @@ namespace Project.MiniGames.HouseBuilding
             {
                 mainPlaneObj = obj.AddComponent<MainPlane>();
             }
+            Debug.Log("Spawn main plane: " + mainPlaneObj.transform.position);
+            spawnParent.transform.position = mainPlaneObj.transform.position;
+            
             OnGameReset();
             //mainPlaneObj.AddFirstBuilding(builtInBuildings[blockIndexes[0] - 1], this);
         }
@@ -67,6 +70,7 @@ namespace Project.MiniGames.HouseBuilding
             HouseBuildingEventManager.Instance.RegisterEvent(HouseBuildingEventManager.ResetBuildEventName, this, OnGameReset);
             HouseBuildingEventManager.Instance.RegisterEvent(HouseBuildingEventManager.StartGameEventName, this, StartGame);
             HouseBuildingEventManager.Instance.RegisterEvent<int>(HouseBuildingEventManager.BlockPlacedEventName, this, OnBlockPlaced);
+            HouseBuildingEventManager.Instance.RegisterEvent(HouseBuildingEventManager.ReturnPrevBuildEventName, this, OnUnBuild);
         }
 
         private void StartGame()
@@ -84,7 +88,6 @@ namespace Project.MiniGames.HouseBuilding
             {
                 if (obj.TryGetComponent<Merge>(out Merge result))
                 {
-                    result.Manager = this;
                     buildings.Add(result);
                 }
             }
@@ -136,21 +139,31 @@ namespace Project.MiniGames.HouseBuilding
             return builtInBuildings[index];
         }
 
+        private void OnUnBuild()
+        {
+            --currentProgress;
+        }
+
         private void OnBlockPlaced(int id)
         {
+            blockRaycaster.UnblockRaycast();
             ++currentProgress;
             Debug.Log(blockIndexes[^1]);
             if (id == blockIndexes[^1])
             {
-                if (currentProgress == blockIndexes.Length - 1)
+                if (currentProgress >= blockIndexes.Length - 1)
                 {
                     // Complete level
                     Debug.Log("Complete");
-                    taskGiver.Tasks.UpdateProgress(1);
+                    TimeCoroutineManager.Instance.WaitForSeconds(0.5f, mainPlaneObj.OnBlockPlaced);
+                    TimeCoroutineManager.Instance.WaitForSeconds(1f, ()=>{
+                        taskGiver.Tasks.UpdateProgress(1);
+                    });
                 }
                 else
                 {
                     //Fail Level
+                    HouseBuildingEventManager.Instance.RaiseEvent(BaseGameEventManager.EndGameEventName, false);
                     Debug.Log("Failed");
                 }
             }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Project.Utils.ExtensionMethods;
+using Project.MiniGames.HouseBuilding;
 
 public class SelectObjectFromCamera : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class SelectObjectFromCamera : MonoBehaviour
             arCamera = Camera.main;
         }
     }
+
+    private bool isRaycatBlocked = false;
+    public void BlockRaycast(){
+        isRaycatBlocked = true;
+    }
+    public void UnblockRaycast(){
+        isRaycatBlocked = false;
+    }
+
     public void SetPlacements(PlacementObject[] placementObjects, Transform placementParent = null){
         placedObjects = placementObjects;
         spawnParent = placementParent;
@@ -33,7 +43,7 @@ public class SelectObjectFromCamera : MonoBehaviour
         {
             var renderer = clone[i].GetComponentInChildren<MeshRenderer>();
             placements[i] = Instantiate(clone[i], spawnParent);
-            placements[i].transform.position = startPosition;
+            placements[i].transform.localPosition = startPosition;
             
             var size = renderer.bounds.size;
             Vector3 spacing = new(0.5f,0,0);
@@ -45,6 +55,11 @@ public class SelectObjectFromCamera : MonoBehaviour
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
+        if(isRaycatBlocked){
+            touchPosition = default;
+            return false;
+        }
+
 #if UNITY_EDITOR
         if (Input.GetMouseButtonUp(0))
         {
@@ -108,8 +123,10 @@ public class SelectObjectFromCamera : MonoBehaviour
             //MeshRenderer meshRenderer = current.GetComponent<MeshRenderer>();
             if (selected == current)
             {
-                current.transform.position = new Vector3(0, 10f, 0);
-                current.transform.rotation = Quaternion.identity;
+                // current.transform.position = new Vector3(0, 10f, 0);
+                // current.transform.rotation = Quaternion.identity;
+                BlockRaycast();
+                HouseBuildingEventManager.Instance.RaiseEvent<PlacementObject>(HouseBuildingEventManager.BlockTouchEventName, selected);
             }
             // else
             // {

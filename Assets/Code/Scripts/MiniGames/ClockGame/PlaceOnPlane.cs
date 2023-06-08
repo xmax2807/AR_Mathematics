@@ -20,7 +20,7 @@ public class PlaceOnPlane : MonoBehaviour
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
 
-    //public GameObject ARCamera;
+    private Camera ARCamera => GameManager.MainGameCam;
 
     //public UnityEvent placementUpdate;
     public UnityEvent<GameObject> onPlacedObject;
@@ -106,12 +106,21 @@ public class PlaceOnPlane : MonoBehaviour
             // Raycast hits are sorted by distance, so the first one
             // will be the closest hit.
 
-            // var hitPose = s_Hits[0].pose;
-            var trackableTrans = s_Hits[0].trackable.transform;
+            var hitPose = s_Hits[0].pose;
+            //var trackableTrans = s_Hits[0].trackable.transform;
 
             if (spawnedObject == null)
             {
-                spawnedObject = Instantiate(m_PlacedPrefab, trackableTrans.position, m_PlacedPrefab.transform.rotation);
+                spawnedObject = Instantiate(m_PlacedPrefab);
+                Transform objTrans = spawnedObject.transform;
+
+                objTrans.position = hitPose.position;
+                Vector3 direction = (objTrans.position - ARCamera.transform.position).normalized;
+                //direction = new Vector3(0, direction.y, direction.z);
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+                var originalAngles = objTrans.rotation.eulerAngles;
+                spawnedObject.transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x + originalAngles.x, lookRotation.eulerAngles.y + originalAngles.y, originalAngles.z);
                 spawnedObject.AddComponent<ARAnchor>();
                 //spawnedObject.transform.LookAt(ARCamera.transform);
                 //var rotation = spawnedObject.transform.rotation;

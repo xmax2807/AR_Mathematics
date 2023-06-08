@@ -7,20 +7,18 @@ using Project.MiniGames.HouseBuilding;
 public class Merge : MonoBehaviour
 {
     public int ID;
-    public Merge cube_merge;
-    public ParticleSystem firework;
-    public BuildingManager Manager {get;set;}
-
-    private void Awake(){
-        firework ??= GetComponentInChildren<ParticleSystem>(true);
-    }
+    public Merge PrevMerge;
+    //public Merge cube_merge;
+    public Merge NextMerge;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("tag"))
+        GameObject collideObject = collision.gameObject;
+        if(collideObject.CompareTag("tag"))
         {
-            if(!collision.gameObject.TryGetComponent<PlacementObject>(out PlacementObject placementObject))
+            if(!collideObject.TryGetComponent<PlacementObject>(out PlacementObject placementObject))
             {
+                Destroy(collideObject);
                 return;
             }
 //            Debug.Log(placementObject.ID);
@@ -28,15 +26,15 @@ public class Merge : MonoBehaviour
             {
                 //if () { return; }
                 //Debug.Log("Merge" + gameObject.name);
-                Merge nextMerge = Manager?.GiveNextMerge(placementObject.ID);
                 
-                if (nextMerge == null) return;
+                if (NextMerge == null) return;
 
-                collision.gameObject.SetActive(false);
-
-                nextMerge = Instantiate(nextMerge, new Vector3 (0, 1, 0), nextMerge.transform.rotation, this.transform.parent);
-                nextMerge.Manager = this.Manager;
-                cube_merge = nextMerge;
+                Destroy(collideObject);
+                gameObject.SetActive(false);
+                NextMerge.gameObject.SetActive(true);
+                //NextMerge = Instantiate(NextMerge, this.transform.parent);
+                //cube_merge = NextMerge;
+                NextMerge.PrevMerge = this;
                 //cube_merge.ID = ID + 1;
                 
 
@@ -45,31 +43,20 @@ public class Merge : MonoBehaviour
                 fwPrefab.Play(true);
                 Debug.Log("firework is running");
                 TimeCoroutineManager.Instance.WaitForSeconds(fwPrefab.main.duration, () => fwPrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting));*/
-                if(firework == null){
-                    firework = this.GetComponentInChildren<ParticleSystem>(true);
-                }
 
-                if(firework == null){
-                    Debug.Log("Firework is null");
-                    gameObject.SetActive(false);
-                    HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.BlockPlacedEventName, value: cube_merge.ID);
-                    return;
-                }
-
-                firework.Play(true);
-                TimeCoroutineManager.Instance.WaitForSeconds(firework.main.duration, OnSuccessfulMerge);
-                gameObject.SetActive(false);
+                OnSuccessfulMerge();
+                //TimeCoroutineManager.Instance.WaitForSeconds(2f, OnSuccessfulMerge);
             }
             else
             {
                 Debug.Log("Fail");
                 placementObject.AddFore(150f);
+                TimeCoroutineManager.Instance.WaitForSeconds(1.5f, ()=>Destroy(collideObject));
             }
         }
     }
 
     private void OnSuccessfulMerge(){
-        firework.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.BlockPlacedEventName, value: cube_merge.ID);
+        HouseBuildingEventManager.Instance.RaiseEvent(HouseBuildingEventManager.BlockPlacedEventName, value: NextMerge.ID);
     }
 }

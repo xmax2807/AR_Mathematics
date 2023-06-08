@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051a6ed4e24670f4a916833624d7bc69, type: 3}
   m_Name: CalendarBadge
   m_EditorClassIdentifier: 
-  Title: "Th\u1EA7n Th\u1EDDi Gian"
+  Title: "H\xF4m nay l\xE0 ng\xE0y..."
   Visual: {fileID: 21300000, guid: acb280d07bb180d4f9be7554f8d10720, type: 3}

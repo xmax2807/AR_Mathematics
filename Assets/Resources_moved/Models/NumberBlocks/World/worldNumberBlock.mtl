@@ -1,0 +1,1002 @@
+# Blender 3.4.1 MTL File: 'None'
+# www.blender.org
+
+newmtl 20201028-15013-gmt
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/20201028-15013-gmt.jpg
+
+newmtl 20201028-1588-gmt
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/20201028-1588-gmt.jpg
+
+newmtl 20201028-164747-gmt
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/20201028-164747-gmt.jpg
+
+newmtl aquarium02___aquarium02:aquarium_plantesg1
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/aquarium_plante.png
+map_d source/Numberblocks world/aquarium_plante.png
+
+newmtl beige_006_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.909804 0.909804 0.878431
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bitume_001_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/bitume_001.jpg
+
+newmtl blanc_001_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl blanc_001_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bleu_001_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.925490 0.952941 0.921569
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bleu_007_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.160784 0.572549 0.788235
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bleu_007_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.160784 0.572549 0.788235
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bleu_008_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.019608 0.266667 0.576471
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl bleu_008_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.019608 0.266667 0.576471
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl canape_off_004___phong283
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ks 0.040000 0.040000 0.040000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd source/Numberblocks world/tissus_051.jpg
+
+newmtl chaise_001___wood_chaise
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_bois.jpg
+
+newmtl colourful_bed___colourful_bed:___default
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tissus_039.jpg
+
+newmtl colourful_bed___colourful_bed:___default2
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tissus_038.jpg
+
+newmtl cuisiniere_002___ornement
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_cuisiniere.jpg
+
+newmtl enduit_004_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/enduit_004.jpg
+
+newmtl enduit_004_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/enduit_004.jpg
+
+newmtl ensemble_cuisine_002___four
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_four.jpg
+
+newmtl ensemble_cuisine_002___metal
+Ns 0.699999
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_alu2.jpg
+
+newmtl etagere_003___etagere_003_album
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_album.jpg
+
+newmtl etagere_003___etagere_003_livre2
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_livre2.jpg
+
+newmtl etagere_003___etagere_003_livre3
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_livre3.jpg
+
+newmtl etagere_003___etagere_003_nopaint_livre004
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_livre4.jpg
+
+newmtl fake_mat_107_102_77_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.419608 0.400000 0.301961
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_115_105_111_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.450980 0.411765 0.435294
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_166_157_141_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.650980 0.615686 0.552941
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_190_48_89_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.745098 0.188235 0.349020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_198_142_59_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.776471 0.556863 0.231373
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_199_193_194_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.780392 0.756863 0.760784
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_218_33_16_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.854902 0.129412 0.062745
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_229_196_17_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.898039 0.768627 0.066667
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_232_223_204_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.909804 0.874510 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_255_255_255_32
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.125490
+illum 1
+
+newmtl fake_mat_31_72_164_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.121569 0.282353 0.643137
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_38_145_189_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.149020 0.568627 0.741176
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_44_143_36_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.172549 0.560784 0.141176
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_55_59_63_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.215686 0.231373 0.247059
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_5_8_6_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.019608 0.031373 0.023529
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_84_59_45_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.329412 0.231373 0.176471
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl fake_mat_97_11_10_255
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.380392 0.043137 0.039216
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl frene____frenefeuilles1
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/feuilles_frene.png
+map_d source/Numberblocks world/feuilles_frene.png
+
+newmtl gris_002_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.423529 0.423529 0.423529
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl gris_002_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.423529 0.423529 0.423529
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl ground_herbe_1_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/ground_herbe_1.jpg
+
+newmtl guitare_electrique_ww___phong135
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/guitare_corde_tex.png
+map_d source/Numberblocks world/guitare_corde_tex.png
+
+newmtl jaune_008_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.941176 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl jaune_008_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.941176 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl lavande___lavande_pot_feuille1
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/lavande_branche2.png
+map_d source/Numberblocks world/lavande_branche2.png
+
+newmtl lavande___lavande_pot_feuille2
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/lavande_branche.png
+map_d source/Numberblocks world/lavande_branche.png
+
+newmtl moquette_012_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/moquette_012.jpg
+
+newmtl orange_004_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.917647 0.392157 0.043137
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl orange_004_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.917647 0.392157 0.043137
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl orange_008_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.823529 0.462745 0.160784
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl orange_008_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.823529 0.462745 0.160784
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl pack_003_salon_haut_parleur___nopaint_enceinte
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_clavier.jpg
+
+newmtl pack_003_salon_meuble_hifi___material__139
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_tapis_feuilles.jpg
+
+newmtl pack_003_salon_meuble_hifi___nopaint_dvd
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_dvd2.jpg
+
+newmtl pack_003_salon_meuble_hifi___nopaint_machin
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_dvd1.jpg
+
+newmtl pack_003_salon_television___material__80_1
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_ecrantv.jpg
+
+newmtl pack_003_salon_television___material__81
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_tv.jpg
+
+newmtl pack_004_chambre_001_dressing___bois
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_bois_marron_002.jpg
+
+newmtl pack_004_chambre_001_dressing___boite_poignee
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_cuir2.jpg
+
+newmtl pack_004_chambre_001_dressing___chaussures001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_cuir1.jpg
+
+newmtl pack_004_chambre_001_dressing___chaussures002
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_cuir3.jpg
+
+newmtl pack_004_chambre_001_dressing___coussin002
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_tapis3.jpg
+
+newmtl pack_004_chambre_001_dressing___coussin003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_paravent.jpg
+
+newmtl pack_004_chambre_001_dressing___serviettes001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/papier_peint_034.jpg
+
+newmtl pack_004_chambre_001_dressing___serviettes002
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_tissu2.jpg
+
+newmtl pack_004_chambre_001_dressing___serviettes003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tex_tapis8.jpg
+
+newmtl pack_004_chambre_001_dressing___serviettes004
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/moquette_003.jpg
+
+newmtl pack_004_chambre_001_dressing___vetement003
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/papier_peint_008.jpg
+
+newmtl parquet_022_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/parquet_022.jpg
+
+newmtl peinture_au_sable_001_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/peinture_au_sable_001.jpg
+
+newmtl peinture_au_sable_002_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/peinture_au_sable_002.jpg
+
+newmtl peinture_au_sable_003
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/peinture_au_sable_003.jpg
+
+newmtl pmu_caisse_enregistreuse_001___lambert15sg
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/Alu_bleu_noir.jpg
+
+newmtl pmu_caisse_enregistreuse_001___lambert17sg
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/clavier.jpg
+
+newmtl pmu_caisse_enregistreuse_001___lambert18sg
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/oven_003.jpg
+
+newmtl pmu_caisse_enregistreuse_001___phong1sg
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ks 0.110000 0.110000 0.110000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd source/Numberblocks world/metal_004.jpg
+
+newmtl refrigerateur_010____mat_orangejussg
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/pois_orange.jpg
+
+newmtl refrigerateur_010____mat_vectorfloralsg
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/vector-floral-ornamenta.png
+map_d source/Numberblocks world/vector-floral-ornamenta.png
+
+newmtl rose_009_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.619608 0.137255 0.400000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl rose_009_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.619608 0.137255 0.400000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl rose_010_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.890196 0.141176 0.517647
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl rose_010_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.890196 0.141176 0.517647
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl rouge_004_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.890196 0.231373 0.090196
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl rouge_004_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.890196 0.231373 0.090196
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl scan_table_001_blanc___bois003
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ks 0.020005 0.020005 0.020005
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd source/Numberblocks world/tex_gene_bois_003.jpg
+
+newmtl scan_table_001_blanc___bois_blanc
+Ns 0.999999
+Ka 1.000000 1.000000 1.000000
+Ks 0.020005 0.020005 0.020005
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd source/Numberblocks world/tex_bois_scan_blanc_002.jpg
+
+newmtl texture_eau_piscine
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/texture_eau_piscine.png
+map_d source/Numberblocks world/texture_eau_piscine.png
+
+newmtl texture_eau_piscine_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/texture_eau_piscine.png
+map_d source/Numberblocks world/texture_eau_piscine.png
+
+newmtl texture_eau_piscine_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/texture_eau_piscine.png
+map_d source/Numberblocks world/texture_eau_piscine.png
+
+newmtl tissus_067
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd source/Numberblocks world/tissus_067.jpg
+
+newmtl trampoline___trampoline_texture_mesh
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd source/Numberblocks world/trampoline_mesh.png
+map_d source/Numberblocks world/trampoline_mesh.png
+
+newmtl vert_010_Room_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.141176 0.654902 0.098039
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl vert_010_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.141176 0.654902 0.098039
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl violet_004_Wall_Entity_Material
+Ns 0.200001
+Ka 1.000000 1.000000 1.000000
+Kd 0.470588 0.239216 0.505882
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1

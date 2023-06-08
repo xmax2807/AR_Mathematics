@@ -11,12 +11,12 @@ public class Calendar : MonoBehaviour
 
     readonly static string[] daysList = new string[7]{
         "Chủ nhật",
-        "Thứ ba",
-        "Thứ năm",
         "Thứ hai",
-        "Thứ bảy",
+        "Thứ ba",
         "Thứ tư",
+        "Thứ năm",
         "Thứ sáu",
+        "Thứ bảy",
     };
     // Update is called once per frame
     // void Update()

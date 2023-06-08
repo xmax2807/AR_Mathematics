@@ -19,7 +19,7 @@ namespace Project.MiniGames{
 
         public RandomizableTask(int goal, string description) : base(goal, description)
         {
-            checker = CreateQuestion().Random();
+            checker = CreateQuestion();
             if(TaskDescription == ""){
                 TaskDescription = checker.GetQuestion();
             }

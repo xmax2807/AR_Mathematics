@@ -29,8 +29,8 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Prefabs/VCNVPrefabs/RunningPlanes/Map3.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 62001381be959424c862feb5da4a54aa
-    m_Address: Assets/Resources_moved/Models/Mystier/Mystiery.fbx
+  - m_GUID: 76deb6ba63b91dd4780de577e525d9d7
+    m_Address: Assets/Resources_moved/Models/Mystier/Mystier/AR-Math.fbx
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

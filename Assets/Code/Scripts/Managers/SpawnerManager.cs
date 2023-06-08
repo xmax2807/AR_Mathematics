@@ -116,5 +116,34 @@ namespace Project.Managers
             SpawnObject(gameObj, newPosition, newParent);
             yield return new WaitForEndOfFrame();
         }
+
+        public void SpawnObjectsInGroup(GameObject prefab, int count, Vector3 direction, Transform parent = null, int maxPerRow = 5, Vector3 startPosition = default, float spacing = 0.05f){
+            Vector3 currentPosition = startPosition;
+            Vector3 size = prefab.TryGetObjectSize();
+
+            float xDir = direction.x * (size.x + spacing);
+            float yDir = direction.y * (size.y + spacing);
+            float zDir = direction.z * (size.z + spacing);
+
+
+            for(int i = 0; i < count;){
+                for(int j = 0; j < maxPerRow && i < count; ++j){
+                    GameObject obj = Instantiate(prefab, parent);
+                    obj.transform.localPosition = currentPosition;
+
+                    //Update progress
+                    currentPosition = new Vector3(currentPosition.x + xDir, currentPosition.y, currentPosition.z + zDir);
+                    ++i;
+                }
+
+                currentPosition = new Vector3(startPosition.x, currentPosition.y + yDir, startPosition.z);
+            }
+        }
+        public void SpawnObjectsLimitCol(GameObject prefab, int count, int maxCol, Vector3 direction, Transform parent = null, Vector3 startPosition = default, float spacing = 0.05f){
+            if(maxCol <= 0){
+                return;
+            }
+            SpawnObjectsInGroup(prefab, count, direction, parent, count / maxCol + 1, startPosition, spacing);
+        }
     }
 }

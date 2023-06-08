@@ -83,8 +83,10 @@ public class UserController
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 user.DisplayName, user.UserId);
         });
+        if(user == null) return false;
+
         ProfileUser(user.UserId);
-        return user != null;
+        return true;
     }
 
     private void ProfileUser(string userID)
