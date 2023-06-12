@@ -157,7 +157,7 @@ namespace Project.UI.Panel
             bool parseResult = int.TryParse(data, out int semester);
             if (!parseResult) semester = -1;
 
-            var Result = await DatabaseManager.Instance.TestController.GetTest(semester);
+            var Result = await DatabaseManager.Instance.TestController.GetTestRandomly(semester);
 
             if (Result.Item1 == null || Result.Item2 == null) return false;
 

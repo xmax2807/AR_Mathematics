@@ -20,6 +20,11 @@ namespace Project.QuizSystem.SaveLoadQuestion{
             this.UserAnswerIndex = UserAnswerIndex;
             this.CorrectAnswerIndex = CorrectAnswerIndex;
         }
+        public RandomizableSCQSaveData(string[] options, int UserAnswerIndex, int CorrectAnswerIndex, bool fakeParam = false){
+            Options = options;
+            this.UserAnswerIndex = UserAnswerIndex;
+            this.CorrectAnswerIndex = CorrectAnswerIndex;
+        }
         public RandomizableSCQSaveData(T[] options, int UserAnswerIndex, int CorrectAnswerIndex){
             Options = new string[options.Length];
             for(int i = 0; i < options.Length; i++){

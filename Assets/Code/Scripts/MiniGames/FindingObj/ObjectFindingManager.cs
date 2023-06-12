@@ -57,7 +57,13 @@ namespace Project.MiniGames.ObjectFinding
         private void OnEnable()
         {
             ARGameEventManager.Instance.RegisterEvent(BaseGameEventManager.StartGameEventName, this, StartGame);
+            ARGameEventManager.Instance.RegisterEvent(BaseGameEventManager.EndGameEventName, this, EndGame);
             ObjectFindingEventManager.Instance.RegisterEvent<PlacementObject>(ObjectFindingEventManager.ObjectTouchEventName, this, OnPlacementTouch);
+        }
+
+        private void EndGame()
+        {
+            objectRaycaster.BlockRaycast();
         }
 
         private void OnPlacementTouch(PlacementObject obj)
@@ -83,8 +89,8 @@ namespace Project.MiniGames.ObjectFinding
             StartCoroutine(VideoStart(answerGIFAnimator, IsCorrect,
                 postCallback: () =>
                 {
-                    UpdateProgress(IsCorrect);
                     objectRaycaster.UnblockRaycast();
+                    UpdateProgress(IsCorrect);
                 })
             );
         }

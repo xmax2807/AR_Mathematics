@@ -42,6 +42,8 @@ namespace Project.UI.Panel{
             int quizUnit = current.QuizUnit;
             string quizTitle = current.QuizTitle;
 
+            //Debug.Log($"Quiz info: img:{current.QuizIMG}, title: {current.QuizTitle}, chap-unit:{current.QuizChapter} - {current.QuizUnit}");
+
             IQuestion question = generator.CreateRandomQuestion(quizUnit, quizChapter, quizTitle);
             
             if(question == null)// Can't random question

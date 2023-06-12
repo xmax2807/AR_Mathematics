@@ -75,7 +75,7 @@ public class ObjectPositionQuestion : BaseQuestion<int>, IRandomizableQuestion
 
     public override IQuestion Clone()
     {
-        throw new System.NotImplementedException();
+        return new ObjectPositionQuestion(this._question, questionType);
     }
 
     public IQuestion GetClone()

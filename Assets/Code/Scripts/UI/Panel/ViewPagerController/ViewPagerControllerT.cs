@@ -13,11 +13,11 @@ namespace Project.UI.Panel
         {
             for (int i = 0; i < count; i++)
             {
-                await SpawnerManager.Instance.SpawnObjectInParentAsync(prefab, this.transform, async (obj) =>
+                await SpawnerManager.Instance.SpawnObjectInParentAsync(prefab, index:i, this.transform, async (obj, index) =>
                 { 
                     await obj.HideAsync();
                     preloadList.Add(obj);
-                    await onBuildObj?.Invoke(obj, i);
+                    await onBuildObj?.Invoke(obj, index);
                 });
             }
             AddLastView();

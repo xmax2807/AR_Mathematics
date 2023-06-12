@@ -16,7 +16,15 @@ namespace Project.Managers{
         public LessonModel CurrentLesson {get;set;}
         public QuizModel[] CurrentQuizzes;
         public TestModel CurrentTestModel;
-        public CurrentUnit CurrentUnitProgress;
+
+        private CurrentUnit currentUnitProgress;
+        public CurrentUnit CurrentUnitProgress {
+            get => currentUnitProgress;
+            set {
+                Debug.Log("Current Unit changed: " + value);
+                currentUnitProgress = value;
+            }
+        }
         public GameModel[] CurrentGameScenes;
         public AchievementModel[] AcquiredAchivements;
         public GameModel CurrentGame;

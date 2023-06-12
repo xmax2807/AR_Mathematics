@@ -44,6 +44,9 @@ namespace Project.QuizSystem{
             if(_answer is IEquatable<T> equatableAnswer){
                 return equatableAnswer.Equals(_playerAnswered);
             }
+            if(_playerAnswered is Enum enumAnswer){
+                return enumAnswer.Equals(_answer);
+            }
             var comparer = GetEqualityComparer();
             if(comparer == null){
                 UnityEngine.Debug.LogError("Can't compare 2 answer");
@@ -64,7 +67,7 @@ namespace Project.QuizSystem{
 
         private T OnSetAnswerFailed(object value, InvalidCastException e){
             TrySetAnswer(value);
-            return _answer;
+            return _playerAnswered;
         }
         protected virtual void TrySetAnswer(object value){}
 

@@ -12,7 +12,9 @@ namespace Project.Managers
     {
         public static GameManager Instance { get; private set; }
         public static Camera MainGameCam => Instance?.mainGameCam;
+        public static Canvas RootCanvas => Instance?.rootCanvas;
         private Camera mainGameCam;
+        private Canvas rootCanvas;
 
         [SerializeField] bool showCamValues = true;
 
@@ -37,6 +39,7 @@ namespace Project.Managers
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Instance.mainGameCam = Camera.main;
+            Instance.rootCanvas = GameObject.FindGameObjectWithTag("MainCanvas")?.GetComponent<Canvas>();
             if(showCamValues){
                 this.EnsureComponent<CameraValueLogger>(autoCreate: true);
             }
@@ -61,11 +64,13 @@ namespace Project.Managers
             Instance.mainGameCam = null;
         }
         protected void OnEnable(){
+            Instance.mainGameCam = Camera.main;
+            Instance.rootCanvas = GameObject.FindGameObjectWithTag("MainCanvas")?.GetComponent<Canvas>();
             if(showCamValues){
                 this.EnsureComponent<CameraValueLogger>(autoCreate: true);
             }
         }
 
-        public System.Func<Task> OnGameFinishLoading;
+        public System.Action OnGameFinishLoading;
     }
 }

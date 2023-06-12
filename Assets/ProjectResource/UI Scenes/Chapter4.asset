@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chapter4
   m_EditorClassIdentifier: 
   Children:
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: a0318eaa64e396040a5079469a6ab2c4, type: 2}
   - {fileID: 11400000, guid: c4b1c809aa36e3b47bcc10b9795acd30, type: 2}
   - {fileID: 11400000}
   ButtonNames:

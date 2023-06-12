@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Project.SaveLoad;
 using Project.QuizSystem.SaveLoadQuestion;
+using UnityEngine.Video;
+using Project.Utils.ExtensionMethods;
 
 namespace Project.Managers
 {
@@ -61,6 +63,13 @@ namespace Project.Managers
                 result = null;
             }
             return result;
+        }
+
+        public IEnumerator GetLocalFile<T>(string relativePath, System.Action<T> OnResult) where T : Object{
+            ResourceRequest req = Resources.LoadAsync<T>(relativePath);
+            yield return req;
+            req.asset.TryCastTo<T>(out T result);
+            OnResult?.Invoke(result);
         }
     }
 }

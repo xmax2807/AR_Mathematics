@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils.ExtensionMethods;
 using System.Linq;
+using Project.Utils;
 
 namespace Project.QuizSystem{
     public class NumberOrderQuestion : BaseQuestion<int[]>, IRandomizableQuestion<int[]>, ISavableQuestion
     {
         private int m_count;
         private int m_maxNumber;
+        private bool m_isDescending;
         private IComparer<int> m_comparer;
         public NumberOrderQuestion(string question, int count, int maxNumber, IComparer<int> orderComparer) : base(question)
         {
@@ -20,10 +22,15 @@ namespace Project.QuizSystem{
             m_maxNumber = maxNumber;
             m_comparer = orderComparer;
             _answer = new int[m_count];
+            m_isDescending = false;
         }
-        public NumberOrderQuestion(string question, int count, int maxNumber) : this(question, count, maxNumber, Comparer<int>.Default){}
+        public NumberOrderQuestion(string question, int count, int maxNumber) : this(question, count, maxNumber, new IntNumberComparer(false)){}
         public NumberOrderQuestion(string question, int count, IComparer<int> comparer) : this(question, count, maxNumber: 10, comparer){}
         public NumberOrderQuestion(string question, int maxNumber) : this(question, 5, maxNumber){}
+        public NumberOrderQuestion(string question, int maxNumber, bool IsDescending = false) : this(question, 5, maxNumber){
+            m_comparer = new IntNumberComparer(IsDescending); 
+            m_isDescending = IsDescending;
+        }
 
         public override QuestionType QuestionType => QuestionType.Other;
 
@@ -161,7 +168,8 @@ namespace Project.QuizSystem{
                 Count = this.m_count,
                 MaxNumber = this.m_maxNumber,
                 Question = this._question,
-                IsAscending = this.m_comparer == Comparer<int>.Default,
+                IsAscending = !m_isDescending,
+                Numbers = _answer,
             };
         }
 
@@ -171,7 +179,7 @@ namespace Project.QuizSystem{
 
             this.m_count = realData.Count;
             this.m_maxNumber = realData.MaxNumber;
-            this.m_comparer = Comparer<int>.Default;
+            this.m_comparer = new IntNumberComparer(IsDescending: !realData.IsAscending);
             this._question = realData.Question;
             _answer = (int[]) realData.Numbers.Clone();
         }

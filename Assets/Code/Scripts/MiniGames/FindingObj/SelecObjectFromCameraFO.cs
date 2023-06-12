@@ -86,7 +86,7 @@ public class SelecObjectFromCameraFO : MonoBehaviour
         // touch object in camera android
         var touch = Input.GetTouch(0);
 
-        if (touch.phase == TouchPhase.End)
+        if (touch.phase == TouchPhase.Ended)
         {
             OnTouch(touchPosition);
         }

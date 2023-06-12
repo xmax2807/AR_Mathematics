@@ -16,4 +16,4 @@ MonoBehaviour:
   Goal: 5
   Badge: {fileID: 0}
   UnacquiredBadge: {fileID: 0}
-  RemoteModel: {fileID: 11400000, guid: 4368260be11e0104ab85af963083ef66, type: 2}
+  RemoteModel: {fileID: 11400000, guid: 4d5467958abca7e4ebc0f3bd4013b4a0, type: 2}

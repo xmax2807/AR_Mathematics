@@ -50,8 +50,23 @@ namespace Project.RewardSystem
             Debug.Log($"{CurrentReward.CurrentValue} - {CurrentReward.Goal}");
             if (!CurrentReward.CanBeRewarded(newValue)) return;
 
-            GiveReward();
-            GiveRemoteReward();
+            GiveReward(CurrentRewardData);
+            GiveRemoteReward(CurrentRewardData);
+            NextReward();
+        }
+        public void OnProgressValueChanged(int newValue, int rewardIndex){
+            if (rewardIndex >= Datas.Length)
+            {
+                return;
+            }
+
+            var currentReward = Rewards[rewardIndex];
+            currentReward.UpdateProgress(newValue);
+            Debug.Log($"{currentReward.CurrentValue} - {currentReward.Goal}");
+            if (!currentReward.CanBeRewarded(newValue)) return;
+
+            GiveReward(GetRewardDataAt(rewardIndex));
+            GiveRemoteReward(GetRewardDataAt(rewardIndex));
             NextReward();
         }
         private void NextReward(){
@@ -61,13 +76,13 @@ namespace Project.RewardSystem
             }
         }
 
-        private void GiveReward(){
-            if(CurrentRewardData.Badge == null) return;
-            OnRewardAccquired?.Invoke(CurrentRewardData.Badge);
+        private void GiveReward(RewardScriptableObject rewardData){
+            if(rewardData.Badge == null) return;
+            OnRewardAccquired?.Invoke(rewardData.Badge);
         }
-        private void GiveRemoteReward(){
-            if(CurrentRewardData.RemoteModel == null) return;
-            OnRemoteRewardAccquired?.Invoke(CurrentRewardData.RemoteModel);
+        private void GiveRemoteReward(RewardScriptableObject rewardData){
+            if(rewardData.RemoteModel == null) return;
+            OnRemoteRewardAccquired?.Invoke(rewardData.RemoteModel);
         }
     }
 }

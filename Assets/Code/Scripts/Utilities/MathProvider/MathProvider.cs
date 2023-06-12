@@ -76,6 +76,8 @@ namespace Project.Utils.MathProvider
             }
             return default;
         }
+
+        public abstract int Compare(T a, T b);
     }
 
     public class DoubleMathProvider : MathProvider<double>
@@ -115,6 +117,13 @@ namespace Project.Utils.MathProvider
             double.TryParse(data, out double result);
             return result;
         }
+
+        public override int Compare(double a, double b)
+        {
+            if(a > b) return 1;
+            if(a < b) return -1;
+            return 0;
+        }
     }
 
     public class IntMathProvider : MathProvider<int>
@@ -152,6 +161,13 @@ namespace Project.Utils.MathProvider
         {
             int.TryParse(data, out int result);
             return result;
+        }
+
+        public override int Compare(int a, int b)
+        {
+            if(a > b) return 1;
+            if(a < b) return -1;
+            return 0;
         }
     }
 }

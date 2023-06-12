@@ -145,4 +145,17 @@ public class UserController
             return false;
         }
     }
+
+    public async Task UpdateUserGameData(UserModel user){
+        try
+        {
+            DocumentReference userRef = db.Collection("users").Document(user.UserID);
+            await userRef.SetAsync(user, SetOptions.Overwrite);
+
+        }
+        catch (Firebase.FirebaseException e)
+        {
+            Debug.Log(e.Message);
+        }
+    }
 }

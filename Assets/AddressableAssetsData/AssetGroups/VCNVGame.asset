@@ -33,6 +33,14 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Models/Mystier/Mystier/AR-Math.fbx
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 13db88c68cc93324786e03e30ac232a8
+    m_Address: Assets/Resources_moved/Models/Octupus/Octopus_toy.obj
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4b2e471718dfe764e97f2e0ff2348b60
+    m_Address: Assets/Resources_moved/Models/Flying map/Bird/GULL.3DS
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 366cfc6bceb8bee42a02874c2da45f55, type: 2}
   m_SchemaSet:

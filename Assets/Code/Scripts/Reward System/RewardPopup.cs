@@ -8,14 +8,17 @@ namespace Project.RewardSystem{
         [SerializeField] private TMPro.TextMeshProUGUI rewardName;
         private OkCancelPanelView view;
         private Canvas canvas;
+
+        public event System.Action OnClose;
         private void Awake(){
             view = GetComponent<OkCancelPanelView>();
-            canvas = GetComponent<Canvas>();
-            canvas.enabled = false;
+            //canvas = GetComponent<Canvas>();
 //            view.HideAsync();
         }
         private void Start(){
-            view.HideAsync();
+            view ??= GetComponent<OkCancelPanelView>();
+            //canvas ??= GetComponent<Canvas>();
+            //view.HideAsync();
         }
         private void OnEnable(){
             view.onConfirm += Hide;
@@ -30,9 +33,9 @@ namespace Project.RewardSystem{
             if(view == null){
                 view = GetComponent<OkCancelPanelView>();
             }
-            if(canvas == null){
-                canvas = GetComponent<Canvas>();
-            }
+            // if(canvas == null){
+            //     canvas = GetComponent<Canvas>();
+            // }
         }
 
         public void SetRewardData(string title, Sprite image){
@@ -41,12 +44,19 @@ namespace Project.RewardSystem{
         }
 
         private async void Hide(){
+            OnClose?.Invoke();
             await view?.HideAsync();
-            canvas.enabled = false;
+            //canvas.enabled = false;
         }
 
         public void Show(){
-            canvas.enabled = true;
+            if(view == null){
+                view = GetComponent<OkCancelPanelView>();
+            }
+            // if(canvas == null){
+            //     canvas = GetComponent<Canvas>();
+            // }
+            //canvas.enabled = true;
             view?.ShowAsync();
         }
     }

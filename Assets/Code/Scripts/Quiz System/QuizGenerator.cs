@@ -27,15 +27,18 @@ namespace Project.QuizSystem
             RandomizableQuestionDict ??= new(){
                     {(2,1,""), new ShapeSCQ(4)},
                     {(3,1,""), new ShapeSCQ(4)},
-                    {(4,2,"ss"), new ComparisonSCQ(maxNumber:10, optionsLength:4)},
-                    {(4,2,"sx"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10)},
+                    {(4,2,"ss"), new InEqualitySCQ(maxNumber:10, optionsLength:4)},
+                    {(4,2,"sx"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10, false)},
                     {(4,2,"ln"), new ShapeSCQ(4)},
                     {(4,2,"bn"), new ShapeSCQ(4)},
                     {(1,3,""), new EquationSCQ(10,4)},
                     {(3,3,""), new EquationSCQ(10,4)},
                     {(2,4,""), new EquationSCQ(20,4)},
                     {(2,5,""), new EquationSCQ(90,4)},
-                    {(6,5,""), new EquationSCQ(100,4)},
+                    {(6,5,"bn"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10, false)},
+                    {(6,5,"ln"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10, false)},
+                    {(6,5,"ss"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10, false)},
+                    {(6,5,"sx"), new NumberOrderSCQ(optionsLength:4, maxNumber: 10, false)},
                     {(7,5,""), new EquationSCQ(100,4)},
                     {(8,5,""), new EquationSCQ(100,4)},
                 };
@@ -65,7 +68,7 @@ namespace Project.QuizSystem
         public IQuestion CreateQuestion(int unit, int chapter, string title){
             (int,int,string) quizType =  (unit, chapter, title);
             if(RandomizableQuestionDict.ContainsKey(quizType)){
-                return RandomizableQuestionDict[quizType].GetClone();
+                return RandomizableQuestionDict[quizType].Clone();
             }
             return null;
         }

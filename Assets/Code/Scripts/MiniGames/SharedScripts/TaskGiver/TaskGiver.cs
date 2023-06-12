@@ -40,14 +40,14 @@ namespace Project.MiniGames{
             BaseGameEventManager.Instance.RegisterEvent(BaseGameEventManager.StartGameEventName, this, Initialize);
             //GameManager.Instance.OnGameFinishLoading += Initialize;
             // if(IsDebugging){
-            //     await Initialize();
+            //     Initialize();
             // }
         }
         
         private void CompleteMission()
         {
             //OnRewardAccquired?.Invoke(CurrentReward.Badge);
-            RewardCollection.OnProgressValueChanged(Tasks.CurrentProgress);
+            RewardCollection.OnProgressValueChanged(Tasks.CurrentProgress, CurrentTaskIndex);
             BaseGameEventManager.Instance.RaiseEvent<bool>(BaseGameEventManager.EndGameEventName, true);
             Debug.Log("Reward accquired");
             ++CurrentTaskIndex;
@@ -68,11 +68,11 @@ namespace Project.MiniGames{
         }
         protected virtual Task InitTasks(){
             GameModel currentGame = UserManager.Instance.CurrentGame;
-            Debug.Log(CurrentTaskIndex);
+            //Debug.Log(CurrentTaskIndex);
             if(currentGame == null) return Task.CompletedTask;
             
             this.CurrentTaskIndex =  GameController.GetLastSavedTask(currentGame.GameID);
-            Debug.Log(CurrentTaskIndex);
+            //Debug.Log(CurrentTaskIndex);
             return Task.CompletedTask;
         }
         protected virtual void ChangeTask(BaseTask task)

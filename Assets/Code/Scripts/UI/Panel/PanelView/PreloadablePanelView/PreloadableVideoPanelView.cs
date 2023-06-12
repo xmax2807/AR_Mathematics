@@ -7,11 +7,13 @@ namespace Project.UI.Panel{
     public class PreloadableVideoPanelView : PreloadablePanelView
     {
         [SerializeField] private VideoPlayerBehaviour videoPlayerBehaviour;
+        public string VideoUrl;
         public VideoPlayerBehaviour VideoPlayerBehaviour {get => videoPlayerBehaviour;}
         public override IEnumerator PrepareAsync()
         {
             if(isPrepared) yield break;
             yield return videoPlayerBehaviour.Setup();
+            yield return videoPlayerBehaviour.PrepareVideoUrl(VideoUrl);
             isPrepared = true;
         }
 
@@ -29,6 +31,7 @@ namespace Project.UI.Panel{
 
         public override Task ShowAsync(CancellationToken cancellationToken)
         {
+            videoPlayerBehaviour.PlayVideo();
             videoPlayerBehaviour.enabled = true;
             return Task.CompletedTask;
         }

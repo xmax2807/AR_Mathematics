@@ -4,7 +4,7 @@ using Project.QuizSystem.SaveLoadQuestion;
 namespace Project.QuizSystem{
     public class WrapperSCQ<T> : RandomizableSCQ<T>
     {
-        IRandomizableQuestion<T> wrappee;
+        protected IRandomizableQuestion<T> wrappee;
         private QuestionContentType questionContentType;
         public WrapperSCQ(IRandomizableQuestion<T> wrappee, QuestionContentType questionContentType,int optionsLength) : base(optionsLength)
         {
@@ -35,7 +35,7 @@ namespace Project.QuizSystem{
         public override string[] GetOptions()
         {
             if(cacheOptions != null) return cacheOptions;
-
+            
             cacheOptions = new string[options.Length];
             for(int i = 0; i < cacheOptions.Length; ++i){
                 cacheOptions[i] = wrappee.ConvertOptionToString(options[i]);
@@ -49,6 +49,25 @@ namespace Project.QuizSystem{
                 return new WrapperSCQSaveData<T>(savableWrappee.ConvertToData(), parent);
             }
             return parent;
+        }
+
+        public override void SetData(QuestionSaveData data)
+        {
+            if(data is not WrapperSCQSaveData<T> realData){
+                base.SetData(data);
+                return;
+            }
+
+            if(wrappee is ISavableQuestion savableWrappee){
+                savableWrappee.SetData(realData.WrappeeData);
+            }
+            base.SetData(data);
+            
+            // string[] stringOptions = realData.Options;
+            // options = new T[stringOptions.Length];
+            // for(int i = 0; i < stringOptions.Length; ++i){
+            //     options[i] = wrappee.ParseOptionFromString(stringOptions[i]);
+            // }
         }
 
         protected override RandomizableSCQ<T> DeepClone()

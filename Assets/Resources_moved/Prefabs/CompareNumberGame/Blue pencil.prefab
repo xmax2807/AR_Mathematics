@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 78f846e71cd65a04882180d4fa205852,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -3329850779861964252, guid: 78f846e71cd65a04882180d4fa205852,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -153,6 +158,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1354622732140865770, guid: 78f846e71cd65a04882180d4fa205852,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -1046596361657730588, guid: 78f846e71cd65a04882180d4fa205852,
         type: 3}
@@ -178,6 +188,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Green pencil
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 78f846e71cd65a04882180d4fa205852,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426669532271018066, guid: 78f846e71cd65a04882180d4fa205852,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4933490165926931467, guid: 78f846e71cd65a04882180d4fa205852,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6694720403668482454, guid: 78f846e71cd65a04882180d4fa205852,
         type: 3}

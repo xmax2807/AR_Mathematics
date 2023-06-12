@@ -20,6 +20,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
     private void Awake()
     {
         if (targetCam == null) targetCam = Camera.main;
+        videoPlayer = GetComponent<VideoPlayer>();
     }
 
     void OnEnable()
@@ -43,9 +44,14 @@ public class VideoPlayerBehaviour : MonoBehaviour
     public void PlayVideo(){
         if(!videoPlayer.isPrepared){
             videoPlayer.Prepare();
-            return;
         }
-        videoPlayer.Play();
+        try{
+            
+            videoPlayer.Play();
+        }
+        catch(System.Exception e){
+            Debug.Log(e.Message);
+        }
         OnVideoStateChanged?.Invoke(VideoState.Playing);
     }
     public void ReplayVideo(){
@@ -72,6 +78,27 @@ public class VideoPlayerBehaviour : MonoBehaviour
         try
         {
             videoPlayer.url = url;
+            PrepareVideo();
+        }
+        catch (UnityException e)
+        {
+            Debug.Log(e.Message);
+        }
+        yield return null;
+    }
+    public IEnumerator PrepareVideoClip(VideoClip clip){
+        if(videoPlayer == null){
+           yield return Setup();
+        }
+
+        try
+        {
+            videoPlayer.source = VideoSource.VideoClip;
+            videoPlayer.clip = clip;
+            audioSource ??= AudioManager.Instance.BackgroundFX;
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            videoPlayer.SetTargetAudioSource(0, audioSource);
+            //VideoUrl = clip.originalPath;
             PrepareVideo();
         }
         catch (UnityException e)

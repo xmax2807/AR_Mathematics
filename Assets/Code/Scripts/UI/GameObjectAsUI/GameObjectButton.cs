@@ -1,14 +1,16 @@
+using UnityEngine;
+
 namespace Project.UI.GameObjectUI{
-    public class GameObjectButton : UnityEngine.MonoBehaviour, ITouchableObject
+    public class GameObjectButton : MonoBehaviour, ITouchableObject
     {
         private string id;
         public string UniqueID => id;
+        public UnityEngine.Events.UnityEvent<GameObjectButton> OnButtonTouchEvent;
+        public event System.Action<GameObjectButton> OnButtonTouch;
 
-        public void OnEnable(){
-
+        public void Awake(){
             //Create new Guid
             id = System.Guid.NewGuid().ToString();
-            
         }
 
         public bool Equals(ITouchableObject other)
@@ -16,9 +18,12 @@ namespace Project.UI.GameObjectUI{
             return other.UniqueID == this.UniqueID;
         }
 
-        public void OnTouch(UnityEngine.TouchPhase phase)
+        public void OnTouch(Touch touch)
         {
-            
+            if(touch.phase == TouchPhase.Ended){
+                OnButtonTouch?.Invoke(this);
+                OnButtonTouchEvent?.Invoke(this);
+            }
         }
     }
 }

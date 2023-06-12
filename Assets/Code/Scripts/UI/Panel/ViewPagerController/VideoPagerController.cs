@@ -42,7 +42,10 @@ namespace Project.UI.Panel
             }
             else
             {
+                Debug.Log($"{fullFilePath}");
+                view.VideoUrl = fullFilePath;
                 view.VideoPlayerBehaviour.VideoUrl = $"{fullFilePath}";
+                //view.VideoPlayerBehaviour.PrepareVideoUrl(fullFilePath);
             }
 
         }
@@ -50,7 +53,10 @@ namespace Project.UI.Panel
         private void OnDownloadComplete(int index, DownloadingPanelView.DownloadTask task)
         {
             if (preloadList[index] is not PreloadableVideoPanelView view) return;
-            view.VideoPlayerBehaviour.VideoUrl = $"file://{task.destinationFile}";
+            // string filePath = $"file://{task.destinationFile}";
+            string filePath = $"{task.destinationFile}";
+            view.VideoUrl = filePath;
+            view.VideoPlayerBehaviour.VideoUrl = filePath;
         }
     }
 }

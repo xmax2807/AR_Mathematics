@@ -73,8 +73,10 @@ public class GameController
             user.SavedGame[index].Task = task;
         }
 
-        if(task - 1 >= game.AchievementID.Length){
-            UnityEngine.Debug.Log("SaveGame error: current progress is out of range actual tasks on database");
+        if (task - 1 >= game.AchievementID.Length)
+        {
+            UnityEngine.Debug.Log("Save without Achivement");
+            await DatabaseManager.Instance.UserController.UpdateUserGameData(user);
             return;
         }
 
@@ -83,17 +85,7 @@ public class GameController
             user.User_ListAchievement.Add(game.AchievementID[task - 1]);
         }
 
-        try
-        {
-            DocumentReference userRef = db.Collection("users").Document(user.UserID);
-            await userRef.SetAsync(user, SetOptions.Overwrite);
-
-        }
-        catch (Firebase.FirebaseException e)
-        {
-            Debug.Log(e.Message);
-        }
-
+        await DatabaseManager.Instance.UserController.UpdateUserGameData(user);
     }
 
     public async Task<List<GameModel>> GetListGames(int unit, int chapter)
@@ -151,6 +143,7 @@ public class GameController
             chapter = chapter,
             unit = -1,
         };
+        Debug.Log("Game chapter: " + UserManager.Instance.CurrentUnitProgress.chapter);
 
         return listGames;
     }

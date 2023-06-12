@@ -2,6 +2,7 @@ using UnityEngine;
 using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using System;
+using Project.UI.GameObjectUI;
 
 namespace Project.MiniGames.ComparisonGame
 {
@@ -10,7 +11,7 @@ namespace Project.MiniGames.ComparisonGame
     public class CompareGameMainPlane : MonoBehaviour
     {
         #region  GUI
-        [SerializeField] private Canvas numberTextCanvas;
+        [SerializeField] private CompareGameUI gameUI;
         #endregion
 
         #region Spawning
@@ -20,16 +21,14 @@ namespace Project.MiniGames.ComparisonGame
         private RandomObjectNumber randomizer;
         #endregion
 
-        #region Controllers
-        private TaskGiver taskGiver;
-        #endregion
+        public event System.Action OnNextButtonClicked;
+
+        public void AddFactory(ItemFactory<GameObject[]> factory){
+            randomizer.SetFactory(factory);
+        }
+
         public void Awake()
         {
-            if (numberTextCanvas != null)
-            {
-                numberTextCanvas.worldCamera = GameManager.MainGameCam;
-            }
-
             // Setup randomizer and env
             randomizer = GetComponent<RandomObjectNumber>();
 
@@ -39,21 +38,35 @@ namespace Project.MiniGames.ComparisonGame
             if(parentSecondObjTransform == null){
                 parentSecondObjTransform = this.gameObject.EnsureChildWithName(childName: "RightSide").transform;
             }
+
+            SetupGameUI();
         }
 
-        public void SetTaskGiver(TaskGiver giver){
-            if(giver == null){
-                Debug.Log("Task Giver is null");
+        private void SetupGameUI(){
+            if(gameUI == null){
+                Debug.Log("ComparisonGame: Game UI is missing");
                 return;
             }
-
-            taskGiver = giver;
-            taskGiver.OnTaskChanged += UpdateUI;
+            
+            gameUI.NextQuestionButtonClicked += InvokeButtonClick;
         }
 
-        private void UpdateUI(BaseTask task)
+        private void InvokeButtonClick()
         {
-            
+            this.OnNextButtonClicked?.Invoke();
+        }
+
+        public void UpdateUI(ComparisonTask task)
+        {
+            gameUI.UpdateUI(task);
+            TimeCoroutineManager.Instance.WaitForSeconds(0.5f, InteractionEventsBehaviour.Instance.UnblockRaycast);
+        }
+        public void SpawnObject(ComparisonTask task){
+            int leftNumber = task.LeftNumber;
+            int rightNumber = task.RightNumber;
+
+            randomizer.SpawnMultiObjectGroup(leftNumber, parentFirstObjTransform, new Vector3(-1, -1, 0));
+            randomizer.SpawnMultiObjectGroup(rightNumber, parentSecondObjTransform, new Vector3(1, -1, 0));
         }
     }
 }

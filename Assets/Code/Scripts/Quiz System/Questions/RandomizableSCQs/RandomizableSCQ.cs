@@ -5,7 +5,6 @@ using Project.Utils;
 namespace Project.QuizSystem{
     public interface IRandomizableQuestion : IQuestion, IRandomizable{
         IQuestion Random(Random rand = null);
-        IQuestion GetClone();
     }
     public interface IRandomizableQuestion<T> : IRandomizableQuestion, IRandomizableOptions<T>{}
     
@@ -45,20 +44,34 @@ namespace Project.QuizSystem{
         {
             if(data is RandomizableSCQSaveData<T> realData){
                 options = realData.ConvertToOptionT(ParseOptionFromString);
-                
+                //UnityEngine.Debug.Log($"{options.Length}");
             }
             base.SetData(data);
         }
         protected abstract T ParseOptionFromString(string data);
         public sealed override QuestionSaveData ConvertToData()
         {
-            var parent = new RandomizableSCQSaveData<T>(options, _answer, _playerAnswered)
+            string[] stringOptions = ConvertOptionsToStrings();
+            // foreach(string str in stringOptions){
+            //     UnityEngine.Debug.Log(str);
+            // }
+            var parent = new RandomizableSCQSaveData<T>(stringOptions, UserAnswerIndex: _playerAnswered, CorrectAnswerIndex: _answer)
             {
                 Question = GetQuestion()
             };
             return ConvertToData(parent);
         }
         protected abstract QuestionSaveData ConvertToData(RandomizableSCQSaveData<T> parent);
+
+        // for the case like an array, this method can be customized to convert an array to string
+        // This should be override for any class use T as an array
+        protected virtual string[] ConvertOptionsToStrings(){
+            string[] result = new string[options.Length];
+            for(int i = 0; i < options.Length; ++i){
+                result[i] = options[i].ToString();
+            }
+            return result;
+        }
 
         public IQuestion Random(Random rand) => RandomT(rand);
         public sealed override IQuestion Clone()

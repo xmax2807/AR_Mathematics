@@ -702,6 +702,7 @@ MonoBehaviour:
       m_Calls: []
   IsDebugging: 1
   Template: {fileID: 11400000, guid: 1b298c68d56f0d84a9197979bdfcff04, type: 2}
+  isEndless: 1
 --- !u!114 &460788265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Datas:
   - {fileID: 11400000, guid: a086241bc1a7e2449a205b32c86c5553, type: 2}
+  - {fileID: 11400000, guid: 9706637c43ff49b4ba0425c21387dc0d, type: 2}
+  - {fileID: 11400000, guid: c14fde0d5d3c4b54bb25879f32719a6f, type: 2}
   OnRewardAccquired:
     m_PersistentCalls:
       m_Calls: []
@@ -996,6 +999,7 @@ MonoBehaviour:
     type: 3}
   buttonGroupTransform: {fileID: 49436869}
   question: {fileID: 1670679301}
+  EndGameButton: {fileID: 0}
   ColliderEvent: {fileID: 11400000, guid: 0b4246b226ce76a47873e42a9b4e0666, type: 2}
 --- !u!1 &912687470
 GameObject:
@@ -1180,6 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c490b59e9d6674aadb092342bb001e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showCamValues: 1
 --- !u!4 &1445655075
 Transform:
   m_ObjectHideFlags: 0
@@ -1285,6 +1290,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 912687474}
     m_Modifications:
+    - target: {fileID: 1340887892897501992, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
+        type: 3}
+      propertyPath: videoUrl
+      value: InGameTutorials/DemoVCNV
+      objectReference: {fileID: 0}
     - target: {fileID: 4425227285114298367, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
         type: 3}
       propertyPath: m_SizeDelta.x

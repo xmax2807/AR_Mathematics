@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01584c71171cc6498876d1824bd37bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8033944283125619340}
 --- !u!1001 &2679659499158173840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2679659499158173840}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8420444073882280920
+--- !u!95 &8033944283125619340
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

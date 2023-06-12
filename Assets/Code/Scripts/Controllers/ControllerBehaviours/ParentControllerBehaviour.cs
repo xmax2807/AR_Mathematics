@@ -14,7 +14,7 @@ public class ParentControllerBehaviour : MonoBehaviour
     [SerializeField] private LoadingPanelView loadingView;
 
     #region Database/Server
-    FirebaseUser CurrentUser => DatabaseManager.Auth.CurrentUser;
+    FirebaseUser CurrentUser => DatabaseManager.Auth?.CurrentUser;
     private bool accessGranted;
     private TestController TestController => DatabaseManager.Instance.TestController;
     private UserController UserController => DatabaseManager.Instance.UserController;
@@ -99,7 +99,7 @@ public class ParentControllerBehaviour : MonoBehaviour
             int currentIndex = i;
 
             var clickEvent = new UnityEngine.UI.Button.ButtonClickedEvent();
-            clickEvent.AddListener(() => ViewTestDetail(currentIndex));
+            clickEvent.AddListener(() => ViewTestDetail(currentIndex, allTests[currentIndex].Title));
             buttons[i] = new ButtonData()
             {
                 Name = "Xem chi tiết",
@@ -126,13 +126,13 @@ public class ParentControllerBehaviour : MonoBehaviour
         }
     }
 
-    public async void ViewTestDetail(int index)
+    public async void ViewTestDetail(int index, string TestTitle)
     {
         // show Loading view
         await Task.WhenAll(loadingView.ShowAsync(), testOverviews.Hide());
 
         // Query from database
-        (TestModel testModel, QuizModel[] quizzes) = await TestController.GetTest(allTests[index].Semester);
+        (TestModel testModel, QuizModel[] quizzes) = await TestController.GetTestByTitle(TestTitle);
         UserManager.Instance.CurrentTestModel = testModel;
         UserManager.Instance.CurrentQuizzes = quizzes;
 
@@ -142,5 +142,10 @@ public class ParentControllerBehaviour : MonoBehaviour
 
         // hide Loading view
         await Task.WhenAll(loadingView.HideAsync(), pagerUIView.ShowAsync());
+    }
+
+    public void ReturnToOverview(){
+        pagerUIView.HideAsync();
+        testOverviews.Show();
     }
 }

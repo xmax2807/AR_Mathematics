@@ -64,13 +64,13 @@ namespace Project.UI.Panel{
             {
                 question = new GeneralQuestion(current.QuizTitle, current.QuizAnswer, current.QuizCorrectAnswer, current.QuizIMG);
             }
-
+            Debug.Log($"{index}:{question.GetQuestion()}");
             return question;
         }
 
-        private async Task LoadSavedData(){
-            savedData = await ResourceManager.Instance.LoadTestAsync(TestModel.TestSemester);
-        }
+        // private async Task LoadSavedData(){
+        //     savedData = await ResourceManager.Instance.LoadTestAsync(TestModel.TestSemester);
+        // }
         private void SetResults(){
             if(savedData == null) return;
             int currentDataIndex = 0;
@@ -78,6 +78,9 @@ namespace Project.UI.Panel{
                 if(AllQuestions[i] is ISavableQuestion savableQuestion){
                     savableQuestion.SetData(savedData.ListData[currentDataIndex]);
                     ++currentDataIndex;
+                }
+                else{
+                    Debug.Log("Skipped " + AllQuestions[i].GetQuestion());
                 }
             }
         }

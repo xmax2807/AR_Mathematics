@@ -140,21 +140,43 @@ namespace Project.MiniGames{
 
     public class VCNVTask : RandomizableSingleChoiceTask<int>
     {
-        private int currentChap;
-        public VCNVTask(int currentChap,int goal, string description) : base(goal, description)
+        private int CurrentChap => Managers.UserManager.Instance.CurrentUnitProgress.chapter;
+        public VCNVTask(int goal, string description) : base(goal, description)
         {
-            this.currentChap = currentChap;
         }
 
         protected override RandomizableSCQ<int> CreateSingleChoiceQuestion()
         {
-            return currentChap switch
+            return CurrentChap switch
             {
                 3 => new EquationSCQ(10, 4),
                 4 => new EquationSCQ(20, 4),
                 5 => new EquationSCQ(100, 4),
                 _ => new EquationSCQ(10, 4),
             };
+        }
+    }
+
+    public class ComparisonTask : RandomizableTask
+    {
+        private int CurrentChap => Managers.UserManager.Instance.CurrentUnitProgress.chapter;
+        public int LeftNumber => cacheQuestion.LeftNumber;
+        public int RightNumber => cacheQuestion.RightNumber;
+        public ComparisonQuestion.ExpressionBiggerSide Answer => cacheQuestion.Answer;
+        private ComparisonQuestion cacheQuestion;
+        public ComparisonTask(int goal, string description) : base(goal, description){}
+
+        protected override IRandomizableQuestion CreateQuestion()
+        {
+            cacheQuestion = CurrentChap switch
+            {
+                3 => new ComparisonQuestion(10, 0),
+                4 => new ComparisonQuestion(20, 5),
+                5 => new ComparisonQuestion(100, 10),
+                _ => new ComparisonQuestion(100, 10),
+            };
+            cacheQuestion.Randomize();
+            return cacheQuestion;
         }
     }
 }
