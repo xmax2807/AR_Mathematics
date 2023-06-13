@@ -37,6 +37,7 @@ namespace Project.AssetIO{
 
         public override async Task<T> GetFile(string url)
         {
+            UnityEngine.Debug.Log($"Getting url from FireBase: {url}");
             if(cache.ContainsKey(url)) return cache[url];
             cache.Add(url, default);
 

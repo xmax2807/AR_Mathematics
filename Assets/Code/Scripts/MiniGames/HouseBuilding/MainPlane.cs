@@ -16,9 +16,9 @@ namespace Project.MiniGames.HouseBuilding{
             if(buildingParent == null){
                 var newGameObj = new GameObject("BuildingParent");
                 buildingParent = newGameObj.transform;
-                newGameObj.transform.parent = this.transform;
+                newGameObj.transform.SetParent(this.transform, false);
             }
-            this.transform.position = new Vector3(1,-4,6);
+            this.transform.position = new Vector3(0,-2.5f,6.5f);
             
             placedBlockHistory = new Stack<PlacementObject>(10);
             HouseBuildingEventManager.Instance.RegisterEvent<PlacementObject>(HouseBuildingEventManager.BlockTouchEventName, this, OnBlockTouch);

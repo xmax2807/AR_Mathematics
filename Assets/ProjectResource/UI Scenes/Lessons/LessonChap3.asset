@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children: []
   ButtonNames:
-  - Name: "Ph\u01B0\u01A1ng h\u01B0\u1EDBng"
+  - Name: "Ph\xE9p c\u1ED9ng t\u1EEB 1 \u0111\u1EBFn 10"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -27,11 +27,11 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 1,1
+            m_StringArgument: 1,3
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "H\xECnh kh\u1ED1i"
+  - Name: "B\u1EA3ng c\u1ED9ng t\u1EEB 1 \u0111\u1EBFn 10"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -44,11 +44,11 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 2,1
+            m_StringArgument: 2,3
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "H\xECnh h\u1ECDc"
+  - Name: "Ph\xE9p tr\u1EEB t\u1EEB 1 \u0111\u1EBFn 10"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -61,7 +61,24 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 3,1
+            m_StringArgument: 3,3
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "B\u1EA3ng tr\u1EEB t\u1EEB 1 \u0111\u1EBFn 10"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 4,3
             m_BoolArgument: 0
           m_CallState: 2
     Description: 

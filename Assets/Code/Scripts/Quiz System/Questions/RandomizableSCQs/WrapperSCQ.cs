@@ -19,7 +19,14 @@ namespace Project.QuizSystem{
             rand ??= random;
             base.Randomize(rand);
             wrappee.Randomize(rand);
+            cacheOptions = null;
+            
             options = wrappee.GetRandomOptions(options.Length);
+            for(int i = 0; i < options.Length; ++i){
+                if(options[_answer].Equals(options[i])){
+                    (options[_answer], options[i]) = (options[i], options[_answer]); 
+                }
+            }
             options[_answer] = wrappee.Answer;
         }
 
@@ -72,7 +79,8 @@ namespace Project.QuizSystem{
 
         protected override RandomizableSCQ<T> DeepClone()
         {
-            return new WrapperSCQ<T>(this.wrappee,this.questionContentType, this.options);
+            IRandomizableQuestion<T> cloneWrappee = (IRandomizableQuestion<T>)this.wrappee.Clone();
+            return new WrapperSCQ<T>(cloneWrappee,this.questionContentType, this.options);
         }
 
         protected override T ParseOptionFromString(string data)

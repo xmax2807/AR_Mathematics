@@ -19,11 +19,11 @@ namespace Project.QuizSystem.UIFactory
             prefab = prefabSample;
             uiState = AnswerUIState.NotAnswered;
         }
-        public void CreateUI(AnswerUIController layoutGroup, IQuestion question)
+        public void CreateUI(AnswerUIController uiController, IQuestion question)
         {
-            controller = layoutGroup;
+            controller = uiController;
             GetQuestionInfo(question);
-            BuildUI(layoutGroup);
+            BuildUI(uiController);
         }
         protected abstract void BuildUI(AnswerUIController layoutGroup);
         protected void InvokeAnswerEvent(bool result) => OnUserAnswered?.Invoke(result);
@@ -35,7 +35,10 @@ namespace Project.QuizSystem.UIFactory
         public void ChangeUIState(AnswerUIState state) => uiState = state;
         public void SetAnswer()
         {
-            if (!question.HasAnswered()) return;
+            if (!question.HasAnswered()) {
+                controller.UnlockUI();
+                return;
+            }
             
             if (uiState == AnswerUIState.Result)
             {

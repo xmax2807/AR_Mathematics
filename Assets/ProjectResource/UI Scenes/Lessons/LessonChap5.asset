@@ -65,7 +65,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "Ch\u1EE5c v\xE0 \u0111\u01A1n v\u1ECB(s\u1EEDa)"
+  - Name: "C\xE1c s\u1ED1 t\u1EEB 21 \u0111\u1EBFn 50"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -82,7 +82,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "Ch\u1EE5c v\xE0 \u0111\u01A1n v\u1ECB(s\u1EEDa)"
+  - Name: "C\xE1c s\u1ED1 t\u1EEB 51 \u0111\u1EBFn 100"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -116,7 +116,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "C\u1ED9ng kh\xF4ng nh\u1EDB ph\u1EA1m vi 100"
+  - Name: "C\u1ED9ng kh\xF4ng nh\u1EDB t\u1EEB 0 \u0111\u1EBFn 100"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -133,7 +133,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: "Tr\u1EEB kh\xF4ng nh\u1EDB ph\u1EA1m vi 100"
+  - Name: "Tr\u1EEB kh\xF4ng nh\u1EDB t\u1EEB 0 \u0111\u1EBFn 100"
     OnClick:
       m_PersistentCalls:
         m_Calls:

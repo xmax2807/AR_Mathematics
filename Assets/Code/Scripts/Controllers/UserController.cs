@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Managers;
 using Project.Utils.ExtensionMethods;
+using RobinBird.FirebaseTools.Storage.Addressables;
 using UnityEngine;
 public class UserController
 {
@@ -84,7 +85,7 @@ public class UserController
                 user.DisplayName, user.UserId);
         });
         if(user == null) return false;
-
+        FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
         ProfileUser(user.UserId);
         return true;
     }

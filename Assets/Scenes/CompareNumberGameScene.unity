@@ -421,6 +421,41 @@ PrefabInstance:
       propertyPath: giver
       value: 
       objectReference: {fileID: 817555406}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 473604883}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Show
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.RewardSystem.ModelRewardPopup, Projec
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701923282789346468, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: OnGiftBoxClicked.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dcbe1ceac8782344b88a76bf4a4d852, type: 3}
 --- !u!224 &218948882 stripped
@@ -806,7 +841,7 @@ PrefabInstance:
     - target: {fileID: 2892079848777800090, guid: f2fe89d38f1b6cc4bbab2203ee4a749b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2892079848777800090, guid: f2fe89d38f1b6cc4bbab2203ee4a749b,
         type: 3}
@@ -1104,6 +1139,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 305996612}
     m_Modifications:
+    - target: {fileID: 1340887892897501992, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
+        type: 3}
+      propertyPath: videoUrl
+      value: InGameTutorials/DemoComparison
+      objectReference: {fileID: 0}
     - target: {fileID: 1340887892897501992, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
         type: 3}
       propertyPath: isFromResource

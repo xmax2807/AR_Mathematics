@@ -3,15 +3,17 @@ using System.Text;
 namespace Project.QuizSystem{
     public class NumberOrderSCQ : WrapperSCQ<int[]>
     {
+        private bool isDescending;
         public NumberOrderSCQ(int optionsLength, int maxNumber, bool IsDescending) : base(new NumberOrderQuestion("", maxNumber, IsDescending), QuestionContentType.Text, optionsLength)
         {
+            isDescending = IsDescending;
         }
         protected NumberOrderSCQ(int optionsLength, IRandomizableQuestion<int[]> wrappee) :  base(wrappee, QuestionContentType.Text, optionsLength){}
         public override QuestionContentType QuestionContentType => QuestionContentType.Text;
 
         protected override RandomizableSCQ<int[]> DeepClone()
         {
-            return new NumberOrderSCQ(this.options.Length, this.wrappee);
+            return new NumberOrderSCQ(this.options.Length, this.wrappee.Clone() as IRandomizableQuestion<int[]>);
         }
 
         protected override string[] ConvertOptionsToStrings()
@@ -37,6 +39,12 @@ namespace Project.QuizSystem{
             // }
 
             return result;
+        }
+
+        public override string GetQuestion()
+        {
+            string ascendingOrder = this.isDescending ? "từ lớn tới bé" : "từ bé đến lớn";
+            return $"Em hãy sắp xếp dãy số {ascendingOrder}:\n" + wrappee.GetQuestion();
         }
     }
 }

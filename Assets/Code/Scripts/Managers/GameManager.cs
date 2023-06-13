@@ -16,7 +16,7 @@ namespace Project.Managers
         private Camera mainGameCam;
         private Canvas rootCanvas;
 
-        [SerializeField] bool showCamValues = true;
+        [SerializeField] bool showCamValues = false;
 
         /// <summary>
         /// Initialize GameManager with required Managers

@@ -34,10 +34,12 @@ namespace Project.UI.Panel
             CreateUI(ListData);
             PushUI(ListData);
         }
-        private void OnEnable(){
+        private void OnEnable()
+        {
             backButton?.onClick.AddListener(PopUI);
         }
-        private void OnDisable(){
+        private void OnDisable()
+        {
             backButton?.onClick.RemoveListener(PopUI);
         }
         private void CreateUI(PanelViewData data)
@@ -63,21 +65,22 @@ namespace Project.UI.Panel
         private async void PopUI()
         {
             eventManager?.Lock();
-            Task[] uiTask = new Task[2];
-            {
-                if (!stack.TryPop(out var result)) return;
 
+            if (!stack.TryPop(out var result)) {
+                eventManager?.Unlock();
                 ShouldEnableBackButton();
-                
-                uiTask[0] = result.Controller.Hide();
-
-                uiTask[1] = Task.CompletedTask;
-                if(CurrentData != null){
-                    uiTask[1] = CurrentData.Controller.Show();
-                }
+                return;
             }
-            
-            await Task.WhenAll(uiTask);
+
+            ShouldEnableBackButton();
+
+            await result.Controller.Hide();
+
+            if (CurrentData != null)
+            {
+                await CurrentData.Controller.Show();
+            }
+
             eventManager?.Unlock();
         }
         private async void PushUI(PanelViewData data)
@@ -88,29 +91,28 @@ namespace Project.UI.Panel
             {
                 CreateUI(data);
             }
-            
-            Task[] uiTask = new Task[2];
+
+            var pack = cached[data.name];
+
+            if (CurrentData != null)
             {
-                var pack = cached[data.name];
-
-                uiTask[0] = Task.CompletedTask;
-                if(CurrentData != null){
-                    uiTask[0] = CurrentData.Controller.Hide();
+                if(CurrentData == pack){
+                    eventManager?.Unlock();
+                    return;
                 }
-                uiTask[1] = pack.Controller.Show();
-
-                stack.Push(pack);
-                ShouldEnableBackButton();
+                await CurrentData.Controller.Hide();
             }
+            await pack.Controller.Show();
+            stack.Push(pack);
+            ShouldEnableBackButton();
 
-
-            await Task.WhenAll(uiTask);
             eventManager?.Unlock();
-            
         }
 
-        private void ShouldEnableBackButton(){
-            if(backButton != null){
+        private void ShouldEnableBackButton()
+        {
+            if (backButton != null)
+            {
                 backButton.interactable = stack.Count > 1;
             }
         }

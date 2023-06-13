@@ -10,7 +10,7 @@ namespace Project.QuizSystem{
     
     public abstract class RandomizableSCQ<T> : SingleChoice<T>, IRandomizableQuestion
     {
-        protected static readonly System.Random random = new(DateTime.Now.Millisecond);
+        public static readonly System.Random random = new(DateTime.Now.Millisecond);
         protected abstract string constQuestion {get;}
         public RandomizableSCQ(int optionsLength) : base("", new T[optionsLength],0){}
 

@@ -29,6 +29,7 @@ public class DatabaseManager : MonoBehaviour
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;
     public static Firebase.Storage.FirebaseStorage Storage;
+    public static FirebaseApp App => Instance.app;
     public static DatabaseManager Instance { get; private set; }
     private FirebaseApp app;
     public UserController UserController { get; private set; }
@@ -71,7 +72,6 @@ public class DatabaseManager : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = Firebase.FirebaseApp.DefaultInstance;
-                FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
                 
                 FirebaseFireStore = FirebaseFirestore.GetInstance(app);
                 Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);

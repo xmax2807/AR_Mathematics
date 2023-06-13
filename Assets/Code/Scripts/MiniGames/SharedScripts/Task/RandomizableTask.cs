@@ -170,6 +170,7 @@ namespace Project.MiniGames{
         {
             cacheQuestion = CurrentChap switch
             {
+                2 => new ComparisonQuestion(10, 0),
                 3 => new ComparisonQuestion(10, 0),
                 4 => new ComparisonQuestion(20, 5),
                 5 => new ComparisonQuestion(100, 10),

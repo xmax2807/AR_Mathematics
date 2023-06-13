@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ae5a29beaff407491e5574f5706dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stack: {fileID: 11400000, guid: a47d394c465a24d1194fce337a94c971, type: 2}
+  stack: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
   popEvent: 1
 --- !u!1 &4110031850112394535
 GameObject:
