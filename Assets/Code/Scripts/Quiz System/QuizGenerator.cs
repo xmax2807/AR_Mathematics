@@ -37,7 +37,7 @@ namespace Project.QuizSystem
                     {(2,5,""), new EquationSCQ(90,4)},
                     {(6,5,"bn"), new ExtremeNumberSCQ(optionsLength:4, maxNumber:100, isMinimumFinding: true, minNumber: 10)},
                     {(6,5,"ln"), new ExtremeNumberSCQ(optionsLength:4, maxNumber:100, isMinimumFinding: false, minNumber: 10)},
-                    {(6,5,"ss"), new NumberOrderSCQ(optionsLength:4, maxNumber: 100, false)},
+                    {(6,5,"ss"), new InEqualitySCQ(maxNumber:100, optionsLength: 4)},
                     {(6,5,"sx"), new NumberOrderSCQ(optionsLength:4, maxNumber: 100, false)},
                     {(7,5,""), new EquationSCQ(100,4)},
                     {(8,5,""), new EquationSCQ(100,4)},

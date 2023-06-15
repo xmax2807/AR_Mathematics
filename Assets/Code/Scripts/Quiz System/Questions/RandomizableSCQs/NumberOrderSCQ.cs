@@ -44,7 +44,7 @@ namespace Project.QuizSystem{
         public override string GetQuestion()
         {
             string ascendingOrder = this.isDescending ? "từ lớn tới bé" : "từ bé đến lớn";
-            return $"Em hãy sắp xếp dãy số {ascendingOrder}:\n" + wrappee.GetQuestion();
+            return $"<size=50%>Em hãy sắp xếp dãy số {ascendingOrder}:</size>\n" + wrappee.GetQuestion();
         }
     }
 }
