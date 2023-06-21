@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children:
   - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
-  - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
+  - {fileID: 11400000}
   ButtonNames:
   - Name: "Danh hi\u1EC7u"
     OnClick:
@@ -24,7 +24,19 @@ MonoBehaviour:
   - Name: "V\u1EADt ph\u1EA9m"
     OnClick:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 8d247f9139b1e5049a870cf37c124f25, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleSceneLoadData, Projec
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: View3DReward
+            m_BoolArgument: 0
+          m_CallState: 2
     Description: 
   Title: "B\u1ED9 s\u01B0u t\u1EADp"
   Description: 

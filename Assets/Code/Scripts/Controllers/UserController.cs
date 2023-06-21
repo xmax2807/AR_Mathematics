@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Firebase.Firestore;
 using Project.Managers;
@@ -10,10 +11,12 @@ public class UserController
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
     Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
     public Firebase.Auth.FirebaseUser FireBaseUser {get;private set;}
+    private Project.AssetIO.JsonFileHandler m_localFileHandler; 
     const string Collection = "users";
     public UserController()
     {
         auth.StateChanged += AuthStateChanged;
+        m_localFileHandler = new Project.AssetIO.JsonFileHandler();
     }
 
     private void AuthStateChanged(object sender, EventArgs e)
@@ -58,6 +61,7 @@ public class UserController
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
             UploadModel(newUser);
+            _ = CreateSaveData(newUser.UserId);
         });
         return newUser;
     }
@@ -84,9 +88,12 @@ public class UserController
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 user.DisplayName, user.UserId);
         });
+
         if(user == null) return false;
+
         FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
         ProfileUser(user.UserId);
+        UserManager.Instance.CurrentLocalUser = await GetLocalUserModel(user.UserId);
         return true;
     }
 
@@ -100,7 +107,7 @@ public class UserController
                 
                 userModel = snapshot.ConvertTo<UserModel>();
                 UserManager.Instance.CurrentUser = userModel;
-                Debug.Log("ok");
+                //Debug.Log("ok");
             }
             catch(Exception e){
                 Debug.Log(e.Message);
@@ -126,7 +133,18 @@ public class UserController
         };
         // user.UserID = newUser.UserId;
         db.Collection("users").Document(newUser.UserId).SetAsync(userModel);
+    }
 
+    private async Task CreateSaveData(string userId){
+        UserLocalModel localModel = new(userId);
+        await m_localFileHandler.WriteAsync(localModel, Path.Combine(Application.persistentDataPath, $"userLocalSave/{userId}.json"));
+    }
+    private async Task<UserLocalModel> GetLocalUserModel(string userId){
+        UserLocalModel result = await m_localFileHandler.ReadAsync<UserLocalModel>(Path.Combine(Application.persistentDataPath, $"userLocalSave/{userId}.json"));
+        if(result == null){
+           await CreateSaveData(userId);
+        }
+        return result;
     }
 
     public async Task<UserModel> GetUserModel(string userId){

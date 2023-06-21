@@ -16,7 +16,7 @@ namespace Project.RewardSystem
 
         private void Awake()
         {
-            Datas = Datas.OrderBy((x) => x.Goal).ToArray();
+            //Datas = Datas.OrderBy((x) => x.Goal).ToArray();
 
             Rewards = new Reward<int>[Datas.Length];
             for (int i = 0; i < Rewards.Length; i++)

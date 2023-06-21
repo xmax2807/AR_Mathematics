@@ -20,7 +20,7 @@ namespace Project.UI.TrueFalseUI{
         }
 
         public string UniqueID => button.UniqueID;
-
+        public bool Interactable { get => button.Interactable; set => button.Interactable = value; }
 
         public bool Equals(ITouchableObject other)
         {

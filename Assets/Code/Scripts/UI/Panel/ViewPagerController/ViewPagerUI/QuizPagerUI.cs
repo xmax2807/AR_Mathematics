@@ -32,7 +32,7 @@ namespace Project.UI.Panel
             base.InitT(panelView);
             //After updating current view
             currentQuestion = panelView.Question;
-            await panelView.ContentUI.CreateUI(content, currentQuestion);
+            await panelView.ContentUI.CreateUI(content, currentQuestion);// lấy hình từ server
             panelView.AnswerUI.CreateUI(answersContainer, currentQuestion);
             questionText.text = currentQuestion.GetQuestion();
             panelView.AnswerUI.OnUserAnswered += OnUserAnswered;

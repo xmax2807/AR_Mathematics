@@ -29,8 +29,13 @@ namespace Project.UI.Panel{
                 obj.onClick = Data.ButtonNames[i].OnClick;
             });
 
-            Title.text = Data.Title;
-            Description.text = Data.Description;
+            if(Title != null){
+                Title.text = Data.Title;
+            }
+
+            if(Description != null){
+                Description.text = Data.Description;
+            }
         }
     }
 }

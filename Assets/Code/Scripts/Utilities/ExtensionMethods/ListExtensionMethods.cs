@@ -159,6 +159,23 @@ namespace Project.Utils.ExtensionMethods
             }
         }
 
+        // public static void SelfSort<T>(this IEnumerable<T> List, Func<T, int> condition){
+        //     if (condition == null) return;
+
+        //     IEnumerator<T> iterator = List.GetEnumerator();
+
+        //     if (!iterator.MoveNext()) return;
+
+        //     T first = iterator.Current;
+        //     while (iterator.MoveNext())
+        //     {
+        //         if (condition.Invoke(iterator.Current) > 1)
+        //         {
+        //             closestMatch = iterator.Current;
+        //         }
+        //     }
+        // }
+
         public static bool IsContains<T>(this IEnumerable<T> List, Func<T, bool> condition){
             if (condition == null) return default;
 

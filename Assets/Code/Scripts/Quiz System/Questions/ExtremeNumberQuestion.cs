@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Project.QuizSystem.SaveLoadQuestion;
 using Project.Utils.ExtensionMethods;
 
 namespace Project.QuizSystem{
-    public class ExtremeNumberQuestion : BaseQuestion<int>, IRandomizableQuestion<int>
+    public class ExtremeNumberQuestion : BaseQuestion<int>, IRandomizableQuestion<int>, ISavableQuestion
     {
         private const string HeaderQuestion = "Em hãy tìm số _ trong dãy số:\n";
         private int maxNumber,minNumber;
@@ -94,16 +95,54 @@ namespace Project.QuizSystem{
             _answer = isMinimumFinding ? numberArray.FindSmallest(Comparer<int>.Default) : numberArray.FindLargest(Comparer<int>.Default);
             
             // Generate question
+            // StringBuilder builder = new($"<size=50%>{HeaderQuestion}</size>");
+            // string whichExtreme = isMinimumFinding ? "bé nhất" : "lớn nhất";
+            // builder.Replace("_", whichExtreme);
+            
+            // i = 0;
+            // for(; i < count - 1; ++i){
+            //     builder.Append(numberArray[i]).Append(", ");
+            // }
+            // builder.Append(numberArray[i]);
+            // _question = builder.ToString();
+            _question = GenerateQuestion();
+        }
+
+        private string GenerateQuestion(){            
+            // Generate question
             StringBuilder builder = new($"<size=50%>{HeaderQuestion}</size>");
             string whichExtreme = isMinimumFinding ? "bé nhất" : "lớn nhất";
             builder.Replace("_", whichExtreme);
             
-            i = 0;
-            for(; i < count - 1; ++i){
+            int i = 0;
+            for(; i < numberArray.Length - 1; ++i){
                 builder.Append(numberArray[i]).Append(", ");
             }
             builder.Append(numberArray[i]);
-            _question = builder.ToString();
+
+            return builder.ToString();
+        }
+
+        public QuestionSaveData ConvertToData()
+        {
+            return new ExtremeNumberQSD(){
+                MaxNumber = this.maxNumber,
+                MinNumber = this.minNumber,
+                Numbers = this.numberArray,
+                IsMinimumFinding = this.isMinimumFinding,
+            };
+        }
+
+        public void SetData(QuestionSaveData data)
+        {
+            if (data is not ExtremeNumberQSD realData){
+                return;
+            }
+            
+            numberArray = (int[])realData.Numbers.Clone();
+            isMinimumFinding = realData.IsMinimumFinding;
+            _answer = isMinimumFinding ? numberArray.FindSmallest(Comparer<int>.Default) : numberArray.FindLargest(Comparer<int>.Default);
+            this._question = GenerateQuestion();
         }
     }
 }

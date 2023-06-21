@@ -166,6 +166,21 @@ namespace Project.Utils.ExtensionMethods
             return objRenderer.bounds.size;
         }
 
+        public static Bounds GetBoundsFromRenderer(this GameObject obj){
+            //Get renderer of this obj
+            if(obj.TryGetComponent<Renderer>(out Renderer objRenderer)){
+                return objRenderer.bounds;
+            }
+
+            // if not get first renderer in children
+            objRenderer = obj.GetComponentInChildren<Renderer>(true);
+            if(objRenderer == null){
+                Debug.Log($"{obj.name} doesn't have any renderer");
+                return default;
+            }
+            return objRenderer.bounds;
+        }
+
         public static Vector3 GetSizeFromCollider(this GameObject obj){
             if(obj.TryGetComponent<Collider>(out Collider objCollider)){
                 return objCollider.bounds.size;

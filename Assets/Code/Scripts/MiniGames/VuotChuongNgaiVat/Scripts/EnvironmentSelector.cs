@@ -32,7 +32,7 @@ public class EnvironmentSelector : MonoBehaviour
             case 3: pack = packs[0]; break;
             case 4: pack = packs[Mathf.Min(1, max)]; break;
             case 5: pack = packs[Mathf.Min(2, max)]; break;
-            default: pack = packs[Mathf.Min(0, max)]; break;
+            default: pack = packs[Mathf.Min(2, max)]; break;
         }
 
         GameObject player = Instantiate(pack.Player);

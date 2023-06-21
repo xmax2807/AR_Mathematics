@@ -129,7 +129,8 @@ public class ParentControllerBehaviour : MonoBehaviour
     public async void ViewTestDetail(int index, string TestTitle)
     {
         // show Loading view
-        await Task.WhenAll(loadingView.ShowAsync(), testOverviews.Hide());
+        await loadingView.ShowAsync();
+        await testOverviews.Hide();
 
         // Query from database
         (TestModel testModel, QuizModel[] quizzes) = await TestController.GetTestByTitle(TestTitle);
@@ -141,7 +142,8 @@ public class ParentControllerBehaviour : MonoBehaviour
         pagerController.ManualSetup();
 
         // hide Loading view
-        await Task.WhenAll(loadingView.HideAsync(), pagerUIView.ShowAsync());
+        await pagerUIView.ShowAsync();
+        await loadingView.HideAsync();
     }
 
     public void ReturnToOverview(){

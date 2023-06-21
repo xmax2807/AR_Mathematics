@@ -13,9 +13,9 @@ namespace Project.UI.Panel{
 
         protected override async void Awake()
         {
+            AllQuestions = new IQuestion[QuizModels.Length];
             base.Awake();
             await generator.InitAsset();
-            AllQuestions = new IQuestion[QuizModels.Length];
         }
 
         protected override async void SetupList (){
@@ -26,7 +26,8 @@ namespace Project.UI.Panel{
             await FetchPanelView(QuizModels.Length, OnBuildUIView);
             if(preloadList.Count == 0){
                 await loadingView.HideAsync();
-                return;  
+                // Báo là k có câu hỏi
+                return; 
             }
             InvokeOnPageChanged(0);
             LoadMore();

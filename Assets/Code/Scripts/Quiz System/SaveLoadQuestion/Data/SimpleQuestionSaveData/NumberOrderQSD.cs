@@ -5,4 +5,11 @@ namespace Project.QuizSystem.SaveLoadQuestion{
         public bool IsAscending {get;set;}
         public int[] Numbers {get;set;}
     }
+
+    public class ExtremeNumberQSD : QuestionSaveData{
+        public int MinNumber{get;set;}
+        public int MaxNumber {get;set;}
+        public int[] Numbers {get;set;}
+        public bool IsMinimumFinding {get;set;}
+    }
 }

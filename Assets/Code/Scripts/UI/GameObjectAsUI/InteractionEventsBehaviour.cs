@@ -3,6 +3,7 @@ using Project.Managers;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace Project.UI.GameObjectUI
 {
@@ -11,6 +12,7 @@ namespace Project.UI.GameObjectUI
         [SerializeField] int maxTouchCount = 3;
         [SerializeField] private LayerMask filteredMasks;
         private Camera MainCam => GameManager.MainGameCam;
+        private EventSystem currentEventSystem;
         private bool m_isBlockTouching = false;
 
         private static Dictionary<int, ITouchableObject> cacheTouchObjs = new(3);
@@ -25,6 +27,7 @@ namespace Project.UI.GameObjectUI
             else if(_instance != this){
                 Destroy(this.gameObject);
             }
+            currentEventSystem = EventSystem.current;
         }
 
         public void Update()
@@ -34,6 +37,11 @@ namespace Project.UI.GameObjectUI
             }
             
             #if UNITY_EDITOR
+            
+            if(currentEventSystem.IsPointerOverGameObject()){
+                return;
+            }
+
             if(Input.GetMouseButtonDown(0)){
                 Touch converted = new(){
                     position = Input.mousePosition,
@@ -66,8 +74,11 @@ namespace Project.UI.GameObjectUI
 
         private void HandleTouch(Touch theTouch)
         {
-            Debug.Log(theTouch.phase);
-            //OnTouchBegan
+            if(currentEventSystem.IsPointerOverGameObject(theTouch.fingerId)){
+                Debug.Log("Pointing UI");
+                return;
+            }
+            //OnTouchBegan-> Perform raycast
             if(theTouch.phase == TouchPhase.Began){
                 bool tryRaycast = TryRaycastTouchableObject(theTouch);
                 if(tryRaycast == false){
@@ -104,6 +115,9 @@ namespace Project.UI.GameObjectUI
 
             if (objectCollider.GetComponent(typeof(ITouchableObject)) is ITouchableObject touchableObject)
             {
+                if(touchableObject.Interactable == false){
+                    return false;
+                }
                 cacheTouchObjs.Add(theTouch.fingerId, touchableObject);
                 touchableObject.OnTouch(theTouch);
                 return true;
@@ -114,7 +128,13 @@ namespace Project.UI.GameObjectUI
             return false;
         }
 
-        public void BlockRaycast() => m_isBlockTouching = true;
-        public void UnblockRaycast() => m_isBlockTouching = false;
+        public void BlockRaycast() {
+            Debug.Log("Blocked raycast");
+            m_isBlockTouching = true;
+        }
+        public void UnblockRaycast() {
+            Debug.Log("Unblocked raycast");
+             m_isBlockTouching = false;
+        }
     }
 }

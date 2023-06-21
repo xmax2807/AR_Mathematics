@@ -5,8 +5,13 @@ namespace Project.UI.GameObjectUI{
     {
         private string id;
         public string UniqueID => id;
+
+        private bool m_interactable = true;
+        public bool Interactable { get => m_interactable; set => m_interactable = value; }
+
         public UnityEngine.Events.UnityEvent<GameObjectButton> OnButtonTouchEvent;
         public event System.Action<GameObjectButton> OnButtonTouch;
+        public event System.Action<GameObjectButton, Vector3> OnButtonTouchPosition;
 
         public void Awake(){
             //Create new Guid
@@ -23,6 +28,7 @@ namespace Project.UI.GameObjectUI{
             if(touch.phase == TouchPhase.Ended){
                 OnButtonTouch?.Invoke(this);
                 OnButtonTouchEvent?.Invoke(this);
+                OnButtonTouchPosition?.Invoke(this, touch.position);
             }
         }
     }

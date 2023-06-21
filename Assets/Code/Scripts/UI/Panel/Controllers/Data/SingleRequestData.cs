@@ -12,7 +12,7 @@ namespace Project.UI.Panel
         protected const char separator = ',';
         public enum RequestType
         {
-            None, Lesson, Quiz, Game, Achievement, Test
+            None, Lesson, Quiz, Game, Achievement, Test, ARModel
         }
         [SerializeField] protected RequestType requestType = RequestType.None;
         protected event System.Action<bool> onPostRequest;
@@ -172,9 +172,9 @@ namespace Project.UI.Panel
 
             var result = await DatabaseManager.Instance.AchievementController.GetAchievementsOfUser(currentUser);
             UserManager.Instance.AcquiredAchivements = result;
-            foreach(var i in result){
-                Debug.Log(i.AchieveTitle);
-            }
+            // foreach(var i in result){
+            //     Debug.Log(i.AchieveTitle);
+            // }
             return result != null;
         }
 

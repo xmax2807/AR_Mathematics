@@ -13,6 +13,7 @@ namespace Project.Managers{
         }
         public static UserManager Instance;
         public UserModel CurrentUser {get;set;}
+        public UserLocalModel CurrentLocalUser {get;set;}
         public LessonModel CurrentLesson {get;set;}
         public QuizModel[] CurrentQuizzes;
         public TestModel CurrentTestModel;

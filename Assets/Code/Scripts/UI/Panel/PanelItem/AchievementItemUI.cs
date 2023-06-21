@@ -44,7 +44,7 @@ namespace Project.UI.Panel.PanelItem
             if (button == null) return;
             if (!uiData.isUnlocked)
             {
-                button.enabled = false;
+                button.interactable = false;
             }
             else
             {

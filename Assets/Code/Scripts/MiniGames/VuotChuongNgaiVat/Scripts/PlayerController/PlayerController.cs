@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour, IEventListener
     }
 
     protected void Die(){
-        float animationLen = animator.GetCurrentAnimatorStateInfo(0).length;
-        TimeCoroutineManager.Instance.WaitForSeconds(animationLen, ()=>{
+        //float animationLen = animator.GetCurrentAnimatorStateInfo(0).length;
+        TimeCoroutineManager.Instance.WaitForSeconds(3f, ()=>{
             VCNVGameEventManager.Instance.RaiseEvent(VCNVGameEventManager.EndGameEventName, false);
         });
     }

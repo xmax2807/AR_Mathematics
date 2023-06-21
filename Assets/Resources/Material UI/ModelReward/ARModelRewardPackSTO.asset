@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b641271d2802c6140ba8822243107d89, type: 3}
+  m_Name: ARModelRewardPackSTO
+  m_EditorClassIdentifier: 
+  ListOfRewards:
+  - {fileID: 11400000, guid: b3a4e7856c09faa4ab2e2994d1abae17, type: 2}
+  - {fileID: 11400000, guid: cdf4e8be7d0bda242af451046fbd635a, type: 2}
+  - {fileID: 11400000, guid: a83d022d69a195a4c9e526fe9bb6bd7e, type: 2}
+  - {fileID: 11400000, guid: 31c2d728e08776f4ebf051dbc9a7d520, type: 2}
+  - {fileID: 11400000, guid: 5afc959764964e946927278e21f7540d, type: 2}
+  - {fileID: 11400000, guid: ff27ff645ffc3254893efcf401ff9b2d, type: 2}
+  - {fileID: 11400000, guid: b06b020ca32222540bc069d02f95e664, type: 2}
+  lockedImage: {fileID: 21300000, guid: 9cbf986f71557d4428da5f46c63396a0, type: 3}

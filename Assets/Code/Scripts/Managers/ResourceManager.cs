@@ -13,8 +13,10 @@ namespace Project.Managers
     {
         public static ResourceManager Instance { get; private set; }
         private const string RewardPackPath = "Material UI/Reward/RewardPackSTO";
+        private const string ARRewardPackPath = "Material UI/ModelReward/ARModelRewardPackSTO";
         private const string ErrorUIPath = "Material UI/ErrorUIs";
         public RewardSystem.RewardPackSTO RewardPack { get; private set; }
+        public RewardSystem.ViewReward.ARModelRewardPackSTO ARModelRewardPack {get;private set;}
         void Awake()
         {
             if (Instance == null)
@@ -34,7 +36,7 @@ namespace Project.Managers
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            LoadEssentialResources();
+            StartCoroutine(LoadEssentialResources());
         }
         private IEnumerator LoadEssentialResources()
         {
@@ -44,8 +46,12 @@ namespace Project.Managers
                 yield return request;
                 RewardPack = request.asset as RewardSystem.RewardPackSTO;
             }
-            
 
+            if(ARModelRewardPack == null){
+                ResourceRequest request = Resources.LoadAsync<RewardSystem.ViewReward.ARModelRewardPackSTO>(ARRewardPackPath);
+                yield return request;
+                ARModelRewardPack = request.asset as RewardSystem.ViewReward.ARModelRewardPackSTO;
+            }
         }
 
         public async void SaveTestAsync(SemesterTestSaveData data, System.Action onResult = null){

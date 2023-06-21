@@ -7,14 +7,21 @@ namespace Project.UI.Panel{
     public abstract class BasePanelController : MonoBehaviour{
         [SerializeField] public PanelViewBase View;
         public abstract PanelEnumType Type {get;}
+        public event System.Action OnPanelHideViewEvent;
+        public event System.Action OnPanelShowViewEvent;
         public abstract bool CheckType(PanelViewData data);
         public abstract void SetUI(PanelViewData Data);
         protected virtual void OnEnable(){}
         protected virtual void OnDisable(){}
         public virtual async Task Hide(){
             await View.HideAsync();
+            OnPanelHideViewEvent?.Invoke();
+        }
+        public async void HideImmediately(){
+            await Hide();
         }
         public virtual async Task Show(){
+            OnPanelShowViewEvent?.Invoke();
             await View.ShowAsync();
         }
     }
