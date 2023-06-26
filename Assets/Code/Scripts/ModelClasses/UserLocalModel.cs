@@ -8,15 +8,21 @@ public class UserLocalModel {
     [Newtonsoft.Json.JsonConstructor]
     public UserLocalModel(string userId, List<string> acquiredARModel){
         UserID = userId;
-        ListOfAcquiredARModel = new List<string>(acquiredARModel);
+
+        if(acquiredARModel == null){
+            ListOfAcquiredARModel = new List<string>();
+        }
+        else{
+            ListOfAcquiredARModel = new List<string>(acquiredARModel);
+        }
     }
     public UserLocalModel(string id){
         UserID = id;
         ListOfAcquiredARModel = new List<string>(){
-            "Wibu",
-            //"Octopus",
-            "Pen",
-            "Pencil",
+            // "Wibu",
+            // "Octopus",
+            // "Pen",
+            // "Pencil",
             // "PenCase",
             // "Gull",
             // "Eraser",

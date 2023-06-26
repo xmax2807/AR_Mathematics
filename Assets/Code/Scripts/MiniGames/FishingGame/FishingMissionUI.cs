@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Project.MiniGames.FishingGame{
     public class FishingMissionUI : MonoBehaviour{
+        [SerializeField] private Canvas gameTaskProgressCanvas;
         [SerializeField] private ProgressBarController OverallGameTask;
         [SerializeField] private SwapableImage Image;
         [SerializeField] private TMPro.TextMeshProUGUI MissionContent;
@@ -25,9 +26,17 @@ namespace Project.MiniGames.FishingGame{
         }
         void Start(){
             var CurrentRewardData = Giver.CurrentReward;
+            if(CurrentRewardData != null){
 
-            Image.ManualSetup(CurrentRewardData.UnacquiredBadge,CurrentRewardData.Badge.GetReward(), Giver.AllTaskCompleted);
-            OverallGameTask.SetupAnimation(Giver.Tasks.Goal);
+                Image.ManualSetup(CurrentRewardData.UnacquiredBadge,CurrentRewardData.Badge.GetReward(), Giver.AllTaskCompleted);
+                OverallGameTask.SetupAnimation(Giver.Tasks.Goal);
+                gameTaskProgressCanvas.enabled = true;
+                return;
+            }
+            else{
+                gameTaskProgressCanvas.enabled = false;
+            }
+
 
             UpdateQuestion(Giver.CurrentTask);
             UpdateProgress();
@@ -38,14 +47,14 @@ namespace Project.MiniGames.FishingGame{
             Giver.OnTaskChanged -= UpdateQuestion;   
         }
         private void UpdateProgress(){
-            if(Giver.Tasks.IsCompleted) {
-                OverallGameTask.UpdateEndValue(Giver.Tasks.CurrentProgress, 1);
-                OverallGameTask.StartAnimation();
+            if(!Giver.Tasks.IsCompleted) {
+                // OverallGameTask.UpdateEndValue(Giver.Tasks.CurrentProgress, 1);
+                // OverallGameTask.StartAnimation();
+                UpdateSubProgress(Giver.CurrentTask);
                 return;
             }
 
             Image.UpdateUI();
-            UpdateSubProgress(Giver.CurrentTask);
             OverallGameTask.UpdateEndValue(Giver.Tasks.CurrentProgress, 1);
             OverallGameTask.StartAnimation();
         }

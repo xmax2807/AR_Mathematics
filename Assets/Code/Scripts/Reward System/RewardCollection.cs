@@ -82,6 +82,8 @@ namespace Project.RewardSystem
         }
         private void GiveRemoteReward(RewardScriptableObject rewardData){
             if(rewardData.RemoteModel == null) return;
+            UserManager.Instance.AddModelReward(rewardData.RemoteModel.UniqueName);
+            //DatabaseManager.Instance.UserController.SaveLocalData();
             OnRemoteRewardAccquired?.Invoke(rewardData.RemoteModel);
         }
     }

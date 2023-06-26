@@ -26,6 +26,7 @@ namespace Project.RewardSystem
         {
             canvas = GetComponent<Canvas>();
             mainCam = Camera.main;
+            view?.HideImmediate();
         }
 
         void Start()
@@ -44,7 +45,7 @@ namespace Project.RewardSystem
             }
             else
             {
-                view?.HideAsync();
+                //view?.HideAsync();
             }
         }
 

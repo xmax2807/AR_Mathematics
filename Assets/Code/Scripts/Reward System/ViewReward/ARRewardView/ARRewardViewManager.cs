@@ -90,12 +90,19 @@ namespace Project.RewardSystem.ViewReward
         {
             m_objectPlanePlacer.TurnOffPlaneDetector();
             ScaleToDesiredSize(obj);
-            GameObject wrapper = new GameObject(obj.name);
-            // obj.transform.position = new Vector3(0.04f,-0.5f,3f);
-            wrapper.transform.position = obj.transform.position;
+            
+            Transform wrapperTransform = new GameObject(obj.name).transform;
+            wrapperTransform.position = obj.transform.position;
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.SetParent(wrapper.transform, false);
-            ARRewardController controller = wrapper.AddComponent<ARRewardController>();
+            obj.transform.SetParent(wrapperTransform, false);
+
+            //Rotate to face camera
+            Vector3 targetDirection = Managers.GameManager.MainGameCam.transform.position - wrapperTransform.position;
+            float angle = Vector3.SignedAngle(wrapperTransform.forward, targetDirection, Vector3.up);
+            wrapperTransform.Rotate(0, angle, 0);
+            //
+
+            ARRewardController controller = wrapperTransform.gameObject.AddComponent<ARRewardController>();
             controller.SetModel(obj);
             controller.SetUIController(uiOptions);
 
@@ -124,7 +131,7 @@ namespace Project.RewardSystem.ViewReward
         //     }
         // }
 
-        private void ScaleToDesiredSize(GameObject obj, float desiredSize = 1f)
+        private void ScaleToDesiredSize(GameObject obj, float desiredSize = 0.4f)
         {
             Bounds bounds = obj.GetBoundsFromRenderer();
             Vector3 currentSize = bounds.size;
@@ -136,8 +143,10 @@ namespace Project.RewardSystem.ViewReward
             Vector3 localScale = obj.transform.localScale;
             Vector3 scaleRatio = new Vector3(ratio * localScale.x, ratio * localScale.y, ratio * localScale.z);
             obj.transform.localScale = scaleRatio;
+            //bounds = obj.GetBoundsFromRenderer();
             box.size = new Vector3(currentSize.x, currentSize.y, currentSize.z);
-            box.center = bounds.center;
+            box.center = new Vector3(0, currentSize.y / 2, 0);
+            //box.center = bounds.center;
         }
     }
 }

@@ -15,11 +15,14 @@ namespace Project.UI.Panel
         [SerializeField] private Button backButton;
         [SerializeField] protected ViewPagerController pagerController;
 
+        private Canvas canvas;
+
         private Dictionary<string,ViewPagerUI> cache;
         protected ViewPagerUI currentPagerUI;
         
         protected virtual void Awake()
         {
+            canvas = GetComponent<Canvas>();
             cache = new (1);
             if (pagerController == null)
             {
@@ -89,6 +92,15 @@ namespace Project.UI.Panel
             if(loadingView == null) return;
 
             loadingView.enabled = isOn;
+        }
+
+        public void HideUI(){
+            if(canvas == null) return;
+            canvas.enabled = false;
+        }
+        public void ShowUI(){
+            if(canvas == null) return;
+            canvas.enabled = true;
         }
     }
 }

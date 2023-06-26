@@ -44,10 +44,13 @@ namespace Project.Addressable
             soRefs.OnComplete?.Invoke(ScriptableObjects);
             Debug.Log("scriptableObject");
 
-            if(audioRefs.Reference.IsValid()) {
+            if(audioRefs.Reference.RuntimeKeyIsValid()) {
                 var audioPack = await AddressableManager.Instance.PreLoadAsset(audioRefs.Reference);
                 AudioManager.Instance.SwapSoundPack(audioPack);
                 Debug.Log("audio");
+            }
+            else{
+                Debug.Log("audio is empty");
             }
             
             await stackSystem.PopAsync();

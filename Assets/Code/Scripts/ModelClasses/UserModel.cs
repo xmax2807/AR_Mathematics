@@ -16,10 +16,12 @@ public class UserModel
 
     [FirestoreProperty] public string UserID { get; set; }
     [FirestoreProperty] public List<string> User_ListAchievement { get; set; }
+    [FirestoreProperty] public List<string> UserAcquiredModel {get; set;}
     [FirestoreProperty] public List<GameData> SavedGame { get; set; }
 
     public UserModel(){
         User_ListAchievement = new();
+        UserAcquiredModel = new(){"Pencil"};
         SavedGame = new();
     }
 

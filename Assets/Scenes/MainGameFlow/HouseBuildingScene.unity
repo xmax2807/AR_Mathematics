@@ -1404,6 +1404,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1319320664}
     m_Modifications:
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d247f9139b1e5049a870cf37c124f25,
+        type: 2}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.UI.Panel.SingleSceneLoadData, Projec
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: HouseBuildingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634905681588727, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 556634905925102312, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

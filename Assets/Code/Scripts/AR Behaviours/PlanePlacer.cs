@@ -9,8 +9,11 @@ namespace Project.ARBehaviours
     [RequireComponent(typeof(ARPlaneManager), typeof(ARRaycastManager))]
     public class PlanePlacer : MonoBehaviour, IPlanePlacer
     {
+
+        private UnityEngine.EventSystems.EventSystem currentEventSystem;
         void Awake()
         {
+            currentEventSystem = UnityEngine.EventSystems.EventSystem.current;
             m_RaycastManager = GetComponent<ARRaycastManager>();
             m_PlaneManager = GetComponent<ARPlaneManager>();
 
@@ -25,6 +28,7 @@ namespace Project.ARBehaviours
         {
             m_PlacedPrefab = newPlace;
             var newPlaceObj = Instantiate(newPlace, Vector3.zero, Quaternion.identity);
+            newPlaceObj.transform.position = new Vector3(0.1f,-0.5f,2f);
             spawnedObject = newPlaceObj;
             OnSpawnMainPlane?.Invoke(newPlaceObj);
         }
@@ -34,6 +38,10 @@ namespace Project.ARBehaviours
 #if UNITY_EDITOR
             if (Input.GetMouseButtonUp(0))
             {
+                if(currentEventSystem.IsPointerOverGameObject()){
+                    touchPosition = default;
+                    return false;
+                }
                 var mousePosition = Input.mousePosition;
                 touchPosition = new Vector2(mousePosition.x, mousePosition.y);
                 return true;
@@ -41,7 +49,13 @@ namespace Project.ARBehaviours
 #endif
             if (Input.touchCount > 0)
             {
-                touchPosition = Input.GetTouch(0).position;
+                Touch currentTouch = Input.GetTouch(0);
+                if(currentEventSystem.IsPointerOverGameObject(currentTouch.fingerId)){
+                    touchPosition = default;
+                    return false;
+                }
+                
+                touchPosition = currentTouch.position;
                 return true;
             }
 

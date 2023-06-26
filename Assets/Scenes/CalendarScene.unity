@@ -1155,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 556634906133819764, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 556634906133819764, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
@@ -1562,7 +1562,7 @@ PrefabInstance:
     - target: {fileID: 6729867906816122304, guid: 8710f7d9ba6ab094d849fec81dd906a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6729867906816122304, guid: 8710f7d9ba6ab094d849fec81dd906a6,
         type: 3}
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   parentPreInitPrefabs: {fileID: 0}
   audioRefs:
     Reference:
-      m_AssetGUID: 67bf105155cff1d41a8ed0cc30fe5f62
+      m_AssetGUID: 
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
@@ -2160,7 +2160,7 @@ PrefabInstance:
     - target: {fileID: 2834370627640413224, guid: 9873383576be4f542bd5481fe930a37f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2834370627640413224, guid: 9873383576be4f542bd5481fe930a37f,
         type: 3}
@@ -2357,7 +2357,7 @@ PrefabInstance:
     - target: {fileID: 4425227286433267438, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4425227286433267438, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
         type: 3}

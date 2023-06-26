@@ -76,7 +76,7 @@ public class GameController
         if (task - 1 >= game.AchievementID.Length)
         {
             UnityEngine.Debug.Log("Save without Achivement");
-            await DatabaseManager.Instance.UserController.UpdateUserGameData(user);
+            await DatabaseManager.Instance.UserController.UpdateUser(user);
             return;
         }
 
@@ -85,7 +85,7 @@ public class GameController
             user.User_ListAchievement.Add(game.AchievementID[task - 1]);
         }
 
-        await DatabaseManager.Instance.UserController.UpdateUserGameData(user);
+        await DatabaseManager.Instance.UserController.UpdateUser(user);
     }
 
     public async Task<List<GameModel>> GetListGames(int unit, int chapter)

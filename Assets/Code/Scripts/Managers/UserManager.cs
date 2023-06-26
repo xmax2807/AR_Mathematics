@@ -11,6 +11,8 @@ namespace Project.Managers{
                 return chapter <= 0 && unit <= 0;
             }
         }
+
+        private UserController Controller => DatabaseManager.Instance.UserController; 
         public static UserManager Instance;
         public UserModel CurrentUser {get;set;}
         public UserLocalModel CurrentLocalUser {get;set;}
@@ -37,6 +39,21 @@ namespace Project.Managers{
             else if(Instance != null && Instance != this){
                 Destroy(this.gameObject);
             }
+        }
+
+        public async void AddModelReward(string uniqueName){
+            // CurrentLocalUser ??= Controller.GetLocalUserModel(userId: CurrentUser.UserID);
+            // if(CurrentLocalUser.ListOfAcquiredARModel.Contains(uniqueName)){
+            //     return;
+            // }
+            // CurrentLocalUser.ListOfAcquiredARModel.Add(uniqueName);
+
+            if(CurrentUser.UserAcquiredModel.Contains(uniqueName)){
+                return;
+            }
+
+            CurrentUser.UserAcquiredModel.Add(uniqueName);
+            await Controller.UpdateUser(CurrentUser);
         }
     }
 }

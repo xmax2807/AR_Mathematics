@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: RootTutorialViewData
+  m_EditorClassIdentifier: 
+  Children:
+  - {fileID: 11400000, guid: 34fd59a62c55d6942b4cd21643a7ae5f, type: 2}
+  - {fileID: 11400000, guid: 910361e34f91297478efb633336faf89, type: 2}
+  - {fileID: 11400000, guid: 1e7572206c1baf54ca3338bcc51272cf, type: 2}
+  - {fileID: 11400000, guid: 0ce856ca70980f84ca18821903e73c61, type: 2}
+  ButtonNames:
+  - Name: "C\xE1ch xem b\xE0i gi\u1EA3ng"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "C\xE1ch l\xE0m b\xE0i t\u1EADp"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "C\xE1ch l\xE0m b\xE0i thi"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "C\xE1ch ch\u01A1i c\xE1c tr\xF2 ch\u01A1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  Title: 
+  Description: 

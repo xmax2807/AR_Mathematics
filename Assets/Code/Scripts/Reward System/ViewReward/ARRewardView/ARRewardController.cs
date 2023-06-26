@@ -7,16 +7,19 @@ using UnityEngine.Events;
 using Project.Utils.ExtensionMethods;
 using UnityEngine.UI;
 
-namespace Project.RewardSystem.ViewReward{
-    public class ARRewardController : MonoBehaviour{
+namespace Project.RewardSystem.ViewReward
+{
+    public class ARRewardController : MonoBehaviour
+    {
         private MenuPanelController m_UIController;
         private GameObject modelObj;
         private GameObjectButton modelObjectButton;
-        public void SetUIController(MenuPanelController controllerPrefab){
+        public void SetUIController(MenuPanelController controllerPrefab)
+        {
             m_UIController = Instantiate(controllerPrefab, this.transform);
             m_UIController.Hide();
             Bounds bounds = modelObj.GetBoundsFromRenderer();
-            m_UIController.transform.localPosition = new Vector3(0, bounds.size.y * 7/5, 0);
+            m_UIController.transform.localPosition = new Vector3(0, bounds.size.y + 0.1f, 0f);
 
             Canvas canvas = m_UIController.EnsureComponent<Canvas>();
             canvas.worldCamera = Managers.GameManager.MainGameCam;
@@ -24,7 +27,8 @@ namespace Project.RewardSystem.ViewReward{
 
             CreateUI();
         }
-        public void SetModel(GameObject modelObj){
+        public void SetModel(GameObject modelObj)
+        {
             this.modelObj = modelObj;
             modelObjectButton = this.modelObj.AddComponent<GameObjectButton>();
             modelObjectButton.OnButtonTouchPosition += OnModelTouch;
@@ -32,7 +36,8 @@ namespace Project.RewardSystem.ViewReward{
 
         private void OnModelTouch(GameObjectButton button, Vector3 touchPosition)
         {
-            if(!button.Equals(modelObjectButton)){
+            if (!button.Equals(modelObjectButton))
+            {
                 return;
             }
             //InteractionEventsBehaviour.Instance.BlockRaycast();
@@ -40,9 +45,10 @@ namespace Project.RewardSystem.ViewReward{
             _ = m_UIController.Show();
         }
 
-        private void CreateUI(){
+        private void CreateUI()
+        {
             MenuPanelViewData menuData = ScriptableObject.CreateInstance<MenuPanelViewData>();
-            
+
 
             List<ButtonData> listButtonData = new()
             {
@@ -54,22 +60,26 @@ namespace Project.RewardSystem.ViewReward{
             m_UIController.SetUI(menuData);
         }
 
-        private ButtonData CreateButton(string name, UnityAction OnClick){
+        private ButtonData CreateButton(string name, UnityAction OnClick)
+        {
             UnityEngine.UI.Button.ButtonClickedEvent buttonClickEvent = new();
             buttonClickEvent.AddListener(OnClick);
-            return new ButtonData(){
+            return new ButtonData()
+            {
                 Name = name,
                 OnClick = buttonClickEvent
             };
         }
 
         #region Button click handler methods
-        private void OnDeleteClicked(){
+        private void OnDeleteClicked()
+        {
             Destroy(this.gameObject);
             InteractionEventsBehaviour.Instance.UnblockRaycast();
         }
 
-        public async void HideUI(){
+        public async void HideUI()
+        {
             await m_UIController.Hide();
             InteractionEventsBehaviour.Instance.UnblockRaycast();
         }

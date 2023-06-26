@@ -5,9 +5,9 @@ namespace Project.RewardSystem.ViewReward{
     public class ARRewardSTO : ScriptableObject{
         [SerializeField] private RemoteRewardSTO rewardSTO;
         [SerializeField] private Sprite avatar;
-        [SerializeField] private string uniqueName;
+        //[SerializeField] private string uniqueName;
 
-        public string UniqueName => uniqueName;
+        public string UniqueName => rewardSTO.UniqueName;
         public string Description => rewardSTO.Description;
         public Sprite Avatar => avatar;
 

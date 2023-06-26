@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Pen
   m_EditorClassIdentifier: 
   RemoteModel:
-    m_AssetGUID: a890747f6e2c3b94782bf85776a13d13
+    m_AssetGUID: a7d788127ba6c3c40bf5fa0d92067c4c
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  uniqueName: Pen
   Description: "C\xE2y B\xFAt Bi"

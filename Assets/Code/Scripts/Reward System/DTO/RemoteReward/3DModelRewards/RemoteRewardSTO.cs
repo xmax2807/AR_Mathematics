@@ -7,6 +7,8 @@ namespace Project.RewardSystem{
     [CreateAssetMenu(menuName ="STO/Reward/3D Model", fileName = "Model")]
     public class RemoteRewardSTO : UnityEngine.ScriptableObject{
         [SerializeField] private AssetReference RemoteModel;
+        [SerializeField] private string uniqueName;
+        public string UniqueName => uniqueName;
         public string Description;
         private GameObject cache;
         private AsyncOperationHandle<GameObject> remoteLoadOperation;
@@ -28,7 +30,14 @@ namespace Project.RewardSystem{
                 if(remoteLoadOperation.Equals(default)){
                     PreLoadAsset();
                 }
-                await remoteLoadOperation.Task;
+                try{
+                    await remoteLoadOperation.Task;
+                }
+                catch(System.Exception e){
+                    Debug.Log(e.Message);
+                    PreLoadAsset();
+                    await remoteLoadOperation.Task;
+                }
                 cache = remoteLoadOperation.Result;
             }
             Debug.Log("Got model " + cache?.name);

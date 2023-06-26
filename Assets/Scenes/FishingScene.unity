@@ -649,7 +649,7 @@ MonoBehaviour:
   parentPreInitPrefabs: {fileID: 0}
   audioRefs:
     Reference:
-      m_AssetGUID: 67bf105155cff1d41a8ed0cc30fe5f62
+      m_AssetGUID: 
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0

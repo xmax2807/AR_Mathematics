@@ -212,6 +212,26 @@ namespace Project.Utils.ExtensionMethods
             return default;
         }
 
+        public static int FindIndex<T>(this IEnumerable<T> List, Func<T, bool> condition){
+            if (condition == null) return -1;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+            if (!iterator.MoveNext()) return -1;
+            
+            
+            int index = 0;
+            do
+            {
+                if (condition.Invoke(iterator.Current))
+                {
+                    return index;
+                }
+                ++index;
+            } while (iterator.MoveNext());
+            
+            return -1;
+        }
+
         public static void SplitLoop(int count, int loopCount, Action eachLoopAction)
         {
             for (int i = 0; i < count;)

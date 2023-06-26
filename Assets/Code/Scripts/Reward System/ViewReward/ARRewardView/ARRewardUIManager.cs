@@ -22,7 +22,7 @@ namespace Project.RewardSystem.ViewReward{
         public event Action<int> OnItemChooseEvent;
         #endregion
 
-        public void Start(){
+        public void Awake(){
             if(listModelChooser == null){
                 Debug.LogError("AR Reward List UI: No list model chooser");
                 return;
@@ -35,7 +35,7 @@ namespace Project.RewardSystem.ViewReward{
 
         public void SetupUI(ARModelRewardPackSTO listRewardPrefabs){
             
-            acquiredRewardUniqueNames = Managers.UserManager.Instance.CurrentLocalUser?.ListOfAcquiredARModel;
+            acquiredRewardUniqueNames = Managers.UserManager.Instance.CurrentUser?.UserAcquiredModel;
             acquiredRewardUniqueNames ??= new UserLocalModel("").ListOfAcquiredARModel;
 
             GridPanelViewData data = ScriptableObject.CreateInstance<GridPanelViewData>();
