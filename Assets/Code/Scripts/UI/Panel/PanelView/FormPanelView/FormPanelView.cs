@@ -12,6 +12,11 @@ namespace Project.UI.Panel.Form{
             }
             return ShowAsync();
         }
+        public void SetTitle(string title){
+            if(TitleText != null){
+                TitleText.text = title;
+            }
+        }
         private void OnEnable(){
             onConfirm += InvokeConfirm;
         }

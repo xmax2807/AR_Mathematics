@@ -6,6 +6,7 @@ using Project.Managers;
 using Gameframe.GUI.PanelSystem;
 using System;
 using System.Threading.Tasks;
+using Project.UI.Panel;
 
 public class UserSignUpControllerBehaviour : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     [SerializeField] Button BackToSignInButton;
     [SerializeField] Button SignUpButton;
     [SerializeField] OkCancelPanelPusher pusher;
+    [SerializeField] PanelType notificationViewType; 
+    [SerializeField] PanelStackSystem stackSystem; 
 
     private string username;
     private string password;
@@ -23,33 +26,44 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     private void OnEnable()
     {
         SignUpButton.interactable = false;
-        userNameField.onEndEdit.AddListener(EndedEditUsername);
-        rePasswordField.onEndEdit.AddListener(EndedEditPassword);
+        userNameField.onValueChanged.AddListener(EndedEditUsername);
+        rePasswordField.onValueChanged.AddListener(EndedEditPassword);
+        passwordField.onValueChanged.AddListener(OnChangingPasswordField);
         SignUpButton.onClick.AddListener(SignUp);
     }
 
     private void OnDisable()
     {
-        userNameField.onEndEdit.RemoveListener(EndedEditUsername);
-        rePasswordField.onEndEdit.RemoveListener(EndedEditPassword);
+        userNameField.onValueChanged.RemoveListener(EndedEditUsername);
+        rePasswordField.onValueChanged.RemoveListener(EndedEditPassword);
+        passwordField.onValueChanged.RemoveListener(OnChangingPasswordField);
         SignUpButton.onClick.RemoveListener(SignUp);
     }
 
     private void EndedEditUsername(string text)
     {
-        SignUpButton.interactable = text.IsEmail();
         username = text;
+        SignUpButton.interactable = IsValid();
     }
     private void EndedEditPassword(string password)
     {
-        SignUpButton.interactable = !(password.Length == 0 || password != passwordField.text);
         this.password = password;
+        SignUpButton.interactable = IsValid();
+        Debug.Log(password);
+    }
+    private void OnChangingPasswordField(string password){
+        SignUpButton.interactable = IsValid();
+    }
+
+    private bool IsValid(){
+       return username.IsEmail() && password != "" && password == passwordField.text;
     }
 
     Firebase.Auth.FirebaseUser user;
     private async void SignUp()
     {
-        user = await Controller.RegisterAuth(username, password);
+        AuthResult authResult;
+        (user, authResult) = await Controller.RegisterAuth(username, password);
         // if (task.IsCanceled)
         // {
         //     Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
@@ -61,7 +75,16 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
         //     return;
         // }
         // var user = task.Result;
-        if (user == null) return;
+        if (user == null || !authResult.IsSuccessful) {
+            OkCancelPanelViewController controller = new OkCancelPanelViewController(notificationViewType, (isOk)=>{
+                stackSystem.Pop();
+            });
+
+            await stackSystem.PushAsync(controller);
+            NotificationPanelView view = (NotificationPanelView)controller.View;
+            view.SetUI(authResult.ErrorMessage, "Lỗi đăng ký");
+            return;
+        }
 
         pusher.Push();
         await user.SendEmailVerificationAsync();

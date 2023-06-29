@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine.UI;
 using Project.Utils.ExtensionMethods;
 using Gameframe.GUI.TransitionSystem;
+using Gameframe.GUI.Camera.UI;
+using Gameframe.GUI.PanelSystem;
+using Project.UI.Panel;
 
 public class UserSignInControllerBehaviour : MonoBehaviour{
     
@@ -10,6 +13,8 @@ public class UserSignInControllerBehaviour : MonoBehaviour{
     [SerializeField] TMP_InputField userNameField;
     [SerializeField] TMP_InputField passwordField;
     [SerializeField] Button SignInButton;
+    [SerializeField] PanelType notificationPanel;
+    [SerializeField] PanelStackSystem stackSystem;
     private string username;
     private string password;
     private UserController Controller => DatabaseManager.Instance.UserController;
@@ -38,11 +43,30 @@ public class UserSignInControllerBehaviour : MonoBehaviour{
     }
   
     public async void SignIn(){
-        bool result = await Controller.SignInAuth(username, password);
-
-        if(result){
+        UIEventManager.Current.Lock();
+        AuthResult result = await Controller.SignInAuth(username, password);
+        UIEventManager.Current.Unlock();
+        
+        if(result.IsSuccessful){
             Debug.Log("Signed");
+            GetComponent<PanelPopper>().Pop();
             SceneLoadBehaviour.Load();
         }
+        else{
+            PopError(result.ErrorMessage);
+        }
+    }
+
+    private async void PopError(string message){
+        OkCancelPanelViewController controller = new(notificationPanel, (isOk)=>{
+            stackSystem.Pop();
+        });
+        //await controller.LoadViewAsync();
+        await stackSystem.PushAsync(controller);
+        var view =  (NotificationPanelView)controller.View;
+
+        string rebuiltMessage = $"<size=80%>Đăng nhập không thành công do:</size>\n{message}";
+        view.SetUI(rebuiltMessage, "Lỗi đăng nhập");
+        Debug.Log("Pushed error");
     }
 }

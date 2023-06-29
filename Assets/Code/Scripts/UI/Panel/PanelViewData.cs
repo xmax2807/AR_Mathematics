@@ -6,7 +6,7 @@ namespace Project.UI.Panel{
 
     
     public enum PanelEnumType{
-        Menu, Grid, Request
+        Menu, Grid, Request, Profile
     }
     public abstract class PanelViewData : ScriptableObject{
         public abstract PanelEnumType Type {get;}

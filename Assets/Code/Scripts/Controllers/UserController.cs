@@ -6,12 +6,21 @@ using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using RobinBird.FirebaseTools.Storage.Addressables;
 using UnityEngine;
+
+public struct AuthResult{
+    public bool IsSuccessful;
+    public string ErrorMessage;
+    public AuthResult(bool isSuccessful = false, string errorMessage = ""){
+        this.IsSuccessful = isSuccessful;
+        this.ErrorMessage = errorMessage;
+    }
+}
 public class UserController
 {
     FirebaseFirestore db => DatabaseManager.FirebaseFireStore;
     Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
-    public Firebase.Auth.FirebaseUser FireBaseUser {get;private set;}
-    private Project.AssetIO.JsonFileHandler m_localFileHandler; 
+    public Firebase.Auth.FirebaseUser FireBaseUser { get; private set; }
+    private Project.AssetIO.JsonFileHandler m_localFileHandler;
     const string Collection = "users";
     public UserController()
     {
@@ -36,23 +45,44 @@ public class UserController
         }
     }
 
-    public async Task<Firebase.Auth.FirebaseUser> RegisterAuth(string email, string password)
+    public async Task<(Firebase.Auth.FirebaseUser, AuthResult)> RegisterAuth(string email, string password)
     {
 
         // Firebase.Auth.FirebaseUser newUser = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
         // UploadModel(newUser);
         // return newUser;
         Firebase.Auth.FirebaseUser newUser = null;
+        AuthResult authResult = new AuthResult(true);
         await auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                authResult = new(false);
                 return;
             }
             if (task.IsFaulted)
             {
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                Firebase.FirebaseException exception = (Firebase.FirebaseException)task.Exception.InnerExceptions[0].InnerException;
+                if (exception == null)
+                {
+                    return;
+                }
+
+                Debug.Log(exception.ErrorCode);
+                string errorMessage = "";
+                switch((Firebase.Auth.AuthError)exception.ErrorCode){
+                    case Firebase.Auth.AuthError.UserNotFound: errorMessage = "Tài khoản không tồn tại";
+                    break;
+                    case Firebase.Auth.AuthError.WrongPassword: errorMessage = "Sai mật khẩu";
+                    break;
+                    case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
+                    break;
+                    case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
+                    break;
+                }
+                authResult = new AuthResult(false, errorMessage);
                 return;
             }
 
@@ -61,26 +91,49 @@ public class UserController
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
             UploadModel(newUser);
-            CreateSaveData(newUser.UserId);
+            //CreateSaveData(newUser.UserId);
         });
-        return newUser;
+        return (newUser, authResult);
     }
-    public async Task<bool> SignInAuth(string email, string password)
+    public async Task<AuthResult> SignInAuth(string email, string password)
     {
         Firebase.Auth.Credential credential =
         Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
 
         Firebase.Auth.FirebaseUser user = null;
+
+        AuthResult authResult = new AuthResult(true);
+        string errorMessage = "";
         await auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
+
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                authResult = new AuthResult();
                 return;
             }
             if (task.IsFaulted)
             {
                 Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                Firebase.FirebaseException exception = (Firebase.FirebaseException)task.Exception.InnerExceptions[0].InnerException;
+                if (exception == null)
+                {
+                    return;
+                }
+
+                Debug.Log(exception.ErrorCode);
+                switch((Firebase.Auth.AuthError)exception.ErrorCode){
+                    case Firebase.Auth.AuthError.UserNotFound: errorMessage = "Tài khoản không tồn tại";
+                    break;
+                    case Firebase.Auth.AuthError.WrongPassword: errorMessage = "Sai mật khẩu";
+                    break;
+                    case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
+                    break;
+                    case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
+                    break;
+                }
+                authResult = new AuthResult(false, errorMessage);
                 return;
             }
 
@@ -89,27 +142,29 @@ public class UserController
                 user.DisplayName, user.UserId);
         });
 
-        if(user == null) return false;
+        if (user == null) return authResult;
 
         FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
         ProfileUser(user.UserId);
         //UserManager.Instance.CurrentLocalUser = GetLocalUserModel(user.UserId);
-        return true;
+        return authResult;
     }
 
     private void ProfileUser(string userID)
     {
-        Query query = db.Collection("users").WhereEqualTo("UserID",userID);
+        Query query = db.Collection("users").WhereEqualTo("UserID", userID);
         query.GetSnapshotAsync().ContinueWith(task =>
         {
-            try{
+            try
+            {
                 DocumentSnapshot snapshot = task.Result[0];
-                
+
                 userModel = snapshot.ConvertTo<UserModel>();
                 UserManager.Instance.CurrentUser = userModel;
                 //Debug.Log("ok");
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 Debug.Log(e.Message);
             }
         });
@@ -128,48 +183,58 @@ public class UserController
     UserModel userModel;
     public void UploadModel(Firebase.Auth.FirebaseUser newUser)
     {
-        userModel = new(){
+        userModel = new()
+        {
             UserID = newUser.UserId,
         };
         // user.UserID = newUser.UserId;
         db.Collection("users").Document(newUser.UserId).SetAsync(userModel);
     }
 
-    private void CreateSaveData(string userId){
+    private void CreateSaveData(string userId)
+    {
         UserLocalModel localModel = new(userId);
         m_localFileHandler.Write(localModel, Path.Combine(Application.persistentDataPath, $"userLocalSave/{userId}.json"));
     }
-    public UserLocalModel GetLocalUserModel(string userId){
+    public UserLocalModel GetLocalUserModel(string userId)
+    {
         UserLocalModel result = m_localFileHandler.Read<UserLocalModel>(Path.Combine(Application.persistentDataPath, $"userLocalSave/{userId}.json"));
-        if(result == null){
-           CreateSaveData(userId);
+        if (result == null)
+        {
+            CreateSaveData(userId);
         }
         return result;
     }
 
-    public async Task<UserModel> GetUserModel(string userId){
+    public async Task<UserModel> GetUserModel(string userId)
+    {
         DocumentSnapshot doc = await db.Collection("users").Document(userId).GetSnapshotAsync();
         return doc.ConvertTo<UserModel>();
     }
 
-    public void SaveLocalData(){
-        m_localFileHandler.Write<UserLocalModel>(UserManager.Instance.CurrentLocalUser,Path.Combine(Application.persistentDataPath, $"userLocalSave/{UserManager.Instance.CurrentUser.UserID}.json"));
+    public void SaveLocalData()
+    {
+        m_localFileHandler.Write<UserLocalModel>(UserManager.Instance.CurrentLocalUser, Path.Combine(Application.persistentDataPath, $"userLocalSave/{UserManager.Instance.CurrentUser.UserID}.json"));
     }
 
-    public async Task<bool> ReAuthenticateWithCredential(string email, string password){
+    public async Task<bool> ReAuthenticateWithCredential(string email, string password)
+    {
         var credential = Firebase.Auth.EmailAuthProvider.GetCredential(email, password);
 
-        try{
+        try
+        {
             var signInResult = await auth.CurrentUser.ReauthenticateAndRetrieveDataAsync(credential);
             return signInResult != null;
         }
-        catch(Firebase.FirebaseException e){
+        catch (Firebase.FirebaseException e)
+        {
             Debug.Log(e.Message);
             return false;
         }
     }
 
-    public async Task UpdateUser(UserModel user){
+    public async Task UpdateUser(UserModel user)
+    {
         try
         {
             DocumentReference userRef = db.Collection("users").Document(user.UserID);
@@ -179,6 +244,37 @@ public class UserController
         catch (Firebase.FirebaseException e)
         {
             Debug.Log(e.Message);
+        }
+    }
+
+    public async Task DeleteCurrentUser()
+    {
+        Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+        if (user != null)
+        {
+            string email = user.Email;
+            DocumentReference userRef = db.Collection(Collection).Document(user.UserId);
+            Task deleteTask = userRef.DeleteAsync();
+            await deleteTask;
+
+            if (deleteTask.IsFaulted)
+            {
+                Debug.Log("Delete User: " + deleteTask.Exception.Message);
+                return;
+            }
+
+            deleteTask = user.DeleteAsync();
+            await deleteTask;
+
+            Debug.Log("Delete completed");
+            if (deleteTask.IsFaulted)
+            {
+                Debug.Log("Delete User: " + deleteTask.Exception.Message);
+            }
+            else
+            {
+                Debug.Log($"Delete user with {email} successfully");
+            }
         }
     }
 }

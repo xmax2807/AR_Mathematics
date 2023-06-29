@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e70909638574717a3e9e1382ce0913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 1269823639}
   panelStackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
   clearSystemStackOnDestroy: 1
 --- !u!1 &907875382
@@ -455,6 +455,7 @@ GameObject:
   - component: {fileID: 1269823637}
   - component: {fileID: 1269823636}
   - component: {fileID: 1269823638}
+  - component: {fileID: 1269823639}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -533,6 +534,25 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &1269823639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269823634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16069015fd38a554c91582a3a9b2f447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputLock:
+    onUnlocked:
+      m_PersistentCalls:
+        m_Calls: []
+    onLocked:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1572520041
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +724,9 @@ GameObject:
   - component: {fileID: 1793584584}
   - component: {fileID: 1793584586}
   - component: {fileID: 1793584585}
+  - component: {fileID: 1793584587}
   m_Layer: 5
-  m_Name: StackPanelController
+  m_Name: PanelController - LoadingPanelType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,7 +768,7 @@ MonoBehaviour:
   provider: {fileID: 11400000, guid: fdc979189f1064e64979c0aa193327f1, type: 2}
   panelType: {fileID: 11400000, guid: e3d693226dc28aa4aa33d2d80154c0e9, type: 2}
   pushOnEvent: 3
-  clearBeforePush: 0
+  clearBeforePush: 1
 --- !u!114 &1793584586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +781,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e70909638574717a3e9e1382ce0913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventManager: {fileID: 0}
+  eventManager: {fileID: 1269823639}
   panelStackSystem: {fileID: 11400000, guid: a47d394c465a24d1194fce337a94c971, type: 2}
   clearSystemStackOnDestroy: 1
+--- !u!114 &1793584587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793584583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274c718b656aa4b949200a902a772807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelType: {fileID: 11400000, guid: ad59a8ced19cb6f4d8a44741f11b70d2, type: 2}
+  panelView: {fileID: 0}
+  eventManager: {fileID: 1269823639}
+  sceneTransitionSystem: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77,
+    type: 2}
