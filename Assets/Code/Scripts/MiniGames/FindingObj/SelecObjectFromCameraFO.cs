@@ -24,7 +24,7 @@ public class SelecObjectFromCameraFO : MonoBehaviour
 
     private ObjectPositionQuestion aimText;
     private TaskGiver taskGiver;
-    private bool isRaycastBlocking = false;
+    private bool isRaycastBlocking = true;
 
     public void onSpawnMainPlane()
     {

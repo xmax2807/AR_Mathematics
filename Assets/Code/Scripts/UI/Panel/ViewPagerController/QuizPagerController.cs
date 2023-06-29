@@ -19,7 +19,7 @@ namespace Project.UI.Panel{
         }
 
         protected override async void SetupList (){
-            loadingView.SetupUI("Đang tải câu hỏi, bé chờ chút nhé...");
+            loadingView.SetupUI("Đang tải câu hỏi, em chờ chút nhé...");
             await loadingView.ShowAsync();
             //await generator.InitAsset();
             

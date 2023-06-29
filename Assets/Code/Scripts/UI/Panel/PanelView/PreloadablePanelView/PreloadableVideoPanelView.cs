@@ -8,12 +8,18 @@ namespace Project.UI.Panel{
     {
         [SerializeField] private VideoPlayerBehaviour videoPlayerBehaviour;
         public string VideoUrl;
+        public UnityEngine.Video.VideoClip Clip;
         public VideoPlayerBehaviour VideoPlayerBehaviour {get => videoPlayerBehaviour;}
         public override IEnumerator PrepareAsync()
         {
             if(isPrepared) yield break;
-            yield return videoPlayerBehaviour.Setup();
-            yield return videoPlayerBehaviour.PrepareVideoUrl(VideoUrl);
+            //yield return videoPlayerBehaviour.Setup();
+            if(Clip != null){
+                yield return videoPlayerBehaviour.PrepareVideoClip(Clip);
+            }
+            else{
+                yield return videoPlayerBehaviour.PrepareVideoUrl(VideoUrl);
+            }
             isPrepared = true;
         }
 
@@ -29,11 +35,17 @@ namespace Project.UI.Panel{
             return Task.CompletedTask;
         }
 
-        public override Task ShowAsync(CancellationToken cancellationToken)
+        public override async Task ShowAsync(CancellationToken cancellationToken)
         {
-            videoPlayerBehaviour.PlayVideo();
+            if(!isPrepared){
+                StartCoroutine(PrepareAsync());
+            }
+            while(!isPrepared){
+               await Task.Delay(10);
+            }
             videoPlayerBehaviour.enabled = true;
-            return Task.CompletedTask;
+            videoPlayerBehaviour.PlayVideo();
+            //return Task.CompletedTask;
         }
     }
 }

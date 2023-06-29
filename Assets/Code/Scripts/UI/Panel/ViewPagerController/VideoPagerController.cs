@@ -7,12 +7,15 @@ namespace Project.UI.Panel
 {
     public class VideoPagerController : ViewPagerControllerT<PreloadableVideoPanelView>
     {
+        [SerializeField] private LoadingPanelView loadingView;
         [SerializeField] private DownloadingPanelView downloadingPanel;
         LessonController lessonController => DatabaseManager.Instance.LessonController;
         LessonModel lessonModel => UserManager.Instance.CurrentLesson;
 
         protected override async void SetupList()
         {
+            loadingView.SetupUI("Đang tải bài học, em chờ chút nhé...");
+            await loadingView.ShowAsync();
             downloadingPanel.SetupUI("Đang tải bài học, bé chờ chút nhé...");
             
             if(lessonModel == null){
@@ -20,6 +23,7 @@ namespace Project.UI.Panel
                 return;
             }
             await FetchPanelView(lessonModel.VideoNumbers, OnBuildUIView);
+            await loadingView.HideAsync();
             await downloadingPanel.StartDownload();
             
             InvokeOnPageChanged(0);

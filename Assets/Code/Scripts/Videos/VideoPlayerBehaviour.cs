@@ -17,6 +17,8 @@ public class VideoPlayerBehaviour : MonoBehaviour
     public event System.Action<VideoState> OnVideoStateChanged;
     public string VideoUrl { get; set; }
 
+    private RenderTexture texture;
+
     private void Awake()
     {
         if (targetCam == null) targetCam = Camera.main;
@@ -26,14 +28,15 @@ public class VideoPlayerBehaviour : MonoBehaviour
     void OnEnable()
     {
         if(videoPlayer == null) return;
-        videoPlayer.targetCamera = targetCam;
+        //videoPlayer.targetCamera = targetCam;
         videoPlayer.loopPointReached += OnEndPointReached;
         PlayVideo();
     }
     void OnDisable()
     {
         if(videoPlayer == null) return;
-        videoPlayer.targetCamera = null;
+        //videoPlayer.targetCamera = null;
+        videoPlayer.loopPointReached -= OnEndPointReached;
         PauseVideo();
     }
     
@@ -46,7 +49,10 @@ public class VideoPlayerBehaviour : MonoBehaviour
             videoPlayer.Prepare();
         }
         try{
-            
+            if(texture != null){
+                videoPlayer.targetTexture = texture;
+                videoPlayer.renderMode = VideoRenderMode.RenderTexture;
+            }
             videoPlayer.Play();
         }
         catch(System.Exception e){
@@ -73,7 +79,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
     {
         if (videoPlayer == null)
         {
-            Setup();
+            yield return Setup();
         }
         try
         {
@@ -84,7 +90,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
-        yield return null;
+        yield break;
     }
     public IEnumerator PrepareVideoClip(VideoClip clip){
         if(videoPlayer == null){
@@ -128,19 +134,19 @@ public class VideoPlayerBehaviour : MonoBehaviour
         videoPlayer.targetCamera = targetCam;
         videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
         videoPlayer.SetTargetAudioSource(0, audioSource);
-        videoPlayer.controlledAudioTrackCount = 1;
-        //videoPlayer.frame = 0;
-        videoPlayer.prepareCompleted += PlayVideo;
-        
-        yield return new WaitUntil(()=>VideoUrl != null);
-        yield return PrepareVideoUrl(VideoUrl);
+        //videoPlayer.controlledAudioTrackCount = 1;
+        videoPlayer.frame = 0;
+        videoPlayer.prepareCompleted += VideoCompleted;
+        yield break;
+        // yield return new WaitUntil(()=>VideoUrl != null);
+        // yield return PrepareVideoUrl(VideoUrl);
     }
     public IEnumerator Unload()
     {
         if (videoPlayer != null)
         {
             StopVideo();
-            videoPlayer.prepareCompleted -= PlayVideo;
+            videoPlayer.prepareCompleted -= VideoCompleted;
             Destroy(videoPlayer);
         }
         yield return null;
@@ -150,5 +156,19 @@ public class VideoPlayerBehaviour : MonoBehaviour
         if(!enabled) return;
 
         PlayVideo();
+    }
+
+    private void VideoCompleted(VideoPlayer player){
+        player.time = 0f;
+    }
+
+    public void AddRenderTexture(RenderTexture texture){
+        this.texture = texture;
+        if(videoPlayer == null || texture == null){
+            return;
+        }
+        videoPlayer.renderMode = VideoRenderMode.RenderTexture;
+        videoPlayer.targetTexture = texture;
+        //videoPlayer.targetCamera = targetCam;
     }
 }

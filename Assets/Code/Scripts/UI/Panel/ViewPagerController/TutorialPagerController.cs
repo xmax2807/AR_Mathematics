@@ -34,7 +34,7 @@ namespace Project.UI.Panel{
             });
             StartCoroutine(task);
             while(isDone == false){
-                await Task.Delay(100);
+                await Task.Delay(10);
             }
         }
 
@@ -45,8 +45,8 @@ namespace Project.UI.Panel{
             }
             string fullFilePath = clip.originalPath;
             Debug.Log($"TutorialController: got video url: {fullFilePath}");
-            view.VideoUrl = fullFilePath;
-            view.VideoPlayerBehaviour.VideoUrl = $"{fullFilePath}";
+            view.Clip = clip;
+            //view.VideoPlayerBehaviour.VideoUrl = $"{fullFilePath}";
         }
 
         public void MoveTo(string name){

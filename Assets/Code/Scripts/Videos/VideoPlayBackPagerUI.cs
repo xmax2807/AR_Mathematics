@@ -10,6 +10,7 @@ namespace Project.UI.Panel
         [SerializeField] private Canvas pausingCanvas;
         [SerializeField] private Canvas stoppedCanvas;
         [SerializeField] private Button pauseButton;
+        [SerializeField] private RenderTexture videoRenderTexture;
         private VideoPlayerBehaviour playerBehaviour;
         private VideoPlayerBehaviour.VideoState currentState;
 
@@ -24,6 +25,7 @@ namespace Project.UI.Panel
             }
 
             playerBehaviour = currentPanelView.VideoPlayerBehaviour;
+            playerBehaviour.AddRenderTexture(videoRenderTexture);
 
             if (playerBehaviour != null)
             {
@@ -65,6 +67,7 @@ namespace Project.UI.Panel
         }
         private void DisableAllCanvas()
         {
+            if(loadingCanvas == null) return;
             loadingCanvas.enabled = false;
             pausingCanvas.enabled = false;
             stoppedCanvas.enabled = false;

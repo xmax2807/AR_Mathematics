@@ -13,6 +13,180 @@ MonoBehaviour:
   m_Name: GameTutorialViewData
   m_EditorClassIdentifier: 
   Children: []
-  ButtonNames: []
+  ButtonNames:
+  - Name: "Tr\xF2 c\xE2u c\xE1"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 8
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
   Title: 
   Description: 

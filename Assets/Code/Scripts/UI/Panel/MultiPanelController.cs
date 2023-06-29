@@ -85,6 +85,7 @@ namespace Project.UI.Panel
         }
         private async void PushUI(PanelViewData data)
         {
+            if(data == null) return;
             eventManager?.Lock();
 
             if (!cached.ContainsKey(data.name))
