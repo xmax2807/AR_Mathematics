@@ -2308,6 +2308,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1977720283}
+    - target: {fileID: 3843124068555034987, guid: e1c062679da198d4a91d09703c434b10,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843124068555034987, guid: e1c062679da198d4a91d09703c434b10,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Gameframe.GUI.TransitionSystem.SingleSceneLoadBehaviour, com.gameframe.gui
+      objectReference: {fileID: 0}
     - target: {fileID: 6481506984509245724, guid: e1c062679da198d4a91d09703c434b10,
         type: 3}
       propertyPath: m_AnchorMax.y

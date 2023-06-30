@@ -616,7 +616,7 @@ MonoBehaviour:
   m_objectPlanePlacer: {fileID: 533509411}
   testObject: {fileID: 919132149155446097, guid: 76deb6ba63b91dd4780de577e525d9d7,
     type: 3}
-  isDebug: 1
+  isDebug: 0
   uiOptions: {fileID: 8109016302603766327, guid: f85e02cc3d2cf3947ac3235ba88d8f96,
     type: 3}
   UIManager: {fileID: 0}

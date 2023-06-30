@@ -791,7 +791,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2994388364330757454}
     - target: {fileID: 2079449857927685525, guid: 311a07389adedbf4fa8aacb9faae8f55,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -800,12 +800,12 @@ PrefabInstance:
     - target: {fileID: 2079449857927685525, guid: 311a07389adedbf4fa8aacb9faae8f55,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Load
+      value: Cancel
       objectReference: {fileID: 0}
     - target: {fileID: 2079449857927685525, guid: 311a07389adedbf4fa8aacb9faae8f55,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Gameframe.GUI.TransitionSystem.SingleSceneLoadBehaviour, com.gameframe.gui
+      value: Gameframe.GUI.PanelSystem.OkCancelPanelView, com.gameframe.gui
       objectReference: {fileID: 0}
     - target: {fileID: 2079449857927685525, guid: 311a07389adedbf4fa8aacb9faae8f55,
         type: 3}

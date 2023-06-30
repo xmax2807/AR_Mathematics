@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneLoadBehaviour: {fileID: 1666351509576733750}
+  notificationPanelViewType: {fileID: 11400000, guid: a8f14bf2c8e629c4098c2922cab951be,
+    type: 2}
   stackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
   SignOutButton: {fileID: 4985293087784058357}
   DeleteAccountButton: {fileID: 8790774046925899988}
