@@ -36,6 +36,7 @@ namespace Project.MiniGames.HouseBuilding
 
             }
             mainGamePlacer.OnSpawnMainPlane += OnSpawnMainPlane;
+            mainGamePlacer.IsBlockRaycast = true;
         }
 
         private void OnSpawnMainPlane(GameObject obj)
@@ -79,6 +80,7 @@ namespace Project.MiniGames.HouseBuilding
                 TimeCoroutineManager.Instance.WaitUntil(()=>questionIsReady, StartGame);
                 return;
             } 
+            mainGamePlacer.IsBlockRaycast = false;
         }
 
         public void ReceiveBuildingsFromRemote(GameObject[] objs)

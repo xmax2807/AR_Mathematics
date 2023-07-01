@@ -21,6 +21,9 @@ namespace Project.RewardSystem{
         }
         public void UnloadAsset(){
             RemoteModel.ReleaseAsset();
+            if(cache == null){
+                return;
+            }
             RemoteModel.ReleaseInstance(cache);
         }
 

@@ -16,6 +16,8 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     public Vector3 rotateObject;
     public Camera ARCamera;
 
+    public bool IsBlockRaycast;
+
     UnityEvent placementUpdate;
 
     [SerializeField]
@@ -77,6 +79,10 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
     bool TryGetTouchPosition(out Vector3 touchPosition)
     {
+        if(IsBlockRaycast){
+            touchPosition = default;
+            return false;
+        }
 #if UNITY_EDITOR
         if (Input.GetMouseButtonUp(0))
         {

@@ -30,6 +30,7 @@ namespace Project.MiniGames.ObjectFinding
 
             }
             mainGamePlacer.OnSpawnMainPlane += OnSpawnMainPlane;
+            mainGamePlacer.IsBlockRaycast = true;
         }
 
         private void OnSpawnMainPlane(GameObject obj)
@@ -53,6 +54,7 @@ namespace Project.MiniGames.ObjectFinding
 
             objectCenterObj.Setup(manager: this, giver: this.taskGiver);
             objectRaycaster.SetPlacements(placementObjectPrefabs, objectCenterObj.transform);
+            objectRaycaster.UnblockRaycast();
         }
         private void OnEnable()
         {
@@ -116,6 +118,7 @@ namespace Project.MiniGames.ObjectFinding
                 return;
             }
 
+            mainGamePlacer.IsBlockRaycast = false;
         }
 
         private void OnTaskGiverReady()

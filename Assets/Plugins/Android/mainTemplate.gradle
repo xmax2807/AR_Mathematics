@@ -6,7 +6,7 @@
             url "https://maven.google.com"
         }
         maven {
-            url "file:///D:/bin/Study/DATN/Project/AR%20Grade%201%20Mathematics/Assets/GeneratedLocalRepo/Firebase/m2repository" // Assets/Firebase/Editor/AppDependencies.xml:22, Assets/Firebase/Editor/AuthDependencies.xml:20, Assets/Firebase/Editor/FirestoreDependencies.xml:20, Assets/Firebase/Editor/StorageDependencies.xml:20
+            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AppDependencies.xml:22, Assets/Firebase/Editor/AuthDependencies.xml:20, Assets/Firebase/Editor/FirestoreDependencies.xml:20, Assets/Firebase/Editor/StorageDependencies.xml:20
         }
         mavenLocal()
         mavenCentral()
