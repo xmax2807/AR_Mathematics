@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:565046576541:android:ea176a534cf0ad2008db74",
+        "android_client_info": {
+          "package_name": "com.HCMUS.ARMath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565046576541-0nojt6ki1806hdiv8q4dt0ucenmp1h18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqlw7_xysySkkWsgskSbW943W77ZIAJjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565046576541-0nojt6ki1806hdiv8q4dt0ucenmp1h18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "565046576541-en7qoeu2ttv3hi1mvevsgilrtd6vgh1j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.KHTN.ARMath"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:565046576541:android:263bac8a72f7322008db74",
         "android_client_info": {
           "package_name": "com.KHTN.AR_Math"
@@ -38,6 +74,13 @@
             {
               "client_id": "565046576541-0nojt6ki1806hdiv8q4dt0ucenmp1h18.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "565046576541-en7qoeu2ttv3hi1mvevsgilrtd6vgh1j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.KHTN.ARMath"
+              }
             }
           ]
         }

@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DATN - AR
+  companyName: DATN
   productName: Toan Lop 1 Voi AR
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -178,9 +178,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 2
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.KHTN.AR_Math
+    Android: com.HCMUS.ARMath
     Standalone: com.DefaultCompany.com.unity.template.ar
-    iPhone: com.KHTN.ARMath
+    iPhone: com.HCMUS.ARMath
   buildNumber:
     Standalone: 0
     iPhone: 0

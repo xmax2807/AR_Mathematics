@@ -20,6 +20,9 @@ namespace Project.RewardSystem{
             remoteLoadOperation = RemoteModel.LoadAssetAsync<GameObject>();
         }
         public void UnloadAsset(){
+            if(!RemoteModel.IsValid()) {
+                return;
+            }
             RemoteModel.ReleaseAsset();
             if(cache == null){
                 return;

@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/google-services.json.meta
 guid: 1bfb53287eb651a45ac2676c8c6a81b2
 TextScriptImporter:
-========
-guid: d4ae1759340c6a44ea576a618edecc29
-PrefabImporter:
->>>>>>>> Minh:Assets/Code/Scripts/MiniGames/ProgressBar/BackgroundSlider.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
