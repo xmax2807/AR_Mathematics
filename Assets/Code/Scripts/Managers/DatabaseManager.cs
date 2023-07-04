@@ -38,7 +38,7 @@ public class DatabaseManager : MonoBehaviour
     public GameController GameController { get; private set; }
     public QuizController QuizController { get; private set; }
     public TestController TestController { get; private set; }
-    public bool IsConfigured {get;private set;}
+    public bool IsConfigured { get; private set; }
     public event Action OnFirebaseConfigured;
     void Awake()
     {
@@ -59,10 +59,18 @@ public class DatabaseManager : MonoBehaviour
 
         FirebaseFireStore.Collection(collection).Document().SetAsync(model);
     }
-    private async void InitFirebase()
+    private void InitFirebase()
     {
         AddressableManager.AddDependencies();
+#if UNITY_ANDROID
+        CheckRequirementForGooglePlay();
+#else
+        StartInitializing();
+#endif
+    }
 
+    private async void CheckRequirementForGooglePlay()
+    {
         await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             var dependencyStatus = task.Result;
@@ -71,59 +79,8 @@ public class DatabaseManager : MonoBehaviour
                 Debug.Log("Connect successfully");
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
-                app = Firebase.FirebaseApp.DefaultInstance;
-                
-                FirebaseFireStore = FirebaseFirestore.GetInstance(app);
-                Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
-                Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
-                OnFirebaseConfigured?.Invoke();
-                Debug.Log("loaded Database");
 
-                UserController = new UserController();
-                AchievementController = new AchievementController();
-                LessonController = new();
-                GameController = new();
-                QuizController = new();
-                TestController = new();
-                FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
-                    task => {
-                        UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
-                    }
-                );
-                // QuizController.GetQuizzesByLesson(unit,chapter);
-                // TestController.GetTest(semester);
-                // LessonController.UploadLesson(LessonData);
-                //LessonController.GetVideo(1, 2);
-                // CreateUser(Username, Password);
-
-                // Debug.Log(LessonController.GetLessonID(1,1).Result);
-            
-                //bool result = await UserController.SignInAuth(Email,Password);
-                // UserController.RegisterAuth(Email,Password);
-                // Debug.Log(LessonController.GetLessonID(1,1).Result);
-
-                // UploadData<QuizModel>(collection, ()=>new QuizModel(){
-                //     QuizUnit = quizData.QuizUnit,
-                //     QuizTitle = quizData.QuizTitle,
-                //     QuizIMG = quizData.QuizIMG,
-                //     QuizAnswer = quizData.QuizAnswer,
-                //     QuizCorrectAnswer = quizData.QuizCorrectAnswer,
-                //     QuizSemester = quizData.QuizSemester,
-                //     QuizChapter = quizData.QuizChapter,
-                // });
-                // LessonController.GetVideo(1,2);
-                // var user = await UserController.RegisterAuth("freefire@gmail.com","pubgmobile");
-                // UserController.UploadModel(user);
-                // try{GameController.SavingGameToUser("wqMomNaMtNeNvHbENiMxzzmcxh72","oHmusqZVcR9BKG5EMekh",1);
-                // }
-                // catch(Exception e){
-                //     Debug.Log(e.Message);
-                // }
-                // try{QuizController.GetQuizzesByLesson(1,2);
-                // }
-                // catch(Exception e){
-                //     Debug.Log(e.Message);
-                // }
+                StartInitializing();
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else
@@ -135,5 +92,29 @@ public class DatabaseManager : MonoBehaviour
 
             return Task.CompletedTask;
         });
+    }
+
+    private void StartInitializing()
+    {
+        app = Firebase.FirebaseApp.DefaultInstance;
+
+        FirebaseFireStore = FirebaseFirestore.GetInstance(app);
+        Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
+        Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+        OnFirebaseConfigured?.Invoke();
+        Debug.Log("loaded Database");
+
+        UserController = new UserController();
+        AchievementController = new AchievementController();
+        LessonController = new();
+        GameController = new();
+        QuizController = new();
+        TestController = new();
+        FirebaseFireStore.Collection("chapter_max_unit_count").Document("semester").GetSnapshotAsync().ContinueWithOnMainThread(
+            task =>
+            {
+                UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
+            }
+        );
     }
 }
