@@ -1028,6 +1028,8 @@ MonoBehaviour:
   passwordField: {fileID: 3148114083784572664}
   SignInButton: {fileID: 3148114082089532459}
   notificationPanel: {fileID: 11400000, guid: a8f14bf2c8e629c4098c2922cab951be, type: 2}
+  autoNotificationPanel: {fileID: 11400000, guid: 8be0ac2ca01d0324a966afc2b5fc64fd,
+    type: 2}
   stackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
 --- !u!114 &8994167512401850141
 MonoBehaviour:

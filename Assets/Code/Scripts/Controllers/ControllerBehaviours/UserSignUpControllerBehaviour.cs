@@ -7,6 +7,7 @@ using Gameframe.GUI.PanelSystem;
 using System;
 using System.Threading.Tasks;
 using Project.UI.Panel;
+using Project.UI.Event.Popup;
 
 public class UserSignUpControllerBehaviour : MonoBehaviour
 {
@@ -49,7 +50,6 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     {
         this.password = password;
         SignUpButton.interactable = IsValid();
-        Debug.Log(password);
     }
     private void OnChangingPasswordField(string password){
         SignUpButton.interactable = IsValid();
@@ -64,45 +64,18 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     {
         AuthResult authResult;
         (user, authResult) = await Controller.RegisterAuth(username, password);
-        // if (task.IsCanceled)
-        // {
-        //     Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-        //     return;
-        // }
-        // if (task.IsFaulted)
-        // {
-        //     Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-        //     return;
-        // }
-        // var user = task.Result;
+        
         if (user == null || !authResult.IsSuccessful) {
-            OkCancelPanelViewController controller = new OkCancelPanelViewController(notificationViewType, (isOk)=>{
-                stackSystem.Pop();
-            });
-
-            await stackSystem.PushAsync(controller);
-            NotificationPanelView view = (NotificationPanelView)controller.View;
-            view.SetUI(authResult.ErrorMessage, "Lỗi đăng ký");
+            PopupDataWithButtonBuilder builder = new();
+            PopupDataWithButton data = builder.StartCreating().AddText("Lỗi đăng ký", authResult.ErrorMessage).AddButtonData("Tôi đã hiểu", null).GetResult();
+            GeneralPopupUI ui = new(notificationViewType, data);
+            PopupUIQueueManager.Instance.EnqueueEventPopup(ui);
             return;
         }
 
         pusher.Push();
         await user.SendEmailVerificationAsync();
         isWaitingEmailVerify = true;
-
-
-        // TimeCoroutineManager.Instance.DoLoopAction(
-        // ReloadUser,
-        // () => user.IsEmailVerified, // stop condition
-        // 1,// interval
-        // () => // post process
-        // {
-        //     //Up model len6 db
-        //     Controller.UploadModel(user);
-        //     //
-        //     BackToSignInButton.onClick?.Invoke();
-        //     pusher.OnConfirm?.Invoke();
-        // });
     }
 
     private async Task<bool> ReloadUser()

@@ -55,23 +55,25 @@ public class UserController
         AuthResult authResult = new AuthResult(true);
         await auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
+            string errorMessage = "Lỗi không xác định";
             if (task.IsCanceled)
             {
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-                authResult = new(false);
+                authResult = new(false, errorMessage);
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                
+                //Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 Firebase.FirebaseException exception = (Firebase.FirebaseException)task.Exception.InnerExceptions[0].InnerException;
                 if (exception == null)
                 {
+                    authResult = new AuthResult(false, errorMessage);
                     return;
                 }
 
                 Debug.Log(exception.ErrorCode);
-                string errorMessage = "";
                 switch((Firebase.Auth.AuthError)exception.ErrorCode){
                     case Firebase.Auth.AuthError.UserNotFound: errorMessage = "Tài khoản không tồn tại";
                     break;
@@ -80,6 +82,12 @@ public class UserController
                     case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
                     break;
                     case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
+                    break;
+                    case Firebase.Auth.AuthError.NetworkRequestFailed: errorMessage = "Mất kết nối tới máy chủ";
+                    break;
+                    case Firebase.Auth.AuthError.WeakPassword: errorMessage = "Sai mật khẩu";
+                    break;
+                    default: errorMessage = "Lỗi không xác định";
                     break;
                 }
                 authResult = new AuthResult(false, errorMessage);
@@ -103,22 +111,23 @@ public class UserController
         Firebase.Auth.FirebaseUser user = null;
 
         AuthResult authResult = new AuthResult(true);
-        string errorMessage = "";
+        string errorMessage = "Lỗi không xác định";
         await auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
 
             if (task.IsCanceled)
             {
-                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                authResult = new AuthResult();
+                //Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                authResult = new AuthResult(false);
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                //Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 Firebase.FirebaseException exception = (Firebase.FirebaseException)task.Exception.InnerExceptions[0].InnerException;
                 if (exception == null)
                 {
+                    authResult = new AuthResult(false, errorMessage);
                     return;
                 }
 
@@ -131,6 +140,12 @@ public class UserController
                     case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
                     break;
                     case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
+                    break;
+                    case Firebase.Auth.AuthError.NetworkRequestFailed: errorMessage = "Mất kết nối tới máy chủ";
+                    break;
+                    case Firebase.Auth.AuthError.WeakPassword: errorMessage = "Sai mật khẩu";
+                    break;
+                    default: errorMessage = "Lỗi không xác định";
                     break;
                 }
                 authResult = new AuthResult(false, errorMessage);

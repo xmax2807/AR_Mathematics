@@ -24,6 +24,7 @@ namespace Project.Managers
         private void Init(){
             Instance = this;
             gameObject.EnsureChildComponent<SpawnerManager>(childName: "Spawn Manager");
+            gameObject.EnsureChildComponent<PopupUIQueueManager>(childName: "Popup UI Queue Manager");
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
