@@ -24,10 +24,12 @@ namespace Project.MiniGames.FishingGame
 
         public Task<bool> OnCaughtFish(Shape.ShapeType type){
             if(Giver.IsCorrect(type)){
+                Managers.AudioManager.Instance.PlayEffect(Audio.SoundFXController.SoundFXType.OnCorrect);
                 Giver.Tasks.UpdateProgress(1);
                 OnCatchRightFish?.Invoke();
                 return Task.FromResult(true);
             }
+            Managers.AudioManager.Instance.PlayEffect(Audio.SoundFXController.SoundFXType.OnError);
             return Task.FromResult(false);
         }
     }

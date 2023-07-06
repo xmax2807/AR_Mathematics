@@ -40,6 +40,9 @@ namespace Project.MiniGames.UI{
 
         IEnumerator VideoStart(Animator anim, bool isCorrectAns, Action postCallback)
         {
+            Audio.SoundFXController.SoundFXType type = isCorrectAns ? Audio.SoundFXController.SoundFXType.OnCorrect : Audio.SoundFXController.SoundFXType.OnError;
+            AudioManager.Instance.PlayEffect(type);
+
             anim.gameObject.SetActive(true);
             anim.SetBool("isCorrect", isCorrectAns);
             // if (RightAns == true)

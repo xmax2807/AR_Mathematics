@@ -27,6 +27,7 @@ namespace Project.MiniGames.HouseBuilding{
 
         public void OnBlockPlaced()
         {
+            Managers.AudioManager.Instance.PlayEffect(Audio.SoundFXController.SoundFXType.OnCorrect);
             if(firework != null && !firework.isPlaying){
                 firework.gameObject.SetActive(true);
                 firework.Play();

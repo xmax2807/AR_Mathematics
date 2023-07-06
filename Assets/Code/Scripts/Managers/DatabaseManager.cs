@@ -45,8 +45,6 @@ public class DatabaseManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            InitFirebase();
-            IsConfigured = true;
         }
         else if (Instance != this)
         {
@@ -59,48 +57,72 @@ public class DatabaseManager : MonoBehaviour
 
         FirebaseFireStore.Collection(collection).Document().SetAsync(model);
     }
-    private void InitFirebase()
+    public async Task<bool> InitFirebase()
     {
         AddressableManager.AddDependencies();
 #if UNITY_ANDROID
-        CheckRequirementForGooglePlay();
+        bool isAvailable = await CheckRequirementForGooglePlay();
+        if(isAvailable){
+            bool isInitSuccessfully = StartInitializing();
+            IsConfigured = isInitSuccessfully;
+            return isInitSuccessfully;
+        }
+        else{
+            return false;
+        }
 #else
-        StartInitializing();
+        bool isInitSuccessfully = StartInitializing();
+        IsConfigured = isInitSuccessfully;
+        return isInitSuccessfully;
 #endif
     }
 
-    private async void CheckRequirementForGooglePlay()
+    private async Task<bool> CheckRequirementForGooglePlay()
     {
+        bool isDependencyStatusAvailable = false;
         await Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
-                Debug.Log("Connect successfully");
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
-
-                StartInitializing();
+                isDependencyStatusAvailable = true;
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else
             {
+                isDependencyStatusAvailable = false;
                 UnityEngine.Debug.LogError(System.String.Format(
                   "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                 // Firebase Unity SDK is not safe to use here.
             }
-
-            return Task.CompletedTask;
         });
+        return isDependencyStatusAvailable;
     }
 
-    private void StartInitializing()
+    private bool StartInitializing()
     {
-        app = Firebase.FirebaseApp.DefaultInstance;
+        try
+        {
+            app = Firebase.FirebaseApp.DefaultInstance;
 
-        FirebaseFireStore = FirebaseFirestore.GetInstance(app);
-        Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
-        Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+            FirebaseFireStore = FirebaseFirestore.GetInstance(app);
+            Auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
+            Storage = Firebase.Storage.FirebaseStorage.GetInstance(app);
+        }
+        catch (Exception ex)
+        {
+            if (ex is Firebase.InitializationException initEx)
+            {
+                Debug.LogError("Init Result Exception: " + initEx.InitResult);
+                Debug.LogError("HResult Exception: " + initEx.HResult);
+            }
+            Debug.Log(ex.StackTrace);
+            Debug.Log("Exception Message: " + ex.Message);
+            return false;
+        }
+
         OnFirebaseConfigured?.Invoke();
         Debug.Log("loaded Database");
 
@@ -116,5 +138,7 @@ public class DatabaseManager : MonoBehaviour
                 UserManager.Instance.CourseModel = task.Result.ConvertTo<CourseModel>();
             }
         );
+
+        return true;
     }
 }

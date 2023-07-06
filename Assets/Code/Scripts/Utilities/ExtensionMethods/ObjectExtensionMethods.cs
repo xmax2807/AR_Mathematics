@@ -107,6 +107,12 @@ namespace Project.Utils.ExtensionMethods
             return child.AddComponent<T>();
         }
 
+        public static T AddChildWithScript<T>(this GameObject obj, string name) where T : MonoBehaviour{
+            GameObject child = new(name); 
+            child.transform.parent = obj.transform;
+            return child.AddComponent<T>();
+        }
+
         public static GameObject EnsureChildWithName(this GameObject obj, string childName){
             Transform child = obj.transform.GetChildWithName(childName);
             if(child == null){

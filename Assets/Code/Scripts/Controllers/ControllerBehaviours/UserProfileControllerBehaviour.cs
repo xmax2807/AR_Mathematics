@@ -23,6 +23,7 @@ public class UserProfileControllerBehaviour : MonoBehaviour{
     private OkCancelPanelViewController notificationController;
     
     #region User Account
+    private const string LoggedIn = "isLoggedIn";
     private bool accessGranted;
     private Firebase.Auth.FirebaseUser CurrentUser => DatabaseManager.Auth.CurrentUser;
     private UserController UserController => DatabaseManager.Instance.UserController;
@@ -95,6 +96,9 @@ public class UserProfileControllerBehaviour : MonoBehaviour{
   
     public  void SignOutAuth(){
         Controller.SignOutAuth();
+        if(PlayerPrefs.HasKey(LoggedIn)){
+            PlayerPrefs.SetInt(LoggedIn, 0);
+        }
         // return login scene
         LoadScene(SceneName);
     }

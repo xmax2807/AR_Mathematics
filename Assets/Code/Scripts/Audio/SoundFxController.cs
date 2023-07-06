@@ -9,7 +9,7 @@ namespace Project.Audio
     {
         public enum SoundFXType
         {
-            OnClick, OnCorrect, OnRewarded, OnError, OnPopUp
+            OnClick, OnCorrect, OnRewarded, OnError, OnPopUp, OnComplete, OnFail
         }
         [System.Serializable]
         public struct SoundFXPack
@@ -48,7 +48,10 @@ namespace Project.Audio
         }
         public void PlayEffect(SoundFXType type)
         {
-            if(soundTable[type] == null) return;
+            if(soundTable[type] == null){
+                Debug.Log("Null sound fx");
+                return;
+            }
 
             source.PlayOneShot(soundTable[type]);
         }

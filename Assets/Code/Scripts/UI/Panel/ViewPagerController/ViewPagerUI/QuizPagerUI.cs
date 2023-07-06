@@ -33,10 +33,12 @@ namespace Project.UI.Panel
             //After updating current view
             currentQuestion = panelView.Question;
             await panelView.ContentUI.CreateUI(content, currentQuestion);// lấy hình từ server
-            panelView.AnswerUI.CreateUI(answersContainer, currentQuestion);
-            questionText.text = currentQuestion.GetQuestion();
-            panelView.AnswerUI.OnUserAnswered += OnUserAnswered;
             
+            questionText.richText = true;
+            questionText.text = currentQuestion.GetQuestion();
+            
+            panelView.AnswerUI.CreateUI(answersContainer, currentQuestion);
+            panelView.AnswerUI.OnUserAnswered += OnUserAnswered;
             panelView.ChangeAnswerUIState(PrefferedUIState);
             panelView.AnswerUI.SetAnswer();// Set prev answer if any
 

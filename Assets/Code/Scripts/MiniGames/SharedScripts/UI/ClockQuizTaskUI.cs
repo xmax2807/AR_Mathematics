@@ -76,6 +76,9 @@ namespace Project.MiniGames
             TrueFalseAnsGIF.gameObject.SetActive(true);
             TrueFalseAnsGIF.SetBool("isCorrect", result);
 
+            Audio.SoundFXController.SoundFXType type = result ? Audio.SoundFXController.SoundFXType.OnCorrect : Audio.SoundFXController.SoundFXType.OnError; 
+            AudioManager.Instance.PlayEffect(type);
+
             var stateInfo = TrueFalseAnsGIF.GetCurrentAnimatorStateInfo(0);
             TimeCoroutineManager.Instance.WaitForSeconds(stateInfo.length, () =>
             {

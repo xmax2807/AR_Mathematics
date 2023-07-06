@@ -10,6 +10,7 @@ namespace Project.Managers{
         private const string googleSTT_URL = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=vi&q=";
         public AudioSource VoiceVolume {get; private set;}
         public AudioSource BackgroundFX {get;private set;}
+        private const string AudioPackPath = "Audio/DefaultAudioPack";
         private Project.Audio.SoundFXController SoundFXController;
         public void Awake(){
             if(Instance == null){
@@ -22,11 +23,15 @@ namespace Project.Managers{
                 BackgroundFX = this.gameObject.AddChildWithComponent<AudioSource>("BackgroundFX");
             }
             if(SoundFXController == null){
-                SoundFXController = this.gameObject.AddChildWithComponent<Audio.SoundFXController>("SoundFX");
+                SoundFXController = this.gameObject.AddChildWithScript<Audio.SoundFXController>("SoundFX");
             }
         }
         public void Start(){
-            //Speak("Và giờ anh biết cuộc tình mình chẳng còn gì. Khi nắng xuân sang để lòng mình chẳng thầm thì");
+            StartCoroutine(ResourceManager.Instance.AskForAsset<Project.Audio.AudioPackSTO>(AudioPackPath, OnReceiveDefaultPack));
+        }
+
+        private void OnReceiveDefaultPack(Project.Audio.AudioPackSTO pack){
+            SwapSoundPack(pack);
         }
 
         public void PlayEffect(Audio.SoundFXController.SoundFXType type) => SoundFXController.PlayEffect(type);

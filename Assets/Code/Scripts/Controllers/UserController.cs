@@ -95,7 +95,7 @@ public class UserController
             }
 
             // Firebase user has been created.
-            newUser = task.Result;
+            newUser = task.Result.User;
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
             UploadModel(newUser);
@@ -159,6 +159,7 @@ public class UserController
 
         if (user == null) return authResult;
 
+        await GameManager.Instance.CheckIsAdminLoggedIn(user.UserId);
         FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
         ProfileUser(user.UserId);
         //UserManager.Instance.CurrentLocalUser = GetLocalUserModel(user.UserId);

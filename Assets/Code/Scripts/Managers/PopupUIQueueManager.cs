@@ -23,18 +23,29 @@ namespace Project.Managers{
             Instance.m_stackSystem = ScriptableObject.CreateInstance<PanelStackSystem>();
 
             SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+            MainCanvas = GameObject.FindGameObjectWithTag("MainCanvas")?.GetComponent<Canvas>();
             EnsureContainer();
+        }
+        private void OnSceneUnloaded(Scene scene){
+            m_stackSystem.RemoveController(m_popupContainer);
+            if(m_popupContainer != null){
+                Destroy(m_popupContainer.gameObject);
+                m_popupContainer = null;
+            }
+            m_stackSystem.Clear();
+            m_isStarted = false;
         }
 
         private Queue<IPopupUI> m_queuePopup;
         private bool m_isStarted = false;
         private Gameframe.GUI.PanelSystem.PanelStackSystem m_stackSystem;
         private PopupContainer m_popupContainer;
-        private PanelStackController m_stackController;
-        private Canvas MainCanvas => GameManager.RootCanvas;
+        //private PanelStackController m_stackController;
+        private Canvas MainCanvas;
 
         public void EnqueueEventPopup(IPopupUI popupUI, bool immediateStart = true){
             m_queuePopup.Enqueue(popupUI);
@@ -55,6 +66,7 @@ namespace Project.Managers{
             m_isStarted = true;
             bool hasTop = m_queuePopup.TryPeek(out IPopupUI popupUI);
             if(hasTop == false){
+                m_isStarted = false;
                 return;
             }
             popupUI.OnClose += Dequeue;
@@ -66,8 +78,9 @@ namespace Project.Managers{
         private async void Dequeue(bool isConfirm)
         {
             bool hasUI = m_queuePopup.TryDequeue(out IPopupUI ui);
-            m_isStarted = m_queuePopup.Count > 0;
+            
             if(!hasUI){
+                m_isStarted = false;
                 return;
             }
             await m_stackSystem.PopAsync();
@@ -76,7 +89,9 @@ namespace Project.Managers{
             if(view != null){
                 Destroy(view.gameObject);
             }
-            if(m_isStarted){
+
+            if(m_queuePopup.Count > 0){
+                m_isStarted = false;
                 StartPopup();
             }
         }
@@ -100,16 +115,17 @@ namespace Project.Managers{
                 rectTrans.ForceUpdateRectTransforms();
                 //
                 m_popupContainer = newObj.AddComponent<PopupContainer>();
+                m_popupContainer.SettingUp(m_stackSystem, UIEventManager.Current);
 
-                m_stackController = new PanelStackController(this.m_stackSystem, m_popupContainer, UIEventManager.Current);
-                m_stackSystem.AddController(m_stackController);
+                //m_stackController = new PanelStackController(this.m_stackSystem, m_popupContainer, UIEventManager.Current);
+                m_stackSystem.AddController(m_popupContainer);
                 return;
             }
             
-            if(m_stackController == null){
-                m_stackController = new PanelStackController(this.m_stackSystem, m_popupContainer, UIEventManager.Current);
-                m_stackSystem.AddController(m_stackController);
-            }
+            // if(m_stackController == null){
+            //     m_stackController = new PanelStackController(this.m_stackSystem, m_popupContainer, UIEventManager.Current);
+            //     m_stackSystem.AddController(m_stackController);
+            // }
         }
 
         private void EnsureLastSibling(){

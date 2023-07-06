@@ -20,12 +20,14 @@ namespace Project.MiniGames{
         protected override void OnCorrectAnswer()
         {
             canvas.enabled = false;
+            Managers.AudioManager.Instance.PlayEffect(Audio.SoundFXController.SoundFXType.OnCorrect);
             BaseGameEventManager.RealInstance<VCNVGameEventManager>().AnswerResultEvent.Raise<bool>(true);
             NextQuestion();
         }
         protected override void OnWrongAnswer()
         {
             UIEventManager?.Unlock();
+            Managers.AudioManager.Instance.PlayEffect(Audio.SoundFXController.SoundFXType.OnError);
             canvas.enabled = false;
             BaseGameEventManager.RealInstance<VCNVGameEventManager>().AnswerResultEvent.Raise<bool>(false);
         }

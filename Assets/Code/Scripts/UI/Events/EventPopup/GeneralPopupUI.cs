@@ -28,8 +28,8 @@ namespace Project.UI.Event.Popup{
 
         private void OnConfirmCallback(bool result){
             OnClose?.Invoke(result);
-            int index = result == true ? 1 : 0;
-            m_data.InvokeButtonClickAt(index);
+            // int index = result == true ? 1 : 0;
+            // m_data.InvokeButtonClickAt(index);
         }
     }
 }

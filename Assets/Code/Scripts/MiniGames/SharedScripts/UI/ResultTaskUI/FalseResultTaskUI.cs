@@ -72,6 +72,9 @@ namespace Project.MiniGames{
             canvas.enabled = true;
             await view?.ShowAsync();
             progressBarController.StartAnimation();
+
+            Audio.SoundFXController.SoundFXType type = result ? Audio.SoundFXController.SoundFXType.OnComplete: Audio.SoundFXController.SoundFXType.OnFail; 
+            Managers.AudioManager.Instance.PlayEffect(type);
         }
 
         private void SetupGiftBox(){

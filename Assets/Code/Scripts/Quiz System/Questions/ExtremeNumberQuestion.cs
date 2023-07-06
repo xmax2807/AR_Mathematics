@@ -7,7 +7,7 @@ using Project.Utils.ExtensionMethods;
 namespace Project.QuizSystem{
     public class ExtremeNumberQuestion : BaseQuestion<int>, IRandomizableQuestion<int>, ISavableQuestion
     {
-        private const string HeaderQuestion = "Em hãy tìm số _ trong dãy số:\n";
+        private const string HeaderQuestion = "Em hãy tìm số _ trong dãy số:";
         private int maxNumber,minNumber;
         private bool isMinimumFinding;
         private int[] numberArray;
@@ -83,7 +83,7 @@ namespace Project.QuizSystem{
             for(; i < count; ++i){
                 int value = rand.Next(minNumber, maxNumber + 1);
 
-                int randomRetries = 6;
+                int randomRetries = 20;
                 while(randomRetries > 0 && listNumbers.Contains(value)){
                     value = rand.Next(minNumber, maxNumber + 1);
                     --randomRetries;
@@ -110,7 +110,7 @@ namespace Project.QuizSystem{
 
         private string GenerateQuestion(){            
             // Generate question
-            StringBuilder builder = new($"<size=50%>{HeaderQuestion}</size>");
+            StringBuilder builder = new($"<size=50%>{HeaderQuestion}</size>\n");
             string whichExtreme = isMinimumFinding ? "bé nhất" : "lớn nhất";
             builder.Replace("_", whichExtreme);
             

@@ -164,17 +164,10 @@ namespace Project.MiniGames.ObjectFinding
 
         IEnumerator VideoStart(Animator anim, bool RightAns, Action postCallback)
         {
+            Audio.SoundFXController.SoundFXType type = RightAns ? Audio.SoundFXController.SoundFXType.OnCorrect : Audio.SoundFXController.SoundFXType.OnError;
+            AudioManager.Instance.PlayEffect(type);
             anim.gameObject.SetActive(true);
             anim.SetBool("isCorrect", RightAns);
-            // if (RightAns == true)
-            // {
-            //     anim.Play("RightAnswerAnimation");
-            // }
-            // else
-            // {
-            //     anim.Play("WrongAnswerAnimation");
-            // }
-            //anim.transform.LookAt(mainCam.transform);
             var animInfo = anim.GetCurrentAnimatorStateInfo(0);
             yield return new WaitForSeconds(animInfo.length);
 

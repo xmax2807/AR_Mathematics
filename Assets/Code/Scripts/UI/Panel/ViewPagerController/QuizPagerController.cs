@@ -11,17 +11,16 @@ namespace Project.UI.Panel{
 
         public IQuestion[] AllQuestions {get;private set;}
 
-        protected override async void Awake()
+        protected override void Awake()
         {
             AllQuestions = new IQuestion[QuizModels.Length];
             base.Awake();
-            await generator.InitAsset();
         }
 
         protected override async void SetupList (){
             loadingView.SetupUI("Đang tải câu hỏi, em chờ chút nhé...");
             await loadingView.ShowAsync();
-            //await generator.InitAsset();
+            await generator.InitAsset();
             
             await FetchPanelView(QuizModels.Length, OnBuildUIView);
             if(preloadList.Count == 0){

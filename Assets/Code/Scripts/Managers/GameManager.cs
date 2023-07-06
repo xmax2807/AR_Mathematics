@@ -73,5 +73,35 @@ namespace Project.Managers
         }
 
         public System.Action OnGameFinishLoading;
+
+        public bool IsAdmin {get; private set;}
+        private void SwitchToDebuggingMode(){
+            IsAdmin = true;
+            DebugLog logger = this.EnsureComponent<DebugLog>(autoCreate: true);
+            logger.enabled = true;
+        }
+
+        internal Task CheckIsAdminLoggedIn(string userId)
+        {
+            bool isCheckCompleted = false;
+            StartCoroutine(ResourceManager.Instance.AskForAsset<TextAsset>("admin_ids", 
+            (asset)=>{
+                GotAdminFile(asset, userId);
+                isCheckCompleted = true;
+            }));
+            while(!isCheckCompleted){
+                return Task.Delay(100);
+            }
+            return Task.CompletedTask;
+        }
+
+        private void GotAdminFile(TextAsset text, string userId){
+            string[] adminIds = text.text.Split(',');
+            foreach(string id in adminIds){
+                if(id == userId){
+                    SwitchToDebuggingMode();
+                }
+            }
+        }
     }
 }

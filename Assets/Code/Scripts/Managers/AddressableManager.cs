@@ -37,7 +37,7 @@ namespace Project.Managers
                 Destroy(this.gameObject);
             }
         }
-        void Start()
+        public void InitAddressable()
         {
             InitializeTask = Addressables.InitializeAsync();
             InitializeTask.Completed += Instance.OnComplete;

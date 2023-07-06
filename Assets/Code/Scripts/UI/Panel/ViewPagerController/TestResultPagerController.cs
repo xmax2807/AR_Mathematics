@@ -14,16 +14,16 @@ namespace Project.UI.Panel{
         private TestModel TestModel => UserManager.Instance.CurrentTestModel;
         private SemesterTestSaveData savedData;
 
-        protected override async void Awake()
-        {
-            base.Awake();
-            await generator.InitAsset();
-        }
+        // protected override async void Awake()
+        // {
+        //     base.Awake();
+        //     await generator.InitAsset();
+        // }
 
         protected override async void SetupList (){
             loadingView.SetupUI("Đang tải câu hỏi");
             await loadingView.ShowAsync();
-            //await generator.InitAsset();
+            await generator.InitAsset();
             //await LoadSavedData();
             AllQuestions = new IQuestion[QuizModels.Length];
             await FetchPanelView(QuizModels.Length, OnBuildUIView);

@@ -27,18 +27,18 @@ namespace Project.Managers
             {
                 Destroy(this.gameObject);
             }
-            StartCoroutine(LoadEssentialResources());
+            //StartCoroutine(LoadEssentialResources());
         }
-        void OnEnable()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
+        // void OnEnable()
+        // {
+        //     SceneManager.sceneLoaded += OnSceneLoaded;
+        // }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            StartCoroutine(LoadEssentialResources());
-        }
-        private IEnumerator LoadEssentialResources()
+        // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        // {
+        //     StartCoroutine(LoadEssentialResources());
+        // }
+        public IEnumerator LoadEssentialResources()
         {
             if (RewardPack == null)
             {
@@ -52,6 +52,12 @@ namespace Project.Managers
                 yield return request;
                 ARModelRewardPack = request.asset as RewardSystem.ViewReward.ARModelRewardPackSTO;
             }
+        }
+
+        public IEnumerator AskForAsset<T>(string filePath, System.Action<T> OnComplete) where T : Object{
+            ResourceRequest request = Resources.LoadAsync<T>(filePath);
+            yield return request;
+            OnComplete?.Invoke(request.asset as T);
         }
 
         public async void SaveTestAsync(SemesterTestSaveData data, System.Action onResult = null){
