@@ -15,6 +15,7 @@ namespace Project.Managers
         public static Canvas RootCanvas => Instance?.rootCanvas;
         private Camera mainGameCam;
         private Canvas rootCanvas;
+        private Scene currentScene;
 
         [SerializeField] bool showCamValues = false;
 
@@ -39,6 +40,7 @@ namespace Project.Managers
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            currentScene = scene;
             Instance.mainGameCam = Camera.main;
             Instance.rootCanvas = GameObject.FindGameObjectWithTag("MainCanvas")?.GetComponent<Canvas>();
             if(showCamValues){
@@ -102,6 +104,10 @@ namespace Project.Managers
                     SwitchToDebuggingMode();
                 }
             }
+        }
+
+        public void ReLoadCurrentScene(){
+            SceneManager.LoadScene(currentScene.name);
         }
     }
 }

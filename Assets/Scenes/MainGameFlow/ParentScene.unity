@@ -206,11 +206,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1893269385}
     m_Modifications:
-    - target: {fileID: 1056698197300716674, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7909147670819863425, guid: 2c78dba13fc2be84fa2ad6feb7f0d9d7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1558,7 +1553,7 @@ GameObject:
   - component: {fileID: 1893269386}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: MainCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

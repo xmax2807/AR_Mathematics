@@ -154,7 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1889434581}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -541,7 +541,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: -200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362872035
 MonoBehaviour:
@@ -594,9 +594,9 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -801,8 +801,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: -60}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723630766
 MonoBehaviour:
@@ -1155,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 556634906133819764, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 556634906133819764, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
@@ -1251,6 +1251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EndScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 556634906133819765, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5108025614336576944, guid: 0dcbe1ceac8782344b88a76bf4a4d852,
         type: 3}
@@ -1562,7 +1567,7 @@ PrefabInstance:
     - target: {fileID: 6729867906816122304, guid: 8710f7d9ba6ab094d849fec81dd906a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6729867906816122304, guid: 8710f7d9ba6ab094d849fec81dd906a6,
         type: 3}
@@ -2028,9 +2033,9 @@ RectTransform:
   - {fileID: 1908912954}
   - {fileID: 1994040469}
   - {fileID: 2051462817}
+  - {fileID: 36405381}
   - {fileID: 1038660630}
   - {fileID: 1598026478}
-  - {fileID: 36405381}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2343,6 +2348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartGameScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425227286433267436, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4425227286433267438, guid: d2bfb4ac5b7e12c45993f4785175ca9c,
         type: 3}

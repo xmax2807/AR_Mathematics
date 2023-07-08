@@ -32,6 +32,12 @@ namespace Project.MiniGames{
         {
             base.OnEnable();
             BaseGameEventManager.Instance?.RegisterEvent<bool>(BaseGameEventManager.EndGameEventName, this, OnResult);
+            PlayAgainButton.onClick.AddListener(Managers.GameManager.Instance.ReLoadCurrentScene);
+        }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayAgainButton.onClick.RemoveAllListeners();
         }
         protected override void Start()
         {

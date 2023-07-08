@@ -13,7 +13,7 @@ using Project.Managers;
 /// If a raycast hits a trackable, the <see cref="placedPrefab"/> is instantiated
 /// and moved to the hit position.
 /// </summary>
-[RequireComponent(typeof(ARRaycastManager))]
+[RequireComponent(typeof(ARRaycastManager), typeof(ARAnchorManager))]
 public class PlaceOnPlane : MonoBehaviour
 {
     [SerializeField]
@@ -46,6 +46,7 @@ public class PlaceOnPlane : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
+        m_ARAnchorManager = GetComponent<ARAnchorManager>();
 
         // spawnedObject = Instantiate(m_PlacedPrefab, Vector3.zero, m_PlacedPrefab.transform.rotation);
         // spawnedObject.AddComponent<ARAnchor>();
@@ -107,8 +108,10 @@ public class PlaceOnPlane : MonoBehaviour
             // will be the closest hit.
 
             var hitPose = s_Hits[0].pose;
-            //var trackableTrans = s_Hits[0].trackable.transform;
+            var trackable = s_Hits[0].trackable;
 
+            m_ARAnchorManager?.AttachAnchor(trackable as ARPlane, hitPose);
+            
             if (spawnedObject == null)
             {
                 spawnedObject = Instantiate(m_PlacedPrefab);
@@ -159,4 +162,5 @@ public class PlaceOnPlane : MonoBehaviour
 
     ARRaycastManager m_RaycastManager;
     ARPlaneManager m_PlaneManager;
+    ARAnchorManager m_ARAnchorManager;
 }

@@ -41,12 +41,18 @@ namespace Project.QuizSystem{
 
         public int[] GetRandomOptions(int count)
         {
-            System.Random rand = RandomizableSCQ<int>.random ?? new Random();
+            // System.Random rand = RandomizableSCQ<int>.random ?? new Random();
 
+            // int[] result = new int[count];
+            // for(int i = 0; i < count; ++i){
+            //     int index = rand.Next(0, numberArray.Length);
+            //     result[i] = numberArray[index];
+            // }
+            // return result;
+            int[] shuffleArray = numberArray.Shuffle();
             int[] result = new int[count];
             for(int i = 0; i < count; ++i){
-                int index = rand.Next(0, numberArray.Length);
-                result[i] = numberArray[index];
+                result[i] = shuffleArray[i];
             }
             return result;
         }

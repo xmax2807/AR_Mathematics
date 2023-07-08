@@ -1911,10 +1911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499851182}
   - component: {fileID: 1499851192}
-  - component: {fileID: 1499851191}
   - component: {fileID: 1499851190}
-  - component: {fileID: 1499851189}
-  - component: {fileID: 1499851188}
   - component: {fileID: 1499851187}
   - component: {fileID: 1499851186}
   - component: {fileID: 1499851184}
@@ -1994,33 +1991,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 0}
---- !u!114 &1499851188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499851181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 3384827338253038384, guid: d8612b38bd20d564d9fa0cb4cca51c60,
-    type: 3}
---- !u!114 &1499851189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499851181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DestroyOnRemoval: 1
 --- !u!114 &1499851190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,22 +2006,6 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 4776765576899091622, guid: 3738bd65ede154463b2c35064b9e5fdb,
     type: 3}
   m_DetectionMode: 1
---- !u!114 &1499851191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499851181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 11400000, guid: d7eca5e57810c3645816d51c61a788cb,
-    type: 2}
-  m_MaxNumberOfMovingImages: 100
-  m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &1499851192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,6 +2035,7 @@ MonoBehaviour:
     type: 3}
   rotateObject: {x: 0, y: 0, z: 0}
   ARCamera: {fileID: 1578595529}
+  IsBlockRaycast: 0
   visualObject: {fileID: 9152172852391460986, guid: 5ebdf4338e83ea24a84e325ed0c60196,
     type: 3}
   onSpawnPlane:

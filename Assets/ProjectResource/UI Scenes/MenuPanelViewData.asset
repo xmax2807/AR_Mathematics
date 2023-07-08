@@ -16,8 +16,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 599d9d66b4e2142499172bec2c938a17, type: 2}
   - {fileID: 11400000, guid: 6566a0fd27328ba43890a103a319611f, type: 2}
   - {fileID: 11400000, guid: c29eda5456f94e440a586111e0620d6c, type: 2}
-  - {fileID: 11400000, guid: d055c0da805522440bd39f3bccddb013, type: 2}
   - {fileID: 11400000, guid: 4cff52c2d3eb3ae499536c208045fb17, type: 2}
+  - {fileID: 11400000, guid: d055c0da805522440bd39f3bccddb013, type: 2}
   ButtonNames:
   - Name: "B\u1EAFt \u0111\u1EA7u h\u1ECDc"
     OnClick:
@@ -46,11 +46,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     Description: 
-  - Name: "T\xE0i kho\u1EA3n"
-    OnClick:
-      m_PersistentCalls:
-        m_Calls: []
-    Description: 
   - Name: "Ph\u1EE5 huynh"
     OnClick:
       m_PersistentCalls:
@@ -67,6 +62,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    Description: 
+  - Name: "T\xE0i kho\u1EA3n"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
     Description: 
   Title: "To\xE1n L\u1EDBp 1"
   Description: 

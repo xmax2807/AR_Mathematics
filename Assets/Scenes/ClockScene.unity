@@ -471,11 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626532294}
   - component: {fileID: 626532293}
-  - component: {fileID: 626532296}
-  - component: {fileID: 626532295}
   - component: {fileID: 626532298}
-  - component: {fileID: 626532302}
-  - component: {fileID: 626532301}
   - component: {fileID: 626532297}
   - component: {fileID: 626532300}
   - component: {fileID: 626532299}
@@ -515,36 +511,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &626532295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626532292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e24b2eb6809a2044904a70d58ea489d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ARPrefabs:
-  - {fileID: 6656903810175582907, guid: eb7db8af144a96a4ca708ca08843f570, type: 3}
---- !u!114 &626532296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626532292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 11400000, guid: d7eca5e57810c3645816d51c61a788cb,
-    type: 2}
-  m_MaxNumberOfMovingImages: 100
-  m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &626532297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,33 +580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AnchorPrefab: {fileID: 0}
---- !u!114 &626532301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626532292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 3384827338253038384, guid: d8612b38bd20d564d9fa0cb4cca51c60,
-    type: 3}
---- !u!114 &626532302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626532292}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DestroyOnRemoval: 1
 --- !u!1 &941923654
 GameObject:
   m_ObjectHideFlags: 0

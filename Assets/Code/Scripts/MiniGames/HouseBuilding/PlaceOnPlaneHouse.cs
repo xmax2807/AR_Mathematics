@@ -7,7 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 using Project.MiniGames;
 using Project.MiniGames.HouseBuilding;
 
-[RequireComponent(typeof(ARRaycastManager))]
+[RequireComponent(typeof(ARRaycastManager), typeof(ARAnchorManager))]
 public class PlaceOnPlaneHouse : MonoBehaviour
 {
     [SerializeField]
@@ -44,6 +44,7 @@ public class PlaceOnPlaneHouse : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
+        m_ARAnchorManager = GetComponent<ARAnchorManager>();
 
         if (placementUpdate == null)
             placementUpdate = new UnityEvent();
@@ -115,6 +116,7 @@ public class PlaceOnPlaneHouse : MonoBehaviour
             // will be the closest hit.
             var hitPose = s_Hits[0].pose;
             var trackable = s_Hits[0].trackable;
+            m_ARAnchorManager?.AttachAnchor(trackable as ARPlane, hitPose);
 
             if (spawnedObject == null)
             {
@@ -165,4 +167,5 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
     ARPlaneManager m_PlaneManager;
     ARRaycastManager m_RaycastManager;
+    ARAnchorManager m_ARAnchorManager;
 }

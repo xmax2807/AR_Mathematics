@@ -14,7 +14,9 @@ namespace Project.UI.Panel{
         protected virtual void OnEnable(){}
         protected virtual void OnDisable(){}
         public virtual async Task Hide(){
-            await View.HideAsync();
+            if(View != null){
+                await View.HideAsync();
+            }
             OnPanelHideViewEvent?.Invoke();
         }
         public async void HideImmediately(){
@@ -22,7 +24,9 @@ namespace Project.UI.Panel{
         }
         public virtual async Task Show(){
             OnPanelShowViewEvent?.Invoke();
-            await View.ShowAsync();
+            if(View != null){
+                await View.ShowAsync();
+            }
         }
     }
     public abstract class BasePanelController<T> : BasePanelController where T : PanelViewData {

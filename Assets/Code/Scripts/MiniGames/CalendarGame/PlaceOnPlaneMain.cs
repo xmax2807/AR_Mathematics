@@ -12,7 +12,7 @@ using UnityEngine.XR.ARSubsystems;
 /// If a raycast hits a trackable, the <see cref="placedPrefab"/> is instantiated
 /// and moved to the hit position.
 /// </summary>
-[RequireComponent(typeof(ARRaycastManager))]
+[RequireComponent(typeof(ARRaycastManager), typeof(ARAnchorManager))]
 public class PlaceOnPlaneMain : MonoBehaviour
 {
     [SerializeField]
@@ -46,6 +46,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
+        m_ARAnchorManager = GetComponent<ARAnchorManager>();
 
         if (placementUpdate == null)
             placementUpdate = new UnityEvent();
@@ -105,6 +106,7 @@ public class PlaceOnPlaneMain : MonoBehaviour
             // Raycast hits are sorted by distance, so the first one
             // will be the closest hit.
             var hitPose = s_Hits[0].pose;
+            m_ARAnchorManager?.AttachAnchor(s_Hits[0].trackable as ARPlane, hitPose);
 
             if (spawnedObject == null)
             {
@@ -152,4 +154,5 @@ public class PlaceOnPlaneMain : MonoBehaviour
 
     ARRaycastManager m_RaycastManager;
     ARPlaneManager m_PlaneManager;
+    ARAnchorManager m_ARAnchorManager;
 }

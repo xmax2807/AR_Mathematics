@@ -3,6 +3,7 @@ using Project.Managers;
 using UnityEngine.UI;
 using Project.Utils.ObjectPooling;
 using System;
+using System.Collections;
 
 namespace Project.UI.Panel{
     public class MenuPanelController : BasePanelController<MenuPanelViewData>{
@@ -35,6 +36,43 @@ namespace Project.UI.Panel{
 
             if(Description != null){
                 Description.text = Data.Description;
+            }
+
+            StartCoroutine(CenterElements());
+        }
+
+        IEnumerator CenterElements(){
+            yield return new WaitForEndOfFrame();
+            
+            
+            Canvas rootCanvas = Managers.GameManager.RootCanvas;
+
+            if(rootCanvas != null){
+                
+                RectTransform rootCanvasRect = rootCanvas.GetComponent<RectTransform>();
+                float canvasWidth = rootCanvasRect.rect.width - 60;
+
+                RectTransform buttonGroupRect = ButtonGroupTransform.GetComponent<RectTransform>();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(buttonGroupRect);
+                yield return new WaitForEndOfFrame();
+                float currentButtonGroupWidth = buttonGroupRect.rect.width;
+
+                //Debug.Log($"Canvas: {canvasWidth}, Group: {currentButtonGroupWidth}");
+                if(canvasWidth <= currentButtonGroupWidth){
+                    yield break;
+                }
+
+                float emptyObjWidth = (canvasWidth - currentButtonGroupWidth) / 2;
+
+                GameObject emptyObj = new GameObject("Empty");
+                RectTransform rectTransform = emptyObj.AddComponent<RectTransform>();
+                rectTransform.offsetMin = new Vector2(0,0);
+                rectTransform.offsetMax = new Vector2(0, 0);
+                emptyObj.transform.SetParent(ButtonGroupTransform, false);
+                emptyObj.transform.SetAsFirstSibling();
+                rectTransform.sizeDelta = new Vector2(emptyObjWidth,0);
+
+                // buttonGroupRect.ForceUpdateRectTransforms();
             }
         }
     }
