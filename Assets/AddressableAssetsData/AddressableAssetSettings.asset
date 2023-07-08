@@ -37,7 +37,7 @@ MonoBehaviour:
     m_Id: e573122461eb258409ec84e88d604974
   m_RemoteCatalogLoadPath:
     m_Id: d257dc9eb2df1324e8211ce6845a3127
-  m_ContentStateBuildPath: 
+  m_ContentStateBuildPath: ServerData/ContentBuildStates
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: 
   m_GroupAssets:

@@ -16,7 +16,7 @@ namespace Project.AssetIO.Firebase
             return System.IO.File.Exists(destinationPath);
         }
         public static bool TryGetLocalFilePath(System.Uri uri, out string fullFilePath){
-            return TryGetLocalFilePath(uri.Segments[^1].Replace("%2F", "/"), out fullFilePath);
+            return TryGetLocalFilePath(uri.Segments[^1].Replace("%2F", Path.DirectorySeparatorChar.ToString()), out fullFilePath);
         }
         public static bool TryGetLocalFilePath(string relativePath, out string fullFilePath)
         {

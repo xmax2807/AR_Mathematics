@@ -56,7 +56,7 @@ namespace Project.Managers
             {
                 Destroy(this.gameObject);
             }
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject);
             Application.targetFrameRate = 30;
             Screen.SetResolution(1280, 720, fullscreen: true);
         }

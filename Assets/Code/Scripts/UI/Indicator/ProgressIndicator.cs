@@ -27,7 +27,7 @@ namespace Project.UI.Indicator{
             if(currentIndex + 1 >= items.Length) return;
 
             items[currentIndex + 1].SwitchToUnselectedUI();
-            cacheCondition.UnlockNext();
+            cacheCondition.UnlockNext(currentIndex);
         }
     }
 }

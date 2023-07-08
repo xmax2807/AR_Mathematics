@@ -39,8 +39,8 @@ namespace Project.UI.Panel
             
             panelView.AnswerUI.CreateUI(answersContainer, currentQuestion);
             panelView.ChangeAnswerUIState(PrefferedUIState);
-            panelView.AnswerUI.SetAnswer();// Set prev answer if any
             panelView.AnswerUI.OnUserAnswered += OnUserAnswered;
+            panelView.AnswerUI.SetAnswer();// Set prev answer if any
 
             Manager.ToggleLoadingView(false);
         }

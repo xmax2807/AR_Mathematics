@@ -2,7 +2,7 @@ namespace Project.UI.Indicator{
     public class LimitNextNavigationCondition : ComplexNavigationCondition
     {
         private bool[] m_listOfMovable;
-        private int currentIndex;
+        //private int currentIndex;
         public LimitNextNavigationCondition(INavigationCondition wrappee, int count) : base(wrappee, count)
         {
             InitMovableList(count);
@@ -18,7 +18,6 @@ namespace Project.UI.Indicator{
             for(int i = 1; i < count; ++i){
                 m_listOfMovable[i] = false; 
             }
-            currentIndex = 0;
         }
 
         public override bool CanMoveTo(int currentIndex, int destinationIndex)
@@ -33,12 +32,12 @@ namespace Project.UI.Indicator{
             return m_listOfMovable[destinationIndex];
         }
 
-        public void UnlockNext(){
-            if(currentIndex + 1 >= m_count){
+        public void UnlockNext(int index){
+            if (index + 1 >= m_count)
+            {
                 return;
             }
-            ++currentIndex;
-            m_listOfMovable[currentIndex] = true;
+            m_listOfMovable[index + 1] = true;
         }
     }
 }
