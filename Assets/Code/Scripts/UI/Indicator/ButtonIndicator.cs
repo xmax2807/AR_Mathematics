@@ -2,7 +2,6 @@ using Project.UI.TrueFalseUI;
 
 namespace Project.UI.Indicator{
     public class ButtonIndicator : BaseIndicator<TrueFalseButton>{
-        public event System.Action<int> ItemClickedCallback;
         private string textFormat = "#i";
 
         public ButtonIndicator ChangeTextFormat(string newFormat){
@@ -14,7 +13,7 @@ namespace Project.UI.Indicator{
             base.OnBuildComponent(item, index);
             string text = textFormat.Replace("#i", $"{index + 1}");
             item.Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = text;
-            item.Button.onClick.AddListener(()=>ItemClickedCallback?.Invoke(index));
+            item.Button.onClick.AddListener(()=>InvokeIndexChanged(index));
         }
     }
 }

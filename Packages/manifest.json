@@ -20,7 +20,7 @@
     "com.unity.timeline": "1.7.1",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.8.0",
-    "com.unity.xr.arkit-face-tracking": "4.2.7",
+    "com.unity.xr.arkit": "4.2.8",
     "com.unity.xr.interaction.toolkit": "2.2.0",
     "com.unity.xr.management": "4.2.1",
     "robinbird.firebasetools": "https://gitlab.com/robinbird-studios/libraries/unity-plugins/firebase-tools.git",

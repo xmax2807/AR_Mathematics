@@ -11,14 +11,13 @@ namespace Project.UI.Panel
         protected System.Action OnBuildComplete;
         public async Task FetchPanelView(int count, System.Func<T, int, Task> onBuildObj)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < count; ++i)
             {
-                await SpawnerManager.Instance.SpawnObjectInParentAsync(prefab, index:i, this.transform, async (obj, index) =>
-                { 
-                    await obj.HideAsync();
-                    preloadList.Add(obj);
-                    await onBuildObj?.Invoke(obj, index);
-                });
+                T obj = SpawnerManager.Instance.SpawnObjectInParent<T>(prefab, this.transform);
+
+                preloadList.Add(obj);
+                await onBuildObj?.Invoke(obj, i);
+                //obj.HideImmediate();
             }
             AddLastView();
         }

@@ -2,6 +2,7 @@ using Project.Managers;
 using Project.AssetIO.Firebase;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Project.UI.Panel
 {
@@ -9,20 +10,22 @@ namespace Project.UI.Panel
     {
         [SerializeField] private LoadingPanelView loadingView;
         [SerializeField] private DownloadingPanelView downloadingPanel;
-        LessonController lessonController => DatabaseManager.Instance.LessonController;
-        LessonModel lessonModel => UserManager.Instance.CurrentLesson;
+        LessonController LessonController => DatabaseManager.Instance.LessonController;
+        LessonModel LessonModel => UserManager.Instance.CurrentLesson;
 
         protected override async void SetupList()
         {
             loadingView.SetupUI("Đang tải bài học, em chờ chút nhé...");
             await loadingView.ShowAsync();
-            downloadingPanel.SetupUI("Đang tải bài học, bé chờ chút nhé...");
-            
-            if(lessonModel == null){
-                await downloadingPanel.HideAsync();
-                return;
-            }
-            await FetchPanelView(lessonModel.VideoNumbers, OnBuildUIView);
+            downloadingPanel.SetupUI("Đang tải bài học, em chờ chút nhé...");
+
+            // if(LessonModel == null){
+            //     await LessonController.GetLessonModel(unit: unit.unit, chapter: unit.chapter);
+            // }
+            UserManager.CurrentUnit unit = UserManager.Instance.CurrentUnitProgress;
+            UserManager.Instance.CurrentLesson = await LessonController.GetLessonModel(unit: unit.unit, chapter: unit.chapter);
+
+            await FetchPanelView(LessonModel.VideoNumbers, OnBuildUIView);
             await loadingView.HideAsync();
             await downloadingPanel.StartDownload();
             
@@ -33,13 +36,16 @@ namespace Project.UI.Panel
 
         protected override async Task OnBuildUIView(PreloadableVideoPanelView view, int index)
         {
-            var reference = lessonController.GetVideoReference(lessonModel, index);
+            Firebase.Storage.StorageReference reference = LessonController.GetVideoReference(LessonModel, index);
             if (reference == null) return;
 
             System.Uri uri = await reference.GetDownloadUrlAsync();
-            string relativePath = uri.Segments[uri.Segments.Length - 1].Replace("%2F", "/");
+            Debug.Log("Got video at uri: " + uri.AbsolutePath);
+            string relativePath = uri.Segments[uri.Segments.Length - 1].Replace("%2F", Path.DirectorySeparatorChar.ToString());
+            Debug.Log("Relative path: " + relativePath);
 
             bool isFileAvailableOffline = FirebaseStorageDownloadHandler.TryGetLocalFilePath(relativePath, out string fullFilePath);
+            Debug.Log($"Full file path: {fullFilePath}");
             if (!isFileAvailableOffline)
             {
                 downloadingPanel.AddDownloadTask(reference, fullFilePath, OnDownloadComplete);

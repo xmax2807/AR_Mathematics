@@ -123,10 +123,10 @@ public class UserSignInControllerBehaviour : MonoBehaviour
         Project.Managers.PopupUIQueueManager.Instance.EnqueueEventPopup(popupUI);
     }
 
-    private AutoClosePopupUI PopAutoClose(string message)
+    private AutoClosePopupUI PopAutoClose(string message, string title = "Thông báo")
     {
         PopupDataBuilder dataPopupBuilder = new();
-        PopupData data = dataPopupBuilder.StartCreating().AddText("", message).GetResult();
+        PopupData data = dataPopupBuilder.StartCreating().AddText(title, message).GetResult();
         AutoClosePopupUI popupUI = new(autoNotificationPanel, data);
         Project.Managers.PopupUIQueueManager.Instance.EnqueueEventPopup(popupUI);
         return popupUI;

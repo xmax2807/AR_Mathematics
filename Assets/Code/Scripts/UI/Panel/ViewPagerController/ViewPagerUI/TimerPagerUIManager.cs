@@ -14,7 +14,7 @@ namespace Project.UI.Panel{
     public class TimerPagerUIManager : ViewPagerUIManager{
         [SerializeField] private Button SubmitTest;
         [SerializeField] private BaseCountdownTimer timer;
-        [SerializeField] private ButtonIndicator Indicator;
+        [SerializeField] private ProgressIndicator Indicator;
         [SerializeField] private OkCancelPanelView readyToStartTestView;
         [SerializeField] private QuizResultPanelView quizResult;
         private TestModel TestModel => UserManager.Instance.CurrentTestModel;
@@ -32,7 +32,7 @@ namespace Project.UI.Panel{
             readyToStartTestView.ShowAsync();
             readyToStartTestView.onConfirm += StartTheTest;
 
-            Indicator.ItemClickedCallback += MoveTo;
+            Indicator.OnIndexChanged += MoveTo;
             base.Awake();
             
             timer.SetMinutes(TestModel.TestTime);
@@ -69,6 +69,26 @@ namespace Project.UI.Panel{
 
         // private void SetupNavigator(){
         //     if(quizNavigationController == null || data == null) return;
+
+        //     data.ButtonNames = new ButtonData[pagerController.PreloadList.Count];
+        //     for(int i = 0; i < data.ButtonNames.Length; i++){
+        //         int currentIndex = i;
+
+        //         var buttonClickedEvent = new UnityEngine.UI.Button.ButtonClickedEvent();
+        //         buttonClickedEvent.AddListener(()=>MoveTo(currentIndex));
+
+        //         data.ButtonNames[i] = new ButtonData{
+        //             Name = $"{i + 1}",
+        //             OnClick = buttonClickedEvent,
+        //         };
+        //     }
+
+        //     quizNavigationController.SetUI(data);
+        // }
+
+
+        // private void SetupNavigator(){
+        //     if(quizNavigationController == null || data == null) return;
             
         //     data.ButtonNames = new ButtonData[pagerController.PreloadList.Count];
         //     for(int i = 0; i < data.ButtonNames.Length; i++){
@@ -87,6 +107,7 @@ namespace Project.UI.Panel{
         // }
 
         private void OnUserAnswered(QuizSystem.IQuestion question){
+            Indicator.MarkAsCompleted();
             SubmitTest.interactable = this.quizResult.IsAllQuestionAnswered();
         }
 

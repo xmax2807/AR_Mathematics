@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2079449857927685525}
   - component: {fileID: 4925819605871066984}
   m_Layer: 5
-  m_Name: NavigatorButton
+  m_Name: NavigatorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

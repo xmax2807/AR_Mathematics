@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "565046576541-en7qoeu2ttv3hi1mvevsgilrtd6vgh1j.apps.googleusercontent.com",
+              "client_id": "565046576541-abbmrut39krnua6m772sl6tieuopsplg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.KHTN.ARMath"
+                "bundle_id": "com.HCMUS.ARMath"
               }
             }
           ]
@@ -76,10 +76,10 @@
               "client_type": 3
             },
             {
-              "client_id": "565046576541-en7qoeu2ttv3hi1mvevsgilrtd6vgh1j.apps.googleusercontent.com",
+              "client_id": "565046576541-abbmrut39krnua6m772sl6tieuopsplg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.KHTN.ARMath"
+                "bundle_id": "com.HCMUS.ARMath"
               }
             }
           ]

@@ -149,5 +149,12 @@ namespace Project.Managers
             }
             return SpawnObjectsInGroup(prefab, count, direction, parent, count / maxCol + 1, startPosition, spacing);
         }
+
+        public TObject SpawnObjectInParent<TObject>(TObject prefab, Transform theParent) where TObject : MonoBehaviour{
+            TObject newGameObj;
+            newGameObj = Instantiate(prefab);
+            newGameObj.transform.SetParent(theParent);
+            return newGameObj;
+        }
     }
 }

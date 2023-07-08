@@ -3,18 +3,29 @@ using Project.Managers;
 using UnityEngine.UI;
 
 namespace Project.UI.Indicator{
-    public interface IIndicatorItem{
-        void SwitchToUnselectedUI();
-        void SwitchToSelectedUI();
+
+    public interface IIndicator{
+        public event System.Action<int> OnIndexChanged;
+        public void ManualFetchItem(int count);
     }
-    public abstract class BaseIndicator<TItem> : MonoBehaviour where TItem : Component, IIndicatorItem
+    
+    public abstract class BaseIndicator<TItem> : MonoBehaviour, IIndicator where TItem : Component, IIndicatorItem
     {
         [SerializeField] private LayoutGroup prefabContainer;
         [SerializeField] private TItem prefab;
         protected TItem[] items;
         protected int currentIndex;
 
+        private INavigationCondition navigationCondition;
+
+        public event System.Action<int> OnIndexChanged;
+
+        protected void InvokeIndexChanged(int index) => OnIndexChanged?.Invoke(index);
+        protected virtual INavigationCondition InitNavigation(int count){
+            return new BasicNavigationCondition(count);
+        }
         public void ManualFetchItem(int count){
+            navigationCondition = InitNavigation(count);
             items = new TItem[count];
             for(int i = 0; i < count; i++){
                 SpawnerManager.Instance.SpawnComponentInParent(prefab, prefabContainer.transform, (obj)=>OnBuildComponent(obj, i));
@@ -27,7 +38,7 @@ namespace Project.UI.Indicator{
             item.SwitchToUnselectedUI();
         }
 
-        public bool CanMoveTo(int index) => index != currentIndex && index >= 0 && items != null && index < items.Length;
+        public bool CanMoveTo(int index) => navigationCondition != null && navigationCondition.CanMoveTo(currentIndex, index);
         public void MoveTo(int index){
             if(!CanMoveTo(index)) return;
 
@@ -46,6 +57,6 @@ namespace Project.UI.Indicator{
             }
 
             items[currentIndex]?.SwitchToSelectedUI();
-        } 
+        }
     }
 }
