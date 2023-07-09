@@ -52,7 +52,7 @@ namespace Project.UI.Panel.PanelItem
                 button.onClick.AddListener(Push);
             }
         }
-        private void Push()
+        public void Push()
         {
             rewardPopup?.SetRewardData(uiData.Name, uiData.GetImage());
             popupPanel ??= new PanelViewController(panelType);
