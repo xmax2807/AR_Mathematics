@@ -148,8 +148,8 @@ namespace Project.MiniGames.HouseBuilding
 
         private void OnBlockPlaced(int id)
         {
-            blockRaycaster.UnblockRaycast();
             ++currentProgress;
+            blockRaycaster.UnblockRaycast();
             Debug.Log(blockIndexes[^1]);
             if (id == blockIndexes[^1])
             {

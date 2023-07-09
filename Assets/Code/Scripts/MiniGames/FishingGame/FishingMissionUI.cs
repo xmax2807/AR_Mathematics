@@ -31,6 +31,8 @@ namespace Project.MiniGames.FishingGame{
                 Image.ManualSetup(CurrentRewardData.UnacquiredBadge,CurrentRewardData.Badge.GetReward(), Giver.AllTaskCompleted);
                 OverallGameTask.SetupAnimation(Giver.Tasks.Goal);
                 gameTaskProgressCanvas.enabled = true;
+                UpdateQuestion(Giver.CurrentTask);
+                UpdateProgress();
                 return;
             }
             else{

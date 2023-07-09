@@ -18,13 +18,6 @@ public class PlaceOnPlaneMain : MonoBehaviour
     [SerializeField]
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject m_PlacedPrefab;
-    public Vector3 rotateObject;
-    public GameObject ARCamera;
-
-    UnityEvent placementUpdate;
-
-    // [SerializeField]
-    // GameObject visualObject;
 
     /// <summary>
     /// The prefab to instantiate on touch.
@@ -47,9 +40,6 @@ public class PlaceOnPlaneMain : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
         m_ARAnchorManager = GetComponent<ARAnchorManager>();
-
-        if (placementUpdate == null)
-            placementUpdate = new UnityEvent();
 
         //placementUpdate.AddListener(DiableVisual);
 
@@ -110,34 +100,12 @@ public class PlaceOnPlaneMain : MonoBehaviour
 
             if (spawnedObject == null)
             {
-                spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);
-                // Transform objTrans = spawnedObject.transform;
-
-                // Vector3 direction = (objTrans.position - ARCamera.transform.position).normalized;
-                // //direction = new Vector3(0, direction.y, direction.z);
-                // Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-                // var originalAngles = objTrans.rotation.eulerAngles;
-                // spawnedObject.transform.rotation = Quaternion.Euler(lookRotation.eulerAngles.x + originalAngles.x, lookRotation.eulerAngles.y + originalAngles.y, originalAngles.z);
-                
+                spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, hitPose.rotation);                
                 spawnedObject.AddComponent<ARAnchor>();
+
                 DisablePlaneDetection();
                 OnSpawnMainPlane?.Invoke(spawnedObject);
-                // spawnedObject.transform.LookAt(ARCamera.transform);
-                // var rotation = spawnedObject.transform.rotation;
-                // spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-
-
             }
-            /*else
-			{
-				spawnedObject.transform.position = hitPose.position;
-				spawnedObject.transform.LookAt(ARCamera.transform);
-				var rotation = spawnedObject.transform.rotation;
-				spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-			}*/
-
-            //placementUpdate.Invoke();
         }
     }
 

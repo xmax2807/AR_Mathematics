@@ -18,13 +18,6 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
     public bool IsBlockRaycast;
 
-    UnityEvent placementUpdate;
-
-    [SerializeField]
-    GameObject visualObject;
-
-    [SerializeField]
-    UnityEngine.Events.UnityEvent onSpawnPlane;
     public event System.Action<GameObject> OnSpawnMainPlane;
     /// <summary>
     /// The prefab to instantiate on touch.
@@ -45,9 +38,6 @@ public class PlaceOnPlaneHouse : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_PlaneManager = GetComponent<ARPlaneManager>();
         m_ARAnchorManager = GetComponent<ARAnchorManager>();
-
-        if (placementUpdate == null)
-            placementUpdate = new UnityEvent();
 
         if (ARCamera == null)
         {
@@ -120,38 +110,13 @@ public class PlaceOnPlaneHouse : MonoBehaviour
 
             if (spawnedObject == null)
             {
-                //Vector3 position0 = new Vector3(0, 0, 0);
-                //spawnedObject = Instantiate(m_PlacedPrefab, trackable.transform.position ,Quaternion.identity) ;
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, m_PlacedPrefab.transform.rotation);
                 spawnedObject.AddComponent<ARAnchor>();
-                //spawnedObject.transform.LookAt(ARCamera.transform);
-                //var rotation = spawnedObject.transform.rotation;
-                //spawnedObject.transform.Rotate(rotation.x, rotation.y - 90, rotation.z);
                 DisablePlaneDetection();
                 OnSpawnMainPlane?.Invoke(spawnedObject);
                 ARGameEventManager.Instance.RaiseEvent(BaseGameEventManager.StartGameEventName);
-                //Debug.Log(spawnedObject.transform.localPosition);
-                //spawnedObject.transform.LookAt(ARCamera.transform);
-                //var rotation = spawnedObject.transform.rotation;
-                //spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-
-
             }
-            //else
-            //{
-            //    spawnedObject.transform.position = hitPose.position;
-            //    spawnedObject.transform.LookAt(ARCamera.transform);
-            //    var rotation = spawnedObject.transform.rotation;
-            //    spawnedObject.transform.Rotate(rotation.x + rotateObject.x, rotation.y + rotateObject.y, rotation.z + rotateObject.z);
-            //}
-
-            placementUpdate.Invoke();
         }
-    }
-
-    public void DiableVisual()
-    {
-        visualObject.SetActive(false);
     }
 
     private void DisablePlaneDetection()

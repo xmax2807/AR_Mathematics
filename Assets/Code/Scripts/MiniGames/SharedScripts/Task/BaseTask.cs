@@ -5,7 +5,7 @@ namespace Project.MiniGames
 {
     public abstract class BaseTask
     {
-        public int Goal;
+        public int Goal {get; protected set;}
         public string TaskDescription;
         public int CurrentProgress { get; protected set; }
         public bool IsCompleted => CurrentProgress >= Goal;

@@ -21,16 +21,8 @@ public class PlaceOnPlane : MonoBehaviour
     GameObject m_PlacedPrefab;
 
     private Camera ARCamera => GameManager.MainGameCam;
-
-    //public UnityEvent placementUpdate;
     public UnityEvent<GameObject> onPlacedObject;
 
-    // [SerializeField]
-    // GameObject visualObject;
-
-    /// <summary>
-    /// The prefab to instantiate on touch.
-    /// </summary>
     public GameObject placedPrefab
     {
         get { return m_PlacedPrefab; }
@@ -86,12 +78,6 @@ public class PlaceOnPlane : MonoBehaviour
         if (objs == null || objs.Length == 0) return;
 
         m_PlacedPrefab = objs[0];
-
-        // spawnedObject = Instantiate(m_PlacedPrefab);
-        // spawnedObject.AddComponent<ARAnchor>();
-        // DisablePlaneDetection();
-        // onPlacedObject?.Invoke(spawnedObject);
-        // enabled = false;
     }
 
     void Update()

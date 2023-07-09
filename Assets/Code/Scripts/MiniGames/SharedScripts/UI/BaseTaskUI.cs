@@ -1,5 +1,12 @@
 using UnityEngine;
 namespace Project.MiniGames{
+    public interface ITaskUIWrappee {
+        void ManuallyUpdateUI(BaseTask task);
+    }
+    public abstract class TaskUIWrappee : MonoBehaviour, ITaskUIWrappee
+    {
+        public abstract void ManuallyUpdateUI(BaseTask task);
+    }
     public abstract class BaseTaskUI : UnityEngine.MonoBehaviour{
         public bool IsDebugging = false;
         [SerializeField] protected TaskGiver giver;

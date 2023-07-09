@@ -3,9 +3,7 @@ using UnityEngine.AddressableAssets;
 using Project.Managers;
 using System.Threading.Tasks;
 
-namespace Project.Addressable{
-    
-    [CreateAssetMenu(menuName ="STO/Addressables/GameObjectRequest", fileName ="GameObjectAddressableRequest")]
+namespace Project.Addressable{    
     public class PrefabAddressableRequest : IndividualAddressableRequest<GameObject>
     {
         [SerializeField] private AssetReferenceT<GameObject>[] requests;
