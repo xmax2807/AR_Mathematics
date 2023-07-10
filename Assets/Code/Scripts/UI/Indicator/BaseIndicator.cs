@@ -6,7 +6,7 @@ namespace Project.UI.Indicator{
 
     public interface IIndicator{
         public event System.Action<int> OnIndexChanged;
-        public void ManualFetchItem(int count);
+        public void ManualFetchItem(int count, bool autoMoveTo = true);
     }
     
     public abstract class BaseIndicator<TItem> : MonoBehaviour, IIndicator where TItem : Component, IIndicatorItem
@@ -24,13 +24,30 @@ namespace Project.UI.Indicator{
         protected virtual INavigationCondition InitNavigation(int count){
             return new BasicNavigationCondition(count);
         }
-        public void ManualFetchItem(int count){
+        public void ManualFetchItem(int count, bool autoMoveTo = true){
             navigationCondition = InitNavigation(count);
             items = new TItem[count];
             for(int i = 0; i < count; i++){
                 SpawnerManager.Instance.SpawnComponentInParent(prefab, prefabContainer.transform, (obj)=>OnBuildComponent(obj, i));
             }
-            UpdateNextItemUI();
+            if(autoMoveTo){
+                UpdateNextItemUI();
+            }
+        }
+
+        public void ManualFetchItemCallback(int count, System.Action<TItem, int> buildCallback, bool autoMoveTo = true){
+            navigationCondition = InitNavigation(count);
+            items = new TItem[count];
+            for(int i = 0; i < count; i++){
+                int index = i;
+                SpawnerManager.Instance.SpawnComponentInParent(prefab, prefabContainer.transform, (obj)=>{
+                    OnBuildComponent(obj, index);
+                    buildCallback?.Invoke(obj,index);
+                });
+            }
+            if(autoMoveTo){
+                UpdateNextItemUI();
+            }
         }
 
         protected virtual void OnBuildComponent(TItem item, int index){

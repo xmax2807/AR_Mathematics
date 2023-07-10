@@ -2,20 +2,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using Project.UI.Indicator;
 
-namespace Project.UI.TrueFalseUI{
+namespace Project.UI.TrueFalseUI
+{
 
-    [RequireComponent(typeof(Button),typeof(Image))]
+    [RequireComponent(typeof(Button), typeof(Image))]
     public class TrueFalseButton : BaseTrueFalseUI<Color>, IIndicatorItem
     {
-        public Button Button{get;private set;}
+        private Button button;
+        public Button Button
+        {
+            get
+            {
+                button ??= GetComponent<Button>();
+                return button;
+            }
+            private set
+            {
+                button = value;
+            }
+        }
         private Image background;
-        protected override void Awake(){
+        protected override void Awake()
+        {
             base.Awake();
             Button = GetComponent<Button>();
             background = GetComponent<Image>();
         }
         public override void ChangeUI(bool isTrue)
         {
+            background ??= GetComponent<Image>();
             background.color = isTrue ? TrueUI : FalseUI;
         }
 

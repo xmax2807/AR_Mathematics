@@ -37,7 +37,7 @@ public class EnvironmentSelector : MonoBehaviour
 
         GameObject player = Instantiate(pack.Player);
         player.transform.position += new Vector3(0,-5,8);
-        player.AddComponent<UnityEngine.XR.ARFoundation.ARAnchor>();
+        //player.AddComponent<UnityEngine.XR.ARFoundation.ARAnchor>();
         
         tileManager.SetTileGroup(pack.EnvironmentTiles);
     }

@@ -8,7 +8,7 @@ namespace Project.UI.Panel
     public abstract class ViewPagerControllerT<T> : ViewPagerController where T : PreloadablePanelView
     {
         [SerializeField] private T prefab;
-        protected System.Action OnBuildComplete;
+        public event System.Action OnBuildComplete;
         public async Task FetchPanelView(int count, System.Func<T, int, Task> onBuildObj)
         {
             for (int i = 0; i < count; ++i)
@@ -20,6 +20,7 @@ namespace Project.UI.Panel
                 //obj.HideImmediate();
             }
             AddLastView();
+            OnBuildComplete?.Invoke();
         }
         protected virtual Task OnBuildUIView(T item, int index) => Task.CompletedTask;
     }

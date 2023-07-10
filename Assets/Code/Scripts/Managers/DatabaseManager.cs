@@ -14,17 +14,6 @@ using Firebase.Extensions;
 
 public class DatabaseManager : MonoBehaviour
 {
-    // // Start is called before the first frame update
-    // [SerializeField] QuizData quizData;
-    [SerializeField] string collection = "quizzes";
-    // private string userID;
-    // [SerializeField] private string Email;
-    // [SerializeField] private string Password;
-    [SerializeField] private int chapter;
-    [SerializeField] private int unit;
-    // [SerializeField] private int semester = 1;
-
-
     // Firebase.FirebaseApp app;
     public static FirebaseFirestore FirebaseFireStore;
     public static Firebase.Auth.FirebaseAuth Auth;

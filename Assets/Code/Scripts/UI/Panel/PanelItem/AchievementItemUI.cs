@@ -73,12 +73,15 @@ namespace Project.UI.Panel.PanelItem
 
         private void GetRewardPopup()
         {
+            
             if (panelType == null)
             {
+                Debug.Log("panelType is null");
                 return;
             }
 
             bool hasRewardPopup = panelType.Prefab.gameObject.TryGetComponent<RewardSystem.RewardPopup>(out rewardPopup);
+            
             if (!hasRewardPopup && button != null)
             {
                 button.enabled = false;

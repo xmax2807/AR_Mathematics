@@ -37,8 +37,8 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Models/Octupus/Octopus_toy.obj
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 4b2e471718dfe764e97f2e0ff2348b60
-    m_Address: Assets/Resources_moved/Models/Flying map/Bird/GULL.3DS
+  - m_GUID: d32878f6f359a6741b3181f320283e45
+    m_Address: Assets/Resources_moved/Models/Flying map/QuirkyBird/source/Sparrow_Animations.fbx
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

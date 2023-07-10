@@ -13,6 +13,7 @@ namespace Project.UI.Panel{
             public string TutorialName;
         }
         [SerializeField] private TutorialData[] datas;
+        public TutorialData[] Datas => datas;
         protected override async void SetupList()
         {            
             if(datas == null || datas.Length == 0){
@@ -22,7 +23,9 @@ namespace Project.UI.Panel{
             await FetchPanelView(datas.Length, OnBuildUIView);
             //await downloadingPanel.StartDownload();
             
-            LoadMore();
+            //LoadMore();
+            //InvokeOnPageChanged(0);
+            //await preloadList[0].ShowAsync();
         }
 
         protected override async Task OnBuildUIView(PreloadableVideoPanelView view, int index)

@@ -43,7 +43,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: 
+  - Name: "Tr\xF2 x\xE2y nh\xE0"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -72,7 +72,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: 
+  - Name: "Tr\xF2 t\xECm \u0111\u1ED3 v\u1EADt"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -101,7 +101,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: 
+  - Name: "Tr\xF2 \u0111\u1ED3ng h\u1ED3"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -130,7 +130,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: 
+  - Name: "Tr\xF2 so s\xE1nh"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -159,7 +159,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  - Name: 
+  - Name: "Tr\xF2 v\u01B0\u1EE3t ch\u01B0\u1EDBng ng\u1EA1i v\u1EADt"
     OnClick:
       m_PersistentCalls:
         m_Calls:
@@ -188,5 +188,5 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     Description: 
-  Title: 
+  Title: "Video H\u01B0\u1EDBng d\u1EABn"
   Description: 

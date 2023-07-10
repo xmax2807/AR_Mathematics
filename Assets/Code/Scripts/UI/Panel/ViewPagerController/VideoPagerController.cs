@@ -11,7 +11,7 @@ namespace Project.UI.Panel
         [SerializeField] private LoadingPanelView loadingView;
         [SerializeField] private DownloadingPanelView downloadingPanel;
         LessonController LessonController => DatabaseManager.Instance.LessonController;
-        LessonModel LessonModel => UserManager.Instance.CurrentLesson;
+        public LessonModel LessonModel => UserManager.Instance.CurrentLesson;
 
         protected override async void SetupList()
         {

@@ -14,7 +14,15 @@ namespace Project.UI.Panel{
 
         public override void SetUI(PanelViewData Data)
         {
+            if(DatabaseManager.Auth == null){
+                return;
+            }
             Firebase.Auth.FirebaseUser currentUser = DatabaseManager.Auth.CurrentUser;
+            if(currentUser == null){
+                userIdText.text = "Không có dữ liệu";
+                emailText.text = "Không có dữ liệu";
+                return;
+            }
             userIdText.text = currentUser.UserId;
             emailText.text = currentUser.Email;
         }
