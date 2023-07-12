@@ -34,6 +34,8 @@ public class ParentControllerBehaviour : MonoBehaviour
     [SerializeField] private GridPanelViewData testOverviewData;
     [SerializeField] private TestResultItemUI ItemUIPrefab;
     #endregion
+
+    [SerializeField] private Canvas NoDataFoundCanvas;
     
     private void OnEnable()
     {
@@ -91,7 +93,10 @@ public class ParentControllerBehaviour : MonoBehaviour
 
     public void SetUpOverviewTestResult()
     {
-        if (allTests.Count == 0) return;
+        if (allTests.Count == 0) {
+            NoDataFoundCanvas.enabled = true;
+            return;
+        }
 
         ButtonData[] buttons = new ButtonData[allTests.Count];
         for (int i = 0; i < allTests.Count; i++)

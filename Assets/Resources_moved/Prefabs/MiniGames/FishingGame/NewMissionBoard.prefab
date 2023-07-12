@@ -501,9 +501,9 @@ Animation:
   m_GameObject: {fileID: 3513913320003138658}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  m_Animation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  - {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -520,9 +520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13da5fd81c7453c90dd78db60706fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  showAnimation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   showPanelNavigationDirection: 1
-  hideAnimation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  hideAnimation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   hidePanelNavigationDirection: -1
   debug: 0
 --- !u!1 &4173295591854349206
@@ -750,9 +750,9 @@ Animation:
   m_GameObject: {fileID: 4614617672673282306}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  m_Animation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  - {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -769,9 +769,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb13da5fd81c7453c90dd78db60706fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showAnimation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  showAnimation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   showPanelNavigationDirection: 1
-  hideAnimation: {fileID: 7400000, guid: 235742dc02e8346b1b2b56d0dc72a6d6, type: 2}
+  hideAnimation: {fileID: 7400000, guid: 8a23dc0089b2a4c418547450ceac294b, type: 2}
   hidePanelNavigationDirection: -1
   debug: 0
 --- !u!1 &4625805560169419229
