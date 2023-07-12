@@ -54,6 +54,9 @@ namespace Project.UI.Panel.PanelItem
         }
         public void Push()
         {
+            if(!uiData.isUnlocked){
+                return;
+            }
             rewardPopup?.SetRewardData(uiData.Name, uiData.GetImage());
             popupPanel ??= new PanelViewController(panelType);
             if (popupPanel != null)

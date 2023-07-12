@@ -2,15 +2,18 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Firebase.Firestore;
+using Firebase.Storage;
 using Project.Managers;
 using Project.Utils.ExtensionMethods;
 using RobinBird.FirebaseTools.Storage.Addressables;
 using UnityEngine;
 
-public struct AuthResult{
+public struct AuthResult
+{
     public bool IsSuccessful;
     public string ErrorMessage;
-    public AuthResult(bool isSuccessful = false, string errorMessage = ""){
+    public AuthResult(bool isSuccessful = false, string errorMessage = "")
+    {
         this.IsSuccessful = isSuccessful;
         this.ErrorMessage = errorMessage;
     }
@@ -64,7 +67,7 @@ public class UserController
             }
             if (task.IsFaulted)
             {
-                
+
                 //Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 Firebase.FirebaseException exception = (Firebase.FirebaseException)task.Exception.InnerExceptions[0].InnerException;
                 if (exception == null)
@@ -74,21 +77,29 @@ public class UserController
                 }
 
                 Debug.Log(exception.ErrorCode);
-                switch((Firebase.Auth.AuthError)exception.ErrorCode){
-                    case Firebase.Auth.AuthError.UserNotFound: errorMessage = "Tài khoản không tồn tại";
-                    break;
-                    case Firebase.Auth.AuthError.WrongPassword: errorMessage = "Sai mật khẩu";
-                    break;
-                    case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
-                    break;
-                    case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
-                    break;
-                    case Firebase.Auth.AuthError.NetworkRequestFailed: errorMessage = "Mất kết nối tới máy chủ";
-                    break;
-                    case Firebase.Auth.AuthError.WeakPassword: errorMessage = "Sai mật khẩu";
-                    break;
-                    default: errorMessage = "Lỗi không xác định";
-                    break;
+                switch ((Firebase.Auth.AuthError)exception.ErrorCode)
+                {
+                    case Firebase.Auth.AuthError.UserNotFound:
+                        errorMessage = "Tài khoản không tồn tại";
+                        break;
+                    case Firebase.Auth.AuthError.WrongPassword:
+                        errorMessage = "Sai mật khẩu";
+                        break;
+                    case Firebase.Auth.AuthError.InvalidEmail:
+                        errorMessage = "Email không hợp lệ";
+                        break;
+                    case Firebase.Auth.AuthError.EmailAlreadyInUse:
+                        errorMessage = "Email đã tồn tại";
+                        break;
+                    case Firebase.Auth.AuthError.NetworkRequestFailed:
+                        errorMessage = "Mất kết nối tới máy chủ";
+                        break;
+                    case Firebase.Auth.AuthError.WeakPassword:
+                        errorMessage = "Sai mật khẩu";
+                        break;
+                    default:
+                        errorMessage = "Lỗi không xác định";
+                        break;
                 }
                 authResult = new AuthResult(false, errorMessage);
                 return;
@@ -132,21 +143,29 @@ public class UserController
                 }
 
                 Debug.Log(exception.ErrorCode);
-                switch((Firebase.Auth.AuthError)exception.ErrorCode){
-                    case Firebase.Auth.AuthError.UserNotFound: errorMessage = "Tài khoản không tồn tại";
-                    break;
-                    case Firebase.Auth.AuthError.WrongPassword: errorMessage = "Sai mật khẩu";
-                    break;
-                    case Firebase.Auth.AuthError.InvalidEmail: errorMessage = "Email không hợp lệ";
-                    break;
-                    case Firebase.Auth.AuthError.EmailAlreadyInUse: errorMessage = "Email đã tồn tại";
-                    break;
-                    case Firebase.Auth.AuthError.NetworkRequestFailed: errorMessage = "Mất kết nối tới máy chủ";
-                    break;
-                    case Firebase.Auth.AuthError.WeakPassword: errorMessage = "Sai mật khẩu";
-                    break;
-                    default: errorMessage = "Lỗi không xác định";
-                    break;
+                switch ((Firebase.Auth.AuthError)exception.ErrorCode)
+                {
+                    case Firebase.Auth.AuthError.UserNotFound:
+                        errorMessage = "Tài khoản không tồn tại";
+                        break;
+                    case Firebase.Auth.AuthError.WrongPassword:
+                        errorMessage = "Sai mật khẩu";
+                        break;
+                    case Firebase.Auth.AuthError.InvalidEmail:
+                        errorMessage = "Email không hợp lệ";
+                        break;
+                    case Firebase.Auth.AuthError.EmailAlreadyInUse:
+                        errorMessage = "Email đã tồn tại";
+                        break;
+                    case Firebase.Auth.AuthError.NetworkRequestFailed:
+                        errorMessage = "Mất kết nối tới máy chủ";
+                        break;
+                    case Firebase.Auth.AuthError.WeakPassword:
+                        errorMessage = "Sai mật khẩu";
+                        break;
+                    default:
+                        errorMessage = "Lỗi không xác định";
+                        break;
                 }
                 authResult = new AuthResult(false, errorMessage);
                 return;
@@ -291,6 +310,31 @@ public class UserController
             {
                 Debug.Log($"Delete user with {email} successfully");
             }
+        }
+    }
+    public async Task<Uri> UploadImageBytes(string userId, byte[] contentBytes)
+    {
+        string guid = Guid.NewGuid().ToString();
+        StorageReference folderRef = DatabaseManager.Storage.RootReference.Child($"user_images/{userId}/{userId}_{guid}.png");
+
+        // Upload the file to the path "images/rivers.jpg"
+        Task<StorageMetadata> task = folderRef.PutBytesAsync(contentBytes);
+        await task;
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            Debug.Log(task.Exception.ToString());
+            // Uh-oh, an error occurred!
+            return new Uri("");
+        }
+        else
+        {
+            // Metadata contains file metadata such as size, content-type, and md5hash.
+            //StorageMetadata metadata = task.Result;
+            return await folderRef.GetDownloadUrlAsync();
+            // string filePath = metadata.Path;
+            // Debug.Log("Finished uploading...");
+            // Debug.Log("file path = " + filePath);
+            // Debug.Log("file size = " + metadata.SizeBytes);
         }
     }
 }

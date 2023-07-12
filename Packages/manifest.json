@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.yasirkula.nativeshare": "https://github.com/yasirkula/UnityNativeShare.git",
     "com.gameframe.gui": "https://github.com/coryleach/UnityGUI.git#2.0.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.adaptiveperformance": "4.0.1",
