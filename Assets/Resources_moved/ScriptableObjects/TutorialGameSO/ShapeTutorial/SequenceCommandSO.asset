@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb945abf42272e84dbed27abac4f0464, type: 3}
   m_Name: SequenceCommandSO
   m_EditorClassIdentifier: MiniGamesAssembly:Project.MiniGames.TutorialGames:SequenceTutorialCommandSO
-  commands: []
+  commands:
+  - {fileID: 11400000, guid: 33f9240548303414195243500d103efe, type: 2}
+  - {fileID: 11400000, guid: 33f9240548303414195243500d103efe, type: 2}
+  - {fileID: 11400000, guid: 081268710b2a3404da2446d6b602532f, type: 2}

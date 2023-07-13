@@ -4,14 +4,17 @@ namespace Project.MiniGames.TutorialGames{
         private ContextGroup _contexts;
         private IStage[] _stages;
 
+        private ICommander commander;
+
         private int _currentStateIndex;
 
-        public Tutorial(ContextGroup group){
+        public Tutorial(ContextGroup group, ICommander commander){
+            this.commander = commander;
             _contexts = group;
             _currentStateIndex = 0;
             _stages = new IStage[group.Length];
             for(int i = 0; i < _stages.Length; ++i){
-                _stages[i] = new Stage(_contexts[i]);
+                _stages[i] = new Stage(_contexts[i], commander);
             }
         }
         public void Begin()

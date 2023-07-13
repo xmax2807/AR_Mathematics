@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Project.MiniGames.TutorialGames
 {
@@ -15,8 +16,15 @@ namespace Project.MiniGames.TutorialGames
         
         public IEnumerator Execute(ICommander commander)
         {
+            yield return new WaitUntil(()=>Managers.AddressableManager.Instance.IsInitialized);
+            
+            Debug.Log("Getting references");
             Task<GameObject[]> task = Managers.AddressableManager.Instance.PreLoadAssets(m_pack.References);
             yield return new TaskAwaitInstruction(task);
+            // while(!task.IsCompleted){
+            //     yield return null;
+            // }
+            Debug.Log("Got references");
 
             GameObject[] m_objects = task.Result;
             for(int i = 0; i < m_objects.Length; ++i){

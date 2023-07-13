@@ -24,6 +24,7 @@ namespace Project.Managers
         public static AddressableManager Instance;
         public AsyncOperationHandle<IResourceLocator> InitializeTask { get; private set; }
         public Action<AsyncOperationHandle<IResourceLocator>> OnComplete;
+        public bool IsInitialized {get; private set;}
         void Awake()
         {
             if (Instance == null)
@@ -41,6 +42,7 @@ namespace Project.Managers
         {
             InitializeTask = Addressables.InitializeAsync();
             InitializeTask.Completed += Instance.OnComplete;
+            InitializeTask.Completed += (operation) => IsInitialized = true;
         }
 
         public static void AddDependencies()
@@ -96,6 +98,9 @@ namespace Project.Managers
         }
         public async Task<T> PreLoadAsset<T>(AssetReferenceT<T> required) where T : UnityEngine.Object
         {
+            if(required.IsValid()){
+                return required.Asset as T;
+            }
             var task = required.LoadAssetAsync<T>();
             return await task.Task;
         }
@@ -106,8 +111,13 @@ namespace Project.Managers
             List<Task<GameObject>> tasks = new();
             foreach (AssetReference asset in required)
             {
-                var task = asset.LoadAssetAsync<GameObject>();
-                tasks.Add(task.Task);
+                if(asset.IsValid()){
+                    tasks.Add(Task.FromResult((GameObject)asset.Asset));
+                }
+                else{
+                    var task = asset.LoadAssetAsync<GameObject>();
+                    tasks.Add(task.Task);
+                }
             }
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();
@@ -119,8 +129,13 @@ namespace Project.Managers
             List<Task<T>> tasks = new();
             foreach (AssetReferenceT<T> asset in required)
             {
-                var task = asset.LoadAssetAsync<T>();
-                tasks.Add(task.Task);
+                if(asset.IsValid()){
+                    tasks.Add(Task<T>.FromResult((T)asset.Asset));
+                }
+                else{
+                    var task = asset.LoadAssetAsync<T>();
+                    tasks.Add(task.Task);
+                }
             }
             await Task.WhenAll(tasks);
             return tasks.Select((x) => x.Result).ToArray();

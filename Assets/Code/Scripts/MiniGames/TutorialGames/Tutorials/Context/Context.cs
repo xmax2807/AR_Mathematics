@@ -5,12 +5,14 @@ namespace Project.MiniGames.TutorialGames{
         private int currentIndex;
 
         public Context(ITutorialCommand[] commands){
+            currentIndex = 0;
             this.commands = new ITutorialCommand[commands.Length];
             for(int i = 0; i < commands.Length; ++i){
                 this.commands[i] = commands[i];
             }
         }
         public Context(CommandSO[] commands){
+            currentIndex = 0;
             this.commands = new ITutorialCommand[commands.Length];
             for(int i = 0; i < commands.Length; ++i){
                 this.commands[i] = commands[i].BuildCommand();

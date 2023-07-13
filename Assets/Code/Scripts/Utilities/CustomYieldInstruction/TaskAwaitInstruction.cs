@@ -5,7 +5,7 @@ namespace Project{
     public class TaskAwaitInstruction : CustomYieldInstruction
     {
         private Task task;
-        public override bool keepWaiting => task.IsCompleted || task.IsFaulted || task.IsCanceled;
+        public override bool keepWaiting => !task.IsCompleted;
 
         public TaskAwaitInstruction(Task task){
             this.task = task;

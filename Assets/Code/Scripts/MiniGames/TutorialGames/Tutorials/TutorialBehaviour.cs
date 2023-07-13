@@ -11,12 +11,16 @@ namespace Project.MiniGames.TutorialGames{
         }
 
         private ITutorial SettingUp(){
-            ITutorial result = new Tutorial(contexts);
+            ITutorial result = new Tutorial(contexts, new Commander(this));
             return result;
         }
 
         private void Awake(){
             _tutorial = SettingUp();
+        }
+
+        public void Start(){
+            Begin();
         }
 
         public void Begin(){
