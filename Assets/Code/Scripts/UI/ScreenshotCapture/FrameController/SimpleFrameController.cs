@@ -51,10 +51,10 @@ namespace Project.UI.Screenshot{
             StartCoroutine(StartSharing());
         }
 
-        private IEnumerator StartPosting(){
-            yield return Managers.FacebookSDK.FacebookSDKManager.Instance.LogoutCurrentAccount();
-            Managers.FacebookSDK.FacebookSDKManager.Instance.FeedController.PostFeed(cacheTexture.EncodeToPNG());
-        }
+        // private IEnumerator StartPosting(){
+        //     yield return Managers.FacebookSDK.FacebookSDKManager.Instance.LogoutCurrentAccount();
+        //     Managers.FacebookSDK.FacebookSDKManager.Instance.FeedController.PostFeed(cacheTexture.EncodeToPNG());
+        // }
 
         private IEnumerator StartSharing(){
             string filePath = Path.Combine(Application.temporaryCachePath, "Screenshot.png");
