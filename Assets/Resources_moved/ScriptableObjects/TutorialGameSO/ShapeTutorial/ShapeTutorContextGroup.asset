@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3c2811d41034e52a6d6c33ac73a207, type: 3}
-  m_Name: AR Kit Settings
+  m_Script: {fileID: 11500000, guid: df920209f176a10468408a086314cf1b, type: 3}
+  m_Name: ShapeTutorContextGroup
   m_EditorClassIdentifier: 
-  m_Requirement: 0
-  m_FaceTracking: 1
+  contexts:
+  - {fileID: 11400000, guid: 4c6c4bbc7fdd87f4db9a34ec6ff0f25d, type: 2}

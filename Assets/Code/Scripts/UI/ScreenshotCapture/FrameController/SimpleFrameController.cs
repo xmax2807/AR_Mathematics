@@ -51,15 +51,15 @@ namespace Project.UI.Screenshot{
             StartCoroutine(StartSharing());
         }
 
-        private IEnumerator StartPosting(){
-            yield return Managers.FacebookSDK.FacebookSDKManager.Instance.LogoutCurrentAccount();
-            Managers.FacebookSDK.FacebookSDKManager.Instance.FeedController.PostFeed(cacheTexture.EncodeToPNG());
-        }
+        // private IEnumerator StartPosting(){
+        //     yield return Managers.FacebookSDK.FacebookSDKManager.Instance.LogoutCurrentAccount();
+        //     Managers.FacebookSDK.FacebookSDKManager.Instance.FeedController.PostFeed(cacheTexture.EncodeToPNG());
+        // }
 
         private IEnumerator StartSharing(){
             string filePath = Path.Combine(Application.temporaryCachePath, "Screenshot.png");
             File.WriteAllBytes(filePath, cacheTexture.EncodeToPNG());
-            new NativeShare().AddFile(filePath).SetText("asdasdasdsad").SetUrl("https://www.google.com").SetCallback(OnShareComplete).Share();
+            new NativeShare().AddFile(filePath).SetCallback(OnShareComplete).Share();
             yield break;
         }
 
