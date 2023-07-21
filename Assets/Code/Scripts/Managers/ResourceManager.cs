@@ -6,6 +6,7 @@ using Project.SaveLoad;
 using Project.QuizSystem.SaveLoadQuestion;
 using UnityEngine.Video;
 using Project.Utils.ExtensionMethods;
+using Project.UI.Panel;
 
 namespace Project.Managers
 {
@@ -17,6 +18,7 @@ namespace Project.Managers
         private const string ErrorUIPath = "Material UI/ErrorUIs";
         public RewardSystem.RewardPackSTO RewardPack { get; private set; }
         public RewardSystem.ViewReward.ARModelRewardPackSTO ARModelRewardPack {get;private set;}
+        public HistoryPanelDataSO HistorySO { get; private set; }
         void Awake()
         {
             if (Instance == null)
@@ -29,15 +31,33 @@ namespace Project.Managers
             }
             //StartCoroutine(LoadEssentialResources());
         }
-        // void OnEnable()
-        // {
-        //     SceneManager.sceneLoaded += OnSceneLoaded;
-        // }
+        void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
 
-        // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        // {
-        //     StartCoroutine(LoadEssentialResources());
-        // }
+        void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+        {
+            if(scene.name == "LoginScene"){
+                UnloadAssets();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            UnloadAssets();
+        }
+
+        private void UnloadAssets()
+        {
+            HistorySO?.Clear();
+        }
+
         public IEnumerator LoadEssentialResources()
         {
             if (RewardPack == null)
@@ -51,6 +71,12 @@ namespace Project.Managers
                 ResourceRequest request = Resources.LoadAsync<RewardSystem.ViewReward.ARModelRewardPackSTO>(ARRewardPackPath);
                 yield return request;
                 ARModelRewardPack = request.asset as RewardSystem.ViewReward.ARModelRewardPackSTO;
+            }
+
+            if(HistorySO == null){
+                ResourceRequest request = Resources.LoadAsync<HistoryPanelDataSO>("HistoryPanelData");
+                yield return request;
+                HistorySO = request.asset as HistoryPanelDataSO;
             }
         }
 

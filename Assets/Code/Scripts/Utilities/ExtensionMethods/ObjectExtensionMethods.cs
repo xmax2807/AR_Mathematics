@@ -80,17 +80,22 @@ namespace Project.Utils.ExtensionMethods
         /// <returns>component or throw if can't be found</returns>
         public static T EnsureComponent<T>(this MonoBehaviour obj, bool autoCreate = false) where T : Component
         {
+            return EnsureComponent<T>(obj.gameObject, autoCreate);
+        }
+
+        public static T EnsureComponent<T>(this GameObject obj, bool autoCreate = false) where T : Component
+        {
             bool res = obj.TryGetComponent<T>(out var component);
 
             if (res == false)
             {
                 if(autoCreate){
-                    return obj.gameObject.AddComponent<T>();
+                    return obj.AddComponent<T>();
                 }
                 throw new NullReferenceException($"{component.GetType()} - {obj.name}");
             }
             return component;
-        }
+        } 
 
         public static GameObject AddChildWithComponent(this GameObject obj,string name, Component[] components){
            

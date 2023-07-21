@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Children:
   - {fileID: 11400000, guid: e8142f23e6070d0498a29b6eb086c1a2, type: 2}
-  - {fileID: 11400000}
+  - {fileID: 0}
   ButtonNames:
   - Name: "Danh hi\u1EC7u"
     OnClick:

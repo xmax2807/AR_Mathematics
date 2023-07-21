@@ -8,6 +8,7 @@ using System;
 using Project.UI.Panel.Form;
 using Project.Managers;
 using Project.UI.Panel;
+using Project.UI.Event.Popup;
 
 public class UserProfileControllerBehaviour : MonoBehaviour{
     private const string SceneName = "LoginScene";
@@ -77,19 +78,33 @@ public class UserProfileControllerBehaviour : MonoBehaviour{
             //for now, return to login scene
             await UserController.DeleteCurrentUser();
             //stackSystem.Pop();
-            if(notificationController != null && notificationController.IsViewLoaded){
-                Destroy(notificationController.View.gameObject);
-            }
-            notificationController = new(notificationPanelViewType, (isOk)=>{
-                stackSystem.Pop();    
+            AutoClosePopupUI popupUI = PopAutoClose("Xóa tài khoản thành công");
+            TimeCoroutineManager.Instance.WaitForSeconds(1.5f, ()=>{
+                popupUI.ManuallyClose();
                 LoadScene(SceneName);
             });
-            await stackSystem.PushAsync(notificationController);
-            NotificationPanelView view = (NotificationPanelView)notificationController.View;
-            view.SetUI("Xóa tài khoản thành công", "Thông báo");
-            //await stackSystem.PopAndPushAsync(1, new PanelViewController(Reconfirm));
+            // if(notificationController != null && notificationController.IsViewLoaded){
+            //     Destroy(notificationController.View.gameObject);
+            // }
+            // notificationController = new(notificationPanelViewType, (isOk)=>{
+            //     stackSystem.Pop();    
+            //     LoadScene(SceneName);
+            // });
+            // await stackSystem.PushAsync(notificationController);
+            // NotificationPanelView view = (NotificationPanelView)notificationController.View;
+            // view.SetUI("Xóa tài khoản thành công", "Thông báo");
+            // //await stackSystem.PopAndPushAsync(1, new PanelViewController(Reconfirm));
         }
         
+    }
+
+    private AutoClosePopupUI PopAutoClose(string message, string title = "Thông báo")
+    {
+        PopupDataBuilder dataPopupBuilder = new();
+        PopupData data = dataPopupBuilder.StartCreating().AddText(title, message).GetResult();
+        AutoClosePopupUI popupUI = new(notificationPanelViewType, data);
+        Project.Managers.PopupUIQueueManager.Instance.EnqueueEventPopup(popupUI);
+        return popupUI;
     }
 
 

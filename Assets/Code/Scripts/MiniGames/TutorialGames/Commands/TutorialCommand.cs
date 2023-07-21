@@ -5,4 +5,7 @@ namespace Project.MiniGames.TutorialGames{
     {
         IEnumerator Execute(ICommander commander);
     }
+    public interface IUndoableTutorialCommand : ITutorialCommand{
+        IEnumerator Undo(ICommander commander);
+    }
 }

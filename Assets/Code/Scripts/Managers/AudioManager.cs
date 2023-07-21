@@ -1,6 +1,7 @@
 using UnityEngine;
 using Project.Utils.ExtensionMethods;
 using System;
+using System.Collections;
 
 namespace Project.Managers{
     public class AudioManager : MonoBehaviour{
@@ -54,6 +55,16 @@ namespace Project.Managers{
         public void Speak(string speech) {
             string url = googleSTT_URL + Uri.EscapeDataString(speech);
             NetworkManager.Instance.GetAudioClip(url,(clip)=>VoiceVolume.PlayOneShot(clip));
+        }
+
+        public IEnumerator SpeakAndWait(string speech){
+            string url = googleSTT_URL + Uri.EscapeDataString(speech);
+            AudioClip audioClip = null;
+            NetworkManager.Instance.GetAudioClip(url, (clip)=> audioClip = clip);
+            yield return new WaitUntil(() => audioClip != null);
+            
+            VoiceVolume.PlayOneShot(audioClip);
+            yield return new WaitForSeconds(audioClip.length);
         }
 
         public void SwapSoundPack(Audio.AudioPackSTO pack)

@@ -109,7 +109,7 @@ public class UserController
             newUser = task.Result.User;
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
-            UploadModel(newUser);
+            //UploadModel(newUser);
             //CreateSaveData(newUser.UserId);
         });
         return (newUser, authResult);
@@ -176,7 +176,17 @@ public class UserController
                 user.DisplayName, user.UserId);
         });
 
+        FireBaseUser = user;
         if (user == null) return authResult;
+
+        // User is found but is not verified -> Delete the user and return an error
+        if(user.IsEmailVerified == false){
+            await DeleteCurrentUser();
+            authResult = new AuthResult(false, "Email không tồn tại");
+            return authResult;
+        }
+
+        // If everything is fine, Initialize the firebase addressables
 
         await GameManager.Instance.CheckIsAdminLoggedIn(user.UserId);
         FirebaseAddressablesManager.IsFirebaseSetupFinished = true;
@@ -295,7 +305,6 @@ public class UserController
             if (deleteTask.IsFaulted)
             {
                 Debug.Log("Delete User: " + deleteTask.Exception.Message);
-                return;
             }
 
             deleteTask = user.DeleteAsync();

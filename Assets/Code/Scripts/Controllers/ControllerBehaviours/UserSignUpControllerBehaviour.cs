@@ -8,6 +8,8 @@ using System;
 using System.Threading.Tasks;
 using Project.UI.Panel;
 using Project.UI.Event.Popup;
+using System.Collections;
+using Project;
 
 public class UserSignUpControllerBehaviour : MonoBehaviour
 {
@@ -16,12 +18,14 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
     [SerializeField] TMP_InputField rePasswordField;
     [SerializeField] Button BackToSignInButton;
     [SerializeField] Button SignUpButton;
-    [SerializeField] OkCancelPanelPusher pusher;
-    [SerializeField] PanelType notificationViewType; 
-    [SerializeField] PanelStackSystem stackSystem; 
+    //[SerializeField] OkCancelPanelPusher pusher;
+    [SerializeField] PanelType notificationViewType;
+    [SerializeField] PanelType confirmLinkViewType;
+    [SerializeField] PanelStackSystem stackSystem;
 
     private string username;
     private string password;
+    //qhuyvo28072001@gmail.com
     private UserController Controller => DatabaseManager.Instance.UserController;
     private Firebase.Auth.FirebaseAuth auth => DatabaseManager.Auth;
     private void OnEnable()
@@ -51,21 +55,31 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
         this.password = password;
         SignUpButton.interactable = IsValid();
     }
-    private void OnChangingPasswordField(string password){
+    private void OnChangingPasswordField(string password)
+    {
         SignUpButton.interactable = IsValid();
     }
 
-    private bool IsValid(){
-       return username.IsEmail() && password != "" && password == passwordField.text;
+    private bool IsValid()
+    {
+        return username.IsEmail() && password != "" && password == passwordField.text;
     }
 
     Firebase.Auth.FirebaseUser user;
     private async void SignUp()
     {
+
+        PopupDataBuilder autoBuilder = new();
+        PopupData popupData = autoBuilder.StartCreating().AddText("Thông báo", "Đang đăng ký").GetResult();
+        AutoClosePopupUI popupUI = new(notificationViewType, popupData);
+        PopupUIQueueManager.Instance.EnqueueEventPopup(popupUI);
+
         AuthResult authResult;
         (user, authResult) = await Controller.RegisterAuth(username, password);
-        
-        if (user == null || !authResult.IsSuccessful) {
+
+        popupUI.ManuallyClose();
+        if (user == null || !authResult.IsSuccessful)
+        {
             PopupDataWithButtonBuilder builder = new();
             PopupDataWithButton data = builder.StartCreating().AddText("Lỗi đăng ký", authResult.ErrorMessage).AddButtonData("Tôi đã hiểu", null).GetResult();
             GeneralPopupUI ui = new(notificationViewType, data);
@@ -73,14 +87,32 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
             return;
         }
 
-        pusher.Push();
+        OkCancelPanelViewController controller = new(confirmLinkViewType, null);
+        await stackSystem.PushAsync(controller);
+        //pusher.Push();
         await user.SendEmailVerificationAsync();
-        isWaitingEmailVerify = true;
+        //isWaitingEmailVerify = true;
+
+        StartCoroutine(WaitingForEmailVerification());
+    }
+
+    private IEnumerator WaitingForEmailVerification()
+    {
+        Task<bool> reloadTask = ReloadUser();
+        bool result = false;
+
+        while (result == false)
+        {
+            yield return new TaskAwaitInstruction(reloadTask);
+            result = reloadTask.Result;
+            reloadTask = ReloadUser();
+        }
     }
 
     private async Task<bool> ReloadUser()
     {
-        if(auth.CurrentUser == null){
+        if (auth.CurrentUser == null)
+        {
             return false;
         }
         Debug.Log("reloading");
@@ -88,29 +120,31 @@ public class UserSignUpControllerBehaviour : MonoBehaviour
         Debug.Log("Done reloading");
         user = auth.CurrentUser;
         Debug.Log($"Verifying: {user.IsEmailVerified}");
-        if(user.IsEmailVerified){
+        if (user.IsEmailVerified)
+        {
             Controller.UploadModel(user);
             //
             BackToSignInButton.onClick?.Invoke();
-            pusher.OnConfirm?.Invoke();
+            await stackSystem.PopAsync();
+            Gameframe.GUI.Camera.UI.UIEventManager.Current?.Unlock();
             return true;
         }
 
         return false;
     }
 
-    private bool isWaitingEmailVerify = false;
+    //private bool isWaitingEmailVerify = false;
 
-    async void OnApplicationPause(bool pauseStatus)
-    {
-        if (isWaitingEmailVerify && !pauseStatus)
-        {
-            //Debug.Log("is Pausing " + pauseStatus);
-            await ReloadUser();
-            Controller.UploadModel(user);
-            //
-            BackToSignInButton.onClick?.Invoke();
-            pusher.OnConfirm?.Invoke();
-        }
-    }
+    // async void OnApplicationPause(bool pauseStatus)
+    // {
+    //     if (isWaitingEmailVerify && !pauseStatus)
+    //     {
+    //         //Debug.Log("is Pausing " + pauseStatus);
+    //         await ReloadUser();
+    //         Controller.UploadModel(user);
+    //         //
+    //         BackToSignInButton.onClick?.Invoke();
+    //         pusher.OnConfirm?.Invoke();
+    //     }
+    // }
 }

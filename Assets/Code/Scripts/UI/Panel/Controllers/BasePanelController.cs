@@ -19,8 +19,8 @@ namespace Project.UI.Panel{
             }
             OnPanelHideViewEvent?.Invoke();
         }
-        public async void HideImmediately(){
-            await Hide();
+        public void HideImmediately(){
+            View.HideImmediate();
         }
         public virtual async Task Show(){
             OnPanelShowViewEvent?.Invoke();

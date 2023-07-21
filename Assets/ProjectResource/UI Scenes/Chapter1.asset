@@ -15,7 +15,7 @@ MonoBehaviour:
   Children:
   - {fileID: 11400000, guid: 6224ede55a4cfff43b9d1d267b1b8b5f, type: 2}
   - {fileID: 11400000, guid: 8427c79153b4d3d4590661bc0f21985c, type: 2}
-  - {fileID: 11400000}
+  - {fileID: 0}
   ButtonNames:
   - Name: "B\xE0i h\u1ECDc"
     OnClick:

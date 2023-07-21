@@ -76,6 +76,19 @@ namespace Project.Managers
                 }));
         }
 
+        public Coroutine GetAudioClipAsync(string url, Action<AudioClip> OnResult, AudioType type = AudioType.MPEG)
+        {
+            return StartCoroutine(
+                SendRequest(UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG),
+                (req) =>
+                {
+                    if (req.result == UnityWebRequest.Result.Success)
+                    {
+                        OnResult?.Invoke(DownloadHandlerAudioClip.GetContent(req));
+                    }
+                }));
+        }
+
         public void RequestWithErrorHandling(Action action, Action<Exception> onError, int maxRetries = 3)
         {
             for (int i = 0; i < maxRetries; i++)

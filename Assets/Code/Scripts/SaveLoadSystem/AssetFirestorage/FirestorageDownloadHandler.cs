@@ -33,9 +33,12 @@ namespace Project.AssetIO.Firebase
         }
         public static Task DownloadFile(StorageReference reference, string fullFilePath, System.Action<DownloadState> progressCallback = null)
         {
-
+            string realFilePath = fullFilePath;
+            #if UNITY_IOS
+            realFilePath = "file://" + fullFilePath;
+            #endif
             return reference.GetFileAsync(
-                    fullFilePath,
+                    realFilePath,
                     progressCallback == null ? null: new StorageProgress<DownloadState>(progressCallback),
                     CancellationToken.None
                 );

@@ -36,6 +36,7 @@ namespace Project.Managers
 
             // OnSceneLoaded
             SceneManager.sceneLoaded += OnSceneLoaded;
+            mainGameCam = Camera.main;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

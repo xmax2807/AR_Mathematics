@@ -73,6 +73,20 @@ MonoBehaviour:
         m_Value: ServerData/[BuildTarget]
       - m_Id: d257dc9eb2df1324e8211ce6845a3127
         m_Value: gs://math-64c88.appspot.com/GameAssets/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: e6066444d2cb1a54e97e1457a0f3de5f
+      m_ProfileName: TestProfile
+      m_Values:
+      - m_Id: 03b6bed7a2bec584797a66e2af7f0241
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 9191a3924952c3e4a9430647bf030d26
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e5364040e617b3f4894234c3b094c0e1
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: e573122461eb258409ec84e88d604974
+        m_Value: ServerData/Test/[BuildTarget]
+      - m_Id: d257dc9eb2df1324e8211ce6845a3127
+        m_Value: gs://math-64c88.appspot.com/GameAssetsTest/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 03b6bed7a2bec584797a66e2af7f0241
       m_Name: BuildTarget
@@ -107,7 +121,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5cb715553c38a8043b0cb73b2268d0f6, type: 2}
   - {fileID: 11400000, guid: 2ac061f067863c34d9f1e622824ec859, type: 2}
   - {fileID: 11400000, guid: 57526c24f909b33459cdfed1f40ff90c, type: 2}
-  m_ActiveProfileId: 1077d95ef46ec194c8685dd85811aeff
+  m_ActiveProfileId: e6066444d2cb1a54e97e1457a0f3de5f
   m_HostingServicesManager:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}

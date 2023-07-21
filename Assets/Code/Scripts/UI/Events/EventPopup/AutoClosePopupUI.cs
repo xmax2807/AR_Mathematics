@@ -22,12 +22,12 @@ namespace Project.UI.Event.Popup{
 
         private void SetupView(){
             
-            if(m_controller.View is not AutoNotificationPanelView realView){
+            if(m_controller.View is not NotificationPanelView realView){
                 UnityEngine.Debug.LogError("AutoPopUI can't set ui since the view is not AutoNotificationPanelView");
                 return;
             }
             realView.SetPopupData(m_data);
-            view = realView;
+            view = realView as AutoNotificationPanelView;
         }
 
         private void OnConfirmCallback(bool result){

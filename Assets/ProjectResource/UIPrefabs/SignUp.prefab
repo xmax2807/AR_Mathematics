@@ -908,8 +908,9 @@ MonoBehaviour:
   rePasswordField: {fileID: 3148114083784572664}
   BackToSignInButton: {fileID: 5817361551261871326}
   SignUpButton: {fileID: 3148114082089532459}
-  pusher: {fileID: 6106464471838128746}
   notificationViewType: {fileID: 11400000, guid: a8f14bf2c8e629c4098c2922cab951be,
+    type: 2}
+  confirmLinkViewType: {fileID: 11400000, guid: eb5fe7a589871374f9dc630fa79f108d,
     type: 2}
   stackSystem: {fileID: 11400000, guid: 324e0db3d92d24150a95432fc51163d4, type: 2}
 --- !u!1 &3148114083230410555

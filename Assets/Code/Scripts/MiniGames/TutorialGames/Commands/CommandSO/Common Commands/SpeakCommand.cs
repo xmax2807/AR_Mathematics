@@ -10,8 +10,7 @@ namespace Project.MiniGames.TutorialGames
         }
         public IEnumerator Execute(ICommander commander)
         {
-            Managers.AudioManager.Instance.Speak(m_text);
-            yield break;
+            yield return Managers.AudioManager.Instance.SpeakAndWait(m_text);
         }
     }
 }

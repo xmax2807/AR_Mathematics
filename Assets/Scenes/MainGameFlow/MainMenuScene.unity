@@ -336,6 +336,7 @@ MonoBehaviour:
   eventManager: {fileID: 1561473625}
   backButton: {fileID: 1287338836}
   mainViewTransform: {fileID: 492847818}
+  historySO: {fileID: 11400000, guid: cdfc83db53ab13b4883b30abc0b3d649, type: 2}
 --- !u!114 &298516109
 MonoBehaviour:
   m_ObjectHideFlags: 0

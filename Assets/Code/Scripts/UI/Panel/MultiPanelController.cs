@@ -14,25 +14,58 @@ namespace Project.UI.Panel
         [SerializeField] UIEventManager eventManager;
         [SerializeField] private UnityEngine.UI.Button backButton;
         [SerializeField] private Transform mainViewTransform;
-        class PanelPack
+        private HistoryPanelDataSO historySO;
+        private HistoryPanelDataSO HistoryPanelDataSO
         {
-            public PanelViewData Data;
-            public BasePanelController Controller;
-            public PanelPack(PanelViewData data, BasePanelController controller)
+            get
             {
-                Data = data;
-                Controller = controller;
+                if (historySO == null)
+                {
+                    historySO = ResourceManager.Instance.HistorySO;
+                }
+                return historySO;
             }
         }
-        private Dictionary<string, PanelPack> cached;
-        private Stack<PanelPack> stack;
-        private PanelPack CurrentData => stack.Count == 0 ? null : stack.Peek();
-        private void Awake()
+        private Dictionary<PanelViewData, BasePanelController> cached;
+        private Dictionary<PanelViewData, UnityEngine.Events.UnityAction[]> cachedDelegates;
+        private PanelViewData CurrentData => HistoryPanelDataSO.CurrentData;
+
+        private void Start()
         {
-            stack = new();
             cached = new();
-            CreateUI(ListData);
-            PushUI(ListData);
+            cachedDelegates = new();
+            if (HistoryPanelDataSO.Count == 0)
+            {
+                Debug.Log("History is 0");
+                PushUI(ListData);
+            }
+            else
+            {
+                // PanelViewData[] history = HistoryPanelDataSO.History;
+                // for (int i = 0; i < history.Length; i++)
+                // {
+                //     PushUI(history[i]);
+                // }
+
+                historySO.TryPop(out PanelViewData data);
+                PushUI(data);
+            }
+        }
+
+        private void OnDestroy(){
+            foreach(var pair in cached){
+                Destroy(pair.Value);
+            }
+            cached.Clear();
+
+            foreach(var pair in cachedDelegates){
+                ButtonData[] buttonDatas = pair.Key.ButtonNames;
+                UnityEngine.Events.UnityAction[] actions = pair.Value;
+                for(int i = 0; i < actions.Length; ++i){
+                    // unsubscribe onclick
+                    buttonDatas[i].OnClick.RemoveListener(pair.Value[i]);   
+                }
+            }
         }
         private void OnEnable()
         {
@@ -44,68 +77,94 @@ namespace Project.UI.Panel
         }
         private void CreateUI(PanelViewData data)
         {
+            if(cachedDelegates.ContainsKey(data)){
+                SpawnViewController(data);
+                return;
+            }
+
             int min = Mathf.Min(data.Children.Length, data.ButtonNames.Length);
+            cachedDelegates[data] = new UnityEngine.Events.UnityAction[min];
             for (int i = 0; i < min; i++)
             {
                 int currIndex = i;
-                data.ButtonNames[currIndex].OnClick.AddListener(() => PushUI(data.Children[currIndex]));
+                cachedDelegates[data][i] = () => PushUI(data.Children[currIndex]);
+                data.ButtonNames[currIndex].OnClick.AddListener(cachedDelegates[data][i]);
             }
 
+            SpawnViewController(data);
+        }
+
+        private void SpawnViewController(PanelViewData data)
+        {
             var controller = Samples.FindMatch((item) => item.CheckType(data));
 
             if (controller == null) return;
-            SpawnerManager.Instance.SpawnObjectInParent(controller, mainViewTransform, (obj) =>
-            {
-                obj.SetUI(data);
 
-                var newPanel = new PanelPack(data, obj);
-                cached.Add(data.name, newPanel);
-            });
+            var obj = Instantiate(controller, mainViewTransform, false);
+            obj.SetUI(data);
+            cached[data] = obj;
         }
+
         private async void PopUI()
         {
             eventManager?.Lock();
 
-            if (!stack.TryPop(out var result)) {
+            if (!HistoryPanelDataSO.TryPop(out var data))
+            {
                 eventManager?.Unlock();
                 ShouldEnableBackButton();
                 return;
             }
 
             ShouldEnableBackButton();
-
-            await result.Controller.Hide();
-
-            if (CurrentData != null)
+            if (cached.TryGetValue(data, out var controller))
             {
-                await CurrentData.Controller.Show();
+                
+                await controller.Hide();
+            }
+
+            PanelViewData currentData = CurrentData;
+            if (currentData != null)
+            {
+                // If stack has the data but the cached has not spawned the controller => spawn only (not create UI)
+                if(!cached.ContainsKey(currentData)){
+                    CreateUI(currentData);
+                }
+
+                await cached[currentData].Show();
             }
 
             eventManager?.Unlock();
         }
         private async void PushUI(PanelViewData data)
         {
-            if(data == null) return;
+            if (data == null) return;
+
             eventManager?.Lock();
 
-            if (!cached.ContainsKey(data.name))
+            //Hide first
+            PanelViewData currentData = CurrentData;
+            if (currentData != null)
+            {
+                bool result = cached.TryGetValue(currentData, out BasePanelController controller);
+                Debug.Log(result);
+                if(result == true){
+                    await controller.Hide();
+                }
+            }
+
+            // Start Pushing new one
+
+            // stack doesn't have any data and also cache hasn't spawned the controller.
+            if (!cached.ContainsKey(data))
             {
                 CreateUI(data);
             }
 
-            var pack = cached[data.name];
-
-            if (CurrentData != null)
-            {
-                if(CurrentData == pack){
-                    eventManager?.Unlock();
-                    return;
-                }
-                await CurrentData.Controller.Hide();
-            }
-            await pack.Controller.Show();
-            stack.Push(pack);
+            HistoryPanelDataSO.Push(data);
             ShouldEnableBackButton();
+
+            await cached[data].Show();
 
             eventManager?.Unlock();
         }
@@ -114,7 +173,7 @@ namespace Project.UI.Panel
         {
             if (backButton != null)
             {
-                backButton.interactable = stack.Count > 1;
+                backButton.interactable = HistoryPanelDataSO.Count > 1;
             }
         }
     }
