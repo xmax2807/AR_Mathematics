@@ -18,3 +18,4 @@ MonoBehaviour:
   - Map1
   algorithm: 1
   m_objectDataDeliver: {fileID: 0}
+  m_mainPlaneHolder: {fileID: 11400000, guid: 74d69de26403312419fbd777cedd691b, type: 2}

@@ -2,14 +2,17 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Project.Utils.ExtensionMethods;
 
 namespace Project.MiniGames.TutorialGames
 {
     public class SpawnCommand : ITutorialCommand
     {
-        public enum SpawnAlgorithm{
+        public enum SpawnAlgorithm
+        {
             Random,
-            Linear,
+            Row,
+            Column,
             Grid,
         }
         private Addressable.GameObjectReferencePack m_pack;
@@ -20,9 +23,9 @@ namespace Project.MiniGames.TutorialGames
 
         private bool isRemoteLoad;
 
-        public SpawnCommand(GameObject[] objects, 
-                    SpawnAlgorithm algorithm = SpawnAlgorithm.Random, 
-                    Transform parentTransform = null, 
+        public SpawnCommand(GameObject[] objects,
+                    SpawnAlgorithm algorithm = SpawnAlgorithm.Random,
+                    Transform parentTransform = null,
                     System.Action<GameObject[]> spawnCallback = null)
         {
             m_objects = objects;
@@ -32,8 +35,8 @@ namespace Project.MiniGames.TutorialGames
             isRemoteLoad = false;
         }
 
-        public SpawnCommand(Addressable.GameObjectReferencePack pack, 
-                    Transform parentTransform = null, 
+        public SpawnCommand(Addressable.GameObjectReferencePack pack,
+                    Transform parentTransform = null,
                     SpawnAlgorithm algorithm = SpawnAlgorithm.Random,
                     System.Action<GameObject[]> spawnCallback = null)
         {
@@ -43,11 +46,11 @@ namespace Project.MiniGames.TutorialGames
             m_algorithm = algorithm;
             isRemoteLoad = true;
         }
-        
+
         public IEnumerator Execute(ICommander commander)
         {
-            yield return new WaitUntil(()=>Managers.AddressableManager.Instance.IsInitialized);
-            
+            yield return new WaitUntil(() => Managers.AddressableManager.Instance.IsInitialized);
+
             Debug.Log("Getting references");
 
 
@@ -62,14 +65,22 @@ namespace Project.MiniGames.TutorialGames
             yield return PickAlgoAndSpawn(m_objects);
         }
 
-        private IEnumerator PickAlgoAndSpawn(GameObject[] objects){
+        private IEnumerator PickAlgoAndSpawn(GameObject[] objects)
+        {
             GameObject[] result = null;
-            switch(m_algorithm){
+            Vector3 startPos = default;
+            switch (m_algorithm)
+            {
                 case SpawnAlgorithm.Random:
                     result = new GameObject[0];
                     break;
-                case SpawnAlgorithm.Linear:
-                    result = Managers.SpawnerManager.Instance.SpawnObjectsInRow(objects, new Vector3(1,0,0) ,parentTransform, spacing: 0.5f);
+                case SpawnAlgorithm.Row:
+                    startPos = MeasureStartingPosition(objects, new Vector3(1, 0, 0));
+                    result = Managers.SpawnerManager.Instance.SpawnObjectsInRow(objects, new Vector3(1, 0, 0), parentTransform, startPosition: startPos, spacing: 0.5f);
+                    break;
+                case SpawnAlgorithm.Column:
+                    startPos = MeasureStartingPosition(objects, new Vector3(0, 0, 1));
+                    result = Managers.SpawnerManager.Instance.SpawnObjectsInRow(objects, new Vector3(0, 0, 1), parentTransform,startPosition: startPos, spacing: 0.5f);
                     break;
                 case SpawnAlgorithm.Grid:
                     result = new GameObject[0];
@@ -80,6 +91,24 @@ namespace Project.MiniGames.TutorialGames
             }
             yield return new WaitUntil(() => result != null);
             m_spawnCallback?.Invoke(result);
+        }
+
+        private Vector3 MeasureStartingPosition(GameObject[] objects, Vector3 direction, float spacing = 0.5f)
+        {
+            Vector3 totalSize = default;
+            for (int i = 0; i < objects.Length; ++i)
+            {
+                totalSize += objects[i].GetSizeFromRenderer();
+            }
+
+            // Create start position based on total size and direction
+            Vector3 startPosition = new Vector3(totalSize.x / 2 * direction.x, totalSize.y / 2 * direction.y, totalSize.z / 2 * direction.z);
+            // Add spacing
+            startPosition += new Vector3(spacing * direction.x, spacing * direction.y, spacing * direction.z);
+            // finalizing by multiplying by -1
+            startPosition *= -1f;
+            Debug.Log("StartPosition: " + startPosition);
+            return startPosition;
         }
     }
 }

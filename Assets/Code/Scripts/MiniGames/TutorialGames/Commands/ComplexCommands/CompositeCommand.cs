@@ -22,7 +22,7 @@ namespace Project.MiniGames.TutorialGames{
             MonoBehaviour executer = commander.GetExecuter();
             Coroutine[] waiters = new Coroutine[m_commands.Length];
             for(int i = 0; i < m_commands.Length; ++i){
-                waiters[i] = executer.StartCoroutine(m_commands[i].Execute(commander));
+                waiters[i] = m_commands[i] == null ? null : executer.StartCoroutine(m_commands[i].Execute(commander));
             }
 
             for(int i = 0; i < m_commands.Length; ++i){

@@ -10,10 +10,17 @@ namespace Project.MiniGames.TutorialGames
         [SerializeField] private string[] m_names;
         [SerializeField] private SpawnCommand.SpawnAlgorithm algorithm;
         [SerializeField] private ObjectDataDeliver m_objectDataDeliver;
+        [SerializeField] private MainPlaneHolder m_mainPlaneHolder;
 
         public override ITutorialCommand BuildCommand()
         {
-            return new SpawnCommand(m_references, algorithm: algorithm, spawnCallback: AddToDelivery);
+            Transform parentTransform = null;
+            if(m_mainPlaneHolder != null){
+                if(m_mainPlaneHolder.MainPlaneObj != null){
+                    parentTransform = m_mainPlaneHolder.MainPlaneObj.transform;
+                }
+            }
+            return new SpawnCommand(m_references, parentTransform: parentTransform, algorithm: algorithm, spawnCallback: AddToDelivery);
         }
 
         private void AddToDelivery(GameObject[] objs)

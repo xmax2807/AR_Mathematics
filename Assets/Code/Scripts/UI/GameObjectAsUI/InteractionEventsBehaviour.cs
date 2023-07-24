@@ -118,7 +118,7 @@ namespace Project.UI.GameObjectUI
                 if(touchableObject.Interactable == false){
                     return false;
                 }
-                cacheTouchObjs.Add(theTouch.fingerId, touchableObject);
+                cacheTouchObjs.TryAdd(theTouch.fingerId, touchableObject);
                 touchableObject.OnTouch(theTouch);
                 return true;
             }

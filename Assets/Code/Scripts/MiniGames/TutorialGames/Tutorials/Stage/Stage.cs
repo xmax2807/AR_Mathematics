@@ -28,13 +28,19 @@ namespace Project.MiniGames.TutorialGames
             yield return _currentCommand.Execute(_commander);
             Update();
         }
+
+        /// <summary>
+        /// This method is called by Commande or Tutorial which will force this stage to end (No need to invoke back) 
+        /// </summary>
         public void End(){
-            _commander.StageEnded();
+            _commander.GetExecuter().StopCoroutine(_coroutine);
         }
+        
         public void Update(){
             Debug.Log("Update Stage");
             if(_context.NextCommand == null){
-                End();
+                // Tell commander has ended.
+                _commander.StageEnded();
                 return;
             }
             _currentCommand = _context.CurrentCommand;

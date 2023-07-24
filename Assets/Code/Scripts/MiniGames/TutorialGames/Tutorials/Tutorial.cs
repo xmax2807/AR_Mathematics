@@ -31,7 +31,15 @@ namespace Project.MiniGames.TutorialGames{
                 return;
             }
             UnityEngine.Debug.Log("Building stage " + _currentStateIndex);
-            _stages[_currentStateIndex] = new Stage(_contexts[_currentStateIndex], commander);
+
+            Context currentContext = _contexts[_currentStateIndex];
+            // if current context is null move to next stage
+            if(currentContext == null){
+                NextStage();
+                return;
+            }
+
+            _stages[_currentStateIndex] = new Stage(currentContext, commander);
             this.commander.OnStageRestart += RestartStage;
             commander.UpdateCurrentStage(_stages[_currentStateIndex]);
             
@@ -42,6 +50,7 @@ namespace Project.MiniGames.TutorialGames{
         {
             //Tutorial is finished
             UnityEngine.Debug.Log("Ended Tutorial");
+            commander.TutorialEnded();
         }
 
         public void MoveToStage(int index)
@@ -54,7 +63,7 @@ namespace Project.MiniGames.TutorialGames{
         {
             UnityEngine.Debug.Log("Next Stage");
             this.commander.OnStageRestart -= RestartStage;
-
+            _stages[_currentStateIndex]?.End();
             ++_currentStateIndex;
             Begin();
         }

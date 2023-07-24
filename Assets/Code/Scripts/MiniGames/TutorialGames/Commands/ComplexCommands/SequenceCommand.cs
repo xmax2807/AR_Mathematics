@@ -34,6 +34,10 @@ namespace Project.MiniGames.TutorialGames{
 
         public void AddNextCommand(ITutorialCommand command){
             m_commands ??= new();
+
+            if(command == null){
+                return;
+            }
             m_commands.Add(command);
         }
 

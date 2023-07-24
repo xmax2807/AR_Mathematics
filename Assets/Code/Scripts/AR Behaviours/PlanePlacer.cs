@@ -16,8 +16,7 @@ namespace Project.ARBehaviours
             currentEventSystem = UnityEngine.EventSystems.EventSystem.current;
             m_RaycastManager = GetComponent<ARRaycastManager>();
             m_PlaneManager = GetComponent<ARPlaneManager>();
-
-            ARCamera ??= Camera.main;
+            m_ARAnchorManager = GetComponent<ARAnchorManager>();
         }
 
         public void SetPrefab(GameObject newPlace)
@@ -50,6 +49,10 @@ namespace Project.ARBehaviours
             if (Input.touchCount > 0)
             {
                 Touch currentTouch = Input.GetTouch(0);
+                if(currentTouch.phase != TouchPhase.Began){
+                    touchPosition = default;
+                    return false;
+                }
                 if(currentEventSystem.IsPointerOverGameObject(currentTouch.fingerId)){
                     touchPosition = default;
                     return false;
@@ -76,7 +79,7 @@ namespace Project.ARBehaviours
                 // Raycast hits are sorted by distance, so the first one
                 // will be the closest hit.
                 var hitPose = s_Hits[0].pose;
-                
+                m_ARAnchorManager?.AttachAnchor(s_Hits[0].trackable as ARPlane, hitPose);
                 spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, m_PlacedPrefab.transform.rotation);
                 spawnedObject.AddComponent<ARAnchor>();
                 DisablePlaneDetection();
@@ -118,9 +121,9 @@ namespace Project.ARBehaviours
 
         ARPlaneManager m_PlaneManager;
         ARRaycastManager m_RaycastManager;
+        ARAnchorManager m_ARAnchorManager;
         private GameObject m_PlacedPrefab;
         private GameObject spawnedObject;
         public event Action<GameObject> OnSpawnMainPlane;
-        private object ARCamera;
     }
 }

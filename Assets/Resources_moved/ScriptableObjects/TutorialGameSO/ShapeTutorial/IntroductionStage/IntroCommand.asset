@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IntroCommand
   m_EditorClassIdentifier: 
   highLightObjectTransform:
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 0.2, z: 0}
     rotation: {x: 0, y: 0, z: 0}
-    scale: {x: 0.5, y: 0.5, z: 0.5}
+    scale: {x: 0.02, y: 0.02, z: 0.02}
   objectDataDeliver: {fileID: 11400000, guid: ae3a0aed998bb8d439268b5ad4ecccdf, type: 2}
   introductionFormat: "\u0110\xE2y l\xE0 %s"

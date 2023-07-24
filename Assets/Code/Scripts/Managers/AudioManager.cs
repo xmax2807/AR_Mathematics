@@ -57,14 +57,29 @@ namespace Project.Managers{
             NetworkManager.Instance.GetAudioClip(url,(clip)=>VoiceVolume.PlayOneShot(clip));
         }
 
+        public Coroutine GetAudioClip(string speech, Action<AudioClip> callback) {
+            string url = googleSTT_URL + Uri.EscapeDataString(speech);
+            return NetworkManager.Instance.GetAudioClipAsync(url, callback);
+        }
+
         public IEnumerator SpeakAndWait(string speech){
             string url = googleSTT_URL + Uri.EscapeDataString(speech);
             AudioClip audioClip = null;
-            NetworkManager.Instance.GetAudioClip(url, (clip)=> audioClip = clip);
-            yield return new WaitUntil(() => audioClip != null);
-            
-            VoiceVolume.PlayOneShot(audioClip);
-            yield return new WaitForSeconds(audioClip.length);
+
+            bool isCallbackReturned = false;
+            NetworkManager.Instance.GetAudioClip(url, (clip)=> {
+                audioClip = clip;
+                isCallbackReturned = true;
+            });
+            yield return new WaitUntil(() => isCallbackReturned == true);
+
+            yield return SpeakAndWait(audioClip);
+        }
+        public IEnumerator SpeakAndWait(AudioClip clip){
+            if(clip == null) yield break;
+
+            VoiceVolume.PlayOneShot(clip);
+            yield return new WaitForSeconds(clip.length);
         }
 
         public void SwapSoundPack(Audio.AudioPackSTO pack)

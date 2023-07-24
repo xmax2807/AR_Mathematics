@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Project.UI.Panel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Project.MiniGames.TutorialGames{
     [CreateAssetMenu(menuName = "MiniGames/TutorialGames/Commands/PlayerUICommandSO", fileName = "PlayerUICommand")]
@@ -22,6 +23,20 @@ namespace Project.MiniGames.TutorialGames{
 
         private bool IsPlayerClicked = false;
         private MenuPanelViewData cacheData;
+
+        void OnEnable(){
+            SceneManager.sceneUnloaded += DeleteCache;
+        }
+
+        private void DeleteCache(Scene scene)
+        {
+            cacheData = null;
+        }
+
+        void OnDisable(){
+            SceneManager.sceneUnloaded -= DeleteCache;
+            cacheData = null;
+        }
 
         public override ITutorialCommand BuildCommand()
         {
@@ -48,19 +63,22 @@ namespace Project.MiniGames.TutorialGames{
 
         private IEnumerator HandleOnUIShow(ICommander commander)
         {
+            IsPlayerClicked = false;
+            
             BasePanelController controller = commander.UIController;
+            // if data is null, create and set it to UI controller
             if(cacheData == null){
                 cacheData = BuildUI(commander);
-                controller.SetUI(cacheData);
             }
-            IsPlayerClicked = false;
+            controller.SetUI(cacheData);
+            
             yield return new TaskAwaitInstruction(controller.Show());
+            yield return new SpeakCommand(Title).Execute(commander);
             yield return new WaitUntil(() => IsPlayerClicked == true);
         }
 
         private UnityEngine.UI.Button.ButtonClickedEvent CreateClickEventFromCommandType(CommandType commandType, ICommander commander){
             UnityEngine.UI.Button.ButtonClickedEvent clickEvent = new();
-            
             switch(commandType){
                 case CommandType.Restart:
                     clickEvent.AddListener(commander.ReturnToCheckpoint);
@@ -69,7 +87,7 @@ namespace Project.MiniGames.TutorialGames{
                     break;
             }
 
-            clickEvent.AddListener(commander.UIController.HideImmediately);
+            clickEvent.AddListener(async ()=>await commander.UIController.Hide());
             clickEvent.AddListener(WaitForInput);
             return clickEvent;
         }

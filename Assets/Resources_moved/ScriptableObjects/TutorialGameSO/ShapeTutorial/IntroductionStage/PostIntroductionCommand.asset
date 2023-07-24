@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596f285275e5bd848997220de839e718, type: 3}
   m_Name: PostIntroductionCommand
   m_EditorClassIdentifier: 
-  Title: "Em c\xF3 mu\u1ED1n nghe l\u1EA1i kh\xF4ng ?"
+  Title: "Em c\xF3 mu\u1ED1n nghe l\u1EA1i b\xE0i gi\u1EA3ng kh\xF4ng ?"
   Description: "Em h\xE3y ch\u1ECDn m\u1ED9t trong c\xE1c n\xFAt b\xEAn d\u01B0\u1EDBi
     nh\xE9"
   buttonCommands:

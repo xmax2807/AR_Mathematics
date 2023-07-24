@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d18f8bb30f6f243b4bfd22a1baf37e, type: 3}
+  m_Name: NextQuestionSpeakCommand
+  m_EditorClassIdentifier: 
+  m_speechText:
+  - "Ch\xFAng ta \u0111i ti\u1EBFp c\xE2u ti\u1EBFp theo nh\xE9"
+  - "C\xE2u ti\u1EBFp theo"
+  - "Ti\u1EBFp nh\xE9"
+  m_algorithmType: 0

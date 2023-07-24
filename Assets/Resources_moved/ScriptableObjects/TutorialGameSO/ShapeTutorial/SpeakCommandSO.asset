@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6f58c011c1b3a428cb863340f45010, type: 3}
   m_Name: SpeakCommandSO
   m_EditorClassIdentifier: 
-  m_text: "Xin ch\xE0o b\xE9 \u0111\xE3 \u0111\u1EBFn v\u1EDBi l\u1EDBp h\u1ECDc
+  m_text: "Ch\xE0o m\u1EEBng em \u0111\xE3 \u0111\u1EBFn v\u1EDBi l\u1EDBp h\u1ECDc
     AR"

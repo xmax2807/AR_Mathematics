@@ -1,5 +1,6 @@
 using UnityEngine;
 namespace Project.MiniGames.TutorialGames{
+    [CreateAssetMenu(menuName = "MiniGames/TutorialGames/Data/PracticeTaskDataSO", fileName = "PracticeTaskData")]
     public class PracticeTaskDataSO : ScriptableObject{
         public int Count;
         public PracticeTaskGenerator.PracticeTaskType Type;

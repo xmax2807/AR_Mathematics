@@ -11,8 +11,9 @@ namespace Project.MiniGames.TutorialGames
         public override ITutorialCommand BuildCommand(){
             InteractionAttachingCommand[] listCommands = new InteractionAttachingCommand[dataDeliver.Objects.Length];
             for(int i = 0; i < dataDeliver.Objects.Length; ++i){
-                listCommands[i] = new InteractionAttachingCommand(dataDeliver.Objects[i]);
-                listCommands[i].OnTargetTouch += (obj) => this.HandleTouch(obj, i);
+                int index = i;
+                listCommands[i] = new InteractionAttachingCommand(dataDeliver.Objects[index]);
+                listCommands[i].OnTargetTouch += (obj) => this.HandleTouch(obj, index);
             }
             return new CompositeCommand(listCommands);
         }

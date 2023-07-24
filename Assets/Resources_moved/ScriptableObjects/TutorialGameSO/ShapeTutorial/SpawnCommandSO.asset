@@ -26,13 +26,19 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
+    - m_AssetGUID: 47953b408565c984198323d3f4f147d5
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     OnComplete:
       m_PersistentCalls:
         m_Calls: []
   m_names:
   - "H\xECnh vu\xF4ng"
-  - "H\xECnh Ch\u1EEF Nh\u1EADt"
+  - "H\xECnh ch\u1EEF nh\u1EADt"
   - "H\xECnh tr\xF2n"
+  - "H\xECnh tam gi\xE1c"
   algorithm: 1
   m_objectDataDeliver: {fileID: 11400000, guid: ae3a0aed998bb8d439268b5ad4ecccdf,
     type: 2}
+  m_mainPlaneHolder: {fileID: 11400000, guid: 74d69de26403312419fbd777cedd691b, type: 2}

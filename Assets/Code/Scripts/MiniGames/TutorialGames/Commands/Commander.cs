@@ -10,9 +10,12 @@ namespace Project.MiniGames.TutorialGames
         MonoBehaviour GetExecuter();
         void StageEnded();
         void StageRestart();
+        void TutorialEnded();
         BasePanelController UIController {get;}
+        PracticeTaskUIController PracticeTaskUIController {get;}
         event Action OnStageRestart;
         event Action OnStageEnded;
+        event Action OnTutorialEnded;
         void MarkCheckpoint();
         void ReturnToCheckpoint();
         void UpdateCurrentStage(IStage newStage);
@@ -21,17 +24,22 @@ namespace Project.MiniGames.TutorialGames
     {
         public event Action OnStageEnded;
         public event Action OnStageRestart;
+        public event Action OnTutorialEnded;
 
         private MonoBehaviour m_executer;
         private BasePanelController m_uiController;
+        private PracticeTaskUIController m_practiceTaskUIController;
 
         private IStage _currentStage;
         private int _currentCommandIndex;
 
         public BasePanelController UIController => m_uiController;
-        public Commander(MonoBehaviour executer, BasePanelController uiController){
+        public PracticeTaskUIController PracticeTaskUIController => m_practiceTaskUIController;
+
+        public Commander(MonoBehaviour executer, BasePanelController uiController, PracticeTaskUIController practiceTaskUIController){
             m_executer = executer;
             m_uiController = uiController;
+            m_practiceTaskUIController = practiceTaskUIController;
         }
         public MonoBehaviour GetExecuter()
         {
@@ -61,6 +69,11 @@ namespace Project.MiniGames.TutorialGames
         public void ReturnToCheckpoint()
         {
             _currentStage.MoveToCommand(_currentCommandIndex);
+        }
+
+        public void TutorialEnded()
+        {
+            OnTutorialEnded?.Invoke();
         }
     }
 }

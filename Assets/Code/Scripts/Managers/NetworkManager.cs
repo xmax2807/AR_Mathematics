@@ -73,6 +73,10 @@ namespace Project.Managers
                     {
                         OnResult?.Invoke(DownloadHandlerAudioClip.GetContent(req));
                     }
+                    else{
+                        Debug.Log(req.error);
+                        OnResult?.Invoke(null);
+                    }
                 }));
         }
 

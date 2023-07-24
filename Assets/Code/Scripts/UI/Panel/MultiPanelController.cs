@@ -28,13 +28,13 @@ namespace Project.UI.Panel
         }
         private Dictionary<PanelViewData, BasePanelController> cached;
         private Dictionary<PanelViewData, UnityEngine.Events.UnityAction[]> cachedDelegates;
-        private PanelViewData CurrentData => HistoryPanelDataSO.CurrentData;
+        private PanelViewData CurrentData => HistoryPanelDataSO?.CurrentData;
 
         private void Start()
         {
             cached = new();
             cachedDelegates = new();
-            if (HistoryPanelDataSO.Count == 0)
+            if (HistoryPanelDataSO == null || HistoryPanelDataSO.Count == 0)
             {
                 Debug.Log("History is 0");
                 PushUI(ListData);

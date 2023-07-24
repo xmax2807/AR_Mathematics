@@ -9,7 +9,7 @@ namespace Project.MiniGames.TutorialGames
         public int Length => contexts.Length;
         public Context this[int key]
         {
-            get => contexts[key].Context;
+            get => contexts[key]?.Context;
         }
     }
 }

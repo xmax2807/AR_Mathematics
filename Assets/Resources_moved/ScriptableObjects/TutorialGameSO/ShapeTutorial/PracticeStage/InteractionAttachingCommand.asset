@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: InteractionAttachingCommand
   m_EditorClassIdentifier: 
   dataDeliver: {fileID: 11400000, guid: ae3a0aed998bb8d439268b5ad4ecccdf, type: 2}
+  EventCenter: {fileID: 11400000, guid: 38ff6d81a90b21c4886ada8a9d37bcbb, type: 2}

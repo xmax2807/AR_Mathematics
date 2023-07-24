@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commands:
   - {fileID: 11400000, guid: 630e45c4e9110d24f961a60979a208c6, type: 2}
+  - {fileID: 11400000, guid: afb85dfb28e22e445b6048bc1a90f558, type: 2}
+  - {fileID: 11400000, guid: 6e7e7d823c32f2144b8feb9910b8c9c7, type: 2}

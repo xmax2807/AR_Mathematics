@@ -9,10 +9,9 @@ namespace Project.MiniGames.TutorialGames
                 throw new System.ArgumentNullException(nameof(uniqueNames));
             }
             _uniqueNames = uniqueNames;
-            BuildTask();
         }
-        private void BuildTask(){
-            correctIndex = UnityEngine.Random.Range(0, _uniqueNames.Length);
+        public void BuildTask(int index = -1){
+            correctIndex = index != -1 ? index : UnityEngine.Random.Range(0, _uniqueNames.Length);
             BuildQuestion();
         }
         protected abstract void BuildQuestion();

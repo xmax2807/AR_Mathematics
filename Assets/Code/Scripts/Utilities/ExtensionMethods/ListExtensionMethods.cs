@@ -263,18 +263,30 @@ namespace Project.Utils.ExtensionMethods
 
         public static T[] Shuffle<T>(this T[] array)
         {
-            T[] result = (T[])array.Clone();
+            T[] result = new T[array.Length];
+            Array.Copy(array, result, array.Length);
             System.Random random = new();
             for (int i = array.Length - 1; i > 0; --i)
             {
-                int j = random.Next(i + 1);
+                int j = random.Next(i);
+                UnityEngine.Debug.Log("before: " + result[i] + " : " + result[j]);
+                // swap two values
                 (result[j], result[i]) = (result[i], result[j]);
+                UnityEngine.Debug.Log("after: " + result[i] + " : " + result[j]);
             }
             return result;
         }
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
         {
             return Shuffle(list.ToArray());
+        }
+
+        public static void SelfShuffle<T>(this T[] list){
+            for (int i = list.Length - 1; i > 0; --i)
+            {
+                int j = UnityEngine.Random.Range(0, i + 1);
+                (list[j], list[i]) = (list[i], list[j]);
+            }
         }
 
         public static IEnumerable<V> Convert<T,V>(this IEnumerable<T> list, Func<T,V> onBuild){
