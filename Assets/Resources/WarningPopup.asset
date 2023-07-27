@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402176ae2f8965e4db82b2870958df80, type: 3}
-  m_Name: Map2Model
+  m_Script: {fileID: 11500000, guid: fc69d8282683b4927bea889cf04fdbad, type: 3}
+  m_Name: WarningPopup
   m_EditorClassIdentifier: 
-  rewardSTO: {fileID: 11400000, guid: 4368260be11e0104ab85af963083ef66, type: 2}
-  avatar: {fileID: 21300000, guid: ac1f462733876e948953f9980ad8ade5, type: 3}
+  prefab: {fileID: 2290390119906179334, guid: 644974b4d804b6440b37633438764d35, type: 3}
+  visibility: 0

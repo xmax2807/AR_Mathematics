@@ -31,38 +31,4 @@ namespace Project.UI.Event.Popup{
             
         }
     }
-
-    public class PopupDataWithButton : PopupData{
-        public struct ButtonData{
-            public string Title;
-            public Button.ButtonClickedEvent ClickedEvent;    
-        }
-        public List<ButtonData> ButtonDatas {get;private set;}
-
-        public PopupDataWithButton(){
-            this.ButtonDatas = new(0);
-        }
-
-        public PopupDataWithButton(PopupDataWithButton clone) : base(clone){
-            this.ButtonDatas = new(clone.ButtonDatas);
-        }
-
-        public void AddButtonData(string title,Button.ButtonClickedEvent clickedEvent){
-            ButtonDatas ??= new();
-            ButtonDatas.Add(
-                new ButtonData(){
-                    Title = title,
-                    ClickedEvent = clickedEvent,
-                }
-            );
-        }
-
-        public void InvokeButtonClickAt(int index){
-            if(index < 0 || index >= ButtonDatas.Count){
-                return;
-            }
-
-            ButtonDatas[index].ClickedEvent?.Invoke();
-        }
-    }
 }

@@ -20,8 +20,10 @@ namespace Project.UI.Panel{
             int count = data.ButtonDatas.Count;
             for(int i = 0; i < count; ++i){
                 var newButton = Instantiate(buttonPrefab, ButtonContainer);
-                newButton.onClick = data.ButtonDatas[i].ClickedEvent;
-                newButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = data.ButtonDatas[i].Title;
+                
+                data.ButtonDatas[i].ConfigButton(newButton);
+                // newButton.onClick = data.ButtonDatas[i].ClickedEvent;
+                // newButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = data.ButtonDatas[i].Title;
             }
 
             if(count <= 0){

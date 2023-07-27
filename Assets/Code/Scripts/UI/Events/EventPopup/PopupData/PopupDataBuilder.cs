@@ -36,7 +36,7 @@ namespace Project.UI.Event.Popup{
             return this;
         }
 
-        public PopupDataWithButtonBuilder AddText(string title, string mainText){
+        public PopupDataWithButtonBuilder AddText(string title, string mainText, bool isRichText = false){
             data.AddText(title, mainText);
             return this;
         }
@@ -44,6 +44,11 @@ namespace Project.UI.Event.Popup{
             UnityEngine.UI.Button.ButtonClickedEvent buttonClickedEvent = new();
             buttonClickedEvent.AddListener(()=>callback?.Invoke());
             data.AddButtonData(title, buttonClickedEvent);
+            return this;
+        }
+
+        public PopupDataWithButtonBuilder AddButtonData(PopupButtonData buttonData){
+            data.AddButtonData(buttonData);
             return this;
         }
         public PopupDataWithButton GetResult() => data;

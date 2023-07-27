@@ -4,7 +4,7 @@ using Project.Utils.ExtensionMethods;
 using UnityEngine;
 using Project.Utils;
 using UnityEngine.SceneManagement;
-using System;
+using Project.UI.Event.Popup;
 
 namespace Project.Managers
 {
@@ -19,11 +19,19 @@ namespace Project.Managers
 
         [SerializeField] bool showCamValues = false;
 
+        #region Warning Notification
+        [Header("Warning Notification")]
+        [SerializeField] Gameframe.GUI.PanelSystem.PanelType popupPanelType;
+        [SerializeField] TextAsset warningNotificationText;
+        #endregion
+        private bool showPreWarningNotification = false;
+
         /// <summary>
         /// Initialize GameManager with required Managers
         /// </summary>
         private void Init(){
             Instance = this;
+            showPreWarningNotification = true;
             gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
             gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
@@ -41,12 +49,33 @@ namespace Project.Managers
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            if(scene.name == "MainMenuScene"){
+                if(showPreWarningNotification){
+                    ShowWarningNotification();
+                    showPreWarningNotification = false;
+                }
+            }
+
             currentScene = scene;
             Instance.mainGameCam = Camera.main;
             Instance.rootCanvas = GameObject.FindGameObjectWithTag("MainCanvas")?.GetComponent<Canvas>();
             if(showCamValues){
                 this.EnsureComponent<CameraValueLogger>(autoCreate: true);
             }
+        }
+
+        private void ShowWarningNotification()
+        {
+            PopupDataWithButtonBuilder builder = new();
+            string mainText = warningNotificationText.text;
+            DelayPopupButtonData buttonData = new DelayPopupButtonData(
+                title: "Tôi đã hiểu",
+                clickedEvent: new UnityEngine.UI.Button.ButtonClickedEvent(),
+                delayTime: 10,
+                isRichText: true
+            );
+            PopupDataWithButton ui = builder.AddText("Quan trọng", mainText, isRichText: true).AddButtonData(buttonData).GetResult();
+            PopupUIQueueManager.Instance.EnqueueEventPopup(new GeneralPopupUI(popupPanelType,ui));
         }
 
         protected void Awake()
