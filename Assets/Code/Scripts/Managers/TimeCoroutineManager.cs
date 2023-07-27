@@ -15,6 +15,12 @@ namespace Project.Managers{
         StopAllCoroutines();
     }
 
+    public Coroutine PauseGame(float seconds){
+        PauseGame();
+        return WaitForSeconds(seconds, ResumeGame);
+    }
+    public void ResumeGame() => Time.timeScale = 1;
+    private void PauseGame() => Time.timeScale = 0;
     public Coroutine WaitFor(YieldInstruction instruction, Action result){
         return StartCoroutine(ExecuteWaitCoroutine(instruction, result));
     }
@@ -22,7 +28,20 @@ namespace Project.Managers{
         float timeout = Time.time + seconds;
         return StartCoroutine(ExecuteWaitCoroutine(()=>Time.time >= timeout, result));
     }
+    public Coroutine WatiForFixedSeconds(float seconds, Action result){
+        float timeout = Time.unscaledTime + seconds;
+        return StartCoroutine(ExecuteWaitCoroutine(()=>Time.unscaledTime >= timeout, result));
+    }
     public Coroutine WaitUntil(Func<bool> condition, Action result) => StartCoroutine(ExecuteWaitCoroutine(condition, result));
+    public Coroutine WaitUntil(Func<bool> condition, Action result, float timeout = -1f){
+        if(condition == null) return null;
+
+        if(timeout <= -1f) return WaitUntil(condition, result);
+
+        float endTime = Time.time + timeout;
+        return WaitUntil(() => condition.Invoke() && (endTime >= Time.time), result);
+    }
+    
     private IEnumerator ExecuteWaitCoroutine(Func<bool> condition, Action result){
         yield return new WaitUntil(condition);
         result?.Invoke();

@@ -10,10 +10,17 @@ namespace Project.UI.ProgressBar{
         protected IProgressAnim _animation;
         protected void Awake(){
             SetupSlider();
-            SetupAnimation();
+            SetupAnimation(200);
         }
-        protected virtual void SetupAnimation(){
-            _animation = new BaseProgressAnim(_slider,200);
+        public virtual void SetupAnimation(float maxValue){
+            if(_slider == null){
+                SetupSlider();
+            }
+            _slider.value = 0;
+            _animation = new BaseProgressAnim(_slider,maxValue);
+        }
+        public virtual void UpdateEndValue(float endValue, float duration = 1){
+            _animation.SettingUp(endValue, duration);
         }
         private void SetupSlider(){
             _slider = GetComponent<Slider>();

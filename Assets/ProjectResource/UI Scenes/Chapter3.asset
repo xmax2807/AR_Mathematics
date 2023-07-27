@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: Chapter3
+  m_EditorClassIdentifier: 
+  Children:
+  - {fileID: 11400000, guid: 43e7b7aafa5d5ff42b0ff91207a591e5, type: 2}
+  - {fileID: 11400000, guid: e181b7ee940c0874e95f0e140ea1c36a, type: 2}
+  - {fileID: 0}
+  ButtonNames:
+  - Name: "B\xE0i h\u1ECDc"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "Tr\xF2 ch\u01A1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "\xD4n t\u1EADp"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: cda2f5ff5bf59c94f84d39376c69dd53, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleRequestData, Projec
+          m_MethodName: Request
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: ',3,1'
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  Title: "Ch\u01B0\u01A1ng 3"
+  Description: "Ph\xE9p c\u1ED9ng tr\u1EEB trong ph\u1EA1m vi 10"

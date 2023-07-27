@@ -1,21 +1,31 @@
 using Project.Utils.ExtensionMethods;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace Project.QuizSystem{
-    // public enum QuestionType{
-    //     SingleChoice, MultipleChoice
-    // }
+    public enum QuestionType {
+        SingleChoice, ShortAnswer, Other
+    }
+    public enum QuestionContentType{
+        Image,Text, Slider, None
+    }
     public interface IQuestion {
+        public QuestionType QuestionType {get;}
+        public QuestionContentType QuestionContentType {get;}
+        public string GetQuestion();
         public bool IsCorrect();
         public bool HasAnswered();
         public void SetAnswer(object value);
-        public void UpdateUI(LayoutGroup layout);
+        public IQuestion Clone();
     }
-    public abstract class BaseQuestion<T> : IQuestion where T : IEquatable<T>{
-        private string _question;
+    public abstract class BaseQuestion<T> : IQuestion{
+        public abstract QuestionType QuestionType {get;}
+        public abstract QuestionContentType QuestionContentType {get;}
+        protected string _question;
         protected T _answer;
-        private T _playerAnswered;
+        protected T _playerAnswered;
+        public T Answer => _answer;
         public BaseQuestion(string question, T answer){
             _question = question;
             _answer = answer;
@@ -31,17 +41,36 @@ namespace Project.QuizSystem{
         // }
         public bool IsCorrect()
         {
-            return _answer.Equals(_playerAnswered);
+            if(_answer is IEquatable<T> equatableAnswer){
+                return equatableAnswer.Equals(_playerAnswered);
+            }
+            if(_playerAnswered is Enum enumAnswer){
+                return enumAnswer.Equals(_answer);
+            }
+            var comparer = GetEqualityComparer();
+            if(comparer == null){
+                UnityEngine.Debug.LogError("Can't compare 2 answer");
+                return false;
+            }
+            return comparer.Equals(_answer, _playerAnswered);
+        }
+        protected virtual IEqualityComparer<T> GetEqualityComparer() => null;
+        public bool IsCorrect(T answer){
+            SetAnswer(answer);
+            return IsCorrect();
         }
 
-        public void SetAnswer(object value)
+        public virtual void SetAnswer(object value)
         {
-            value.TryCastTo<T>(out _playerAnswered);
+            value.TryCastTo<T>(onErrorFallback: OnSetAnswerFailed,out _playerAnswered);
         }
 
-        public void UpdateUI(LayoutGroup layout)
-        {
-            throw new NotImplementedException();
+        private T OnSetAnswerFailed(object value, InvalidCastException e){
+            TrySetAnswer(value);
+            return _playerAnswered;
         }
+        protected virtual void TrySetAnswer(object value){}
+
+        public abstract IQuestion Clone();
     }
 }

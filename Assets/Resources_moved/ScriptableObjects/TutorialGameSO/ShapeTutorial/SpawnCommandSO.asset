@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db3501bd5ce0ed4c96046177b5045ba, type: 3}
+  m_Name: SpawnCommandSO
+  m_EditorClassIdentifier: 
+  m_references:
+    References:
+    - m_AssetGUID: 2871fd821163756498dc3414519887f3
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 6a5152d6bfe8f0a49b0ef4608ac3bf2e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 87ee5d26475b8b147a374840f13108fd
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    - m_AssetGUID: 47953b408565c984198323d3f4f147d5
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  m_names:
+  - "H\xECnh vu\xF4ng"
+  - "H\xECnh ch\u1EEF nh\u1EADt"
+  - "H\xECnh tr\xF2n"
+  - "H\xECnh tam gi\xE1c"
+  algorithm: 1
+  m_objectDataDeliver: {fileID: 11400000, guid: ae3a0aed998bb8d439268b5ad4ecccdf,
+    type: 2}
+  m_mainPlaneHolder: {fileID: 11400000, guid: 74d69de26403312419fbd777cedd691b, type: 2}

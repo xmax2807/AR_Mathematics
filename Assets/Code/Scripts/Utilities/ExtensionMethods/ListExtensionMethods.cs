@@ -5,7 +5,8 @@ using System.Linq.Expressions;
 
 namespace Project.Utils.ExtensionMethods
 {
-    public static class ListExtensionMethods{
+    public static class ListExtensionMethods
+    {
         /// <summary>
         /// Find the largest item in list
         /// </summary>
@@ -13,40 +14,48 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="comparer"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T FindLargest<T>(this IEnumerable<T> List, IComparer<T> comparer){
+        public static T FindLargest<T>(this IEnumerable<T> List, IComparer<T> comparer)
+        {
             IEnumerator<T> iterator = List.GetEnumerator();
 
-            if(!iterator.MoveNext()) return default;
-            
+            if (!iterator.MoveNext()) return default;
+
             T valueToCompare = iterator.Current;
 
-            while(iterator.MoveNext()){
-                if(valueToCompare == null){
+            while (iterator.MoveNext())
+            {
+                if (valueToCompare == null)
+                {
                     valueToCompare = iterator.Current;
                     continue;
                 }
-                if(comparer.Compare(valueToCompare, iterator.Current) < 0){
+                if (comparer.Compare(valueToCompare, iterator.Current) < 0)
+                {
                     valueToCompare = iterator.Current;
                 }
             }
             return valueToCompare;
         }
 
-        public static TProperty FindLargestPropertyInObjects<T,TProperty>(this IEnumerable<T> List, Func<T, TProperty> getProperty) where TProperty :IComparable<TProperty>{
+        public static TProperty FindLargestPropertyInObjects<T, TProperty>(this IEnumerable<T> List, Func<T, TProperty> getProperty) where TProperty : IComparable<TProperty>
+        {
             IEnumerator<T> iterator = List.GetEnumerator();
 
-            if(!iterator.MoveNext() || getProperty == null) return default;
-            
+            if (!iterator.MoveNext() || getProperty == null) return default;
+
             TProperty valueToCompare = getProperty(iterator.Current);
 
-            while(iterator.MoveNext()){
+            while (iterator.MoveNext())
+            {
                 TProperty newValue = getProperty(iterator.Current);
-                
-                if(valueToCompare == null){
+
+                if (valueToCompare == null)
+                {
                     valueToCompare = newValue;
                     continue;
                 }
-                if(newValue.CompareTo(valueToCompare) < 0){
+                if (newValue.CompareTo(valueToCompare) < 0)
+                {
                     valueToCompare = newValue;
                 }
             }
@@ -59,15 +68,18 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="comparer"> Comparer<T> </param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T FindSmallest<T>(this IEnumerable<T> List, IComparer<T> comparer){
+        public static T FindSmallest<T>(this IEnumerable<T> List, IComparer<T> comparer)
+        {
             IEnumerator<T> iterator = List.GetEnumerator();
-            
-            if(!iterator.MoveNext()) return default;
+
+            if (!iterator.MoveNext()) return default;
 
             T valueToCompare = iterator.Current;
 
-            while(iterator.MoveNext()){
-                if(comparer.Compare(valueToCompare, iterator.Current) > 0){
+            while (iterator.MoveNext())
+            {
+                if (comparer.Compare(valueToCompare, iterator.Current) > 0)
+                {
                     valueToCompare = iterator.Current;
                 }
             }
@@ -81,9 +93,12 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="stopCondition"></param>
         /// <param name="result"> is the list traversed fully or not</param>
         /// <typeparam name="T"></typeparam>
-        public static void TraverseWithCondition<T>(this T[] List, Func<int,bool> stopCondition, out bool result){
-            for(int i = 0; i < List.Length; i++){
-                if(stopCondition != null && stopCondition.Invoke(i) == true){
+        public static void TraverseWithCondition<T>(this T[] List, Func<int, bool> stopCondition, out bool result)
+        {
+            for (int i = 0; i < List.Length; i++)
+            {
+                if (stopCondition != null && stopCondition.Invoke(i) == true)
+                {
                     result = false;
                     return;
                 }
@@ -99,11 +114,12 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="isDescending">Check sort order</param>
         /// <typeparam name="T"></typeparam>
         /// <returns>true - Array is Sort. false - Array is not sorted</returns>
-        public static bool IsSorted<T>(this IEnumerable<T> List, IComparer<T> comparer, bool isDescending = false){
+        public static bool IsSorted<T>(this IEnumerable<T> List, IComparer<T> comparer, bool isDescending = false)
+        {
             comparer.EnsureComparer();
 
             T[] array = List.ToArray();
-            
+
             //Local function
             bool stopCondition(int index)
             {
@@ -125,44 +141,169 @@ namespace Project.Utils.ExtensionMethods
         /// <param name="condition"> Delegate invokes the function </param>
         /// <param name="closestMatch"> reference parameter as result </param>
         /// <typeparam name="T"></typeparam>
-        public static void FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition, ref T closestMatch){
-            if(condition == null) return;
+        public static void FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition, ref T closestMatch)
+        {
+            if (condition == null) return;
 
             IEnumerator<T> iterator = List.GetEnumerator();
 
-            if(!iterator.MoveNext()) return;
+            if (!iterator.MoveNext()) return;
 
             closestMatch = iterator.Current;
-            while(iterator.MoveNext()){
-                if(condition.Invoke(iterator.Current)){
+            while (iterator.MoveNext())
+            {
+                if (condition.Invoke(iterator.Current))
+                {
                     closestMatch = iterator.Current;
                 }
             }
         }
 
-        public static T FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition){
-            if(condition == null) return default;
+        // public static void SelfSort<T>(this IEnumerable<T> List, Func<T, int> condition){
+        //     if (condition == null) return;
+
+        //     IEnumerator<T> iterator = List.GetEnumerator();
+
+        //     if (!iterator.MoveNext()) return;
+
+        //     T first = iterator.Current;
+        //     while (iterator.MoveNext())
+        //     {
+        //         if (condition.Invoke(iterator.Current) > 1)
+        //         {
+        //             closestMatch = iterator.Current;
+        //         }
+        //     }
+        // }
+
+        public static bool IsContains<T>(this IEnumerable<T> List, Func<T, bool> condition){
+            if (condition == null) return default;
 
             IEnumerator<T> iterator = List.GetEnumerator();
 
-            if(!iterator.MoveNext()) return default;
+            if (!iterator.MoveNext()) return default;
 
-            do{
-                if(condition.Invoke(iterator.Current)){
+            do
+            {
+                if (condition.Invoke(iterator.Current))
+                {
+                    return true;
+                }
+            } while (iterator.MoveNext());
+            
+            return false;
+        }
+
+        public static T FindMatch<T>(this IEnumerable<T> List, Func<T, bool> condition)
+        {
+            if (condition == null) return default;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+
+            if (!iterator.MoveNext()) return default;
+
+            do
+            {
+                if (condition.Invoke(iterator.Current))
+                {
                     return iterator.Current;
                 }
-            }while(iterator.MoveNext());
+            } while (iterator.MoveNext());
             return default;
         }
 
-        public static void SplitLoop(int count, int loopCount, Action eachLoopAction){
-            for(int i = 0; i < count;){
+        public static int FindIndex<T>(this IEnumerable<T> List, Func<T, bool> condition){
+            if (condition == null) return -1;
+
+            IEnumerator<T> iterator = List.GetEnumerator();
+            if (!iterator.MoveNext()) return -1;
+            
+            
+            int index = 0;
+            do
+            {
+                if (condition.Invoke(iterator.Current))
+                {
+                    return index;
+                }
+                ++index;
+            } while (iterator.MoveNext());
+            
+            return -1;
+        }
+
+        public static void SplitLoop(int count, int loopCount, Action eachLoopAction)
+        {
+            for (int i = 0; i < count;)
+            {
                 int limit = Math.Min(loopCount, count - i) + i;
-                while(i < limit){
+                while (i < limit)
+                {
                     eachLoopAction?.Invoke();
                     i++;
                 }
             }
         }
+
+        public static bool CheckAnyDuplicateWithinRange<T>(this IEnumerable<T> list, T itemNeedChecked, int itemIndex, int range) where T : IEquatable<T>
+        {
+            var arrayList = list.ToArray();
+            range = Math.Min(range, arrayList.Length);
+            int startIndex = Math.Max(itemIndex - range, 0);
+
+            for (int i = startIndex; i < itemIndex; i++)
+            {
+                if (itemNeedChecked.Equals(arrayList[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static T[] Shuffle<T>(this T[] array)
+        {
+            T[] result = new T[array.Length];
+            Array.Copy(array, result, array.Length);
+            System.Random random = new();
+            for (int i = array.Length - 1; i > 0; --i)
+            {
+                int j = random.Next(i);
+                UnityEngine.Debug.Log("before: " + result[i] + " : " + result[j]);
+                // swap two values
+                (result[j], result[i]) = (result[i], result[j]);
+                UnityEngine.Debug.Log("after: " + result[i] + " : " + result[j]);
+            }
+            return result;
+        }
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> list)
+        {
+            return Shuffle(list.ToArray());
+        }
+
+        public static void SelfShuffle<T>(this T[] list){
+            for (int i = list.Length - 1; i > 0; --i)
+            {
+                int j = UnityEngine.Random.Range(0, i + 1);
+                (list[j], list[i]) = (list[i], list[j]);
+            }
+        }
+
+        public static IEnumerable<V> Convert<T,V>(this IEnumerable<T> list, Func<T,V> onBuild){
+            if(list == null || onBuild == null) return null;
+
+            IEnumerator<T> iterator = list.GetEnumerator();
+
+            if (!iterator.MoveNext()) return Enumerable.Empty<V>();
+
+            IList<V> result = new List<V>(list.Count()); 
+
+            result.Add(onBuild.Invoke(iterator.Current));
+            while (iterator.MoveNext())
+            {
+                result.Add(onBuild.Invoke(iterator.Current));
+            }
+            return result;
+        } 
     }
 }

@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: RootTutorialViewData
+  m_EditorClassIdentifier: 
+  Children:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 0ce856ca70980f84ca18821903e73c61, type: 2}
+  ButtonNames:
+  - Name: "V\u1EC1 trang ch\u1EE7"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 8d247f9139b1e5049a870cf37c124f25, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleSceneLoadData, Projec
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: MainMenuScene
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "C\xE1ch xem b\xE0i gi\u1EA3ng"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "C\xE1ch l\xE0m b\xE0i t\u1EADp"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "C\xE1ch l\xE0m b\xE0i thi"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ea7ca35a4e23e7342935515ea9be7ef3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIPagerEventSO, Projec
+          m_MethodName: MoveTo
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: e8987d915a87c6c4a8c43540253d3fa3, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Event.UIEventScriptableObject, Projec
+          m_MethodName: HideUI
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  - Name: "C\xE1ch ch\u01A1i c\xE1c tr\xF2 ch\u01A1i"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  Title: "Video h\u01B0\u1EDBng d\u1EABn"
+  Description: "Em h\xE3y ch\u1ECDn c\xE1c n\xFAt b\xEAn d\u01B0\u1EDBi \u0111\u1EC3
+    xem h\u01B0\u1EDBng d\u1EABn nh\xE9"

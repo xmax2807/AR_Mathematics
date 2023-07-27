@@ -1,16 +1,19 @@
-using MongoDB.Driver;
-using MongoDB.Bson;
-using UnityEngine;
-using MongoDB.Bson.Serialization.Attributes;
+using System.IO;
+using Firebase.Firestore;
+using Project.Utils.ExtensionMethods;
+[FirestoreData]
+public class LessonModel{
+    [FirestoreProperty] public string LessonTitle {get; set;}
+    [FirestoreProperty] public string LessonVideoFolder {get; set;}
+    [FirestoreProperty] public int VideoNumbers {get; set;}
+    [FirestoreProperty] public int LessonChapter {get; set;}
+    [FirestoreProperty] public int LessonUnit {get; set;}
+    [FirestoreProperty] public int LessonSemester {get; set;}
+    [FirestoreProperty] public bool LessonStatus {get; set;}
 
-public class LessonModel : MonoBehaviour
-{
-    [BsonId]
-    public ObjectId Id { get; set; }
-    public string LessionTitle { get; set; }
-    public string LessionVideo { get; set; }
-    public int LessionChapter { get; set; }
-    public int LessionSemester { get; set; }
-    public string CreatedAt { get; set; }
-    public string UpdatedAt { get; set; }
+    public string GetFileFormat(int index){
+        index.EnsureInRange(VideoNumbers);
+
+        return LessonVideoFolder +'/'+ $"chuong{this.LessonChapter}_bai{this.LessonUnit}_{index + 1}.mp4" ; 
+    }
 }

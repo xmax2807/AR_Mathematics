@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a59eaeddb3094e8044e06ea92a4db, type: 3}
+  m_Name: Games Chap1
+  m_EditorClassIdentifier: 
+  Children: []
+  ButtonNames:
+  - Name: "Tr\xF2 x\xE2y nh\xE0"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls: []
+    Description: 
+  - Name: "Tr\xF2 c\xE2u c\xE1"
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: ebb5926703397a64c80878c99a572691, type: 2}
+          m_TargetAssemblyTypeName: Project.UI.Panel.SingleSceneLoadData, Projec
+          m_MethodName: LoadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: FishingScene
+            m_BoolArgument: 0
+          m_CallState: 2
+    Description: 
+  Title: "Tr\xF2 ch\u01A1i"
+  Description: "Ch\u1ECDn 1 trong c\xE1c tr\xF2 sau"

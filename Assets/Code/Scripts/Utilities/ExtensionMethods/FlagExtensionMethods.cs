@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace Project.Utils.ExtensionMethods
 {
     public static class FlagExtensionMethods
     {
+        public static int GetLength<TEnum>() where TEnum : Enum
+        {
+            return Enum.GetNames(typeof(TEnum)).Length;
+        }
         public static bool HasValue<TFlag>(this TFlag flags, TFlag flagToCheck) where TFlag : System.Enum
         {
             if (!Attribute.IsDefined(typeof(TFlag), typeof(FlagsAttribute)))
@@ -35,12 +40,27 @@ namespace Project.Utils.ExtensionMethods
 
         }
 
-        public static T Randomize<T>(Random rand) where T : Enum{
-            if(rand == null){
+        public static T Randomize<T>(Random rand) where T : Enum
+        {
+            if (rand == null)
+            {
                 rand = new Random();
             }
             var values = Enum.GetValues(typeof(T));
-            return (T) values.GetValue (rand.Next(values.Length));
+            return (T)values.GetValue(rand.Next(values.Length));
+        }
+        public static List<TEnum> ToList<TEnum>() where TEnum : Enum
+        {
+            TEnum[] values = (TEnum[]) Enum.GetValues(typeof(TEnum));
+            List<TEnum> result = new (values.Length);
+            for (int i = 0; i < values.Length; i++)
+            {
+                result.Add(values[i]);
+            }
+            return result;
+        }
+        public static IEnumerable<TEnum> ToEnumerable<TEnum>() where TEnum : Enum{
+            return (IEnumerable<TEnum>)Enum.GetValues(typeof(TEnum));
         }
     }
 }

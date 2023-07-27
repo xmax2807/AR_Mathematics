@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7947768644304909736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7947768644304909734}
+  - component: {fileID: 7947768644304909737}
+  m_Layer: 0
+  m_Name: TransitionView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7947768644304909734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947768644304909736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7947768644304909737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947768644304909736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75fc0a61c84eeb40a9899dc6cc4b24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pagerUI: {fileID: 6408485926895340690, guid: c4b2d1087affc544d91e490bdefd45cb, type: 3}
+  NextLessonReq: {fileID: 11400000, guid: 31fb55d0f9eba2e46af76eef1e096b6b, type: 2}
+  GameSceneReq: {fileID: 11400000, guid: ac8b9853c35e271498d6120985f38532, type: 2}
+  QuizSceneReq: {fileID: 11400000, guid: cda2f5ff5bf59c94f84d39376c69dd53, type: 2}

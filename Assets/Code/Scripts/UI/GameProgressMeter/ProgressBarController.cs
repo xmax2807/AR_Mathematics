@@ -18,14 +18,11 @@ namespace Project.UI.ProgressBar
         void OnDisable(){
             _slider.onValueChanged.RemoveListener(OnSliderChanged);
         }
-        void Start(){
-            _animation.SettingUp(153,buildUpSFX.length);
-            StartAnimation();
-        }
 
-        protected override void SetupAnimation()
+        public override void SetupAnimation(float maxValue)
         {
-            _animation = new ProgressSoundAnim(buildUpSFX, new InfiniteProgressAnim(_slider, 100));
+            _slider.value = 0;
+            _animation = new ProgressSoundAnim(buildUpSFX, new BaseProgressAnim(_slider, maxValue));
         }
 
         private void OnSliderChanged(float value){

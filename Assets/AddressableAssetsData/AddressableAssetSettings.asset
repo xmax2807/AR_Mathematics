@@ -17,7 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
@@ -29,20 +29,29 @@ MonoBehaviour:
   m_ContiguousBundles: 1
   m_StripUnityVersionFromBundleBuild: 0
   m_DisableVisibleSubAssetRepresentations: 0
-  m_ShaderBundleNaming: 0
+  m_ShaderBundleNaming: 1
   m_ShaderBundleCustomNaming: 
   m_MonoScriptBundleNaming: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: e573122461eb258409ec84e88d604974
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: d257dc9eb2df1324e8211ce6845a3127
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: 619feabb01b23464cb61fb2be3452d7a, type: 2}
   - {fileID: 11400000, guid: ffe4208266e843f47b390000b3a120dd, type: 2}
+  - {fileID: 11400000, guid: 7bcef90fa46340040a8cc22bba9ab36f, type: 2}
+  - {fileID: 11400000, guid: 758623c1be5cad447994ae7829b84f98, type: 2}
+  - {fileID: 11400000, guid: 978871c03e9916d45b273c40040ec8fd, type: 2}
+  - {fileID: 11400000, guid: 82796a153d6e337478f44491ce6234b2, type: 2}
+  - {fileID: 11400000, guid: a288ddfdce54825439267e4e325a99a2, type: 2}
+  - {fileID: 11400000, guid: eee1cc085b52f6a4db541c1179d0a443, type: 2}
+  - {fileID: 11400000, guid: 550f6e22b01bf914eab1ee0487a31c6a, type: 2}
+  - {fileID: 11400000, guid: a89d4e87303af614b9fb3993a0f08816, type: 2}
+  - {fileID: 11400000, guid: 16b825c8bbd12df41a96a28db1f708d3, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -63,7 +72,21 @@ MonoBehaviour:
       - m_Id: e573122461eb258409ec84e88d604974
         m_Value: ServerData/[BuildTarget]
       - m_Id: d257dc9eb2df1324e8211ce6845a3127
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: gs://math-64c88.appspot.com/GameAssets/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: e6066444d2cb1a54e97e1457a0f3de5f
+      m_ProfileName: TestProfile
+      m_Values:
+      - m_Id: 03b6bed7a2bec584797a66e2af7f0241
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 9191a3924952c3e4a9430647bf030d26
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e5364040e617b3f4894234c3b094c0e1
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: e573122461eb258409ec84e88d604974
+        m_Value: ServerData/Test/[BuildTarget]
+      - m_Id: d257dc9eb2df1324e8211ce6845a3127
+        m_Value: gs://math-64c88.appspot.com/GameAssetsTest/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 03b6bed7a2bec584797a66e2af7f0241
       m_Name: BuildTarget
@@ -91,13 +114,14 @@ MonoBehaviour:
   m_CertificateHandlerType:
     m_AssemblyName: 
     m_ClassName: 
-  m_ActivePlayerDataBuilderIndex: 3
+  m_ActivePlayerDataBuilderIndex: 4
   m_DataBuilders:
   - {fileID: 11400000, guid: 40f71fa363815af40b7fa55b8eb88c49, type: 2}
   - {fileID: 11400000, guid: 80d0c44ad398aeb44b79af95eb48b6a4, type: 2}
   - {fileID: 11400000, guid: 5cb715553c38a8043b0cb73b2268d0f6, type: 2}
   - {fileID: 11400000, guid: 2ac061f067863c34d9f1e622824ec859, type: 2}
-  m_ActiveProfileId: 1077d95ef46ec194c8685dd85811aeff
+  - {fileID: 11400000, guid: 57526c24f909b33459cdfed1f40ff90c, type: 2}
+  m_ActiveProfileId: e6066444d2cb1a54e97e1457a0f3de5f
   m_HostingServicesManager:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}

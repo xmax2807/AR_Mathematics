@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e055b31a2ab8ff141aac979ed48ca843, type: 3}
+  m_Name: CorrectAnswerTemplate
+  m_EditorClassIdentifier: 
+  m_speechText:
+  - "\u0110\xFAng r\u1ED3i, em gi\u1ECFi qu\xE1"
+  - "Ch\xEDnh x\xE1c r\u1ED3i, em nh\u1EDB t\u1ED1t l\u1EAFm"
+  - "Hoan h\xF4 em \u0111\xE3 \u0111o\xE1n \u0111\xFAng r\u1ED3i"
+  m_algorithmType: 0
+  uiCommand: {fileID: 0}

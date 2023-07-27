@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4e191df2b7ed4944bb99fbd226d37a6, type: 3}
+  m_Name: RewardPackSTO
+  m_EditorClassIdentifier: 
+  artist: {fileID: 11400000, guid: 0f63bad59255b5645aeaf9e69d68a6ac, type: 2}
+  builder: {fileID: 11400000, guid: 09618f1a6a4c53645afb7fd344d6a5db, type: 2}
+  compass: {fileID: 11400000, guid: 486dead224280ed41b1c343edc1208f8, type: 2}
+  designer: {fileID: 11400000, guid: b9396526cc39834408e81a319b449a16, type: 2}
+  fishing: {fileID: 11400000, guid: 5bedae15067c6c74991ada1dc43cdc03, type: 2}
+  godOfTime: {fileID: 11400000, guid: 1d5069d870fa7f14fae5ec058fc5105a, type: 2}
+  mathGenius: {fileID: 11400000, guid: 41b24b534366c3e4b8f5e968a2e0bab7, type: 2}
+  ruler: {fileID: 11400000, guid: c825e41f2b9b74147886265889374b3b, type: 2}
+  defaultSprite: {fileID: 21300000, guid: 596b176e9bbd0e34da219b0c4fec6003, type: 3}

@@ -3,43 +3,66 @@ using Project.QuizSystem;
 using Project.Utils;
 using UnityEngine;
 using UnityEngine.UI;
+using Project.Addressable;
+using Project.Utils.ExtensionMethods;
+using System.Threading.Tasks;
 
-namespace Project.MiniGames.FishingGame{
+namespace Project.MiniGames.FishingGame
+{
     [RequireComponent(typeof(Canvas))]
-    public class ShapeBoard : MonoBehaviour{
-        [System.Serializable]
-        public struct ShapePack{
-            public Shape.ShapeType type;
-            public Sprite icon;
-        }
-
+    public class ShapeBoard : MonoBehaviour
+    {
         private Canvas canvas;
         [SerializeField] private Image Icon;
-        [SerializeField] private ShapePack[] packs;
-        private static Randomizer<ShapePack> Randomizer;
-
-        private void Awake(){
-            Randomizer ??= new Randomizer<ShapePack>(packs);
-
+        [SerializeField] private StoAddressableRequest request;
+        private Button button;
+        private static Randomizer<ShapePackAsset.ShapePack> Randomizer;
+        public ShapePackAsset.ShapePack Current {get; private set;}
+        public System.Func<Shape.ShapeType, Task> OnCatchFish;
+        private async void Awake()
+        {
             InitCanvas();
+            if (Randomizer == null)
+            {
+                ScriptableObject[] result = await request.GetResultT();
+                result[0].TryCastTo<ShapePackAsset>(out var asset);
+                if (result.Length == 0 || asset == null)
+                {
+                    throw new System.InvalidCastException("Cannot cast ScriptableObject to ShapePackAsset");
+                }
+
+                Randomizer = new Randomizer<ShapePackAsset.ShapePack>(asset.Packs);
+            }
             UpdateUI();
         }
-        private void InitCanvas(){
+        private void InitCanvas()
+        {
             canvas = this.GetComponent<Canvas>();
             canvas.worldCamera = Camera.main;
+
+            button = GetComponentInChildren<Button>();
+            button.onClick.AddListener(ButtonClick);
         }
-        public void OnEnable(){
+        public void OnEnable()
+        {
             canvas.enabled = true;
         }
-        public void OnDisable(){
+        public void OnDisable()
+        {
             canvas.enabled = false;
         }
-        public void UpdateUI(){
-            ShapePack pack = Randomizer.Next();
-            Icon.sprite = pack.icon;
+        public void UpdateUI()
+        {
+            Current = Randomizer.Next();
+            Icon.sprite = Current.Icon;
         }
-        public void ButtonClick(){
-            
+        public async void ButtonClick()
+        {
+            if(button.interactable == false) return;
+
+            button.interactable = false;
+            await OnCatchFish?.Invoke(Current.Type);
+            button.interactable = true;
         }
     }
 }

@@ -15,6 +15,25 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.adaptiveperformance": {
+      "version": "4.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.subsystemregistration": "1.1.0",
+        "com.unity.profiling.core": "1.0.2"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.adaptiveperformance.samsung.android": {
+      "version": "4.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.adaptiveperformance": "4.0.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.addressables": {
       "version": "1.19.19",
       "depth": 0,
@@ -29,12 +48,12 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.burst": {
-      "version": "1.8.2",
-      "depth": 1,
+    "com.unity.cinemachine": {
+      "version": "2.8.9",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.2.1"
+        "com.unity.test-framework": "1.1.31"
       },
       "url": "https://packages.unity.com"
     },
@@ -88,7 +107,7 @@
     },
     "com.unity.ide.rider": {
       "version": "3.0.18",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
@@ -113,16 +132,16 @@
     },
     "com.unity.inputsystem": {
       "version": "1.4.4",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.mathematics": {
-      "version": "1.2.6",
-      "depth": 1,
+    "com.unity.mobile.android-logcat": {
+      "version": "1.3.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -141,37 +160,16 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.render-pipelines.core": {
-      "version": "12.1.10",
-      "depth": 1,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity.modules.physics": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      }
-    },
-    "com.unity.render-pipelines.universal": {
-      "version": "12.1.10",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.mathematics": "1.2.1",
-        "com.unity.burst": "1.8.2",
-        "com.unity.render-pipelines.core": "12.1.10",
-        "com.unity.shadergraph": "12.1.10"
-      }
-    },
-    "com.unity.scriptablebuildpipeline": {
-      "version": "1.20.1",
+    "com.unity.profiling.core": {
+      "version": "1.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.searcher": {
-      "version": "4.9.1",
-      "depth": 2,
+    "com.unity.scriptablebuildpipeline": {
+      "version": "1.20.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -183,15 +181,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.shadergraph": {
-      "version": "12.1.10",
-      "depth": 1,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.render-pipelines.core": "12.1.10",
-        "com.unity.searcher": "4.9.1"
-      }
-    },
     "com.unity.subsystemregistration": {
       "version": "1.1.0",
       "depth": 1,
@@ -202,7 +191,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.31",
+      "version": "1.1.33",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -232,7 +221,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.6.4",
+      "version": "1.7.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -263,11 +252,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arcore": {
-      "version": "4.2.7",
-      "depth": 1,
+      "version": "4.2.8",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.arsubsystems": "4.2.7",
+        "com.unity.xr.arsubsystems": "4.2.8",
         "com.unity.xr.management": "4.0.1",
         "com.unity.modules.androidjni": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0"
@@ -286,28 +275,28 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit": {
-      "version": "4.2.7",
-      "depth": 1,
+      "version": "4.2.8",
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.editorcoroutines": "1.0.0",
-        "com.unity.xr.arsubsystems": "4.2.7",
+        "com.unity.xr.arsubsystems": "4.2.8",
         "com.unity.xr.management": "4.0.1"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arkit-face-tracking": {
-      "version": "4.2.7",
+      "version": "4.2.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.arkit": "4.2.7",
-        "com.unity.xr.arsubsystems": "4.2.7"
+        "com.unity.xr.arkit": "4.2.8",
+        "com.unity.xr.arsubsystems": "4.2.8"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arsubsystems": {
-      "version": "4.2.7",
+      "version": "4.2.8",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -397,6 +386,22 @@
         "com.unity.inputsystem": "1.4.4"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.yasirkula.nativeshare": {
+      "version": "https://github.com/yasirkula/UnityNativeShare.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2d8f526a0f452847dcd1fbd93fe0ea7c22e2d9ae"
+    },
+    "robinbird.firebasetools": {
+      "version": "https://gitlab.com/robinbird-studios/libraries/unity-plugins/firebase-tools.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.addressables": "1.7.5"
+      },
+      "hash": "ac3a1334fef087fc594727d0442373eb4b4e8766"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
