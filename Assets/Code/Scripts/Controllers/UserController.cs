@@ -268,8 +268,15 @@ public class UserController
 
         try
         {
-            var signInResult = await auth.CurrentUser.ReauthenticateAndRetrieveDataAsync(credential);
-            return signInResult != null;
+            bool isSuccess = true;
+            Task<Firebase.Auth.AuthResult> authResultTask = auth.CurrentUser.ReauthenticateAndRetrieveDataAsync(credential);
+            await authResultTask.ContinueWith(task =>{
+                isSuccess = task.IsCompletedSuccessfully && !task.IsFaulted;
+            });
+            if(authResultTask.IsFaulted){
+                return false;
+            }
+            return isSuccess;
         }
         catch (Firebase.FirebaseException e)
         {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8d66babe1bfec41a7f5eb51e68c0cb, type: 3}
   m_Name: DefaultAudioPack
   m_EditorClassIdentifier: 
-  BackgroundMusic: {fileID: 0}
+  BackgroundMusic: {fileID: 8300000, guid: e796d52685d41794396a4d0d3a5a42f0, type: 3}
   SoundFXPacks:
   - Type: 0
     Clip: {fileID: 0}

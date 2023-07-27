@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Gameframe.GUI.PanelSystem;
 using System.Collections.Generic;
 using Project.UI.Panel.Form;
+using Project.UI.Event.Popup;
 
 public class ParentControllerBehaviour : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class ParentControllerBehaviour : MonoBehaviour
 
     [Header("AccessView")]
     [SerializeField] private FormPanelView passwordFormView;
+    [SerializeField] private PanelType popupPanelType;
     #endregion
 
     #region TestResults
@@ -74,6 +76,10 @@ public class ParentControllerBehaviour : MonoBehaviour
         accessGranted = await UserController.ReAuthenticateWithCredential(CurrentUser.Email,password);
         if(accessGranted == false){
             //Pop fail
+
+            PopupDataWithButtonBuilder builder = new();
+            PopupDataWithButton ui = builder.AddText("Thông báo", "Mật khẩu không đúng").AddButtonData("Tôi đã hiểu", null).GetResult();
+            PopupUIQueueManager.Instance.EnqueueEventPopup(new GeneralPopupUI(popupPanelType,ui));
             Debug.Log($"Failed to access: {CurrentUser.Email}");
             return;
         }

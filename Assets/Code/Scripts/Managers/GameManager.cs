@@ -24,15 +24,15 @@ namespace Project.Managers
         /// </summary>
         private void Init(){
             Instance = this;
+            gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
+            gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
+            gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<SpawnerManager>(childName: "Spawn Manager");
             gameObject.EnsureChildComponent<PopupUIQueueManager>(childName: "Popup UI Queue Manager");
             gameObject.EnsureChildComponent<AudioManager>(childName:"Audio Manager");
-            gameObject.EnsureChildComponent<TimeCoroutineManager>(childName: "Time Manager");
             gameObject.EnsureChildComponent<DatabaseManager>(childName: "Database Manager");
             gameObject.EnsureChildComponent<UserManager>(childName: "User Manager");
-            gameObject.EnsureChildComponent<NetworkManager>(childName: "Network Manager");
             gameObject.EnsureChildComponent<AddressableManager>(childName: "Addressable Manager");
-            gameObject.EnsureChildComponent<ResourceManager>(childName: "Resource Manager");
 
             // OnSceneLoaded
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -78,10 +78,10 @@ namespace Project.Managers
         public System.Action OnGameFinishLoading;
 
         public bool IsAdmin {get; private set;}
-        private void SwitchToDebuggingMode(){
-            IsAdmin = true;
+        private void SwitchToDebuggingMode(bool isAdmin = false){
+            IsAdmin = isAdmin;
             DebugLog logger = this.EnsureComponent<DebugLog>(autoCreate: true);
-            logger.enabled = true;
+            logger.enabled = isAdmin;
         }
 
         internal Task CheckIsAdminLoggedIn(string userId)
@@ -102,9 +102,12 @@ namespace Project.Managers
             string[] adminIds = text.text.Split(',');
             foreach(string id in adminIds){
                 if(id == userId){
-                    SwitchToDebuggingMode();
+                    SwitchToDebuggingMode(true);
+                    return;
                 }
             }
+
+            SwitchToDebuggingMode(false);
         }
 
         public void ReLoadCurrentScene(){

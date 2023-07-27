@@ -2245,6 +2245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingView: {fileID: 425526941}
   passwordFormView: {fileID: 593685274}
+  popupPanelType: {fileID: 11400000, guid: a8f14bf2c8e629c4098c2922cab951be, type: 2}
   pagerController: {fileID: 713572724}
   pagerUIView: {fileID: 1925164407}
   testOverviews: {fileID: 2135448557}

@@ -39,7 +39,9 @@ namespace Project.Audio
             if(pack == null) return;
             foreach (var sound in pack)
             {
-                soundTable[sound.Type] = sound.Clip;
+                if(sound.Clip != null){
+                    soundTable[sound.Type] = sound.Clip;
+                }
             }
         }
         public void AssignMixerGroup(AudioMixerGroup mixer)

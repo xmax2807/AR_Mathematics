@@ -54,16 +54,20 @@ namespace Project.Managers{
             }
         }
 
-        private async void StartPopup()
+        private void StartPopup()
         {
             if(m_isStarted == true){// the queue is already started
                 return;
             }
 
+            m_isStarted = true;
             EnsureContainer();
             EnsureLastSibling();
 
-            m_isStarted = true;
+            ContinuePop();
+        }
+
+        private void ContinuePop(){
             bool hasTop = m_queuePopup.TryPeek(out IPopupUI popupUI);
             if(hasTop == false){
                 m_isStarted = false;
@@ -72,7 +76,7 @@ namespace Project.Managers{
             popupUI.OnClose += Dequeue;
             var controller = popupUI.GetPanelViewController();
             
-            await m_stackSystem.PushAsync(controller);
+            _ = m_stackSystem.PushAsync(controller);
         }
 
         private async void Dequeue(bool isConfirm)
@@ -90,9 +94,9 @@ namespace Project.Managers{
                 Destroy(view.gameObject);
             }
 
-            if(m_queuePopup.Count > 0){
-                m_isStarted = false;
-                StartPopup();
+            m_isStarted = m_queuePopup.Count > 0;
+            if(m_isStarted){
+                ContinuePop();
             }
         }
 

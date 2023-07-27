@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Project.MiniGames;
 using Project.Managers;
 using UnityEngine.Video;
+using Project.Audio;
 
 namespace Project.MiniGames.UI
 {
@@ -67,11 +68,13 @@ namespace Project.MiniGames.UI
             
         }
         private void PlayVideo(){
+            AudioManager.Instance.ChangeSnapshot(AudioStateManagement.VoiceSpeak);
             videoPlayer.PlayVideo();
         }
         private IEnumerator DisableVideoPlayer()
         {
             yield return videoPlayer?.Unload();
+            AudioManager.Instance.ChangeSnapshot(AudioStateManagement.Default);
         }
         private async void StartGame()
         {

@@ -101,7 +101,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
         {
             videoPlayer.source = VideoSource.VideoClip;
             videoPlayer.clip = clip;
-            audioSource ??= AudioManager.Instance.BackgroundFX;
+            audioSource ??= AudioManager.Instance.VoiceVolume;
             videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
             videoPlayer.SetTargetAudioSource(0, audioSource);
             //VideoUrl = clip.originalPath;
@@ -124,7 +124,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
 
         if (audioSource == null)
         {
-            audioSource = AudioManager.Instance.BackgroundFX;
+            audioSource = AudioManager.Instance.VoiceVolume;
         }
 
         videoPlayer.playOnAwake = false;
