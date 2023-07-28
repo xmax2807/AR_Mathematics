@@ -27,8 +27,8 @@ namespace Project.RewardSystem.ViewReward{
                 Debug.LogError("AR Reward List UI: No list model chooser");
                 return;
             }
-            listModelChooser?.Hide();
             listModelChooser.OnPanelHideViewEvent += OnListItemHide;
+            listModelChooser?.Hide();
 
             CreateNewModelButton.onClick.AddListener(ShowItemList);
         }

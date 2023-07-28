@@ -22,12 +22,15 @@ namespace Project.QuizSystem{
             cacheOptions = null;
             
             options = wrappee.GetRandomOptions(options.Length);
+            T answer = wrappee.Answer;
+
             for(int i = 0; i < options.Length; ++i){
-                if(options[_answer].Equals(options[i])){
+                if(answer.Equals(options[i])){
                     (options[_answer], options[i]) = (options[i], options[_answer]); 
+                    break;
                 }
             }
-            options[_answer] = wrappee.Answer;
+            options[_answer] = answer;
         }
 
         public override QuestionContentType QuestionContentType => this.questionContentType;
