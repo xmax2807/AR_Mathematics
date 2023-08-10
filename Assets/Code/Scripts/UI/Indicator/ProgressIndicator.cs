@@ -29,5 +29,13 @@ namespace Project.UI.Indicator{
             items[currentIndex + 1].SwitchToUnselectedUI();
             cacheCondition.UnlockNext(currentIndex);
         }
+
+        public void RevealAnswer(bool[] ansResults){
+            int count = UnityEngine.Mathf.Min(ansResults.Length, items.Length);
+
+            for(int i = 0; i < count; ++i){
+                items[i].SwitchToTrueOrFalseAnswerUI(ansResults[i]);
+            }
+        }
     }
 }

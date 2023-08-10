@@ -926,6 +926,7 @@ MonoBehaviour:
   view: {fileID: 7654316154320749647}
   GiftBox: {fileID: 3835789929813374852}
   PlayAgainButton: {fileID: 556634905681588727}
+  sceneTransition: {fileID: 11400000, guid: ea5aef66163c2aa46b2900eb962d9b77, type: 2}
   OnGiftBoxClicked:
     m_PersistentCalls:
       m_Calls: []

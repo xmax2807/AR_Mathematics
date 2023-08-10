@@ -119,6 +119,7 @@ namespace Project.UI.Panel{
         public void ViewQuizAnswer(){
             quizResult.HideAsync();
             quizPagerUI.PrefferedUIState = AnswerUIState.Result;
+            Indicator.RevealAnswer(quizResult.AnsResults);
             MoveTo(0);
         }
         public void FinishTest(){

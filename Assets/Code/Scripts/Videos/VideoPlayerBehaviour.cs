@@ -12,12 +12,23 @@ public class VideoPlayerBehaviour : MonoBehaviour
         Playing, Pausing, Stopped, Preparing
     }
     private VideoPlayer videoPlayer;
+
     private AudioSource audioSource;
     private static Camera targetCam;
     public event System.Action<VideoState> OnVideoStateChanged;
+    public event System.Action<VideoPlayer> OnVideoChanged;
+    public event VideoPlayer.EventHandler OnSeekCompleted;
     public string VideoUrl { get; set; }
 
     private RenderTexture texture;
+
+
+    public long Frame {
+        get => videoPlayer == null ? 0 : videoPlayer.frame;
+        set => videoPlayer.frame = value;
+    }
+
+    public ulong FrameCount => videoPlayer == null ? 0 : videoPlayer.frameCount;
 
     private void Awake()
     {
@@ -29,15 +40,27 @@ public class VideoPlayerBehaviour : MonoBehaviour
     {
         if(videoPlayer == null) return;
         //videoPlayer.targetCamera = targetCam;
-        videoPlayer.loopPointReached += OnEndPointReached;
+        //videoPlayer.loopPointReached += OnEndPointReached;
         PlayVideo();
     }
     void OnDisable()
     {
         if(videoPlayer == null) return;
         //videoPlayer.targetCamera = null;
-        videoPlayer.loopPointReached -= OnEndPointReached;
+        //videoPlayer.loopPointReached -= OnEndPointReached;
         PauseVideo();
+    }
+
+    void LateUpdate(){
+        if(videoPlayer == null || !videoPlayer.isPlaying){
+            return;
+        }
+        if(videoPlayer.frameCount > 0){
+            ulong frame = videoPlayer.frame >= 0 ? (ulong)videoPlayer.frame : 0;
+            if(frame + 1 >= videoPlayer.frameCount){
+                StopVideo();
+            }
+        } 
     }
     
     public void PauseVideo(){
@@ -62,7 +85,7 @@ public class VideoPlayerBehaviour : MonoBehaviour
     }
     public void ReplayVideo(){
         videoPlayer.frame = 0;
-        PlayVideo();
+        TimeCoroutineManager.Instance.WaitFor(new WaitForEndOfFrame(), PlayVideo);
     }
     private void PrepareVideo(){
         OnVideoStateChanged?.Invoke(VideoState.Preparing);
@@ -121,6 +144,8 @@ public class VideoPlayerBehaviour : MonoBehaviour
             Destroy(videoPlayer);
         }
         videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        OnVideoChanged?.Invoke(videoPlayer);
+        videoPlayer.seekCompleted += OnSeekCompleted;
 
         if (audioSource == null)
         {
@@ -170,5 +195,15 @@ public class VideoPlayerBehaviour : MonoBehaviour
         videoPlayer.renderMode = VideoRenderMode.RenderTexture;
         videoPlayer.targetTexture = texture;
         //videoPlayer.targetCamera = targetCam;
+    }
+
+    public void Mute(bool shouldMute){
+        audioSource.mute = shouldMute;
+    }
+
+    void OnDestroy(){
+        if(audioSource != null){
+            audioSource.mute = false;
+        }
     }
 }

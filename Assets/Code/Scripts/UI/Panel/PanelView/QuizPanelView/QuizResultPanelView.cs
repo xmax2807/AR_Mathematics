@@ -9,6 +9,7 @@ namespace Project.UI.Panel{
         [SerializeField] private TMPro.TextMeshProUGUI resultText;
         private IQuestion[] questions;
         public int CorrectedQuestionCount {get;private set;}
+        public bool[] AnsResults {get;private set;} 
         private bool isCalculated;
         public void SetupQuestions(IQuestion[] questions) {
             this.questions = questions;
@@ -16,12 +17,16 @@ namespace Project.UI.Panel{
         }
         public void CalculateResult(){
             if(isCalculated) return;
-            
-            foreach(IQuestion question in questions){
-                if(question.IsCorrect()){
-                    CorrectedQuestionCount++;
+            AnsResults = new bool[questions.Length];
+
+            for(int i = 0; i < questions.Length; ++i){
+                bool result = questions[i].IsCorrect();
+                if(result == true){
+                    ++CorrectedQuestionCount;
                 }
+                AnsResults[i] = result;
             }
+            
             isCalculated = true;
         }
 

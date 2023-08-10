@@ -17,4 +17,8 @@ namespace Project.UI.Indicator{
         void SwitchToInCompletedUI();
         void SwitchToCompletedUI();
     }
+
+    public interface ITrueAnswerIndicatorItem : IIndicatorItem{
+        void SwitchToTrueOrFalseAnswerUI(bool isTrue);
+    }
 }

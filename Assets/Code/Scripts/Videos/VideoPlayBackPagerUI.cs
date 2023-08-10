@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace Project.UI.Panel
 {
@@ -11,6 +13,7 @@ namespace Project.UI.Panel
         [SerializeField] private Canvas stoppedCanvas;
         [SerializeField] private Button pauseButton;
         [SerializeField] private RenderTexture videoRenderTexture;
+        [SerializeField] private VideoProgressBar videoProgressBar;
         private VideoPlayerBehaviour playerBehaviour;
         private VideoPlayerBehaviour.VideoState currentState;
 
@@ -26,6 +29,7 @@ namespace Project.UI.Panel
 
             playerBehaviour = currentPanelView.VideoPlayerBehaviour;
             playerBehaviour.AddRenderTexture(videoRenderTexture);
+            videoProgressBar.SetVideoPlayerBehaviour(playerBehaviour);
 
             if (playerBehaviour != null)
             {
@@ -53,6 +57,7 @@ namespace Project.UI.Panel
             {
                 case VideoPlayerBehaviour.VideoState.Pausing:
                     pausingCanvas.enabled = true;
+                    
                     return;
                 case VideoPlayerBehaviour.VideoState.Preparing:
                     loadingCanvas.enabled = true;

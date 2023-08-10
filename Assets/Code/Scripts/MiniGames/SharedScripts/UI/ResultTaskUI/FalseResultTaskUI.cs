@@ -12,6 +12,7 @@ namespace Project.MiniGames{
         [SerializeField] private OkCancelPanelView view;
         [SerializeField] private Button GiftBox;
         [SerializeField] private Button PlayAgainButton;
+        [SerializeField] private SceneTransitionSystem sceneTransition;
         public UnityEngine.Events.UnityEvent OnGiftBoxClicked;
         private string defaultText;
 
@@ -32,7 +33,7 @@ namespace Project.MiniGames{
         {
             base.OnEnable();
             BaseGameEventManager.Instance?.RegisterEvent<bool>(BaseGameEventManager.EndGameEventName, this, OnResult);
-            PlayAgainButton.onClick.AddListener(Managers.GameManager.Instance.ReLoadCurrentScene);
+            PlayAgainButton.onClick.AddListener(()=>Managers.GameManager.Instance.ReLoadCurrentScene(sceneTransition));
         }
         protected override void OnDisable()
         {

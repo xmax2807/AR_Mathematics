@@ -107,6 +107,11 @@ namespace Project.QuizSystem.UIFactory
             userAnsweredIndex = index;
             bool result = question.IsCorrect();
 
+            if(uiState == AnswerUIState.Result){
+                // Play sound effect
+                AudioManager.Instance.PlayEffect(result ? Audio.SoundFXController.SoundFXType.OnCorrect : Audio.SoundFXController.SoundFXType.OnError);
+            }
+            //InvokeEvent
             InvokeAnswerEvent(result);
             SetUserAnswer();
         }

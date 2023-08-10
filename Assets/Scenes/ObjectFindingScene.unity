@@ -484,8 +484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 40, y: -40}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661365223
 MonoBehaviour:
@@ -1196,11 +1196,6 @@ MonoBehaviour:
   rotateObject: {x: 0, y: 180, z: 0}
   ARCamera: {fileID: 245719651}
   IsBlockRaycast: 0
-  visualObject: {fileID: 8009370826780904866, guid: 5a45375c280081346bf5b76291624c36,
-    type: 3}
-  onSpawnPlane:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1282351224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,6 +1541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showCamValues: 1
+  popupPanelType: {fileID: 0}
+  warningNotificationText: {fileID: 0}
 --- !u!114 &1738383165
 MonoBehaviour:
   m_ObjectHideFlags: 0

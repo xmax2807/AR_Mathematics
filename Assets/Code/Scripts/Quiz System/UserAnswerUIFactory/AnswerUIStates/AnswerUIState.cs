@@ -64,7 +64,7 @@ namespace Project.QuizSystem.UIFactory{
             if(!isCorrect){
                 group[correctAnswer].ChangeToTrueFalseState(true);
             }
-            group[userAnsweredIndex].ChangeToTrueFalseState(isCorrect);
+            group[userAnsweredIndex].ChangeToTrueFalseState(isCorrect);            
         }
     }
 }

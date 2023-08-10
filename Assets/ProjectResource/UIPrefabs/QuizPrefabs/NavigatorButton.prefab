@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 7833179093878421210}
   - component: {fileID: 2079449857927685525}
   - component: {fileID: 4925819605871066984}
+  - component: {fileID: 6929132943764995479}
   m_Layer: 5
   m_Name: NavigatorButton
   m_TagString: Untagged
@@ -196,7 +197,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1436097361978060320
 CanvasRenderer:
@@ -298,7 +299,23 @@ MonoBehaviour:
   ButtonSelectedColor: {r: 1, g: 1, b: 1, a: 1}
   ButtonCompletedColor: {r: 0, g: 1, b: 0, a: 1}
   ButtonLockedColor: {r: 1, g: 0.107547104, b: 0.107547104, a: 1}
+  ButtonTrueAnswerColor: {r: 0, g: 1, b: 0, a: 1}
+  ButtonFalseAnswerColor: {r: 1, g: 0, b: 0, a: 1}
   TextUnselectedColor: {r: 1, g: 1, b: 1, a: 1}
   TextSelectedColor: {r: 1, g: 1, b: 1, a: 1}
   TextCompletedColor: {r: 1, g: 1, b: 1, a: 1}
   TextLockedColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &6929132943764995479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993326641737813650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 1

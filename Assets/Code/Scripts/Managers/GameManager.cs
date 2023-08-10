@@ -5,6 +5,7 @@ using UnityEngine;
 using Project.Utils;
 using UnityEngine.SceneManagement;
 using Project.UI.Event.Popup;
+using Gameframe.GUI.TransitionSystem;
 
 namespace Project.Managers
 {
@@ -157,9 +158,15 @@ namespace Project.Managers
             SwitchToDebuggingMode(false);
         }
 
-        public void ReLoadCurrentScene()
+        public void ReLoadCurrentScene(SceneTransitionSystem sceneTransitionSystem)
         {
-            SceneManager.LoadScene(currentScene.name);
+            if(sceneTransitionSystem != null){
+                sceneTransitionSystem.LoadScene(currentScene.name);
+            }
+            else{
+                AsyncOperation unloadProgress = SceneManager.UnloadSceneAsync(currentScene);
+                TimeCoroutineManager.Instance.WaitFor(unloadProgress, ()=> SceneManager.LoadScene(currentScene.name));
+            }
         }
     }
 }
