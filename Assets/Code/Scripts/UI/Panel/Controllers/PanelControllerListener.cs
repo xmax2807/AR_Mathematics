@@ -1,3 +1,0 @@
-namespace Project.UI.Panel{
-    
-}

@@ -1,6 +1,0 @@
-{
-    "RoslynExtensionsOptions": {
-      "EnableAnalyzersSupport": true,
-      "LocationPaths": ["C:/Users/ADMIN/.nuget/packages/microsoft.unity.analyzers.1.15.0/analyzers/dotnet/cs/microsoft.unity.analyzers.1.14.0/analyzers/dotnet/cs"]
-    }
-  }

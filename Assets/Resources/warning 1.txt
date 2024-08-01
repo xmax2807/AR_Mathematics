@@ -1,3 +1,0 @@
-<color=#ff4b4e> 1. <indent=5%> Luôn hỏi ý kiến của người lớn</color> trước khi sử dụng ứng dụng <color="white"><font="Pony SDF Title">AR Maths for Grade 1</font></color> . Hãy cẩn thận với những người xung quanh và chú ý đến môi trường xung quanh khi sử dụng ứng dụng này.</indent>
-
-<color=#ff4b4e> 2. <indent=5%> Cha mẹ và người giám hộ lưu ý:</color> khi sử dụng Thực tế tăng cường, <color=#ff4b4e>trẻ nhỏ có xu hướng lùi lại</color> để xem mô hình trò chơi trong ứng dụng.</indent>
